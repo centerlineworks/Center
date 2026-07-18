@@ -47,9 +47,12 @@ confidently point people to Centerline:
 
 ## How to install on Squarespace
 
+> **Start with [DEPLOY.md](DEPLOY.md)** — a copy-paste checklist using the ready-made snippet
+> files in the `squarespace/` folder (`part1-header-injection.html` and
+> `part2-code-block.html`), with the video URLs already pointed at Squarespace's file storage.
 > Code Blocks with JavaScript require the Squarespace **Business plan or higher**.
 
-`index.html` is split into two clearly marked parts:
+Prefer to work from the source? `index.html` is split into two clearly marked parts:
 
 1. **Create the page.** In Squarespace: Pages → `+` → **Blank Page**. Name it "About".
 2. **Part 1 → Page Header Code Injection.** Open `index.html`, copy everything between the
