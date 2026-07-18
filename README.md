@@ -9,13 +9,17 @@ scroll effects, built to drop into Squarespace. Everything lives in one file: **
   perspective blueprint grid that drifts under the hero, parallax headline layers, sections that
   flip up in 3D as they enter the screen, and value cards that tilt toward the mouse on desktop.
 - **Our Story** — the "centerline" founding story: faith, integrity, craftsmanship, founded 2020,
-  14+ years of experience, with animated stat counters.
-- **Services** — bathrooms, basements, kitchens, decks & railing, siding, wood rot repair,
-  cabinetry, exterior repairs, commercial.
+  18+ years of experience, with animated stat counters.
+- **Services** — bathrooms, basements, kitchens, home additions, decks & railing, siding, wood rot
+  repair, cabinetry, exterior repairs, commercial.
+- **Our Work showcase** — an auto-scrolling horizontal banner of project categories (Bathrooms,
+  Basements, Additions, Kitchens, Decks & Outdoor, Siding & Exterior), each with a photo slot for
+  a real project shot. It glides on its own, pauses on hover/touch, and becomes a normal
+  swipeable strip for reduced-motion visitors.
 - **Real reviews** — three actual client quotes plus the 100% Facebook recommendation stat, with a
   link to the Facebook page.
-- **Meet the Owner** — Alfred Tudela: working CEO, husband and father, family-owned company, and
-  **Youth Director at Rising Hills Church** in Woodstock, GA.
+- **Meet the Owner** — Alfred Tudela: founder & CEO, husband and father, family-owned company,
+  and **Youth Director at Rising Hills Church** in Canton, GA.
 - **FAQ + call-to-action** — click-to-call (678) 372-1274 with business hours.
 - **Accessible & mobile-friendly** — semantic HTML, ARIA labels, fully responsive, and all motion
   is disabled automatically for visitors with "reduce motion" turned on.
@@ -57,11 +61,12 @@ To preview locally first, just open `index.html` in any browser — it's fully s
 
 ## Before you publish — personalize these (search the file for `EDIT ME`)
 
-- **Photos**: two placeholder frames are marked in the code — one for a team/project photo in the
-  story section, one for a photo of Alfred (or the whole family) in the owner section. Upload
+- **Photos**: eight placeholder frames are marked in the code — a team/project photo in the story
+  section, six project-category cards in the Our Work banner (shower/bathroom, basement, addition,
+  kitchen, deck, siding), and a photo of Alfred (or the whole family) in the owner section. Upload
   images to Squarespace and swap in the `<img>` tags per the comments.
 - **Family details**: the owner section says "devoted husband and father" — add names and any
   personal details you'd like to share.
 - **Social share image**: replace the `og:image` URL in Part 1 with a real uploaded photo.
-- **Stats**: 14+ years, founded 2020, and 100% Facebook recommendation are from your current site
-  and public profiles — adjust if anything has changed.
+- **Stats**: 18+ years, founded 2020, and 100% Facebook recommendation — adjust if anything
+  changes.
