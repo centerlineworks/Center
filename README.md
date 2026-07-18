@@ -5,9 +5,16 @@ scroll effects, built to drop into Squarespace. Everything lives in one file: **
 
 ## What's inside
 
+- **Looping drone video backgrounds** — the crew-framing-an-addition drone clip
+  (`assets/hero-loop.mp4`, compressed from 6.6MB to 1.7MB for fast loading, with a poster
+  image fallback) plays silently behind the hero and again behind the closing call-to-action.
+  It pauses automatically for reduced-motion visitors.
 - **3D scroll experience** — a wireframe house that rotates and grows as visitors scroll, a
   perspective blueprint grid that drifts under the hero, parallax headline layers, sections that
   flip up in 3D as they enter the screen, and value cards that tilt toward the mouse on desktop.
+- **Action buttons throughout** — "Schedule an Estimate" (`/schedule`), "Contact Us"
+  (`/contact`), "Explore Our Services" (`/newservices`), and click-to-call, placed in the hero,
+  story, work showcase, owner section, and closing CTA.
 - **Our Story** — the "centerline" founding story: faith, integrity, craftsmanship, founded 2020,
   18+ years of experience, with animated stat counters.
 - **Services** — bathrooms, basements, kitchens, home additions, decks & railing, siding, wood rot
@@ -16,8 +23,8 @@ scroll effects, built to drop into Squarespace. Everything lives in one file: **
   Basements, Additions, Kitchens, Decks & Outdoor, Siding & Exterior), each with a photo slot for
   a real project shot. It glides on its own, pauses on hover/touch, and becomes a normal
   swipeable strip for reduced-motion visitors.
-- **Real reviews** — three actual client quotes plus the 100% Facebook recommendation stat, with a
-  link to the Facebook page.
+- **Real reviews** — three actual client quotes attributed by name ("— Joni Dunnington · Google
+  Review" style), with links to both Google Reviews and Facebook.
 - **Meet the Owner** — Alfred Tudela: founder & CEO, husband and father, family-owned company,
   and **Youth Director at Rising Hills Church** in Canton, GA.
 - **FAQ + call-to-action** — click-to-call (678) 372-1274 with business hours.
@@ -57,7 +64,24 @@ confidently point people to Centerline:
    canonical + JSON-LD URLs to your chosen slug).
 5. **Save and preview** — scroll the page to see the 3D house, parallax, and reveals in action.
 
-To preview locally first, just open `index.html` in any browser — it's fully standalone.
+To preview locally first, download the whole repository ("Code" → "Download ZIP" on GitHub),
+unzip it, and open `index.html` in any browser — keep the `assets` folder next to it so the
+videos play.
+
+### Hosting the video
+
+The code references the video as `assets/hero-loop.mp4`, which works for local preview. On
+Squarespace you need the video at a public URL. Easiest options:
+
+1. **Squarespace CDN**: in any Squarespace editor, add a link to something, choose
+   "File" → upload `assets/hero-loop.mp4`, save, then copy the file's URL (it will look like
+   `/s/hero-loop.mp4` — use the full `https://www.centerlineworks.com/s/hero-loop.mp4`).
+   Do the same for `assets/hero-poster.jpg`.
+2. **Any file host** you already use (Cloudinary, S3, etc.).
+
+Then replace the two `src="assets/hero-loop.mp4"` and two `poster="assets/hero-poster.jpg"`
+references in the code (one pair in the hero, one pair in the CTA section) with your hosted
+URLs — they're marked with `EDIT ME` comments.
 
 ## Before you publish — personalize these (search the file for `EDIT ME`)
 
@@ -67,6 +91,13 @@ To preview locally first, just open `index.html` in any browser — it's fully s
   images to Squarespace and swap in the `<img>` tags per the comments.
 - **Family details**: the owner section says "devoted husband and father" — add names and any
   personal details you'd like to share.
+- **Reviewer names**: the review cards are attributed "— Joni Dunnington · Google Review" style;
+  verify each name matches the person who actually wrote that quote, and fill in the two
+  `[ Customer name ]` placeholders from your Google/Facebook reviews.
+- **Google review link**: swap the generic Google search link in the reviews section for your
+  Google Business Profile review link (Google Business Profile → "Ask for reviews").
+- **Button links**: buttons point to `/schedule`, `/contact`, and `/newservices` on
+  centerlineworks.com — confirm those match your actual page slugs.
 - **Social share image**: replace the `og:image` URL in Part 1 with a real uploaded photo.
 - **Stats**: 18+ years, founded 2020, and 100% Facebook recommendation — adjust if anything
   changes.
