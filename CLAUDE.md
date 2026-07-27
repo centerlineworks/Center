@@ -4,12 +4,27 @@ This repo holds custom pages for **centerlineworks.com**, a Squarespace site own
 Alfred Tudela (alfred@centerlineworks.com). Alfred is not a programmer — explain things
 plainly, do the technical work for him, and always give copy-paste-ready output.
 
+## Pages in this repo
+
+- **About** — `index.html` → `squarespace/part1-header-injection.html` +
+  `part2-code-block.html` + `part3-phone-addon.html`. Desktop-first design with a bolted-on
+  phone twin (see LESSON below on why that got complicated).
+- **Services** — `services.html` → `squarespace/services-part1-header-injection.html` +
+  `services-part2-code-block.html`. Built responsive-first instead — ONE file reshapes
+  itself for phones via CSS media queries (galleries become swipeable strips, a sticky
+  action bar appears) with no duplicated markup/JS twin. Prefer this pattern for any new
+  page: only reach for an About-style Part 3 phone twin when a page already shipped
+  desktop-only and a full rewrite isn't worth it.
+- Each page has its own `<title>`/meta/JSON-LD but shares the same design tokens, fonts,
+  and `#cl-<page>`-scoped CSS pattern — copy the foundation from the most recent page
+  rather than reinventing it.
+
 ## The workflow (follow this for every new page)
 
-1. **`index.html` is the source of truth** — one fully standalone file per page
-   (currently the About page). It must open and work from a local file with zero build
-   steps. Media lives in `assets/` with relative paths for local preview.
-2. **Regenerate the Squarespace paste files after every edit** to `index.html`:
+1. **One fully standalone HTML file per page** (`index.html`, `services.html`, …). Each
+   must open and work from a local file with zero build steps. Media lives in `assets/`
+   with relative paths for local preview.
+2. **Regenerate the Squarespace paste files after every edit** to a page's source file:
    - `squarespace/part1-header-injection.html` — everything from `<meta charset>` through
      `</style>` (minus the `<title>` line; the SEO title is set in Page Settings). Pasted
      into Page Settings → Advanced → Page Header Code Injection.
@@ -50,19 +65,29 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
 - **JavaScript Code Blocks need the Business plan or higher.**
 - **Files vs. images**: files uploaded via Link editor → File → Upload are served at
   `/s/<exact-filename>` — good for videos. Photos in the **asset library live on
-  Squarespace's image CDN at unguessable URLs** — never hardcode guesses. Instead the page
-  has a `window.CL_PHOTOS` config at the top of Part 2: Alfred pastes each image's URL
-  (get it via Image Block on a hidden page → right-click → Copy Image Address); JS applies
-  it to `<img data-cl-photo="...">` tags. Every photo spot needs `data-cl-photo`,
-  a `data-label` fallback, and `onerror` → `.cl-noimg` so a bad URL shows a text label,
-  never a broken image.
+  Squarespace's image CDN at unguessable URLs** — never hardcode guesses. Instead each page
+  has its own `window.CL_PHOTOS` / `CL_SERVICES_PHOTOS` config near the top of Part 2:
+  Alfred pastes each image's URL (get it via Image Block on a hidden page → right-click →
+  Copy Image Address, OR upload as a File like the videos to get a predictable `/s/` URL
+  with no copying at all); JS applies it to `<img data-cl-photo="...">` tags.
+  LESSON: every photo spot's `<figure>`/`<div>` must default to the `.cl-noimg` class in
+  the HTML (not just on error) — an `<img>` with no `src` yet still renders a tiny broken
+  icon in Chrome/Safari otherwise. Reveal the photo via the `<img>`'s own `onload` handler
+  (remove `.cl-noimg`), and keep `onerror` to re-add it if a URL is ever wrong. Never rely
+  on JS alone to add `.cl-noimg` only reactively.
+- **Reducing upload friction**: when Alfred has a batch of photos ready, he can attach them
+  directly in the chat — reuse the video pipeline's instinct (rename/organize/compress for
+  web) and hand back the exact filenames before he uploads. Steer him toward uploading
+  photos as **Files** (same as the videos) rather than through the asset library whenever
+  possible — it skips the "Image Block + copy address" step entirely and gives a
+  predictable `/s/<filename>` URL we can write into the code directly.
 - **The site theme bleeds into code blocks** (it set our headings white-on-white once).
   Guard: `#cl-about :is(h1,h2,h3,h4,p,blockquote,summary,cite,small,li,figcaption)
   { color: inherit; }` and scope ALL CSS under the `#cl-about` id.
-- **The host section adds a big empty (black) gap** below the block. Part 1 CSS collapses
-  it: `.page-section:has(#cl-about) { padding:0!important; min-height:0!important; }` plus
-  `.content-wrapper` / `.sqs-block` equivalents. Manual fallback: Section Height Small,
-  padding 0.
+- **The host section adds a big empty (black) gap** below the block on every page. Part 1
+  CSS collapses it per page: `.page-section:has(#cl-<page>) { padding:0!important;
+  min-height:0!important; }` plus `.content-wrapper` / `.sqs-block` equivalents. Manual
+  fallback: Section Height Small, padding 0.
 - Buttons: "Schedule an Estimate" → `/schedule`, "Explore Our Services" → `/services`
   (NOT `/newservices`), Contact Us → `tel:+16783721274` (top) or
   `mailto:Info@centerlineworks.com` (bottom/owner).
@@ -81,6 +106,10 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
 - All motion respects `prefers-reduced-motion` (reveals shown, videos paused on poster,
   marquee becomes a swipeable strip, carousel keeps manual nav only).
 - Everything is vanilla JS in one IIFE — no libraries, no build step.
+- Portfolio/gallery pages (Services): a simple lightbox (click a real photo → full-size
+  overlay, close via ×/backdrop/Escape) reused wherever a page shows a photo grid; a sticky
+  anchor nav with scrollspy (`IntersectionObserver` + `rootMargin` trick) for jumping
+  between long sections.
 
 ## Media pipeline
 

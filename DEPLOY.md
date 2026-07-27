@@ -1,6 +1,11 @@
-# Put the About page live on Squarespace — step by step
+# Put the pages live on Squarespace — step by step
 
-Total time: about 15 minutes. You need the **Squarespace Business plan or higher**
+This repo has two pages: **About** (`index.html`) and **Services** (`services.html`), each
+with its own pair of paste files in `squarespace/`. Steps 1–7 below cover the About page;
+jump to **"Deploying the Services page"** at the bottom once that's live — it reuses the
+same video files and skips most of the setup.
+
+Total time: about 15 minutes per page. You need the **Squarespace Business plan or higher**
 (code blocks with JavaScript don't run on the Personal plan).
 
 ## Step 1 — Download the files from GitHub
@@ -106,3 +111,33 @@ Search the code block for `EDIT ME`:
   Personal plan (JavaScript blocked)
 - **Fonts look plain** → hard-refresh (Ctrl+Shift+R); the Google Fonts link is in Part 1
 - Still stuck? Come back to this chat and tell me what you're seeing.
+
+---
+
+## Deploying the Services page
+
+The Services page shows every service (Bathrooms, Basements, Kitchens, Additions, Decks &
+Outdoor, Siding & Exterior, Commercial) with its own photo gallery — a combined
+"services + portfolio" page. It's **fully responsive in one file** — no separate phone
+version to paste; the same code reshapes itself into swipeable galleries and a sticky
+Get Estimate / Call / Email bar automatically on phones.
+
+1. **Pages** → **+** → **Blank Page**, name it **Services**, set its URL slug to `/services`
+2. Set the SEO title (Page Settings → SEO) to:
+   `Our Services | Bathrooms, Basements, Kitchens & More — Centerline Construction`
+3. Open `squarespace/services-part1-header-injection.html`, select all, copy → paste into
+   **Page Settings → Advanced → Page Header Code Injection** → Save
+4. Open `squarespace/services-part2-code-block.html`, select all, copy → add a **Code**
+   block (type: HTML) to the page, paste, Save
+5. It reuses the same hero video you already uploaded for the About page — nothing new to
+   upload there
+6. **Photos**: near the top of the code block is a **`YOUR SERVICE PHOTOS`** list — 4 spots
+   per service (28 total). A few are already filled in with photos reused from the About
+   page (bathrooms, basements, decks, siding, commercial); Kitchens and Additions, plus the
+   remaining spots in every category, are waiting on photos. Same method as the About page:
+   put each photo on a page with an Image Block, right-click → Copy Image Address, paste it
+   into the matching line. An empty spot just shows a text label — nothing looks broken
+   while you fill it in.
+7. Click any real photo on the live page to open it full-size in a lightbox; click outside
+   it, the × button, or press Escape to close.
+8. Every "Explore Our Services" link on the About page already points here.

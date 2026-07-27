@@ -1,7 +1,11 @@
-# Centerline Construction — About Page
+# Centerline Construction — Website Pages
 
-An eye-catching About page for [centerlineworks.com](https://www.centerlineworks.com) with 3D
-scroll effects, built to drop into Squarespace. Everything lives in one file: **`index.html`**.
+Custom pages for [centerlineworks.com](https://www.centerlineworks.com), built to drop into
+Squarespace with zero build tools. Two pages so far:
+
+- **`index.html`** — the About page, with 3D scroll effects and a phone-only twin (Part 3).
+- **`services.html`** — the Services page: every service with its own photo gallery, in one
+  fully responsive file (see "The Services page" section below).
 
 ## What's inside
 
@@ -100,3 +104,29 @@ URLs — they're marked with `EDIT ME` comments.
 - **Button links**: confirm the `/schedule` and `/services` page slugs; the Contact Us
   buttons use tel/mailto links (call at the top, Info@centerlineworks.com at the bottom).
 - **Stats**: 18+ years, founded 2020, 43 five-star reviews — adjust as the numbers grow.
+
+## The Services page (`services.html`)
+
+A combined services-and-portfolio page — every service explained alongside real project
+photos, instead of splitting "Services" and "Portfolio" into separate pages.
+
+- **Seven services**, each with a description, a chip list of what's included, and a
+  **4-photo gallery**: Bathrooms, Basements, Kitchens, Additions, Decks & Outdoor, Siding &
+  Exterior, and Commercial.
+- **Fully responsive in one file** — no separate phone version. Galleries become swipeable
+  strips and a sticky Get Estimate / Call / Email bar appears automatically on phones; the
+  same content and code serve every screen size.
+- **Sticky anchor nav** below the hero jumps to any service and highlights the one in view.
+- **Lightbox** — click any real photo to view it full-size; click outside, the × button, or
+  press Escape to close. Empty photo spots aren't clickable.
+- **"How It Works"** 3-step process section (Consultation → Plan & Quote → Build &
+  Walkthrough) and a trust strip linking to the About page's reviews.
+- **Photos**: a `window.CL_SERVICES_PHOTOS` list at the top of the code block, 4 slots per
+  service (28 total) — same "paste the image address" workflow as the About page. A few
+  slots are pre-filled with photos already gathered for the About page (bathrooms,
+  basements, decks, siding, commercial); Kitchens, Additions, and the remaining slots in
+  every category are open. An empty slot shows a text label, never a broken image.
+- **SEO/GEO**: its own `HomeAndConstructionBusiness` + `BreadcrumbList` + a `Service` entity
+  per offering in JSON-LD, plus title/meta/OG tags specific to Services.
+- See **[DEPLOY.md](DEPLOY.md#deploying-the-services-page)** for install steps — it reuses
+  the About page's hero video, so there's nothing new to upload for that part.
