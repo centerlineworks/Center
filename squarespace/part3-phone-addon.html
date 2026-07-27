@@ -1,0 +1,357 @@
+<!-- ============================================================
+     PART 3 — PHONE-ONLY VERSION (optional add-on)
+     Paste this BELOW the Part 2 code, in the same Code Block.
+     Computers and tablets (768px and wider) keep the original page;
+     phones (767px and narrower) get this app-style version instead.
+     It borrows all photos and reviews from the original code above,
+     so you only ever update content in one place.
+     ============================================================ -->
+<style>
+  /* The width switch: phones see the mobile version, everyone else the original */
+  @media (max-width: 767px) {
+    #cl-about { display: none !important; }
+  }
+  @media (min-width: 768px) {
+    #cl-about-m { display: none !important; }
+  }
+
+  /* ---------- Mobile page ---------- */
+  #cl-about-m {
+    --ink: #12100c; --paper: #f7f4ee; --paper-2: #efe9df;
+    --gold: #d9a441; --gold-deep: #b07f22; --dark: #17161c;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+    font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+    background: var(--paper); color: var(--ink); line-height: 1.55;
+    overflow-x: clip;
+    /* room for the sticky action bar */
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+  #cl-about-m *, #cl-about-m *::before, #cl-about-m *::after { box-sizing: border-box; margin: 0; }
+  #cl-about-m :is(h1,h2,h3,p,blockquote,summary,cite,small,li,figcaption) { color: inherit; }
+  #cl-about-m img { display: block; max-width: 100%; }
+  #cl-about-m .m-serif { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-style: italic; }
+  #cl-about-m section { padding: 52px 22px; }
+  #cl-about-m .m-kick {
+    display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .26em;
+    text-transform: uppercase; color: var(--gold-deep); margin-bottom: 12px;
+  }
+  #cl-about-m h2 { font-size: 30px; line-height: 1.1; letter-spacing: -.02em; font-weight: 900; margin-bottom: 14px; }
+  #cl-about-m .m-dark { background: linear-gradient(180deg, #17161c, #0f0e13); color: var(--paper); }
+  #cl-about-m .m-dark .m-kick { color: var(--gold); }
+
+  /* Light-touch reveal */
+  #cl-about-m .m-rev { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  #cl-about-m .m-rev.is-in { opacity: 1; transform: none; }
+
+  /* ---------- Hero ---------- */
+  #cl-about-m .m-hero {
+    position: relative; min-height: 100svh; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 0 22px 64px; color: var(--paper); overflow: hidden;
+    background: radial-gradient(120% 90% at 50% 0%, #23222a, #0c0b10);
+  }
+  #cl-about-m .m-hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #cl-about-m .m-hero .m-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,11,16,.55), rgba(12,11,16,.35) 40%, rgba(12,11,16,.92) 85%); }
+  #cl-about-m .m-hero > div { position: relative; }
+  #cl-about-m .m-hero .m-kick { color: var(--gold); }
+  #cl-about-m .m-hero h1 { font-size: clamp(40px, 12vw, 52px); line-height: .98; text-transform: uppercase; font-weight: 900; letter-spacing: -.01em; }
+  #cl-about-m .m-hero h1 span { display: block; text-transform: none; color: var(--gold); font-size: .62em; letter-spacing: 0; }
+  #cl-about-m .m-hero p { margin-top: 14px; font-size: 16px; color: rgba(247,244,238,.85); max-width: 34ch; }
+  #cl-about-m .m-statrow { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+  #cl-about-m .m-chip {
+    padding: 9px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 800;
+    border: 1px solid rgba(217,164,65,.5); color: var(--gold); background: rgba(12,11,16,.45);
+    backdrop-filter: blur(4px);
+  }
+
+  /* ---------- Story ---------- */
+  #cl-about-m .m-photo { border-radius: 16px; overflow: hidden; background: #ddd3c2; }
+  #cl-about-m .m-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  #cl-about-m .m-story p { font-size: 15.5px; margin-top: 12px; color: rgba(18,16,12,.85); }
+  #cl-about-m .m-story .m-photo { margin: 18px 0 6px; box-shadow: 0 24px 48px -24px rgba(18,16,12,.5); }
+  #cl-about-m .m-vals { list-style: none; padding: 0; margin-top: 18px; display: grid; gap: 12px; }
+  #cl-about-m .m-vals li { display: flex; gap: 14px; align-items: flex-start; background: #fff; border: 1px solid rgba(18,16,12,.1); border-radius: 14px; padding: 14px 16px; }
+  #cl-about-m .m-vals i {
+    flex: none; width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center;
+    background: linear-gradient(140deg, var(--gold), var(--gold-deep)); color: #17161c; font-style: normal;
+  }
+  #cl-about-m .m-vals b { display: block; font-size: 15.5px; }
+  #cl-about-m .m-vals span { font-size: 13.5px; color: rgba(18,16,12,.7); }
+
+  /* ---------- Swipe galleries (work + reviews) ---------- */
+  #cl-about-m .m-snap {
+    display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+    padding: 18px 22px 8px; margin: 0 -22px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  #cl-about-m .m-snap::-webkit-scrollbar { display: none; }
+  #cl-about-m .m-snap > * { scroll-snap-align: center; flex: none; }
+  #cl-about-m .m-hint { text-align: center; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; opacity: .5; margin-top: 10px; }
+
+  #cl-about-m .m-work-card { width: 78vw; max-width: 330px; border-radius: 16px; overflow: hidden; position: relative; background: #1d1c23; border: 1px solid rgba(247,244,238,.14); }
+  #cl-about-m .m-work-card img { width: 100%; aspect-ratio: 4 / 3.4; object-fit: cover; }
+  #cl-about-m .m-work-card figcaption {
+    position: absolute; inset: auto 0 0 0; padding: 40px 16px 14px; display: flex; justify-content: space-between; align-items: baseline;
+    background: linear-gradient(transparent, rgba(12,11,16,.94) 65%); color: var(--paper);
+  }
+  #cl-about-m .m-work-card b { font-size: 18px; font-weight: 800; }
+  #cl-about-m .m-work-card span { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+  /* before/after crossfade reuses the same rhythm as the desktop card */
+  #cl-about-m .m-ba { position: relative; }
+  #cl-about-m .m-ba img + img { position: absolute; inset: 0; animation: m-ba 7s ease-in-out infinite; }
+  #cl-about-m .m-ba-tag {
+    position: absolute; top: 12px; left: 12px; padding: 6px 12px; border-radius: 999px;
+    background: rgba(12,11,16,.72); color: var(--paper); font-size: 10.5px; font-weight: 800;
+    letter-spacing: .16em; text-transform: uppercase; display: grid;
+  }
+  #cl-about-m .m-ba-tag span { grid-area: 1/1; }
+  #cl-about-m .m-ba-tag .ta { animation: m-ba 7s ease-in-out infinite; color: var(--gold); }
+  #cl-about-m .m-ba-tag .tb { animation: m-ba-i 7s ease-in-out infinite; }
+  @keyframes m-ba { 0%, 38% { opacity: 0 } 50%, 88% { opacity: 1 } 100% { opacity: 0 } }
+  @keyframes m-ba-i { 0%, 38% { opacity: 1 } 50%, 88% { opacity: 0 } 100% { opacity: 1 } }
+
+  /* ---------- Reviews ---------- */
+  #cl-about-m .m-score { display: flex; align-items: center; gap: 14px; }
+  #cl-about-m .m-score b { font-size: 46px; font-weight: 900; letter-spacing: -.04em; color: var(--gold-deep); line-height: 1; }
+  #cl-about-m .m-score .m-stars { color: var(--gold); letter-spacing: 2px; font-size: 15px; }
+  #cl-about-m .m-score small { display: block; font-size: 12.5px; color: rgba(18,16,12,.65); font-weight: 600; }
+  #cl-about-m .m-rev-card {
+    width: 82vw; max-width: 340px; background: #fff; border: 1px solid rgba(18,16,12,.1);
+    border-radius: 16px; padding: 20px 18px; display: flex; flex-direction: column; gap: 10px;
+    box-shadow: 0 20px 40px -26px rgba(18,16,12,.4);
+  }
+  #cl-about-m .m-rev-card .m-stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; }
+  #cl-about-m .m-rev-card blockquote {
+    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 14.5px; line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  #cl-about-m .m-rev-card footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  #cl-about-m .m-rev-card cite { font-style: normal; font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: rgba(18,16,12,.65); }
+  #cl-about-m .m-rev-card .m-src { flex: none; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1.5px solid rgba(217,164,65,.55); color: var(--gold-deep); background: rgba(217,164,65,.1); }
+
+  /* ---------- Owner ---------- */
+  #cl-about-m .m-owner { position: relative; }
+  #cl-about-m .m-owner .m-photo img { aspect-ratio: 4 / 4.6; }
+  #cl-about-m .m-owner-wrap { position: relative; margin: 20px 0 30px; }
+  #cl-about-m .m-cameo {
+    position: absolute; width: 42%; right: -6px; bottom: -24px; border-radius: 12px; overflow: hidden;
+    border: 4px solid #1d1c23; transform: rotate(4deg); box-shadow: 0 22px 44px -18px rgba(0,0,0,.6);
+  }
+  #cl-about-m .m-cameo img { aspect-ratio: 3 / 4; object-fit: cover; width: 100%; }
+  #cl-about-m .m-owner p { font-size: 15px; color: rgba(247,244,238,.85); margin-top: 12px; }
+  #cl-about-m .m-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  #cl-about-m .m-badges span { font-size: 12px; font-weight: 700; padding: 8px 13px; border-radius: 999px; border: 1px solid rgba(217,164,65,.45); color: var(--gold); background: rgba(217,164,65,.08); }
+
+  /* ---------- FAQ ---------- */
+  #cl-about-m details { background: #fff; border: 1px solid rgba(18,16,12,.1); border-radius: 13px; padding: 15px 17px; margin-top: 10px; }
+  #cl-about-m summary { list-style: none; font-weight: 800; font-size: 15px; display: flex; justify-content: space-between; gap: 12px; cursor: pointer; }
+  #cl-about-m summary::after { content: "+"; color: var(--gold-deep); font-size: 20px; font-weight: 400; }
+  #cl-about-m details[open] summary::after { content: "–"; }
+  #cl-about-m details p { margin-top: 10px; font-size: 14px; color: rgba(18,16,12,.75); }
+
+  /* ---------- Sticky action bar ---------- */
+  #cl-about-m .m-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 999;
+    display: flex; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(18, 16, 12, .82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(217,164,65,.35);
+  }
+  #cl-about-m .m-bar a {
+    flex: 1; text-align: center; padding: 13px 6px; border-radius: 12px; text-decoration: none;
+    font-size: 13.5px; font-weight: 800; letter-spacing: .02em; color: var(--paper);
+    border: 1.5px solid rgba(247,244,238,.28);
+  }
+  #cl-about-m .m-bar a.gold { background: linear-gradient(140deg, var(--gold), var(--gold-deep)); color: #17140c; border-color: transparent; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #cl-about-m .m-rev { opacity: 1; transform: none; transition: none; }
+    #cl-about-m .m-ba img + img, #cl-about-m .m-ba-tag .ta { animation: none; opacity: 1; }
+    #cl-about-m .m-ba-tag .tb { animation: none; opacity: 0; }
+  }
+</style>
+
+<div id="cl-about-m">
+
+  <header class="m-hero" aria-label="About Centerline Construction">
+    <video data-m-video muted loop playsinline poster="https://www.centerlineworks.com/s/hero-poster.jpg" aria-hidden="true"></video>
+    <div class="m-scrim"></div>
+    <div>
+      <span class="m-kick">Centerline Construction · Holly Springs, GA</span>
+      <h1>Built on faith.<span class="m-serif">Finished with craftsmanship.</span></h1>
+      <p>Family-owned renovations across North Georgia — bathrooms, basements, kitchens, decks &amp; more.</p>
+      <div class="m-statrow">
+        <span class="m-chip">18+ Years</span>
+        <span class="m-chip">★ 5.0 · 43 Reviews</span>
+        <span class="m-chip">Family-Owned</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="m-story m-rev" aria-labelledby="m-story-h">
+    <span class="m-kick">Our Story</span>
+    <h2 id="m-story-h">The line every great build starts from.</h2>
+    <p>In carpentry, the centerline is where every accurate measurement begins. In 2020, Alfred Tudela founded Centerline Construction on the same idea — every project and every relationship starts from a true center: <strong>faith, integrity, and craftsmanship</strong>.</p>
+    <figure class="m-photo"><img data-m-from="story" alt="The Centerline Construction crew at work on a renovation project in North Georgia" loading="lazy"></figure>
+    <p>A crew of skilled carpenters and craftsmen, on time and on budget — with a handshake that still means something.</p>
+    <ul class="m-vals">
+      <li><i>✝</i><div><b>Faith</b><span>A Christ-centered, family-based company — and we build like it.</span></div></li>
+      <li><i>⚖</i><div><b>Integrity</b><span>We show up when we say we will and tell you the truth about your project.</span></div></li>
+      <li><i>⚒</i><div><b>Craftsmanship</b><span>Precision on every cut, tile, and board. Quality is the standard.</span></div></li>
+    </ul>
+  </section>
+
+  <section class="m-dark m-work" aria-labelledby="m-work-h">
+    <div class="m-rev">
+      <span class="m-kick">Our Work</span>
+      <h2 id="m-work-h">Proof, in every room.</h2>
+    </div>
+    <div class="m-snap" data-m-work><!-- cards cloned from the desktop version by the script below --></div>
+    <p class="m-hint">Swipe to browse</p>
+  </section>
+
+  <section class="m-reviews m-rev" style="background:var(--paper-2)" aria-labelledby="m-revs-h">
+    <span class="m-kick">Word of Mouth</span>
+    <h2 id="m-revs-h">Our neighbors say it best.</h2>
+    <div class="m-score">
+      <b>5.0</b>
+      <div><span class="m-stars">★★★★★</span><small>43 five-star reviews on Google, Facebook, Yelp &amp; Nextdoor</small></div>
+    </div>
+    <div class="m-snap" data-m-reviews><!-- review cards cloned from the desktop version --></div>
+    <p class="m-hint">Swipe for more</p>
+  </section>
+
+  <section class="m-dark m-owner" aria-labelledby="m-owner-h">
+    <div class="m-rev">
+      <span class="m-kick">Meet the Owner</span>
+      <h2 id="m-owner-h">Alfred Tudela, <span class="m-serif" style="color:var(--gold)">founder &amp; CEO</span></h2>
+      <div class="m-owner-wrap">
+        <figure class="m-photo"><img data-m-from="alfred" alt="Alfred Tudela, founder and CEO of Centerline Construction Company in Holly Springs, Georgia" loading="lazy"></figure>
+        <figure class="m-cameo"><img data-m-from="cedar" alt="Alfred Tudela of Centerline Construction carrying a large cedar beam on a job site" loading="lazy"></figure>
+      </div>
+      <p>With over 18 years in construction, Alfred still shows up on your job site, meets you on day one, and swings a hammer alongside his crew — carpenters, tile setters, and finish craftsmen who treat every home like their own.</p>
+      <p>A devoted husband and father, Alfred built Centerline as a family company. Faith comes first: he serves as the <strong>Youth Director at Rising Hills Church</strong> in Canton, Georgia.</p>
+      <div class="m-badges">
+        <span>⚒ 18+ Years</span><span>✝ Rising Hills Church</span><span>🏠 Family-Owned</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="m-faq m-rev" aria-labelledby="m-faq-h">
+    <span class="m-kick">Quick Answers</span>
+    <h2 id="m-faq-h">Frequently asked questions</h2>
+    <details><summary>Who owns Centerline Construction?</summary><p>Alfred Tudela — a hands-on CEO with 18+ years of experience who personally meets with clients across North Georgia.</p></details>
+    <details><summary>What areas do you serve?</summary><p>Holly Springs, Canton, Woodstock, Cherokee County, and communities across North Georgia and greater Atlanta.</p></details>
+    <details><summary>What services do you offer?</summary><p>Bathrooms, basements, kitchens, home additions, decks &amp; railing, siding, wood rot repair, cabinetry, exterior repairs, and commercial renovations.</p></details>
+    <details><summary>How do I get a free estimate?</summary><p>Tap the gold button below, or call <a href="tel:+16783721274">(678) 372-1274</a>. Mon–Sat 7am–6pm, Sun 2–6pm.</p></details>
+  </section>
+
+  <section class="m-dark m-rev" style="text-align:center" aria-label="Get started">
+    <h2>Let's find your project's <span class="m-serif" style="color:var(--gold)">centerline.</span></h2>
+    <p style="font-size:15px;color:rgba(247,244,238,.8);max-width:36ch;margin:0 auto">Free estimates. Honest answers. Craftsmanship you can point at.</p>
+    <p style="margin-top:14px;font-size:12.5px;color:rgba(247,244,238,.55)">Mon–Sat 7am–6pm · Sun 2pm–6pm · Holly Springs, GA</p>
+  </section>
+
+  <!-- Sticky thumb-reach action bar -->
+  <nav class="m-bar" aria-label="Quick actions">
+    <a class="gold" href="https://www.centerlineworks.com/schedule">Get Estimate</a>
+    <a href="tel:+16783721274">Call</a>
+    <a href="mailto:Info@centerlineworks.com">Email</a>
+  </nav>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var m = document.getElementById("cl-about-m");
+  var desktop = document.getElementById("cl-about");
+  if (!m || !desktop) return;
+  var isPhone = window.matchMedia("(max-width: 767px)").matches;
+
+  if (!isPhone) return; // desktop/tablet: mobile version stays inert (no downloads)
+
+  /* Phones: stop the hidden desktop videos from downloading */
+  desktop.querySelectorAll("video").forEach(function (v) {
+    v.removeAttribute("autoplay"); v.pause();
+    v.querySelectorAll("source").forEach(function (s) { s.remove(); });
+    v.removeAttribute("src"); v.load();
+  });
+
+  /* Start the mobile hero video (same hosted files as the original) */
+  var mv = m.querySelector("[data-m-video]");
+  if (mv) {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce) {
+      [["https://www.centerlineworks.com/s/hero-loop.webm", "video/webm"], ["https://www.centerlineworks.com/s/hero-loop.mp4", "video/mp4"]].forEach(function (sv) {
+        var s = document.createElement("source"); s.src = sv[0]; s.type = sv[1]; mv.appendChild(s);
+      });
+      mv.autoplay = true; mv.load();
+      mv.play && mv.play().catch(function () {});
+    }
+  }
+
+  /* Borrow photos from the original code (including any CL_PHOTOS overrides) */
+  m.querySelectorAll("[data-m-from]").forEach(function (img) {
+    var srcImg = desktop.querySelector('[data-cl-photo="' + img.getAttribute("data-m-from") + '"]');
+    if (srcImg && srcImg.getAttribute("src")) img.src = srcImg.getAttribute("src");
+  });
+
+  /* Build the swipeable work gallery from the original cards */
+  var workWrap = m.querySelector("[data-m-work]");
+  var workCards = [].slice.call(desktop.querySelectorAll(".cl-work-card"));
+  if (workCards.length) workCards = workCards.slice(0, Math.ceil(workCards.length / 2)); // marquee duplicates its cards
+  workCards.forEach(function (card) {
+    var title = card.querySelector("figcaption b");
+    var tag = card.querySelector("figcaption span");
+    var fig = document.createElement("figure");
+    fig.className = "m-work-card";
+    var ba = card.querySelector(".cl-ba");
+    if (ba) {
+      var before = ba.querySelector(".cl-ba-before"), after = ba.querySelector(".cl-ba-after");
+      var wrap = document.createElement("div"); wrap.className = "m-ba";
+      [before, after].forEach(function (im) {
+        if (!im || !im.getAttribute("src")) return;
+        var c = document.createElement("img"); c.src = im.getAttribute("src"); c.alt = im.alt; c.loading = "lazy";
+        wrap.appendChild(c);
+      });
+      var t = document.createElement("span"); t.className = "m-ba-tag";
+      t.innerHTML = '<span class="tb">Before</span><span class="ta">After</span>';
+      wrap.appendChild(t); fig.appendChild(wrap);
+    } else {
+      var im = card.querySelector("img");
+      if (im && im.getAttribute("src")) {
+        var c2 = document.createElement("img"); c2.src = im.getAttribute("src"); c2.alt = im.alt; c2.loading = "lazy";
+        fig.appendChild(c2);
+      } else {
+        return; // skip cards that still have no photo
+      }
+    }
+    var cap = document.createElement("figcaption");
+    cap.innerHTML = "<b>" + (title ? title.textContent : "") + "</b><span>" + (tag ? tag.textContent : "") + "</span>";
+    fig.appendChild(cap);
+    workWrap.appendChild(fig);
+  });
+
+  /* Build swipeable review cards from the original carousel */
+  var revWrap = m.querySelector("[data-m-reviews]");
+  desktop.querySelectorAll(".cl-rev-card").forEach(function (card) {
+    var q = card.querySelector("blockquote"), cite = card.querySelector("cite"), src = card.querySelector(".cl-rev-src");
+    var el = document.createElement("article");
+    el.className = "m-rev-card";
+    el.innerHTML = '<div class="m-stars" aria-label="5 out of 5 stars">★★★★★</div>' +
+      "<blockquote>" + (q ? q.innerHTML : "") + "</blockquote>" +
+      "<footer><cite>" + (cite ? cite.textContent : "") + "</cite>" +
+      '<span class="m-src">' + (src ? src.textContent : "") + "</span></footer>";
+    revWrap.appendChild(el);
+  });
+
+  /* Gentle scroll reveals */
+  var reveals = m.querySelectorAll(".m-rev");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add("is-in"); });
+  }
+})();
+</script>

@@ -64,6 +64,20 @@ nothing ever looks broken while you work through the list.
 3. If the page section adds white padding around the block, set the section's spacing/padding
    to minimum so the design runs edge to edge
 
+## Step 5b — Optional: the phone-only version (Part 3)
+
+`squarespace/part3-phone-addon.html` is a separate, app-style layout just for phones —
+sticky Get Estimate / Call / Email buttons at the bottom, swipeable work gallery and
+review cards, a full-screen video hero. Computers and tablets keep the original design.
+
+1. Open `part3-phone-addon.html`, select all, copy
+2. Edit the About page's Code Block and paste it **below** the existing Part 2 code
+   (don't change Part 2 itself), then Save
+
+That's it — the code decides by screen width: 767px and narrower gets the phone version,
+768px and wider gets the original. The phone version borrows every photo and review from
+Part 2 automatically, so future content edits only ever happen in one place.
+
 ## Step 6 — Look at it!
 
 Open the page on your phone and computer. You should see the drone video playing behind the

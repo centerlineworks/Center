@@ -14,8 +14,17 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
      `</style>` (minus the `<title>` line; the SEO title is set in Page Settings). Pasted
      into Page Settings → Advanced → Page Header Code Injection.
    - `squarespace/part2-code-block.html` — from the `YOUR PHOTOS` config `<script>` +
-     `<main id="cl-about">` through the final `</script>`. Pasted into one Code Block
-     (type HTML).
+     `<main id="cl-about">` through the desktop IIFE's `</script>` (stop at the
+     `<!-- PART3-START -->` marker). Pasted into one Code Block (type HTML).
+   - `squarespace/part3-phone-addon.html` — the `<!-- PART3-START/END -->` block: a
+     phone-only layout (`#cl-about-m`) pasted below Part 2 in the same Code Block.
+     Width switch at 767px hides `#cl-about` on phones and `#cl-about-m` at ≥768px.
+     Its JS runs only on phones: it strips the hidden desktop videos' sources (saves
+     bandwidth), attaches its own hero video, and CLONES photos (`data-m-from` ←
+     `data-cl-photo`), work cards, and all review cards from the desktop DOM — content
+     is maintained in Part 2 only. On desktop it stays fully inert (no downloads).
+     Signature mobile moves: sticky bottom action bar (Get Estimate / Call / Email,
+     safe-area padding), scroll-snap swipe galleries, 100svh video hero.
    - In both, rewrite `assets/...` video/poster paths to
      `https://www.centerlineworks.com/s/<filename>` (Squarespace file-storage URLs).
    - The regeneration is done with a small Python script (see git history) — keep the
@@ -99,7 +108,8 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
 - 43 five-star reviews (5.0) across Google 29 / Facebook 10 / Yelp 2 / Nextdoor 2 — full
   text baked into the review carousel (39 cards after dropping cross-platform duplicates).
 - Alfred is Youth Director at Rising Hills Church in **Canton, GA** (not Woodstock).
-- Photo filenames Alfred uses: story IMG_1704, bathroom before/after IMG_2415→IMG_2688,
-  basement PXL_20250226_233210463, decks exported_A3C876F6-…, siding dji_fly_20260604_…,
-  commercial IMG_8669, portrait "IMG_1661-EDIT (1)", cedar-beam IMG_1176. Additions and
-  Kitchens cards still need photos.
+- All 11 photo spots are baked into `index.html` as real
+  `images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/...` URLs (Alfred
+  supplied them by editing part2 on GitHub — watch for his direct GitHub edits and
+  integrate them into index.html before regenerating). The `CL_PHOTOS` list remains as an
+  easy override for future photo swaps.
