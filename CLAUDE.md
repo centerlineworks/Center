@@ -25,6 +25,8 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
      is maintained in Part 2 only. On desktop it stays fully inert (no downloads).
      Signature mobile moves: sticky bottom action bar (Get Estimate / Call / Email,
      safe-area padding), scroll-snap swipe galleries, 100svh video hero.
+     LESSON: iPhones reject <source> tags attached via JS — video sources must be
+     static in the HTML (identical URLs across versions share one download anyway).
    - In both, rewrite `assets/...` video/poster paths to
      `https://www.centerlineworks.com/s/<filename>` (Squarespace file-storage URLs).
    - The regeneration is done with a small Python script (see git history) — keep the
