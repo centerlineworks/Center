@@ -129,7 +129,7 @@
 
   /* ---------- Reviews ---------- */
   #cl-about-m .m-score { display: flex; align-items: center; gap: 14px; }
-  #cl-about-m .m-score b { font-size: 46px; font-weight: 900; letter-spacing: -.04em; color: var(--gold-deep); line-height: 1; }
+  #cl-about-m .m-score b { font-size: 46px; font-weight: 900; letter-spacing: -.04em; color: var(--gold-deep); line-height: 1; white-space: nowrap; flex: none; }
   #cl-about-m .m-score .m-stars { color: var(--gold); letter-spacing: 2px; font-size: 15px; }
   #cl-about-m .m-score small { display: block; font-size: 12.5px; color: rgba(18,16,12,.65); font-weight: 600; }
   #cl-about-m .m-rev-card {
@@ -191,12 +191,8 @@
 <div id="cl-about-m">
 
   <header class="m-hero" aria-label="About Centerline Construction">
-    <!-- Same markup pattern as the desktop hero video — proven to play on phones.
-         Both versions point at the same files, so the browser downloads them once. -->
-    <video data-m-video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="https://www.centerlineworks.com/s/hero-poster.jpg" aria-hidden="true">
-      <source src="https://www.centerlineworks.com/s/hero-loop.webm" type="video/webm">
-      <source src="https://www.centerlineworks.com/s/hero-loop.mp4" type="video/mp4">
-    </video>
+    <!-- No video tag here on purpose: the script below MOVES the original hero
+         video element (the exact one that already plays on phones) into this spot. -->
     <div class="m-scrim"></div>
     <div>
       <span class="m-kick">Centerline Construction · Holly Springs, GA</span>
@@ -294,36 +290,32 @@
 
   if (!isPhone) return; // desktop/tablet: mobile version stays inert (no downloads)
 
-  /* Phones: stop the hidden desktop videos from downloading */
+  /* Hero video: MOVE the original desktop hero video element into the mobile
+     hero. It's the exact element (and setup) that already plays on phones —
+     nothing is recreated, so it behaves precisely like it did before. */
+  var mHero = m.querySelector(".m-hero");
+  var heroVid = desktop.querySelector(".cl-hero video");
+  if (mHero && heroVid) {
+    mHero.insertBefore(heroVid, mHero.firstChild);
+    heroVid.muted = true; heroVid.defaultMuted = true;
+    var tryPlay = function () {
+      if (!heroVid.paused) return;
+      var p = heroVid.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    tryPlay();
+    heroVid.addEventListener("canplay", tryPlay);
+    ["touchstart", "click", "scroll"].forEach(function (ev) {
+      window.addEventListener(ev, tryPlay, { once: true, passive: true });
+    });
+  }
+
+  /* Stop the remaining hidden desktop videos (e.g. the CTA one) from downloading */
   desktop.querySelectorAll("video").forEach(function (v) {
     v.removeAttribute("autoplay"); v.pause();
     v.querySelectorAll("source").forEach(function (s) { s.remove(); });
     v.removeAttribute("src"); v.load();
   });
-
-  /* Hero video: the <video> tag already carries its sources (the same proven
-     setup as the desktop hero). Here we only nudge playback for picky iPhones
-     and honor reduced-motion by freezing on the poster frame. */
-  var mv = m.querySelector("[data-m-video]");
-  if (mv) {
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      mv.removeAttribute("autoplay"); mv.pause();
-    } else {
-      mv.muted = true; mv.defaultMuted = true;
-      var tryPlay = function () {
-        if (!mv.paused) return;
-        var p = mv.play();
-        if (p && p.catch) p.catch(function () {});
-      };
-      tryPlay();
-      mv.addEventListener("loadeddata", tryPlay);
-      mv.addEventListener("canplay", tryPlay);
-      ["touchstart", "click", "scroll"].forEach(function (ev) {
-        window.addEventListener(ev, tryPlay, { once: true, passive: true });
-      });
-    }
-  }
 
   /* Borrow photos from the original code (including any CL_PHOTOS overrides) */
   m.querySelectorAll("[data-m-from]").forEach(function (img) {
