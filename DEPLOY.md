@@ -116,24 +116,30 @@ Search the code block for `EDIT ME`:
 
 ## Deploying the Services page
 
-The Services page shows every service (Bathrooms, Basements, Kitchens, Additions, Decks &
+The Services page shows every service (Bathrooms, Basements, Cabanas, Additions, Decks &
 Outdoor, Siding & Exterior, Commercial) with its own photo gallery — a combined
 "services + portfolio" page. It's **fully responsive in one file** — no separate phone
 version to paste; the same code reshapes itself into swipeable galleries and a sticky
 Get Estimate / Call / Email bar automatically on phones.
 
+It has **its own hero video** (a poolside cabana/pavilion project) — separate from the
+About page's video, so both pages can show different footage without one affecting the
+other.
+
 1. **Pages** → **+** → **Blank Page**, name it **Services**, set its URL slug to `/services`
 2. Set the SEO title (Page Settings → SEO) to:
-   `Our Services | Bathrooms, Basements, Kitchens & More — Centerline Construction`
-3. Open `squarespace/services-part1-header-injection.html`, select all, copy → paste into
+   `Our Services | Bathrooms, Basements, Cabanas & More — Centerline Construction`
+3. Upload the Services page's own video files the same way as the About page's (Link
+   editor → **File** → **Upload file**, keep the filenames exactly): `services-hero.mp4`,
+   `services-hero.webm`, `services-hero-poster.jpg` (all in the `assets` folder). Confirm
+   it worked by visiting `https://www.centerlineworks.com/s/services-hero.mp4` directly.
+4. Open `squarespace/services-part1-header-injection.html`, select all, copy → paste into
    **Page Settings → Advanced → Page Header Code Injection** → Save
-4. Open `squarespace/services-part2-code-block.html`, select all, copy → add a **Code**
+5. Open `squarespace/services-part2-code-block.html`, select all, copy → add a **Code**
    block (type: HTML) to the page, paste, Save
-5. It reuses the same hero video you already uploaded for the About page — nothing new to
-   upload there
 6. **Photos**: near the top of the code block is a **`YOUR SERVICE PHOTOS`** list — 4 spots
    per service (28 total). A few are already filled in with photos reused from the About
-   page (bathrooms, basements, decks, siding, commercial); Kitchens and Additions, plus the
+   page (bathrooms, basements, decks, siding, commercial); Cabanas and Additions, plus the
    remaining spots in every category, are waiting on photos. Same method as the About page:
    put each photo on a page with an Image Block, right-click → Copy Image Address, paste it
    into the matching line. An empty spot just shows a text label — nothing looks broken

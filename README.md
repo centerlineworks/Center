@@ -111,8 +111,11 @@ A combined services-and-portfolio page — every service explained alongside rea
 photos, instead of splitting "Services" and "Portfolio" into separate pages.
 
 - **Seven services**, each with a description, a chip list of what's included, and a
-  **4-photo gallery**: Bathrooms, Basements, Kitchens, Additions, Decks & Outdoor, Siding &
+  **4-photo gallery**: Bathrooms, Basements, Cabanas, Additions, Decks & Outdoor, Siding &
   Exterior, and Commercial.
+- **Its own hero video** — a poolside cabana/pavilion project (`assets/services-hero.mp4`)
+  — kept completely separate from the About page's video so each page can show different
+  footage independently.
 - **Fully responsive in one file** — no separate phone version. Galleries become swipeable
   strips and a sticky Get Estimate / Call / Email bar appears automatically on phones; the
   same content and code serve every screen size.
@@ -124,9 +127,9 @@ photos, instead of splitting "Services" and "Portfolio" into separate pages.
 - **Photos**: a `window.CL_SERVICES_PHOTOS` list at the top of the code block, 4 slots per
   service (28 total) — same "paste the image address" workflow as the About page. A few
   slots are pre-filled with photos already gathered for the About page (bathrooms,
-  basements, decks, siding, commercial); Kitchens, Additions, and the remaining slots in
+  basements, decks, siding, commercial); Cabanas, Additions, and the remaining slots in
   every category are open. An empty slot shows a text label, never a broken image.
 - **SEO/GEO**: its own `HomeAndConstructionBusiness` + `BreadcrumbList` + a `Service` entity
   per offering in JSON-LD, plus title/meta/OG tags specific to Services.
-- See **[DEPLOY.md](DEPLOY.md#deploying-the-services-page)** for install steps — it reuses
-  the About page's hero video, so there's nothing new to upload for that part.
+- See **[DEPLOY.md](DEPLOY.md#deploying-the-services-page)** for install steps, including
+  uploading its own video files.

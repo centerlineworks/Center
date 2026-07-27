@@ -15,6 +15,13 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   action bar appears) with no duplicated markup/JS twin. Prefer this pattern for any new
   page: only reach for an About-style Part 3 phone twin when a page already shipped
   desktop-only and a full rewrite isn't worth it.
+  Seven service categories with a 4-photo gallery each: Bathrooms, Basements, Cabanas
+  (custom cabanas/pavilions — swapped in for Kitchen Remodeling since there aren't enough
+  kitchen photos yet), Additions, Decks & Outdoor, Siding & Exterior, Commercial.
+  Has its OWN hero video (`assets/services-hero.mp4/.webm` + `-poster.jpg`) — a separate
+  poolside cabana/pavilion clip, intentionally decoupled from the About page's
+  `hero-loop.*` files so editing one page's video never risks the other's. Never reuse
+  the About page's hero filenames for a different page's different footage.
 - Each page has its own `<title>`/meta/JSON-LD but shares the same design tokens, fonts,
   and `#cl-<page>`-scoped CSS pattern — copy the foundation from the most recent page
   rather than reinventing it.
@@ -81,9 +88,13 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   photos as **Files** (same as the videos) rather than through the asset library whenever
   possible — it skips the "Image Block + copy address" step entirely and gives a
   predictable `/s/<filename>` URL we can write into the code directly.
-- **The site theme bleeds into code blocks** (it set our headings white-on-white once).
-  Guard: `#cl-about :is(h1,h2,h3,h4,p,blockquote,summary,cite,small,li,figcaption)
-  { color: inherit; }` and scope ALL CSS under the `#cl-about` id.
+- **The site theme bleeds into code blocks** (it set our headings white-on-white once, and
+  separately left chip/pill `<span>` text with no explicit color so it could inherit an
+  invisible white-on-cream from the theme). Guard broadly — include `span`/`div`/`b`/`strong`
+  in the `:is(...)` inherit rule, not just headings/paragraphs, and give every "pill" style
+  (chips, badges) its own explicit `color` too, never rely on inheritance alone:
+  `#cl-<page> :is(h1,h2,h3,h4,p,blockquote,summary,cite,small,li,figcaption,span,div,b,strong)
+  { color: inherit; }`. Scope ALL CSS under the page's `#cl-<page>` id.
 - **The host section adds a big empty (black) gap** below the block on every page. Part 1
   CSS collapses it per page: `.page-section:has(#cl-<page>) { padding:0!important;
   min-height:0!important; }` plus `.content-wrapper` / `.sqs-block` equivalents. Manual
@@ -116,6 +127,15 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
 - Playwright's bundled ffmpeg is stripped (VP8/webm only). Use the full static binary:
   `pip install imageio-ffmpeg` →
   `/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-*`.
+- A hero background loop only needs a few seconds — trim long source clips (`-t 8` or so)
+  before encoding. Detailed/busy footage (foliage, water) costs much more per second than
+  simple footage at the same crf; if a first-pass encode comes out heavy (e.g. rich pool/
+  landscaping footage vs. plain framing footage), trim tighter and/or raise crf rather than
+  shipping an oversized background video.
+- **Each page's hero video gets its own filename** (e.g. `hero-loop.*` for About,
+  `services-hero.*` for Services) even if both happen to need re-encoding in the same
+  session — never let two pages share one filename, or replacing one page's footage
+  silently changes the other's.
 - Per video, produce: `-an` MP4 (H.264, scale 1600w, crf 27, `+faststart`), WebM (VP9,
   crf 38), poster JPG, plus ~960w "small" versions (crf 32/44) for data-URI embedding in
   the preview Artifact. WebM source listed before MP4 in `<video>`.

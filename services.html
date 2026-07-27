@@ -11,9 +11,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Our Services | Bathrooms, Basements, Kitchens &amp; More — Centerline Construction</title>
-<meta name="description" content="Centerline Construction builds bathrooms, basements, kitchens, home additions, decks, siding, and commercial renovations across Holly Springs, Canton &amp; North Georgia. See real project photos for every service. Free estimates: (678) 372-1274.">
-<meta name="keywords" content="Centerline Construction services, bathroom remodel Holly Springs GA, basement finishing Canton GA, kitchen remodel North Georgia, home additions Cherokee County, deck builder Woodstock GA, siding repair Georgia, commercial renovation contractor">
+<title>Our Services | Bathrooms, Basements, Cabanas &amp; More — Centerline Construction</title>
+<meta name="description" content="Centerline Construction builds bathrooms, basements, cabanas, home additions, decks, siding, and commercial renovations across Holly Springs, Canton &amp; North Georgia. See real project photos for every service. Free estimates: (678) 372-1274.">
+<meta name="keywords" content="Centerline Construction services, bathroom remodel Holly Springs GA, basement finishing Canton GA, custom cabana North Georgia, home additions Cherokee County, deck builder Woodstock GA, siding repair Georgia, commercial renovation contractor">
 <meta name="author" content="Centerline Construction Company, LLC">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://www.centerlineworks.com/services">
@@ -21,12 +21,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Centerline Construction">
 <meta property="og:title" content="Our Services | Centerline Construction">
-<meta property="og:description" content="Bathrooms, basements, kitchens, home additions, decks, siding &amp; commercial renovations — see real project photos for every service we offer in North Georgia.">
+<meta property="og:description" content="Bathrooms, basements, cabanas, home additions, decks, siding &amp; commercial renovations — see real project photos for every service we offer in North Georgia.">
 <meta property="og:url" content="https://www.centerlineworks.com/services">
 <meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/5322ccd4-aebc-4342-9a05-a3e4ced4f948/IMG_1661-EDIT+%281%29.jpg?format=1000w">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Our Services | Centerline Construction">
-<meta name="twitter:description" content="Bathrooms, basements, kitchens, additions, decks, siding &amp; commercial renovations in North Georgia — with real project photos.">
+<meta name="twitter:description" content="Bathrooms, basements, cabanas, additions, decks, siding &amp; commercial renovations in North Georgia — with real project photos.">
 
 <!-- ===== GEO / AI-answer optimization: structured data =====
      Mirrors the same business identity as the About page, plus a Service entry
@@ -71,9 +71,9 @@
       "areaServed": "North Georgia", "description": "Basement finishing that turns unused space into livable rooms — framing, drywall, flooring, lighting, and trim."
     },
     {
-      "@type": "Service", "@id": "https://www.centerlineworks.com/services#kitchens",
-      "name": "Kitchen Remodeling", "provider": { "@id": "https://www.centerlineworks.com/#business" },
-      "areaServed": "North Georgia", "description": "Kitchen remodels covering cabinetry, countertops, layout changes, and finish carpentry."
+      "@type": "Service", "@id": "https://www.centerlineworks.com/services#cabanas",
+      "name": "Custom Cabanas & Pavilions", "provider": { "@id": "https://www.centerlineworks.com/#business" },
+      "areaServed": "North Georgia", "description": "Timber-frame cabanas and covered pavilions built around a stone fireplace or outdoor kitchen."
     },
     {
       "@type": "Service", "@id": "https://www.centerlineworks.com/services#additions",
@@ -117,7 +117,7 @@
   #cl-services img { max-width: 100%; display: block; }
   #cl-services .cl-wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
   #cl-services h1, #cl-services h2, #cl-services h3 { line-height: 1.08; font-weight: 800; letter-spacing: -.02em; }
-  #cl-services :is(h1,h2,h3,h4,p,blockquote,summary,cite,small,li,figcaption) { color: inherit; }
+  #cl-services :is(h1,h2,h3,h4,p,blockquote,summary,cite,small,li,figcaption,span,div,b,strong) { color: inherit; }
   #cl-services .cl-serif { font-family: 'Fraunces', Georgia, serif; font-weight: 700; }
 
   #cl-services .cl-kicker {
@@ -185,7 +185,7 @@
   #cl-services .cl-svc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
   #cl-services .cl-svc-chips span {
     padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 700;
-    background: #fff; border: 1px solid var(--line);
+    background: #fff; border: 1px solid var(--line); color: var(--ink);
   }
 
   /* ---------- Gallery grid (desktop) / swipe strip (phone via media query) ---------- */
@@ -305,10 +305,10 @@ window.CL_SERVICES_PHOTOS = {
   basements_3: "",
   basements_4: "",
 
-  kitchens_1: "",
-  kitchens_2: "",
-  kitchens_3: "",
-  kitchens_4: "",
+  cabanas_1: "",
+  cabanas_2: "",
+  cabanas_3: "",
+  cabanas_4: "",
 
   additions_1: "",
   additions_2: "",
@@ -335,15 +335,15 @@ window.CL_SERVICES_PHOTOS = {
 
   <!-- ================= HERO ================= -->
   <header class="cl-hero" aria-label="Centerline Construction services">
-    <video class="cl-video-bg" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true">
-      <source src="assets/hero-loop.webm" type="video/webm">
-      <source src="assets/hero-loop.mp4" type="video/mp4">
+    <video class="cl-video-bg" autoplay muted loop playsinline preload="auto" poster="assets/services-hero-poster.jpg" aria-hidden="true">
+      <source src="assets/services-hero.webm" type="video/webm">
+      <source src="assets/services-hero.mp4" type="video/mp4">
     </video>
     <div class="cl-scrim"></div>
     <div class="cl-hero-inner">
       <p class="cl-kicker">What We Build</p>
       <h1>Our Services<span>Every project, built the same way — right.</span></h1>
-      <p>Bathrooms, basements, kitchens, additions, decks, siding, and commercial work across Holly Springs, Canton &amp; North Georgia. Scroll through real projects for every service below.</p>
+      <p>Bathrooms, basements, cabanas, additions, decks, siding, and commercial work across Holly Springs, Canton &amp; North Georgia. Scroll through real projects for every service below.</p>
       <div class="cl-btn-row">
         <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Schedule an Estimate</a>
         <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
@@ -356,7 +356,7 @@ window.CL_SERVICES_PHOTOS = {
     <div class="cl-nav-track">
       <a href="#bathrooms">Bathrooms</a>
       <a href="#basements">Basements</a>
-      <a href="#kitchens">Kitchens</a>
+      <a href="#cabanas">Cabanas</a>
       <a href="#additions">Additions</a>
       <a href="#decks">Decks &amp; Outdoor</a>
       <a href="#siding">Siding &amp; Exterior</a>
@@ -404,22 +404,22 @@ window.CL_SERVICES_PHOTOS = {
     </div>
   </section>
 
-  <!-- ================= KITCHENS ================= -->
-  <section class="cl-svc" id="kitchens" aria-labelledby="kitchens-h">
+  <!-- ================= CABANAS ================= -->
+  <section class="cl-svc" id="cabanas" aria-labelledby="cabanas-h">
     <div class="cl-wrap">
       <div class="cl-svc-head cl-reveal">
-        <p class="cl-kicker">Kitchens</p>
-        <h2 id="kitchens-h">Kitchen Remodeling</h2>
-        <p>Cabinetry, countertops, and layout changes that make the kitchen work better for how your family actually uses it — with finish carpentry that holds up.</p>
+        <p class="cl-kicker">Cabanas</p>
+        <h2 id="cabanas-h">Custom Cabanas &amp; Pavilions</h2>
+        <p>Timber-frame cabanas and covered pavilions built around a stone fireplace or outdoor kitchen — a real second living room for your backyard, built to handle North Georgia weather year-round.</p>
         <div class="cl-svc-chips">
-          <span>Cabinetry</span><span>Countertops</span><span>Layout Changes</span><span>Finish Carpentry</span>
+          <span>Stone Fireplaces</span><span>Outdoor Kitchens</span><span>Timber Framing</span><span>Lighting &amp; Wiring</span>
         </div>
       </div>
       <div class="cl-gallery cl-reveal" data-delay>
-        <figure class="cl-shot cl-noimg" data-cl-photo="kitchens_1"><div class="cl-shot-label">[ Photo: kitchen project 1 ]</div><img alt="Kitchen remodel by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="kitchens_2"><div class="cl-shot-label">[ Photo: kitchen project 2 ]</div><img alt="Kitchen remodel by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="kitchens_3"><div class="cl-shot-label">[ Photo: kitchen project 3 ]</div><img alt="Kitchen remodel by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="kitchens_4"><div class="cl-shot-label">[ Photo: kitchen project 4 ]</div><img alt="Kitchen remodel by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"></figure>
+        <figure class="cl-shot cl-noimg" data-cl-photo="cabanas_1"><div class="cl-shot-label">[ Photo: cabana project 1 ]</div><img alt="Custom cabana built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"></figure>
+        <figure class="cl-shot cl-noimg" data-cl-photo="cabanas_2"><div class="cl-shot-label">[ Photo: cabana project 2 ]</div><img alt="Custom cabana built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"></figure>
+        <figure class="cl-shot cl-noimg" data-cl-photo="cabanas_3"><div class="cl-shot-label">[ Photo: cabana project 3 ]</div><img alt="Custom cabana built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"></figure>
+        <figure class="cl-shot cl-noimg" data-cl-photo="cabanas_4"><div class="cl-shot-label">[ Photo: cabana project 4 ]</div><img alt="Custom cabana built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"></figure>
       </div>
     </div>
   </section>
