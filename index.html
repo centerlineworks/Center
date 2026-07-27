@@ -1638,7 +1638,12 @@ window.CL_PHOTOS = {
 <div id="cl-about-m">
 
   <header class="m-hero" aria-label="About Centerline Construction">
-    <video data-m-video muted loop playsinline poster="assets/hero-poster.jpg" aria-hidden="true"></video>
+    <!-- Same markup pattern as the desktop hero video — proven to play on phones.
+         Both versions point at the same files, so the browser downloads them once. -->
+    <video data-m-video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true">
+      <source src="assets/hero-loop.webm" type="video/webm">
+      <source src="assets/hero-loop.mp4" type="video/mp4">
+    </video>
     <div class="m-scrim"></div>
     <div>
       <span class="m-kick">Centerline Construction · Holly Springs, GA</span>
@@ -1743,21 +1748,16 @@ window.CL_PHOTOS = {
     v.removeAttribute("src"); v.load();
   });
 
-  /* Start the mobile hero video (same hosted files as the original).
-     iPhones are picky about autoplay: force muted+inline, retry when the video
-     is ready, and as a last resort start it on the first touch anywhere. */
+  /* Hero video: the <video> tag already carries its sources (the same proven
+     setup as the desktop hero). Here we only nudge playback for picky iPhones
+     and honor reduced-motion by freezing on the poster frame. */
   var mv = m.querySelector("[data-m-video]");
   if (mv) {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduce) {
+    if (reduce) {
+      mv.removeAttribute("autoplay"); mv.pause();
+    } else {
       mv.muted = true; mv.defaultMuted = true;
-      mv.setAttribute("muted", ""); mv.setAttribute("autoplay", "");
-      mv.setAttribute("playsinline", ""); mv.setAttribute("webkit-playsinline", "");
-      mv.preload = "auto";
-      [["assets/hero-loop.webm", "video/webm"], ["assets/hero-loop.mp4", "video/mp4"]].forEach(function (sv) {
-        var s = document.createElement("source"); s.src = sv[0]; s.type = sv[1]; mv.appendChild(s);
-      });
-      mv.load();
       var tryPlay = function () {
         if (!mv.paused) return;
         var p = mv.play();
