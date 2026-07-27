@@ -18,8 +18,8 @@
 <meta property="og:title" content="About Centerline Construction | Built on Faith, Integrity &amp; Craftsmanship">
 <meta property="og:description" content="Meet Alfred Tudela and the Centerline Construction team — North Georgia's trusted family-owned remodeling company. Bathrooms, basements, kitchens, decks &amp; more.">
 <meta property="og:url" content="https://www.centerlineworks.com/about">
-<!-- EDIT ME: replace with a real photo URL uploaded to Squarespace for social share previews -->
-<meta property="og:image" content="https://www.centerlineworks.com/social-share-image.jpg">
+<!-- Social share preview photo: Alfred's portrait (IMG_1661-EDIT (1)) -->
+<meta property="og:image" content="https://www.centerlineworks.com/s/IMG_1661-EDIT%20(1).jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="About Centerline Construction | Holly Springs &amp; Canton, GA">
 <meta name="twitter:description" content="Family-owned, faith-driven remodeling in North Georgia. Founded by Alfred Tudela. Call (678) 372-1274.">
@@ -38,6 +38,11 @@
       "name": "Centerline Construction Company, LLC",
       "alternateName": "Centerline Construction",
       "url": "https://www.centerlineworks.com",
+      "image": [
+        "https://www.centerlineworks.com/s/IMG_1704.JPG",
+        "https://www.centerlineworks.com/s/IMG_2688.jpg",
+        "https://www.centerlineworks.com/s/IMG_1661-EDIT%20(1).jpg"
+      ],
       "telephone": "+1-678-372-1274",
       "email": "alfred@centerlineworks.com",
       "foundingDate": "2020",
@@ -96,6 +101,10 @@
       "@id": "https://www.centerlineworks.com/#alfred-tudela",
       "name": "Alfred Tudela",
       "jobTitle": "Founder & CEO",
+      "image": [
+        "https://www.centerlineworks.com/s/IMG_1661-EDIT%20(1).jpg",
+        "https://www.centerlineworks.com/s/IMG_1176.JPG"
+      ],
       "worksFor": { "@id": "https://www.centerlineworks.com/#business" },
       "description": "Alfred Tudela is the founder and CEO of Centerline Construction Company, LLC in Holly Springs, Georgia, with more than 18 years of experience in residential and commercial construction. A husband and father, Alfred also serves as the Youth Director at Rising Hills Church in Canton, Georgia.",
       "url": "https://www.centerlineworks.com/about",
@@ -189,6 +198,10 @@
   #cl-about img { max-width: 100%; display: block; }
   #cl-about .cl-wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
   #cl-about h1, #cl-about h2, #cl-about h3 { line-height: 1.08; font-weight: 800; letter-spacing: -.02em; }
+  /* Guard against the surrounding site theme (or viewer dark mode) recoloring our text:
+     every text element inherits the section's own color, so headings on light sections
+     stay dark and headings on dark sections stay light. */
+  #cl-about :is(h1, h2, h3, h4, p, blockquote, summary, cite, small, li, figcaption) { color: inherit; }
   #cl-about .cl-serif { font-family: 'Fraunces', Georgia, serif; font-weight: 700; }
 
   /* ---------- Kicker labels ---------- */
@@ -236,8 +249,12 @@
     top: -20%; left: 50%; transform: translateX(-50%);
   }
   #cl-about .cl-hero-inner { position: relative; z-index: 2; padding: 120px 24px 140px; transform-style: preserve-3d; }
-  #cl-about .cl-hero .cl-kicker { color: var(--gold); justify-content: center; width: 100%; }
+  #cl-about .cl-hero .cl-kicker { color: var(--gold); justify-content: center; width: 100%; margin-bottom: 8px; white-space: nowrap; }
   #cl-about .cl-hero .cl-kicker::after { content: ""; width: 34px; height: 2px; background: var(--gold); }
+  #cl-about .cl-kicker-loc {
+    font-size: 12.5px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase;
+    color: rgba(247,244,238,.72); margin-bottom: 16px;
+  }
   #cl-about .cl-hero h1 {
     font-size: clamp(44px, 8vw, 96px); text-transform: uppercase; letter-spacing: -.01em;
     margin: 8px 0 10px;
@@ -355,8 +372,32 @@
     aspect-ratio: 4 / 3; display: grid; place-items: center; text-align: center; padding: 18px;
     background: linear-gradient(150deg, #2b2b33, #1a1920);
     color: rgba(247,244,238,.4); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase;
+    position: relative; overflow: hidden;
   }
-  #cl-about .cl-work-card .cl-photo-slot img { width: 100%; height: 100%; object-fit: cover; }
+  #cl-about .cl-work-card .cl-photo-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* If a photo URL is wrong/missing, hide the broken image and show the label instead */
+  #cl-about .cl-noimg { position: relative; }
+  #cl-about .cl-noimg img { display: none; }
+  #cl-about .cl-noimg::after {
+    content: attr(data-label); position: absolute; inset: 0; display: grid; place-items: center;
+    padding: 20px; text-align: center; font-size: 12.5px; letter-spacing: .12em;
+    text-transform: uppercase; opacity: .5;
+  }
+
+  /* Before / after auto-crossfade (bathroom card) */
+  #cl-about .cl-ba .cl-ba-after { animation: cl-ba-fade 7s ease-in-out infinite; }
+  #cl-about .cl-ba-tag {
+    position: absolute; top: 14px; left: 14px; z-index: 2;
+    padding: 7px 14px; border-radius: 999px; background: rgba(12,11,16,.72);
+    font-size: 11.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--paper); display: grid;
+  }
+  #cl-about .cl-ba-tag span { grid-area: 1 / 1; transition: opacity .4s; }
+  #cl-about .cl-ba-tag .t-after { animation: cl-ba-fade 7s ease-in-out infinite; color: var(--gold); }
+  #cl-about .cl-ba-tag .t-before { animation: cl-ba-fade-inv 7s ease-in-out infinite; }
+  @keyframes cl-ba-fade { 0%, 38% { opacity: 0 } 50%, 88% { opacity: 1 } 100% { opacity: 0 } }
+  @keyframes cl-ba-fade-inv { 0%, 38% { opacity: 1 } 50%, 88% { opacity: 0 } 100% { opacity: 1 } }
   #cl-about .cl-work-card figcaption {
     position: absolute; left: 0; right: 0; bottom: 0; padding: 42px 20px 16px;
     background: linear-gradient(transparent, rgba(12,11,16,.92) 60%);
@@ -370,16 +411,49 @@
     #cl-about .cl-work-banner { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
 
-  /* ---------- Reviews ---------- */
-  #cl-about .cl-reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 46px; perspective: 1200px; }
-  #cl-about .cl-review {
-    background: #fff; border-radius: var(--radius); padding: 32px 28px;
-    border: 1px solid var(--line); box-shadow: 0 30px 60px -34px rgba(18,16,12,.35);
-    display: flex; flex-direction: column; gap: 16px;
-  }
+  /* ---------- Reviews: 3D carousel ---------- */
   #cl-about .cl-stars { color: var(--gold); font-size: 18px; letter-spacing: 3px; }
-  #cl-about .cl-review blockquote { font-family: 'Fraunces', Georgia, serif; font-size: 17.5px; line-height: 1.55; font-style: italic; }
-  #cl-about .cl-review cite { font-style: normal; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(18,16,12,.55); margin-top: auto; }
+  #cl-about .cl-rev-score { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 26px; }
+  #cl-about .cl-rev-score > b { font-size: clamp(44px, 6vw, 64px); font-weight: 900; letter-spacing: -.04em; color: var(--gold-deep); line-height: 1; }
+  #cl-about .cl-rev-score > div { text-align: left; }
+  #cl-about .cl-rev-score small { display: block; font-size: 13.5px; color: rgba(18,16,12,.6); font-weight: 600; max-width: 300px; }
+  #cl-about .cl-rev3d { margin-top: 44px; }
+  #cl-about .cl-rev3d-stage {
+    position: relative; height: 430px; perspective: 1500px;
+    cursor: grab; touch-action: pan-y;
+  }
+  #cl-about .cl-rev3d-stage:active { cursor: grabbing; }
+  #cl-about .cl-rev-card {
+    position: absolute; top: 0; left: 50%;
+    width: min(440px, 86vw); height: 400px;
+    margin-left: calc(min(440px, 86vw) / -2);
+    background: #fff; border-radius: var(--radius); padding: 30px 28px 26px;
+    border: 1px solid var(--line); box-shadow: 0 34px 70px -36px rgba(18,16,12,.45);
+    display: flex; flex-direction: column; gap: 14px;
+    transition: transform .7s var(--ease-out), opacity .7s var(--ease-out), filter .7s var(--ease-out);
+    will-change: transform, opacity; backface-visibility: hidden;
+  }
+  #cl-about .cl-rev-card[aria-hidden="true"] { pointer-events: none; }
+  #cl-about .cl-rev-card blockquote {
+    font-family: 'Fraunces', Georgia, serif; font-size: 16.5px; line-height: 1.55; font-style: italic;
+    display: -webkit-box; -webkit-line-clamp: 9; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  #cl-about .cl-rev-card footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  #cl-about .cl-rev-card cite { font-style: normal; font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: rgba(18,16,12,.65); }
+  #cl-about .cl-rev-src {
+    flex: none; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 999px; border: 1.5px solid rgba(217,164,65,.55);
+    color: var(--gold-deep); background: rgba(217,164,65,.1);
+  }
+  #cl-about .cl-rev3d-nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 30px; }
+  #cl-about .cl-rev-btn {
+    width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--gold-deep);
+    background: #fff; color: var(--gold-deep); font-size: 26px; line-height: 1;
+    cursor: pointer; transition: transform .3s var(--ease-out), background .3s, color .3s;
+    display: grid; place-items: center; padding-bottom: 4px;
+  }
+  #cl-about .cl-rev-btn:hover { background: var(--gold-deep); color: #fff; transform: scale(1.08); }
+  #cl-about .cl-rev3d-nav [data-counter] { font-size: 13.5px; font-weight: 800; letter-spacing: .12em; color: rgba(18,16,12,.55); font-variant-numeric: tabular-nums; min-width: 68px; text-align: center; }
   #cl-about .cl-proof { margin-top: 30px; font-size: 15px; color: rgba(18,16,12,.65); }
   #cl-about .cl-proof a { color: var(--gold-deep); font-weight: 700; }
 
@@ -400,6 +474,15 @@
     border: 2px solid var(--gold); border-radius: var(--radius); opacity: .5;
   }
   #cl-about .cl-owner-media .cl-photo { position: relative; z-index: 1; }
+  /* Small overlapping "cameo" photo (Alfred with the cedar beam) */
+  #cl-about .cl-photo-cameo {
+    position: absolute; z-index: 2; width: 46%; right: -26px; bottom: -34px;
+    border-radius: 14px; overflow: hidden; transform: rotate(4deg);
+    border: 5px solid #1d1c23; box-shadow: 0 30px 60px -24px rgba(0,0,0,.6);
+    background: #2b2b33; aspect-ratio: 3 / 4; display: grid; place-items: center;
+    color: rgba(247,244,238,.45); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; text-align: center;
+  }
+  #cl-about .cl-photo-cameo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   #cl-about .cl-owner h2 .cl-serif { color: var(--gold); font-style: italic; }
   #cl-about .cl-owner p { margin-bottom: 16px; color: rgba(247,244,238,.82); font-size: 16.5px; }
   #cl-about .cl-owner-badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 4px; }
@@ -460,6 +543,8 @@
     #cl-about .cl-owner-media { order: -1; max-width: 420px; }
     #cl-about .cl-story-media { max-width: 420px; }
     #cl-about .cl-house { transform: scale(.7); opacity: .35; }
+    #cl-about .cl-photo-cameo { right: -8px; bottom: -22px; }
+    #cl-about .cl-rev3d-stage { height: 440px; }
   }
 
   /* ---------- Accessibility: honor reduced motion ---------- */
@@ -467,5 +552,8 @@
     #cl-about .cl-reveal { opacity: 1; transform: none; transition: none; }
     #cl-about .cl-scroll-cue span { animation: none; }
     #cl-about [data-parallax], #cl-about .cl-house, #cl-about .cl-hero-grid { transform: none !important; }
+    #cl-about .cl-ba .cl-ba-after, #cl-about .cl-ba-tag .t-after { animation: none; opacity: 1; }
+    #cl-about .cl-ba-tag .t-before { animation: none; opacity: 0; }
+    #cl-about .cl-rev-card { transition: none; }
   }
 </style>

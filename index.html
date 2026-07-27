@@ -24,8 +24,8 @@
 <meta property="og:title" content="About Centerline Construction | Built on Faith, Integrity &amp; Craftsmanship">
 <meta property="og:description" content="Meet Alfred Tudela and the Centerline Construction team — North Georgia's trusted family-owned remodeling company. Bathrooms, basements, kitchens, decks &amp; more.">
 <meta property="og:url" content="https://www.centerlineworks.com/about">
-<!-- EDIT ME: replace with a real photo URL uploaded to Squarespace for social share previews -->
-<meta property="og:image" content="https://www.centerlineworks.com/social-share-image.jpg">
+<!-- Social share preview photo: Alfred's portrait (IMG_1661-EDIT (1)) -->
+<meta property="og:image" content="https://www.centerlineworks.com/s/IMG_1661-EDIT%20(1).jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="About Centerline Construction | Holly Springs &amp; Canton, GA">
 <meta name="twitter:description" content="Family-owned, faith-driven remodeling in North Georgia. Founded by Alfred Tudela. Call (678) 372-1274.">
@@ -44,6 +44,11 @@
       "name": "Centerline Construction Company, LLC",
       "alternateName": "Centerline Construction",
       "url": "https://www.centerlineworks.com",
+      "image": [
+        "https://www.centerlineworks.com/s/IMG_1704.JPG",
+        "https://www.centerlineworks.com/s/IMG_2688.jpg",
+        "https://www.centerlineworks.com/s/IMG_1661-EDIT%20(1).jpg"
+      ],
       "telephone": "+1-678-372-1274",
       "email": "alfred@centerlineworks.com",
       "foundingDate": "2020",
@@ -102,6 +107,10 @@
       "@id": "https://www.centerlineworks.com/#alfred-tudela",
       "name": "Alfred Tudela",
       "jobTitle": "Founder & CEO",
+      "image": [
+        "https://www.centerlineworks.com/s/IMG_1661-EDIT%20(1).jpg",
+        "https://www.centerlineworks.com/s/IMG_1176.JPG"
+      ],
       "worksFor": { "@id": "https://www.centerlineworks.com/#business" },
       "description": "Alfred Tudela is the founder and CEO of Centerline Construction Company, LLC in Holly Springs, Georgia, with more than 18 years of experience in residential and commercial construction. A husband and father, Alfred also serves as the Youth Director at Rising Hills Church in Canton, Georgia.",
       "url": "https://www.centerlineworks.com/about",
@@ -195,6 +204,10 @@
   #cl-about img { max-width: 100%; display: block; }
   #cl-about .cl-wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
   #cl-about h1, #cl-about h2, #cl-about h3 { line-height: 1.08; font-weight: 800; letter-spacing: -.02em; }
+  /* Guard against the surrounding site theme (or viewer dark mode) recoloring our text:
+     every text element inherits the section's own color, so headings on light sections
+     stay dark and headings on dark sections stay light. */
+  #cl-about :is(h1, h2, h3, h4, p, blockquote, summary, cite, small, li, figcaption) { color: inherit; }
   #cl-about .cl-serif { font-family: 'Fraunces', Georgia, serif; font-weight: 700; }
 
   /* ---------- Kicker labels ---------- */
@@ -242,8 +255,12 @@
     top: -20%; left: 50%; transform: translateX(-50%);
   }
   #cl-about .cl-hero-inner { position: relative; z-index: 2; padding: 120px 24px 140px; transform-style: preserve-3d; }
-  #cl-about .cl-hero .cl-kicker { color: var(--gold); justify-content: center; width: 100%; }
+  #cl-about .cl-hero .cl-kicker { color: var(--gold); justify-content: center; width: 100%; margin-bottom: 8px; white-space: nowrap; }
   #cl-about .cl-hero .cl-kicker::after { content: ""; width: 34px; height: 2px; background: var(--gold); }
+  #cl-about .cl-kicker-loc {
+    font-size: 12.5px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase;
+    color: rgba(247,244,238,.72); margin-bottom: 16px;
+  }
   #cl-about .cl-hero h1 {
     font-size: clamp(44px, 8vw, 96px); text-transform: uppercase; letter-spacing: -.01em;
     margin: 8px 0 10px;
@@ -361,8 +378,32 @@
     aspect-ratio: 4 / 3; display: grid; place-items: center; text-align: center; padding: 18px;
     background: linear-gradient(150deg, #2b2b33, #1a1920);
     color: rgba(247,244,238,.4); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase;
+    position: relative; overflow: hidden;
   }
-  #cl-about .cl-work-card .cl-photo-slot img { width: 100%; height: 100%; object-fit: cover; }
+  #cl-about .cl-work-card .cl-photo-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* If a photo URL is wrong/missing, hide the broken image and show the label instead */
+  #cl-about .cl-noimg { position: relative; }
+  #cl-about .cl-noimg img { display: none; }
+  #cl-about .cl-noimg::after {
+    content: attr(data-label); position: absolute; inset: 0; display: grid; place-items: center;
+    padding: 20px; text-align: center; font-size: 12.5px; letter-spacing: .12em;
+    text-transform: uppercase; opacity: .5;
+  }
+
+  /* Before / after auto-crossfade (bathroom card) */
+  #cl-about .cl-ba .cl-ba-after { animation: cl-ba-fade 7s ease-in-out infinite; }
+  #cl-about .cl-ba-tag {
+    position: absolute; top: 14px; left: 14px; z-index: 2;
+    padding: 7px 14px; border-radius: 999px; background: rgba(12,11,16,.72);
+    font-size: 11.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--paper); display: grid;
+  }
+  #cl-about .cl-ba-tag span { grid-area: 1 / 1; transition: opacity .4s; }
+  #cl-about .cl-ba-tag .t-after { animation: cl-ba-fade 7s ease-in-out infinite; color: var(--gold); }
+  #cl-about .cl-ba-tag .t-before { animation: cl-ba-fade-inv 7s ease-in-out infinite; }
+  @keyframes cl-ba-fade { 0%, 38% { opacity: 0 } 50%, 88% { opacity: 1 } 100% { opacity: 0 } }
+  @keyframes cl-ba-fade-inv { 0%, 38% { opacity: 1 } 50%, 88% { opacity: 0 } 100% { opacity: 1 } }
   #cl-about .cl-work-card figcaption {
     position: absolute; left: 0; right: 0; bottom: 0; padding: 42px 20px 16px;
     background: linear-gradient(transparent, rgba(12,11,16,.92) 60%);
@@ -376,16 +417,49 @@
     #cl-about .cl-work-banner { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
 
-  /* ---------- Reviews ---------- */
-  #cl-about .cl-reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 46px; perspective: 1200px; }
-  #cl-about .cl-review {
-    background: #fff; border-radius: var(--radius); padding: 32px 28px;
-    border: 1px solid var(--line); box-shadow: 0 30px 60px -34px rgba(18,16,12,.35);
-    display: flex; flex-direction: column; gap: 16px;
-  }
+  /* ---------- Reviews: 3D carousel ---------- */
   #cl-about .cl-stars { color: var(--gold); font-size: 18px; letter-spacing: 3px; }
-  #cl-about .cl-review blockquote { font-family: 'Fraunces', Georgia, serif; font-size: 17.5px; line-height: 1.55; font-style: italic; }
-  #cl-about .cl-review cite { font-style: normal; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(18,16,12,.55); margin-top: auto; }
+  #cl-about .cl-rev-score { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 26px; }
+  #cl-about .cl-rev-score > b { font-size: clamp(44px, 6vw, 64px); font-weight: 900; letter-spacing: -.04em; color: var(--gold-deep); line-height: 1; }
+  #cl-about .cl-rev-score > div { text-align: left; }
+  #cl-about .cl-rev-score small { display: block; font-size: 13.5px; color: rgba(18,16,12,.6); font-weight: 600; max-width: 300px; }
+  #cl-about .cl-rev3d { margin-top: 44px; }
+  #cl-about .cl-rev3d-stage {
+    position: relative; height: 430px; perspective: 1500px;
+    cursor: grab; touch-action: pan-y;
+  }
+  #cl-about .cl-rev3d-stage:active { cursor: grabbing; }
+  #cl-about .cl-rev-card {
+    position: absolute; top: 0; left: 50%;
+    width: min(440px, 86vw); height: 400px;
+    margin-left: calc(min(440px, 86vw) / -2);
+    background: #fff; border-radius: var(--radius); padding: 30px 28px 26px;
+    border: 1px solid var(--line); box-shadow: 0 34px 70px -36px rgba(18,16,12,.45);
+    display: flex; flex-direction: column; gap: 14px;
+    transition: transform .7s var(--ease-out), opacity .7s var(--ease-out), filter .7s var(--ease-out);
+    will-change: transform, opacity; backface-visibility: hidden;
+  }
+  #cl-about .cl-rev-card[aria-hidden="true"] { pointer-events: none; }
+  #cl-about .cl-rev-card blockquote {
+    font-family: 'Fraunces', Georgia, serif; font-size: 16.5px; line-height: 1.55; font-style: italic;
+    display: -webkit-box; -webkit-line-clamp: 9; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  #cl-about .cl-rev-card footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  #cl-about .cl-rev-card cite { font-style: normal; font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: rgba(18,16,12,.65); }
+  #cl-about .cl-rev-src {
+    flex: none; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 999px; border: 1.5px solid rgba(217,164,65,.55);
+    color: var(--gold-deep); background: rgba(217,164,65,.1);
+  }
+  #cl-about .cl-rev3d-nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 30px; }
+  #cl-about .cl-rev-btn {
+    width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--gold-deep);
+    background: #fff; color: var(--gold-deep); font-size: 26px; line-height: 1;
+    cursor: pointer; transition: transform .3s var(--ease-out), background .3s, color .3s;
+    display: grid; place-items: center; padding-bottom: 4px;
+  }
+  #cl-about .cl-rev-btn:hover { background: var(--gold-deep); color: #fff; transform: scale(1.08); }
+  #cl-about .cl-rev3d-nav [data-counter] { font-size: 13.5px; font-weight: 800; letter-spacing: .12em; color: rgba(18,16,12,.55); font-variant-numeric: tabular-nums; min-width: 68px; text-align: center; }
   #cl-about .cl-proof { margin-top: 30px; font-size: 15px; color: rgba(18,16,12,.65); }
   #cl-about .cl-proof a { color: var(--gold-deep); font-weight: 700; }
 
@@ -406,6 +480,15 @@
     border: 2px solid var(--gold); border-radius: var(--radius); opacity: .5;
   }
   #cl-about .cl-owner-media .cl-photo { position: relative; z-index: 1; }
+  /* Small overlapping "cameo" photo (Alfred with the cedar beam) */
+  #cl-about .cl-photo-cameo {
+    position: absolute; z-index: 2; width: 46%; right: -26px; bottom: -34px;
+    border-radius: 14px; overflow: hidden; transform: rotate(4deg);
+    border: 5px solid #1d1c23; box-shadow: 0 30px 60px -24px rgba(0,0,0,.6);
+    background: #2b2b33; aspect-ratio: 3 / 4; display: grid; place-items: center;
+    color: rgba(247,244,238,.45); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; text-align: center;
+  }
+  #cl-about .cl-photo-cameo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   #cl-about .cl-owner h2 .cl-serif { color: var(--gold); font-style: italic; }
   #cl-about .cl-owner p { margin-bottom: 16px; color: rgba(247,244,238,.82); font-size: 16.5px; }
   #cl-about .cl-owner-badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 4px; }
@@ -466,6 +549,8 @@
     #cl-about .cl-owner-media { order: -1; max-width: 420px; }
     #cl-about .cl-story-media { max-width: 420px; }
     #cl-about .cl-house { transform: scale(.7); opacity: .35; }
+    #cl-about .cl-photo-cameo { right: -8px; bottom: -22px; }
+    #cl-about .cl-rev3d-stage { height: 440px; }
   }
 
   /* ---------- Accessibility: honor reduced motion ---------- */
@@ -473,6 +558,9 @@
     #cl-about .cl-reveal { opacity: 1; transform: none; transition: none; }
     #cl-about .cl-scroll-cue span { animation: none; }
     #cl-about [data-parallax], #cl-about .cl-house, #cl-about .cl-hero-grid { transform: none !important; }
+    #cl-about .cl-ba .cl-ba-after, #cl-about .cl-ba-tag .t-after { animation: none; opacity: 1; }
+    #cl-about .cl-ba-tag .t-before { animation: none; opacity: 0; }
+    #cl-about .cl-rev-card { transition: none; }
   }
 </style>
 <!-- ============================================================
@@ -510,16 +598,19 @@
     </div>
 
     <div class="cl-hero-inner">
-      <p class="cl-kicker" data-parallax="0.06">Centerline Construction · Holly Springs, GA</p>
+      <div data-parallax="0.06">
+        <p class="cl-kicker">Centerline Construction</p>
+        <p class="cl-kicker-loc">Holly Springs, GA</p>
+      </div>
       <h1 data-parallax="0.12">
         Built on Faith.
         <span class="cl-serif">Finished with craftsmanship.</span>
       </h1>
       <p data-parallax="0.18">We're a family-owned renovation company serving North Georgia — a crew of craftsmen turning bathrooms, basements, kitchens, and outdoor spaces into the rooms families love most.</p>
-      <!-- EDIT ME: confirm these page URLs match your Squarespace page slugs -->
+      <!-- EDIT ME: confirm the /schedule URL matches your Squarespace page slug -->
       <div class="cl-btn-row">
         <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Schedule an Estimate</a>
-        <a class="cl-btn cl-btn--ghost" href="https://www.centerlineworks.com/contact">Contact Us</a>
+        <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Contact Us</a>
       </div>
     </div>
 
@@ -540,16 +631,18 @@
 
         <div class="cl-stats" role="list">
           <div class="cl-stat" role="listitem"><b data-count="18" data-suffix="+">0</b><span>Years of experience</span></div>
-          <div class="cl-stat" role="listitem"><b data-count="100" data-suffix="%">0</b><span>Recommend us on Facebook</span></div>
+          <div class="cl-stat" role="listitem"><b data-count="100" data-suffix="%">0</b><span>Recommend us on every review site</span></div>
           <div class="cl-stat" role="listitem"><b data-count="2020">0</b><span>Family-founded</span></div>
         </div>
       </div>
 
       <div class="cl-story-media cl-reveal" data-delay="1">
-        <!-- EDIT ME: replace this placeholder with a project or team photo.
-             In Squarespace, upload the image and swap the div below for:
-             <img src="YOUR-IMAGE-URL" alt="The Centerline Construction team on a job site in North Georgia"> -->
-        <figure class="cl-photo" data-tiltcard>[ Add a photo of the Centerline team or a favorite finished project here ]</figure>
+        <!-- Photo: upload IMG_1704.JPG to Squarespace file storage (Link -> File -> Upload,
+             keep the filename) so this URL resolves. If the photo doesn't appear, the
+             filename differs - paste the file's exact URL instead. -->
+        <figure class="cl-photo" data-tiltcard data-label="[ Photo: IMG_1704.JPG — upload to Squarespace file storage ]">
+          <img src="https://www.centerlineworks.com/s/IMG_1704.JPG" alt="The Centerline Construction crew at work on a renovation project in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+        </figure>
       </div>
     </div>
   </section>
@@ -625,30 +718,53 @@
          and swap the placeholder div for:
          <img src="YOUR-IMAGE-URL" alt="Describe the project, e.g. Custom tile walk-in shower remodel in Canton GA"> -->
     <div class="cl-work-banner cl-reveal" data-delay="1">
+      <!-- Photos load from Squarespace file storage (/s/<filename>). Upload each file via
+           Link -> File -> Upload WITHOUT renaming. If one doesn't appear, its name or
+           extension differs - swap in the file's exact URL. Cards with a wrong URL fall
+           back to a text label instead of a broken image. -->
       <div class="cl-work-track" data-worktrack>
         <figure class="cl-work-card">
-          <div class="cl-photo-slot">[ Photo: a shower or bathroom you remodeled ]</div>
-          <figcaption><b>Bathrooms</b><span>Remodels</span></figcaption>
+          <!-- Before/after crossfade: IMG_2415.jpg (before) -> IMG_2688.jpg (after) -->
+          <div class="cl-photo-slot cl-ba" data-label="[ Photos: IMG_2415.jpg + IMG_2688.jpg ]">
+            <img class="cl-ba-before" src="https://www.centerlineworks.com/s/IMG_2415.jpg" alt="Bathroom before its remodel by Centerline Construction" loading="lazy" onerror="this.style.display='none'">
+            <img class="cl-ba-after" src="https://www.centerlineworks.com/s/IMG_2688.jpg" alt="Custom tile shower after a full bathroom remodel by Centerline Construction in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+            <span class="cl-ba-tag"><span class="t-before">Before</span><span class="t-after">After</span></span>
+          </div>
+          <figcaption><b>Bathrooms</b><span>Before &amp; After</span></figcaption>
         </figure>
         <figure class="cl-work-card">
-          <div class="cl-photo-slot">[ Photo: a finished basement project ]</div>
+          <div class="cl-photo-slot" data-label="[ Photo: PXL_20250226_233210463.jpg ]">
+            <img src="https://www.centerlineworks.com/s/PXL_20250226_233210463.jpg" alt="Finished basement remodel by Centerline Construction in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+          </div>
           <figcaption><b>Basements</b><span>Finishing</span></figcaption>
         </figure>
         <figure class="cl-work-card">
-          <div class="cl-photo-slot">[ Photo: a home addition you built ]</div>
+          <!-- EDIT ME: no photo chosen yet - add an <img> like the other cards when ready -->
+          <div class="cl-photo-slot cl-noimg" data-label="[ Photo: a home addition you built ]"></div>
           <figcaption><b>Additions</b><span>Built-on space</span></figcaption>
         </figure>
         <figure class="cl-work-card">
-          <div class="cl-photo-slot">[ Photo: a kitchen remodel ]</div>
+          <!-- EDIT ME: no photo chosen yet - add an <img> like the other cards when ready -->
+          <div class="cl-photo-slot cl-noimg" data-label="[ Photo: a kitchen remodel ]"></div>
           <figcaption><b>Kitchens</b><span>Remodels</span></figcaption>
         </figure>
         <figure class="cl-work-card">
-          <div class="cl-photo-slot">[ Photo: a custom deck or outdoor living space ]</div>
+          <div class="cl-photo-slot" data-label="[ Photo: exported_A3C876F6-E171-4DE2-AD28-D72147745BA1.jpg ]">
+            <img src="https://www.centerlineworks.com/s/exported_A3C876F6-E171-4DE2-AD28-D72147745BA1.jpg" alt="Custom deck and outdoor living space built by Centerline Construction" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+          </div>
           <figcaption><b>Decks &amp; Outdoor</b><span>Living spaces</span></figcaption>
         </figure>
         <figure class="cl-work-card">
-          <div class="cl-photo-slot">[ Photo: siding or exterior repair work ]</div>
+          <div class="cl-photo-slot" data-label="[ Photo: dji_fly_20260604_094024_92_1780580434718_photo.jpg ]">
+            <img src="https://www.centerlineworks.com/s/dji_fly_20260604_094024_92_1780580434718_photo.jpg" alt="Siding and exterior repair work by Centerline Construction, aerial view" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+          </div>
           <figcaption><b>Siding &amp; Exterior</b><span>Repairs</span></figcaption>
+        </figure>
+        <figure class="cl-work-card">
+          <div class="cl-photo-slot" data-label="[ Photo: IMG_8669.jpeg ]">
+            <img src="https://www.centerlineworks.com/s/IMG_8669.jpeg" alt="Commercial renovation project by Centerline Construction in Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+          </div>
+          <figcaption><b>Commercial</b><span>Renovations</span></figcaption>
         </figure>
       </div>
     </div>
@@ -661,32 +777,343 @@
   <!-- ================= REVIEWS ================= -->
   <section class="cl-section" style="background:var(--paper-2)" aria-labelledby="reviews-h">
     <div class="cl-wrap">
-      <div class="cl-reveal">
-        <p class="cl-kicker">Word of mouth</p>
+      <div class="cl-reveal" style="text-align:center">
+        <p class="cl-kicker" style="justify-content:center">Word of mouth</p>
         <h2 id="reviews-h">Our neighbors say it best.</h2>
       </div>
-      <!-- EDIT ME: swap in the real reviewer names from your Google & Facebook reviews,
-           and match each quote to the right person and platform. -->
-      <div class="cl-reviews">
-        <article class="cl-review cl-reveal">
+      <div class="cl-rev-score cl-reveal" data-delay="1">
+        <b>5.0</b>
+        <div>
+          <span class="cl-stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <small>43 five-star reviews across Google, Facebook, Yelp &amp; Nextdoor</small>
+        </div>
+      </div>
+    </div>
+    <!-- 3D review carousel: drag or swipe it, use the arrows, or let it rotate on its own -->
+    <div class="cl-rev3d cl-reveal" data-delay="2" data-carousel>
+      <div class="cl-rev3d-stage" data-stage>
+        <article class="cl-rev-card" aria-hidden="true">
           <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <blockquote>"We are so pleased with the work they just finished in our basement. They are extremely hard working, very honest and always showed up when they said they would."</blockquote>
-          <cite>— Joni Dunnington · Google Review</cite>
+          <blockquote>“Alfred was very professional, responsive &amp; reasonable!”</blockquote>
+          <footer>
+            <cite>— Ed Zeer</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
         </article>
-        <article class="cl-review cl-reveal" data-delay="1">
+        <article class="cl-rev-card" aria-hidden="true">
           <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <blockquote>"Alfred and his team do phenomenal work."</blockquote>
-          <cite>— [ Customer name ] · Facebook Review</cite>
+          <blockquote>“Top notch.”</blockquote>
+          <footer>
+            <cite>— David Faust</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
         </article>
-        <article class="cl-review cl-reveal" data-delay="2">
+        <article class="cl-rev-card" aria-hidden="true">
           <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <blockquote>"The CEO found the time to meet with us the first day. He is a fine gentleman with an enthusiastic demeanor."</blockquote>
-          <cite>— [ Customer name ] · Google Review</cite>
+          <blockquote>“Working with Centerline Construction was a fantastic experience from start to finish. Alfred and team was professional, punctual, and highly skilled. The quality of their work exceeded our expectations, and they kept the project on time. Communication was clear throughout, and they went above and beyond to make sure everything was perfect. I highly recommend Centerline Construction for any construction project. Thank you! Linda Carter”</blockquote>
+          <footer>
+            <cite>— Linda Carter</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Prompt appointment scheduled when you call. Exceptional detail on all carpentry work &amp; drywall. Completes any items that need attention &amp; repair that are found during construction and leaves work area spotless!! I would recommend them for any construction &amp; remodeling project. Work is exceptional and done over and above your expectations!”</blockquote>
+          <footer>
+            <cite>— Juanita Powell</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“1000% Recommend Alfred and his team!!<br>Knowledgeable and a man of his word!<br>Respectful, neat, and fast. Didn’t have us sign off until we were completely satisfied which we were! Love my outdoor fireplace!”</blockquote>
+          <footer>
+            <cite>— Christine V</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline did a great job repairing the damaged areas around our home, including trim and siding. The crew was professional, on time, and very detail-oriented. Everything was explained clearly, and the pricing was fair with no surprises. The quality of the work really shows, and we’re very happy with the results. I would definitely call them again for future repairs and recommend them to others.”</blockquote>
+          <footer>
+            <cite>— Albert Jaon</cite>
+            <span class="cl-rev-src">Facebook</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Had a hole knocked into the drywall and Alfred responded to my social media require repairs. He and his tech, Kyle, were friendly, neat and considerate. They fixed the hole and you can’t tell anything ever happened. Reasonable rates and great work! Would definitely hire them again and i highly recommend them!”</blockquote>
+          <footer>
+            <cite>— karen snyder</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction recently resealed my master bathroom shower after I’d been having some water issues, and they did a fantastic job. They were professional from start to finish, easy to talk to, and really flexible with scheduling. I especially appreciated how thoroughly they cleaned up after themselves — it made the whole process so convenient. Their pricing was also very reasonable. I’m really happy with the work they did and would definitely recommend Centerline Construction to anyone needing bathroom repairs or maintenance!”</blockquote>
+          <footer>
+            <cite>— Mary Lammens</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“I had a fantastic experience with Alfred an Centerline Construction. Was quoted a price to put Christmas lights up and then he found out they were the Govee lights and a bit different. He kept the price the same and included some extras to make it look how I wanted by hiding additional wires, etc. Was very quick and communication was top notch. Would highly recommend him and will be using him for future projects.”</blockquote>
+          <footer>
+            <cite>— Ryan Flouer</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline did an outstanding job at installing the cabana roof on our outdoor kitchen. The communication was thorough and the integration with the existing outdoor kitchen was exceptional. Even helped me hang the TV while they were wrapping up.”</blockquote>
+          <footer>
+            <cite>— Steve Calbert</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“I’ve had the pleasure of working with Alfred. He rented a trailer from me and treated it like his own and was punctual.”</blockquote>
+          <footer>
+            <cite>— Luis Arevalo</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred and his experts at Centerline were first-rate in every area. They worked extremely hard, their craftsmanship was beyond compare and so easy to work with. Alfred made everything so easy for us! We won’t hesitate to hire Alfred and Centerline again and have several jobs in mind. We would give 10 ⭐️s if we could!”</blockquote>
+          <footer>
+            <cite>— Fedfanforeva</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Excellent contractor!”</blockquote>
+          <footer>
+            <cite>— Kenny Knox</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction remodeled our front porch and we couldn’t be happier with the results. Communication was easy and they always followed through with their replies. They were dependable and reasonably priced. The final cost was the same as the quote given and the craftsmanship impeccable. We have hired the company for our next project. Highly recommended them to our neighbors who have commented on our beautiful porch.”</blockquote>
+          <footer>
+            <cite>— Kevin Little</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred and team were here when needed and created a seamless installation.”</blockquote>
+          <footer>
+            <cite>— Jonathan Brooks</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred is the absolute best!<br>He handled all of my issues quickly, expertly, and cleaned up everything afterwards.<br>He went over and above and came out multiple times due to the weather, because he wanted to make sure everything was done right.<br>He is very personable and a pleasure to work with!<br>Thank you!!”</blockquote>
+          <footer>
+            <cite>— Debbie Welchel</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Great work, professional, reasonable prices and very reliable.<br>We initially hired Centerline to replace a deck, they did such a great job that we called them back to do some additional work. My neighbors saw their work and hired them as well!<br>Highly recommend this company.”</blockquote>
+          <footer>
+            <cite>— Sandy Ruben</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Great job fixing my soffit. Much appreciated!!”</blockquote>
+          <footer>
+            <cite>— Jon Kruk</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred and his crew did a phenomenal job at our house. First they replaced our whole deck/ poured the concrete landing and the finishes are just top notch. They also replaced two of our exterior doors. Great communication, on time, and friendly service. Any handy man work please hit them up! - Renata and Fabricio”</blockquote>
+          <footer>
+            <cite>— Fabricio De Melo</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“We are absolutely thrilled with the service we received from Alfred and the team at Centerline Construction! From start to finish, his professionalism, responsiveness, and respect were clear in every interaction. Alfred and his team completely rebuilt our shower. They were helpful with all the choices (including a shampoo niche, shaving ledge, glass door and matching hardware) and kept us in the loop the whole time. In addition to the full shower remodel, he corrected an existing exhaust fan issue and installed a new one. Alfred also oversaw the templating and installation of our new countertop, installed our new faucets, and fixed the plumbing. He went above and beyond helping cut the existing drawers to fit the larger sinks.<br><br>We unexpectedly needed a new hot water heater on short notice. Alfred came through for us immediately, continuing his commitment to customer service.<br><br>What stood out the most was Alfred&#x27;s reliability and the quality of his work. Each task was completed on time and with a level of craftsmanship that is hard to come by. His friendly demeanor and willingness to go above and beyond made the entire process stress-free. If you&#x27;re looking for a skilled contractor who delivers top-notch service and results, we highly recommend Alfred and his team. They&#x27;ve met and exceeded our expectations, and we are excited about all the improvements to our home.”</blockquote>
+          <footer>
+            <cite>— Christine Lago</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred was referred to us by Home Depot and was a true professional from the start. He installed our new dishwasher and replaced the old built-in frame with a removable cover in case we ran into any issues. Alfred repaired and installed pocket doors and plantation shutters with great attention to detail. He also handled other small projects around the house, which was very helpful. He was respectful in our home and very responsive through calls and texts. We look forward to working with Alfred again on future projects.”</blockquote>
+          <footer>
+            <cite>— Betty Vanstrom</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction Company is absolutely the best company I have ever worked with. The crew that came to my house were polite, friendly, and professional. The work they did went above and beyond what I expected. The CEO, Alfred Tudela, a working CEO worked with us personally and provided the best solutions to accomplish our project. Alfred is vert easy and great to work with. Without any hesitation I highly recommend this company for your repair and/or construction needs.”</blockquote>
+          <footer>
+            <cite>— Russ Palumbo</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction is an amazing company! Alfred and his team do phenomenal work. We are so pleased with the work they just finished in our basement. They are extremely hard working, very honest and always showed up when they said they would! We would HIGHLY recommend them to anyone!”</blockquote>
+          <footer>
+            <cite>— Joni Dunnington</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction Company LLC led by Alfred will have my recommendation anytime because I can testify to the company’s professionalism, competence and uniqueness. They handled my project with a high level of expertise which includes dealing with insurance matters. With this, I make bold to say they have earned my vote of confidence. 5 Star+”</blockquote>
+          <footer>
+            <cite>— williams Erinle</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Our church recently had a new AC unit installed and to access the space to install the unit the company had to cut a huge hole in our ceiling. Alfred answered the phone AND came out the same day I called and started work! The most refreshing part working with him was his professional response and communication!!! He kept me up to date on each step of the process! His work was stellar. It looks like nothing ever happened. I highly recommend Alfred a s Centerline Construction!!!”</blockquote>
+          <footer>
+            <cite>— Jesse Horne</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred and Centerline did an amazing job on a porch construction detail we needed. Five stars on things that matter to me when hiring a contractor: responsiveness, quality work, and great communication. Thank you!”</blockquote>
+          <footer>
+            <cite>— Kelly Hartman</cite>
+            <span class="cl-rev-src">Facebook</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Great job, amazing attention to detail, and fast service! I had centerline do work on a deck area, while working I pointed out how I always have a wet spot in my backyard. Alfred told me I can fix that quoted me the work added a drainage reservoir or something like that, and I haven’t had a problem since.”</blockquote>
+          <footer>
+            <cite>— Rafael Tudela</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“The CEO found the time to meet with us the first day. He is a fine gentleman with an enthusiastic demeanor. He was able to review our situation and evaluate the time needed to complete our project. We were pleased to realize that this company would suit our project perfectly. We have had problems with our Master Bathroom.His professional knowledge was exactly what we wanted.”</blockquote>
+          <footer>
+            <cite>— Diane P.</cite>
+            <span class="cl-rev-src">Yelp</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“We had an excellent experience with Centerline replacing rotted brick molding trim, sheathing, and siding. Super professional, honest, very reasonable rates, and excellent quality work! Would highly recommend and will be a first choice for future projects.”</blockquote>
+          <footer>
+            <cite>— Mike Singletary</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred Tudela is so knowledgeable, every time I need any kind of work done he exceeds my expectations. His attention detail is unsurpassed. He is prompt, responds quickly, and he honest with pricing and repair expectations. I won’t ever use anyone else.”</blockquote>
+          <footer>
+            <cite>— Catalina McCauley</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Amazing work! Completely transformed our laundry/mudroom. Worked quickly and professionally and super detailed. We were so happy with the end result. Highly recommend for any home remodel or project!”</blockquote>
+          <footer>
+            <cite>— Natalia Bechtold</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Highly recommend centerline construction. Amazing attention to detail I’ve used them for outdoor projects as well as indoor. And best of all they were quick and stuck with their quoted price here’s a before and after of a floating shelf pantry they did exactly what I wanted”</blockquote>
+          <footer>
+            <cite>— Ruben Toldo</cite>
+            <span class="cl-rev-src">Nextdoor</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred responded to a FB post I made looking for a small job on replacing a water spigot/ water hydrant at my personal property. He followed my instructions on how to reach me, have me a quote, and how he would handle it. We discussed time, price, and other details.<br><br>Alfred kept me in touch on his ETA, the parts, and the project as he was working on it.<br><br>It&#x27;s rare to have a contractor do what they say they will and arrive on time. I was impressed that Alfred did both.<br><br>I&#x27;m very satisfied with the job that Centerline Construction completed at my property. thank you.”</blockquote>
+          <footer>
+            <cite>— Cassandra Bickel</cite>
+            <span class="cl-rev-src">Google</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Amazing work! Completely transformed our laundry/mudroom. Worked quickly and professionally and super detailed. Very fair pricing and We were so happy with the end result. Worth every penny! Highly recommend for any home remodel or project!”</blockquote>
+          <footer>
+            <cite>— Natalia B.</cite>
+            <span class="cl-rev-src">Yelp</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“As a general contractor, I cannot stress the importance of having amazing subcontractors like Centerline Construction. Alfred and his team are always friendly, punctual, knowledgeable, and provide quality work. I am thankful to be able to count on this team whenever the need arises. Thanks Alfred!”</blockquote>
+          <footer>
+            <cite>— Hannah Lilley</cite>
+            <span class="cl-rev-src">Facebook</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Always a pleasure to work with the Centerline Construction team. We know when we collaborate on any project with Centerline the customer will get an awesome finished product. Reliable and trustworthy company who always gets the job done right the first time!”</blockquote>
+          <footer>
+            <cite>— American Installations &amp; Renovations</cite>
+            <span class="cl-rev-src">Facebook</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Awesome company with great communication. I subcontracted these guys for a basement remodel they showed up when said and did great work with homeowners still living in the home. Highly recommend Alfred and his team!”</blockquote>
+          <footer>
+            <cite>— Max Lilley</cite>
+            <span class="cl-rev-src">Facebook</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“We’ve had several projects tackled by Centerline Construction and work has been top notch! From furniture building, lighting fixture replacement, remodeling, etc., they were excellent from the beginning of the job to the very end! We have no hesitation in calling on Centerline for future work!”</blockquote>
+          <footer>
+            <cite>— Kristen Reier Faust</cite>
+            <span class="cl-rev-src">Facebook</span>
+          </footer>
+        </article>
+        <article class="cl-rev-card" aria-hidden="true">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“this guy Alfred knows his stuff. we were selling our house, and the deck/ handrail was in a bad way. we called centerline, he came out and brought us up to code, finished when he said they would, and was very fair with the price. I 100% reccommend these guys, they are top notch”</blockquote>
+          <footer>
+            <cite>— Heath Lawson</cite>
+            <span class="cl-rev-src">Facebook</span>
+          </footer>
         </article>
       </div>
-      <!-- EDIT ME: replace the Google link below with your Google Business Profile review
-           link (find it in Google Business Profile -> "Ask for reviews" -> share link). -->
-      <p class="cl-proof cl-reveal" data-delay="2">Find us on <a href="https://www.google.com/search?q=Centerline+Construction+Company+Holly+Springs+GA+reviews" rel="noopener" target="_blank">Google Reviews</a> and <a href="https://www.facebook.com/centerline.works/" rel="noopener" target="_blank">Facebook</a>, where 100% of reviewers recommend us — and when we finish your project, we'd love yours too.</p>
+      <div class="cl-rev3d-nav">
+        <button type="button" class="cl-rev-btn" data-prev aria-label="Previous review">‹</button>
+        <span data-counter aria-live="polite"></span>
+        <button type="button" class="cl-rev-btn" data-next aria-label="Next review">›</button>
+      </div>
+    </div>
+    <div class="cl-wrap">
+      <!-- EDIT ME: swap the Google link for your Google Business Profile review link -->
+      <p class="cl-proof cl-reveal" style="text-align:center">Every one of these is a real review from a real neighbor. Read them all on <a href="https://www.google.com/search?q=Centerline+Construction+Company+Holly+Springs+GA+reviews" rel="noopener" target="_blank">Google</a>, <a href="https://www.facebook.com/centerline.works/" rel="noopener" target="_blank">Facebook</a>, or <a href="https://www.yelp.com/biz/centerline-construction-holly-springs-2" rel="noopener" target="_blank">Yelp</a> — and when we finish your project, we'd love yours too.</p>
     </div>
   </section>
 
@@ -694,9 +1121,15 @@
   <section class="cl-section cl-section-dark" aria-labelledby="owner-h" id="meet-alfred">
     <div class="cl-wrap cl-owner">
       <div class="cl-owner-media cl-reveal">
-        <!-- EDIT ME: replace with a photo of Alfred (or Alfred + family).
-             <img src="YOUR-IMAGE-URL" alt="Alfred Tudela, founder and CEO of Centerline Construction, in Holly Springs, Georgia"> -->
-        <figure class="cl-photo" data-tiltcard>[ Add a photo of Alfred — or the whole Tudela family ]</figure>
+        <!-- Main portrait: IMG_1661-EDIT (1) - if it doesn't appear, check the exact
+             filename/extension in Squarespace and swap in the file's URL. -->
+        <figure class="cl-photo" data-tiltcard data-label="[ Photo: IMG_1661-EDIT (1) — upload to Squarespace file storage ]">
+          <img src="https://www.centerlineworks.com/s/IMG_1661-EDIT%20(1).jpg" alt="Alfred Tudela, founder and CEO of Centerline Construction Company in Holly Springs, Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+        </figure>
+        <!-- Cameo: Alfred carrying the cedar beam (IMG_1176.JPG) -->
+        <figure class="cl-photo-cameo" data-label="[ IMG_1176.JPG ]">
+          <img src="https://www.centerlineworks.com/s/IMG_1176.JPG" alt="Alfred Tudela of Centerline Construction carrying a large cedar beam on a job site" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+        </figure>
       </div>
       <div class="cl-reveal" data-delay="1">
         <p class="cl-kicker">Meet the owner</p>
@@ -712,7 +1145,7 @@
           <span class="cl-badge">🏠 Family-Owned &amp; Operated</span>
         </div>
         <div class="cl-btn-row cl-btn-row--left">
-          <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/contact">Contact Us</a>
+          <a class="cl-btn cl-btn--gold" href="mailto:Info@centerlineworks.com">Email Us</a>
         </div>
       </div>
     </div>
@@ -764,7 +1197,7 @@
       <p>Tell us about your bathroom, basement, kitchen, addition, or deck — the estimate is free, and the handshake still means something.</p>
       <div class="cl-btn-row">
         <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Schedule an Estimate</a>
-        <a class="cl-btn cl-btn--ghost" href="https://www.centerlineworks.com/contact">Contact Us</a>
+        <a class="cl-btn cl-btn--ghost" href="mailto:Info@centerlineworks.com">Contact Us</a>
         <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
       </div>
       <small>Mon–Sat 7am–6pm · Sun 2pm–6pm · Holly Springs, GA</small>
@@ -817,6 +1250,56 @@
     counters.forEach(function (el) { cio.observe(el); });
   } else {
     counters.forEach(runCounter);
+  }
+
+  /* ---------- 3D review carousel: drag, swipe, arrows, or auto-rotate ---------- */
+  var carousel = root.querySelector("[data-carousel]");
+  if (carousel) {
+    var stage = carousel.querySelector("[data-stage]");
+    var revCards = [].slice.call(stage.querySelectorAll(".cl-rev-card"));
+    var revCount = revCards.length, revCur = 0;
+    var revCounter = carousel.querySelector("[data-counter]");
+    var revTimer = null;
+
+    function revLayout() {
+      revCards.forEach(function (c, i) {
+        var o = i - revCur;
+        // wrap around so the carousel is an endless loop
+        if (o > revCount / 2) o -= revCount;
+        if (o < -revCount / 2) o += revCount;
+        var abs = Math.abs(o);
+        c.style.opacity = abs <= 2 ? 1 : 0;
+        c.style.filter = abs === 0 ? "none" : "brightness(.9)";
+        c.style.zIndex = 20 - abs;
+        c.style.transform =
+          "translateX(" + (o * 54) + "%) translateZ(" + (-abs * 150) + "px) rotateY(" + (o * -14) + "deg)";
+        c.setAttribute("aria-hidden", abs === 0 ? "false" : "true");
+      });
+      if (revCounter) revCounter.textContent = (revCur + 1) + " / " + revCount;
+    }
+    function revGo(d) { revCur = (revCur + d + revCount) % revCount; revLayout(); }
+    carousel.querySelector("[data-prev]").addEventListener("click", function () { revGo(-1); revPause(); });
+    carousel.querySelector("[data-next]").addEventListener("click", function () { revGo(1); revPause(); });
+
+    // drag / swipe
+    var dragX = null;
+    stage.addEventListener("pointerdown", function (e) { dragX = e.clientX; }, { passive: true });
+    window.addEventListener("pointerup", function (e) {
+      if (dragX === null) return;
+      var dx = e.clientX - dragX; dragX = null;
+      if (Math.abs(dx) > 40) { revGo(dx < 0 ? 1 : -1); revPause(); }
+    }, { passive: true });
+
+    // gentle auto-rotate (not under reduced motion); pauses on hover or after interaction
+    function revPlay() {
+      if (reduceMotion || revTimer) return;
+      revTimer = setInterval(function () { revGo(1); }, 5000);
+    }
+    function revPause() { clearInterval(revTimer); revTimer = null; }
+    carousel.addEventListener("mouseenter", revPause);
+    carousel.addEventListener("mouseleave", revPlay);
+    revLayout();
+    revPlay();
   }
 
   if (reduceMotion) {

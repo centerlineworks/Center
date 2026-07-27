@@ -23,8 +23,10 @@ scroll effects, built to drop into Squarespace. Everything lives in one file: **
   Basements, Additions, Kitchens, Decks & Outdoor, Siding & Exterior), each with a photo slot for
   a real project shot. It glides on its own, pauses on hover/touch, and becomes a normal
   swipeable strip for reduced-motion visitors.
-- **Real reviews** — three actual client quotes attributed by name ("— Joni Dunnington · Google
-  Review" style), with links to both Google Reviews and Facebook.
+- **Real reviews** — a 3D carousel of all 43 five-star reviews (39 cards after removing
+  cross-platform duplicates) from Google, Facebook, Yelp, and Nextdoor, each attributed by
+  name with a source badge. It auto-rotates, and visitors can drag, swipe, or use the arrows.
+  A "5.0 across 43 reviews" scoreboard sits above it.
 - **Meet the Owner** — Alfred Tudela: founder & CEO, husband and father, family-owned company,
   and **Youth Director at Rising Hills Church** in Canton, GA.
 - **FAQ + call-to-action** — click-to-call (678) 372-1274 with business hours.
@@ -88,19 +90,13 @@ URLs — they're marked with `EDIT ME` comments.
 
 ## Before you publish — personalize these (search the file for `EDIT ME`)
 
-- **Photos**: eight placeholder frames are marked in the code — a team/project photo in the story
-  section, six project-category cards in the Our Work banner (shower/bathroom, basement, addition,
-  kitchen, deck, siding), and a photo of Alfred (or the whole family) in the owner section. Upload
-  images to Squarespace and swap in the `<img>` tags per the comments.
+- **Photos**: most cards are wired to real filenames served from Squarespace file storage
+  (see DEPLOY.md step 2 for the upload list). Still open: the **Additions** and **Kitchens**
+  work cards have no photo yet, and three guessed `.jpg` extensions may need correcting.
 - **Family details**: the owner section says "devoted husband and father" — add names and any
   personal details you'd like to share.
-- **Reviewer names**: the review cards are attributed "— Joni Dunnington · Google Review" style;
-  verify each name matches the person who actually wrote that quote, and fill in the two
-  `[ Customer name ]` placeholders from your Google/Facebook reviews.
 - **Google review link**: swap the generic Google search link in the reviews section for your
   Google Business Profile review link (Google Business Profile → "Ask for reviews").
-- **Button links**: buttons point to `/schedule`, `/contact`, and `/newservices` on
-  centerlineworks.com — confirm those match your actual page slugs.
-- **Social share image**: replace the `og:image` URL in Part 1 with a real uploaded photo.
-- **Stats**: 18+ years, founded 2020, and 100% Facebook recommendation — adjust if anything
-  changes.
+- **Button links**: confirm the `/schedule` and `/newservices` page slugs; the Contact Us
+  buttons use tel/mailto links (call at the top, Info@centerlineworks.com at the bottom).
+- **Stats**: 18+ years, founded 2020, 43 five-star reviews — adjust as the numbers grow.

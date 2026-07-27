@@ -12,18 +12,35 @@ Total time: about 15 minutes. You need the **Squarespace Business plan or higher
    - `squarespace/part2-code-block.html`
    - `assets/hero-loop.mp4`, `assets/hero-loop.webm`, `assets/hero-poster.jpg`
 
-## Step 2 — Upload the three video files to Squarespace
+## Step 2 — Upload the videos and photos to Squarespace file storage
 
-The page expects the video files at `centerlineworks.com/s/hero-loop.mp4` (etc.), which is
-exactly where Squarespace puts uploaded files **as long as you don't rename them**.
+The page expects every video and photo at `centerlineworks.com/s/<filename>`, which is
+exactly where Squarespace puts uploaded **files** — as long as you don't rename them.
+(Note: photos added through regular image blocks live somewhere else; for this page,
+upload them as *files* using the method below.)
 
 1. In Squarespace, edit any page and add a text block, type a word, highlight it, and click
    the **link** icon
-2. In the link editor choose **File** → **Upload file** → upload `hero-loop.mp4`
-3. Repeat for `hero-loop.webm` and `hero-poster.jpg`
+2. In the link editor choose **File** → **Upload file**
+3. Upload each of these, keeping the exact filename:
+   - `hero-loop.mp4`, `hero-loop.webm`, `hero-poster.jpg` (from the `assets` folder)
+   - `IMG_1704.JPG` (Our Story)
+   - `IMG_2415.jpg` + `IMG_2688.jpg` (bathroom before/after)
+   - `PXL_20250226_233210463.jpg` (basement)
+   - the decks photo (`exported_A3C876F6-E171-4DE2-AD28-D72147745BA1…`)
+   - the siding drone photo (`dji_fly_20260604_094024_92_1780580434718_photo…`)
+   - `IMG_8669.jpeg` (commercial)
+   - `IMG_1661-EDIT (1)` (Alfred's portrait) and `IMG_1176.JPG` (cedar-beam photo)
 4. Delete the temporary text block (the uploaded files stay in your file storage)
 5. Check it worked: visit `https://www.centerlineworks.com/s/hero-loop.mp4` — the video
    should play in your browser
+
+**About file extensions:** the code guesses `.jpg` for the three files whose full names
+weren't certain (the decks photo, the siding drone photo, and `IMG_1661-EDIT (1).jpg`).
+If one of those photos shows a text label instead of the picture, the filename differs —
+find the file in Squarespace, copy its exact URL, and paste it over the matching
+`https://www.centerlineworks.com/s/...` URL in the code block. A wrong URL never shows a
+broken-image icon; the card just displays its label until you fix the link.
 
 ## Step 3 — Create the About page
 
@@ -54,12 +71,12 @@ headline, the 3D house rotating as you scroll, and the work banner gliding.
 
 Search the code block for `EDIT ME`:
 
-- Swap the 8 photo placeholders for real photos (story, six work cards, you/family)
-- Fill in the two `[ Customer name ]` review attributions and verify Joni's quote is hers
-- Swap the generic Google link for your Google Business Profile review link
-- Confirm the button links: `/schedule`, `/contact`, `/newservices`
+- Add photos for the two work cards still waiting on one: **Additions** and **Kitchens**
+- Swap the generic Google link in the reviews section for your Google Business Profile
+  review link
+- Confirm the `/schedule` and `/newservices` page slugs ("Contact Us" buttons now call
+  (678) 372-1274 at the top and email Info@centerlineworks.com at the bottom)
 - Add family names/details to the owner section if you'd like
-- Replace the `og:image` URL in Part 1 with a real photo for nice link previews
 
 ## If something looks off
 
