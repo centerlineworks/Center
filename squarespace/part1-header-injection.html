@@ -556,4 +556,13 @@
     #cl-about .cl-ba-tag .t-before { animation: none; opacity: 0; }
     #cl-about .cl-rev-card { transition: none; }
   }
+
+  /* ---------- Squarespace host-page fixes ----------
+     Collapse the section that hosts this code block: no min-height, no padding,
+     full-bleed width. This removes the tall empty (black) area between our final
+     call-to-action and the Squarespace footer, and lets the design run edge to edge. */
+  .page-section:has(#cl-about) { padding: 0 !important; min-height: 0 !important; }
+  .page-section:has(#cl-about) > .content-wrapper { padding: 0 !important; max-width: none !important; width: 100% !important; }
+  .sqs-block:has(#cl-about), .sqs-block-code:has(#cl-about) { padding: 0 !important; }
+  .sqs-block:has(#cl-about) .sqs-block-content { margin: 0 !important; }
 </style>

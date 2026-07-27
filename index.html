@@ -562,6 +562,15 @@
     #cl-about .cl-ba-tag .t-before { animation: none; opacity: 0; }
     #cl-about .cl-rev-card { transition: none; }
   }
+
+  /* ---------- Squarespace host-page fixes ----------
+     Collapse the section that hosts this code block: no min-height, no padding,
+     full-bleed width. This removes the tall empty (black) area between our final
+     call-to-action and the Squarespace footer, and lets the design run edge to edge. */
+  .page-section:has(#cl-about) { padding: 0 !important; min-height: 0 !important; }
+  .page-section:has(#cl-about) > .content-wrapper { padding: 0 !important; max-width: none !important; width: 100% !important; }
+  .sqs-block:has(#cl-about), .sqs-block-code:has(#cl-about) { padding: 0 !important; }
+  .sqs-block:has(#cl-about) .sqs-block-content { margin: 0 !important; }
 </style>
 <!-- ============================================================
      END PART 1
@@ -573,6 +582,36 @@
      Copy everything between the PART 2 markers into a single
      Code Block on your About page (set to HTML).
      ============================================================ -->
+<script>
+/* =====================================================================
+   YOUR PHOTOS — paste each picture's web address between the quotes.
+
+   How to get a photo's address from Squarespace:
+     1. Put the image on any page with a normal Image Block (a hidden/
+        unlinked page is fine) and save.
+     2. View that page on the live site, right-click the image, and choose
+        "Copy Image Address".
+     3. Paste it below between the quotes for the matching photo.
+        (You can delete the temporary page afterward — the address keeps
+        working.)
+
+   Any line left as "" keeps its current behavior. A photo spot with no
+   working address shows a simple text label — never a broken image.
+   ===================================================================== */
+window.CL_PHOTOS = {
+  story:           "",  /* IMG_1704 — Our Story section */
+  bathroom_before: "",  /* IMG_2415 — bathroom BEFORE shot */
+  bathroom_after:  "",  /* IMG_2688 — bathroom AFTER shot */
+  basement:        "",  /* PXL_20250226_233210463 */
+  additions:       "",  /* (no photo picked yet) */
+  kitchens:        "",  /* (no photo picked yet) */
+  decks:           "",  /* exported_A3C876F6-... */
+  siding:          "",  /* dji_fly_20260604_... drone photo */
+  commercial:      "",  /* IMG_8669 */
+  alfred:          "",  /* IMG_1661-EDIT (1) — Alfred's portrait */
+  cedar:           ""   /* IMG_1176 — Alfred with the cedar beam */
+};
+</script>
 <main id="cl-about">
 
   <!-- ================= HERO ================= -->
@@ -626,7 +665,7 @@
         <p class="cl-lede">In carpentry, the centerline is where every accurate measurement begins. In 2020, Alfred Tudela founded <strong>Centerline Construction Company, LLC</strong> on the same idea — that every project, and every relationship, should start from a true center: <strong>faith, integrity, and old-fashioned craftsmanship</strong>.</p>
         <p style="margin-top:16px">With more than 18 years of residential and commercial construction experience behind it, Centerline is carried by a crew of skilled carpenters and craftsmen who work closely with every client to bring their vision to life — on time, on budget, and with the precision and attention to detail your home deserves. We're a Christ-centered, family-based company, and we build like it: honestly, carefully, and with a handshake that still means something.</p>
         <div class="cl-btn-row cl-btn-row--left">
-          <a class="cl-btn" href="https://www.centerlineworks.com/newservices">Explore Our Services</a>
+          <a class="cl-btn" href="https://www.centerlineworks.com/services">Explore Our Services</a>
         </div>
 
         <div class="cl-stats" role="list">
@@ -641,7 +680,7 @@
              keep the filename) so this URL resolves. If the photo doesn't appear, the
              filename differs - paste the file's exact URL instead. -->
         <figure class="cl-photo" data-tiltcard data-label="[ Photo: IMG_1704.JPG — upload to Squarespace file storage ]">
-          <img src="https://www.centerlineworks.com/s/IMG_1704.JPG" alt="The Centerline Construction crew at work on a renovation project in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+          <img data-cl-photo="story" src="https://www.centerlineworks.com/s/IMG_1704.JPG" alt="The Centerline Construction crew at work on a renovation project in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
         </figure>
       </div>
     </div>
@@ -726,43 +765,43 @@
         <figure class="cl-work-card">
           <!-- Before/after crossfade: IMG_2415.jpg (before) -> IMG_2688.jpg (after) -->
           <div class="cl-photo-slot cl-ba" data-label="[ Photos: IMG_2415.jpg + IMG_2688.jpg ]">
-            <img class="cl-ba-before" src="https://www.centerlineworks.com/s/IMG_2415.jpg" alt="Bathroom before its remodel by Centerline Construction" loading="lazy" onerror="this.style.display='none'">
-            <img class="cl-ba-after" src="https://www.centerlineworks.com/s/IMG_2688.jpg" alt="Custom tile shower after a full bathroom remodel by Centerline Construction in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+            <img class="cl-ba-before" data-cl-photo="bathroom_before" src="https://www.centerlineworks.com/s/IMG_2415.jpg" alt="Bathroom before its remodel by Centerline Construction" loading="lazy" onerror="this.style.display='none'">
+            <img class="cl-ba-after" data-cl-photo="bathroom_after" src="https://www.centerlineworks.com/s/IMG_2688.jpg" alt="Custom tile shower after a full bathroom remodel by Centerline Construction in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
             <span class="cl-ba-tag"><span class="t-before">Before</span><span class="t-after">After</span></span>
           </div>
           <figcaption><b>Bathrooms</b><span>Before &amp; After</span></figcaption>
         </figure>
         <figure class="cl-work-card">
           <div class="cl-photo-slot" data-label="[ Photo: PXL_20250226_233210463.jpg ]">
-            <img src="https://www.centerlineworks.com/s/PXL_20250226_233210463.jpg" alt="Finished basement remodel by Centerline Construction in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+            <img data-cl-photo="basement" src="https://www.centerlineworks.com/s/PXL_20250226_233210463.jpg" alt="Finished basement remodel by Centerline Construction in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
           </div>
           <figcaption><b>Basements</b><span>Finishing</span></figcaption>
         </figure>
         <figure class="cl-work-card">
           <!-- EDIT ME: no photo chosen yet - add an <img> like the other cards when ready -->
-          <div class="cl-photo-slot cl-noimg" data-label="[ Photo: a home addition you built ]"></div>
+          <div class="cl-photo-slot cl-noimg" data-label="[ Photo: a home addition you built ]"><img data-cl-photo="additions" alt="Home addition built by Centerline Construction in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')"></div>
           <figcaption><b>Additions</b><span>Built-on space</span></figcaption>
         </figure>
         <figure class="cl-work-card">
           <!-- EDIT ME: no photo chosen yet - add an <img> like the other cards when ready -->
-          <div class="cl-photo-slot cl-noimg" data-label="[ Photo: a kitchen remodel ]"></div>
+          <div class="cl-photo-slot cl-noimg" data-label="[ Photo: a kitchen remodel ]"><img data-cl-photo="kitchens" alt="Kitchen remodel by Centerline Construction in North Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')"></div>
           <figcaption><b>Kitchens</b><span>Remodels</span></figcaption>
         </figure>
         <figure class="cl-work-card">
           <div class="cl-photo-slot" data-label="[ Photo: exported_A3C876F6-E171-4DE2-AD28-D72147745BA1.jpg ]">
-            <img src="https://www.centerlineworks.com/s/exported_A3C876F6-E171-4DE2-AD28-D72147745BA1.jpg" alt="Custom deck and outdoor living space built by Centerline Construction" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+            <img data-cl-photo="decks" src="https://www.centerlineworks.com/s/exported_A3C876F6-E171-4DE2-AD28-D72147745BA1.jpg" alt="Custom deck and outdoor living space built by Centerline Construction" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
           </div>
           <figcaption><b>Decks &amp; Outdoor</b><span>Living spaces</span></figcaption>
         </figure>
         <figure class="cl-work-card">
           <div class="cl-photo-slot" data-label="[ Photo: dji_fly_20260604_094024_92_1780580434718_photo.jpg ]">
-            <img src="https://www.centerlineworks.com/s/dji_fly_20260604_094024_92_1780580434718_photo.jpg" alt="Siding and exterior repair work by Centerline Construction, aerial view" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+            <img data-cl-photo="siding" src="https://www.centerlineworks.com/s/dji_fly_20260604_094024_92_1780580434718_photo.jpg" alt="Siding and exterior repair work by Centerline Construction, aerial view" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
           </div>
           <figcaption><b>Siding &amp; Exterior</b><span>Repairs</span></figcaption>
         </figure>
         <figure class="cl-work-card">
           <div class="cl-photo-slot" data-label="[ Photo: IMG_8669.jpeg ]">
-            <img src="https://www.centerlineworks.com/s/IMG_8669.jpeg" alt="Commercial renovation project by Centerline Construction in Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+            <img data-cl-photo="commercial" src="https://www.centerlineworks.com/s/IMG_8669.jpeg" alt="Commercial renovation project by Centerline Construction in Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
           </div>
           <figcaption><b>Commercial</b><span>Renovations</span></figcaption>
         </figure>
@@ -1124,11 +1163,11 @@
         <!-- Main portrait: IMG_1661-EDIT (1) - if it doesn't appear, check the exact
              filename/extension in Squarespace and swap in the file's URL. -->
         <figure class="cl-photo" data-tiltcard data-label="[ Photo: IMG_1661-EDIT (1) — upload to Squarespace file storage ]">
-          <img src="https://www.centerlineworks.com/s/IMG_1661-EDIT%20(1).jpg" alt="Alfred Tudela, founder and CEO of Centerline Construction Company in Holly Springs, Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+          <img data-cl-photo="alfred" src="https://www.centerlineworks.com/s/IMG_1661-EDIT%20(1).jpg" alt="Alfred Tudela, founder and CEO of Centerline Construction Company in Holly Springs, Georgia" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
         </figure>
         <!-- Cameo: Alfred carrying the cedar beam (IMG_1176.JPG) -->
         <figure class="cl-photo-cameo" data-label="[ IMG_1176.JPG ]">
-          <img src="https://www.centerlineworks.com/s/IMG_1176.JPG" alt="Alfred Tudela of Centerline Construction carrying a large cedar beam on a job site" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
+          <img data-cl-photo="cedar" src="https://www.centerlineworks.com/s/IMG_1176.JPG" alt="Alfred Tudela of Centerline Construction carrying a large cedar beam on a job site" loading="lazy" onerror="this.closest('[data-label]').classList.add('cl-noimg')">
         </figure>
       </div>
       <div class="cl-reveal" data-delay="1">
@@ -1211,6 +1250,18 @@
   var root = document.getElementById("cl-about");
   if (!root) return;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Apply the photo URLs from the CL_PHOTOS list up top ---------- */
+  var photoMap = window.CL_PHOTOS || {};
+  Object.keys(photoMap).forEach(function (key) {
+    var url = (photoMap[key] || "").trim();
+    if (!url) return;
+    root.querySelectorAll('[data-cl-photo="' + key + '"]').forEach(function (img) {
+      img.src = url;
+      var slot = img.closest("[data-label]");
+      if (slot) slot.classList.remove("cl-noimg");
+    });
+  });
 
   /* ---------- Scroll-reveal: sections flip up in 3D as they enter ---------- */
   var reveals = root.querySelectorAll(".cl-reveal");

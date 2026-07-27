@@ -13,7 +13,7 @@ scroll effects, built to drop into Squarespace. Everything lives in one file: **
   perspective blueprint grid that drifts under the hero, parallax headline layers, sections that
   flip up in 3D as they enter the screen, and value cards that tilt toward the mouse on desktop.
 - **Action buttons throughout** — "Schedule an Estimate" (`/schedule`), "Contact Us"
-  (`/contact`), "Explore Our Services" (`/newservices`), and click-to-call, placed in the hero,
+  (`/contact`), "Explore Our Services" (`/services`), and click-to-call, placed in the hero,
   story, work showcase, owner section, and closing CTA.
 - **Our Story** — the "centerline" founding story: faith, integrity, craftsmanship, founded 2020,
   18+ years of experience, with animated stat counters.
@@ -97,6 +97,6 @@ URLs — they're marked with `EDIT ME` comments.
   personal details you'd like to share.
 - **Google review link**: swap the generic Google search link in the reviews section for your
   Google Business Profile review link (Google Business Profile → "Ask for reviews").
-- **Button links**: confirm the `/schedule` and `/newservices` page slugs; the Contact Us
+- **Button links**: confirm the `/schedule` and `/services` page slugs; the Contact Us
   buttons use tel/mailto links (call at the top, Info@centerlineworks.com at the bottom).
 - **Stats**: 18+ years, founded 2020, 43 five-star reviews — adjust as the numbers grow.

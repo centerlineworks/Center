@@ -12,35 +12,37 @@ Total time: about 15 minutes. You need the **Squarespace Business plan or higher
    - `squarespace/part2-code-block.html`
    - `assets/hero-loop.mp4`, `assets/hero-loop.webm`, `assets/hero-poster.jpg`
 
-## Step 2 — Upload the videos and photos to Squarespace file storage
+## Step 2 — Upload the three video files to Squarespace
 
-The page expects every video and photo at `centerlineworks.com/s/<filename>`, which is
-exactly where Squarespace puts uploaded **files** — as long as you don't rename them.
-(Note: photos added through regular image blocks live somewhere else; for this page,
-upload them as *files* using the method below.)
+The page expects the videos at `centerlineworks.com/s/hero-loop.mp4` (etc.), which is
+exactly where Squarespace serves uploaded **files** — as long as you don't rename them.
 
 1. In Squarespace, edit any page and add a text block, type a word, highlight it, and click
    the **link** icon
-2. In the link editor choose **File** → **Upload file**
-3. Upload each of these, keeping the exact filename:
-   - `hero-loop.mp4`, `hero-loop.webm`, `hero-poster.jpg` (from the `assets` folder)
-   - `IMG_1704.JPG` (Our Story)
-   - `IMG_2415.jpg` + `IMG_2688.jpg` (bathroom before/after)
-   - `PXL_20250226_233210463.jpg` (basement)
-   - the decks photo (`exported_A3C876F6-E171-4DE2-AD28-D72147745BA1…`)
-   - the siding drone photo (`dji_fly_20260604_094024_92_1780580434718_photo…`)
-   - `IMG_8669.jpeg` (commercial)
-   - `IMG_1661-EDIT (1)` (Alfred's portrait) and `IMG_1176.JPG` (cedar-beam photo)
+2. In the link editor choose **File** → **Upload file** → upload `hero-loop.mp4`
+3. Repeat for `hero-loop.webm` and `hero-poster.jpg` (from the `assets` folder)
 4. Delete the temporary text block (the uploaded files stay in your file storage)
 5. Check it worked: visit `https://www.centerlineworks.com/s/hero-loop.mp4` — the video
    should play in your browser
 
-**About file extensions:** the code guesses `.jpg` for the three files whose full names
-weren't certain (the decks photo, the siding drone photo, and `IMG_1661-EDIT (1).jpg`).
-If one of those photos shows a text label instead of the picture, the filename differs —
-find the file in Squarespace, copy its exact URL, and paste it over the matching
-`https://www.centerlineworks.com/s/...` URL in the code block. A wrong URL never shows a
-broken-image icon; the card just displays its label until you fix the link.
+## Step 2b — Hook up your photos (asset-library friendly)
+
+Photos in the Squarespace **asset library** live at Squarespace's own image-CDN addresses,
+so the page can't guess them. Instead, the very top of the code block has a clearly marked
+**`YOUR PHOTOS` list** — you paste each picture's address between the quotes, once.
+
+To get a photo's address:
+
+1. Put the image on any page with a normal **Image Block** (a hidden "not linked" page is
+   fine) and save
+2. View that page on the live site, **right-click the image → "Copy Image Address"**
+3. Paste it into the matching line of the `YOUR PHOTOS` list in the code block
+   (e.g. `story: "https://images.squarespace-cdn.com/...",`)
+4. Repeat for each photo, then save the page. You can delete the temporary page afterward —
+   the addresses keep working.
+
+A spot with no working address shows a small text label instead of a broken image, so
+nothing ever looks broken while you work through the list.
 
 ## Step 3 — Create the About page
 
@@ -74,13 +76,18 @@ Search the code block for `EDIT ME`:
 - Add photos for the two work cards still waiting on one: **Additions** and **Kitchens**
 - Swap the generic Google link in the reviews section for your Google Business Profile
   review link
-- Confirm the `/schedule` and `/newservices` page slugs ("Contact Us" buttons now call
+- Confirm the `/schedule` and `/services` page slugs ("Contact Us" buttons now call
   (678) 372-1274 at the top and email Info@centerlineworks.com at the bottom)
 - Add family names/details to the owner section if you'd like
 
 ## If something looks off
 
 - **No video playing** → Step 2's URL check failed; re-upload without renaming the files
+- **Photos show text labels** → their addresses aren't filled in yet; see Step 2b
+- **Black empty area between the last section and the footer** → make sure you re-pasted
+  the latest Part 1 (it collapses the host section automatically). If a sliver remains,
+  edit the page, click the section containing the code block → pencil icon → set **Section
+  Height** to Small and **Padding** to 0
 - **Page looks like plain text** → the Code block type isn't set to HTML, or you're on the
   Personal plan (JavaScript blocked)
 - **Fonts look plain** → hard-refresh (Ctrl+Shift+R); the Google Fonts link is in Part 1
