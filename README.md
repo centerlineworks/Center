@@ -119,6 +119,9 @@ photos, instead of splitting "Services" and "Portfolio" into separate pages.
 - **Fully responsive in one file** — no separate phone version. Galleries become swipeable
   strips and a sticky Get Estimate / Call / Email bar appears automatically on phones; the
   same content and code serve every screen size.
+- **3D effects to match the About page** — parallax hero text, sections that flip up in 3D
+  as they scroll into view, and mouse-tilt on gallery photos and the "How It Works" cards
+  (desktop only; all disabled under reduced motion).
 - **Sticky anchor nav** below the hero jumps to any service and highlights the one in view.
 - **Lightbox** — click any real photo to view it full-size; click outside, the × button, or
   press Escape to close. Empty photo spots aren't clickable.

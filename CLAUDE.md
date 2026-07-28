@@ -95,6 +95,12 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   (chips, badges) its own explicit `color` too, never rely on inheritance alone:
   `#cl-<page> :is(h1,h2,h3,h4,p,blockquote,summary,cite,small,li,figcaption,span,div,b,strong)
   { color: inherit; }`. Scope ALL CSS under the page's `#cl-<page>` id.
+  LESSON: white-on-cream isn't always theme bleed — an alternating-background rule like
+  `.cl-svc:nth-of-type(even)` can outrank a section's own intentional dark-background rule
+  on CSS specificity alone (extra class-level selector from `:nth-of-type()`), silently
+  flipping a dark CTA section to a light background while its light text stays light.
+  Any section with its own hardcoded background (CTA, etc.) needs `:not(.cl-cta)` added to
+  the alternating-background selector, not just an inherit guard.
 - **The host section adds a big empty (black) gap** below the block on every page. Part 1
   CSS collapses it per page: `.page-section:has(#cl-<page>) { padding:0!important;
   min-height:0!important; }` plus `.content-wrapper` / `.sqs-block` equivalents. Manual

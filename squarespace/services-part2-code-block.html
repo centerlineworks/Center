@@ -59,14 +59,15 @@ window.CL_SERVICES_PHOTOS = {
     </video>
     <div class="cl-scrim"></div>
     <div class="cl-hero-inner">
-      <p class="cl-kicker">What We Build</p>
-      <h1>Our Services<span>Every project, built the same way — right.</span></h1>
-      <p>Bathrooms, basements, cabanas, additions, decks, siding, and commercial work across Holly Springs, Canton &amp; North Georgia. Scroll through real projects for every service below.</p>
-      <div class="cl-btn-row">
+      <p class="cl-kicker" data-parallax="0.06">What We Build</p>
+      <h1 data-parallax="0.12">Our Services<span>Every project, built the same way — right.</span></h1>
+      <p data-parallax="0.16">Bathrooms, basements, cabanas, additions, decks, siding, and commercial work across Holly Springs, Canton &amp; North Georgia. Scroll through real projects for every service below.</p>
+      <div class="cl-btn-row" data-parallax="0.2">
         <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Schedule an Estimate</a>
         <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
       </div>
     </div>
+    <span class="cl-scroll-cue" aria-hidden="true"></span>
   </header>
 
   <!-- ================= ANCHOR NAV ================= -->
@@ -347,6 +348,46 @@ window.CL_SERVICES_PHOTOS = {
 
   if (reduceMotion) {
     root.querySelectorAll(".cl-video-bg").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
+    return; // everything below is decorative motion
+  }
+
+  /* ---------- Hero parallax on scroll ---------- */
+  var hero = root.querySelector(".cl-hero");
+  var parallaxEls = root.querySelectorAll("[data-parallax]");
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      var heroH = hero ? hero.offsetHeight : window.innerHeight;
+      if (y < heroH * 1.4) {
+        parallaxEls.forEach(function (el) {
+          var speed = parseFloat(el.getAttribute("data-parallax")) || 0.1;
+          el.style.transform = "translate3d(0," + (y * speed * -1) + "px,0)";
+        });
+      }
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Mouse-tilt 3D on gallery photos and process steps (desktop only) ---------- */
+  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (fine) {
+    root.querySelectorAll(".cl-shot, .cl-step").forEach(function (card) {
+      var max = card.classList.contains("cl-shot") ? 7 : 6;
+      card.addEventListener("mousemove", function (ev) {
+        var r = card.getBoundingClientRect();
+        var px = (ev.clientX - r.left) / r.width - 0.5;
+        var py = (ev.clientY - r.top) / r.height - 0.5;
+        card.style.transform = "perspective(900px) rotateY(" + (px * max) + "deg) rotateX(" + (py * -max) + "deg) translateZ(4px)";
+      });
+      card.addEventListener("mouseleave", function () {
+        card.style.transform = "perspective(900px) rotateY(0) rotateX(0)";
+      });
+    });
   }
 })();
 </script>
