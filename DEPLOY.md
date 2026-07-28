@@ -153,3 +153,17 @@ other.
 8. Click any real photo on the live page to open it full-size in a lightbox; click outside
    it, the × button, or press Escape to close.
 9. Every "Explore Our Services" link on the About page already points here.
+
+### If the Services page video isn't playing
+
+This page uses its **own** video files (`services-hero.mp4/.webm/-poster.jpg`) — separate
+from the About page's `hero-loop.*` files, uploaded in Step 3 above. If nothing plays:
+
+- Double check those 3 files were actually uploaded — visit
+  `https://www.centerlineworks.com/s/services-hero.mp4` directly in your browser; if it
+  doesn't play there either, they either weren't uploaded or got renamed on upload
+- If the About page's video works but this one doesn't, that almost always means Step 3
+  was skipped (easy to miss since it's easy to assume "I already uploaded a video" from
+  setting up About) — go back and upload these 3 specific files
+- Make sure you re-pasted the **current** `services-part1` and `services-part2` files from
+  GitHub — an older paste from before the video existed won't reference it at all
