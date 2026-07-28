@@ -127,6 +127,13 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   overlay, close via ×/backdrop/Escape) reused wherever a page shows a photo grid; a sticky
   anchor nav with scrollspy (`IntersectionObserver` + `rootMargin` trick) for jumping
   between long sections.
+- **Before/after comparison reveal** (Services gallery): each photo slot has an optional
+  matching `_before` config key. A shot with one gets `.has-before` and two stacked
+  `<img>`s (`.cl-shot-after`, `.cl-shot-before` clipped via `clip-path: inset(0 X% 0 0)`,
+  X driven live off cursor-x-within-card on `mousemove`, no transition while tracking so it
+  feels directly connected to the mouse); `mouseleave` re-adds a transition and animates
+  the clip back to fully hidden. A thin gold handle line follows the same X. Shots without
+  a `_before` photo keep the plain hover-zoom instead — never show an inert handle/tag.
 
 ## Media pipeline
 

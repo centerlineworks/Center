@@ -120,18 +120,26 @@ photos, instead of splitting "Services" and "Portfolio" into separate pages.
   strips and a sticky Get Estimate / Call / Email bar appears automatically on phones; the
   same content and code serve every screen size.
 - **3D effects to match the About page** — parallax hero text, sections that flip up in 3D
-  as they scroll into view, and mouse-tilt on gallery photos and the "How It Works" cards
-  (desktop only; all disabled under reduced motion).
+  as they scroll into view, and mouse-tilt on the "How It Works" cards (desktop only; all
+  disabled under reduced motion).
+- **Before/after comparison reveal** — hover any gallery photo that has a matching "before"
+  photo configured and it slides open to compare, tracking your mouse left-right in real
+  time; move off and it closes back to just the finished photo. Squares without a before
+  photo keep a simple hover zoom instead. Currently wired up on the first bathroom photo
+  (IMG_2415 before → IMG_2657 after); every other photo slot has an empty, ready-to-fill
+  `_before` counterpart.
 - **Sticky anchor nav** below the hero jumps to any service and highlights the one in view.
-- **Lightbox** — click any real photo to view it full-size; click outside, the × button, or
-  press Escape to close. Empty photo spots aren't clickable.
+- **Lightbox** — click any real (non-comparison) photo to view it full-size; click outside,
+  the × button, or press Escape to close. Empty photo spots aren't clickable.
 - **"How It Works"** 3-step process section (Consultation → Plan & Quote → Build &
   Walkthrough) and a trust strip linking to the About page's reviews.
-- **Photos**: a `window.CL_SERVICES_PHOTOS` list at the top of the code block, 4 slots per
-  service (28 total) — same "paste the image address" workflow as the About page. A few
-  slots are pre-filled with photos already gathered for the About page (bathrooms,
-  basements, decks, siding, commercial); Cabanas, Additions, and the remaining slots in
-  every category are open. An empty slot shows a text label, never a broken image.
+- **Photos**: a `window.CL_SERVICES_PHOTOS` list at the top of the code block, 4 "after"
+  slots per service (28 total) plus a matching optional `_before` slot for each (56 lines
+  total) — same "paste the image address" workflow as the About page. A few "after" slots
+  are pre-filled with photos already gathered for the About page (bathrooms, basements,
+  decks, siding, commercial); Cabanas, Additions, and the remaining slots in every category
+  are open. An empty slot shows a text label, never a broken image; an empty `_before` slot
+  just means that square has no comparison, nothing more.
 - **SEO/GEO**: its own `HomeAndConstructionBusiness` + `BreadcrumbList` + a `Service` entity
   per offering in JSON-LD, plus title/meta/OG tags specific to Services.
 - See **[DEPLOY.md](DEPLOY.md#deploying-the-services-page)** for install steps, including

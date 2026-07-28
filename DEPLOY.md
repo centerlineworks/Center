@@ -137,13 +137,19 @@ other.
    **Page Settings → Advanced → Page Header Code Injection** → Save
 5. Open `squarespace/services-part2-code-block.html`, select all, copy → add a **Code**
    block (type: HTML) to the page, paste, Save
-6. **Photos**: near the top of the code block is a **`YOUR SERVICE PHOTOS`** list — 4 spots
-   per service (28 total). A few are already filled in with photos reused from the About
-   page (bathrooms, basements, decks, siding, commercial); Cabanas and Additions, plus the
-   remaining spots in every category, are waiting on photos. Same method as the About page:
-   put each photo on a page with an Image Block, right-click → Copy Image Address, paste it
-   into the matching line. An empty spot just shows a text label — nothing looks broken
-   while you fill it in.
-7. Click any real photo on the live page to open it full-size in a lightbox; click outside
+6. **Photos**: near the top of the code block is a **`YOUR SERVICE PHOTOS`** list — 4 "after"
+   spots per service (28 total). A few are already filled in with photos reused from the
+   About page (bathrooms, basements, decks, siding, commercial); Cabanas and Additions, plus
+   the remaining spots in every category, are waiting on photos. Same method as the About
+   page: put each photo on a page with an Image Block, right-click → Copy Image Address,
+   paste it into the matching line. An empty spot just shows a text label — nothing looks
+   broken while you fill it in.
+7. **Before/after photos (optional)**: every spot in that same list also has a matching
+   `_before` line right below it. Fill one in and hovering that square on the live page
+   slides open the before photo as you move your mouse across it, closing back to just the
+   after photo when you move away — no code changes needed, just paste the address. One
+   pair is already set up (the first bathroom photo) as a working example. Leave a
+   `_before` line blank and that square stays a normal photo with a gentle hover zoom.
+8. Click any real photo on the live page to open it full-size in a lightbox; click outside
    it, the × button, or press Escape to close.
-8. Every "Explore Our Services" link on the About page already points here.
+9. Every "Explore Our Services" link on the About page already points here.
