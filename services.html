@@ -211,14 +211,19 @@
     will-change: transform;
   }
   #cl-services .cl-shot:hover { box-shadow: 0 26px 46px -20px rgba(18,16,12,.4); }
-  #cl-services .cl-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease-out); transform: translateZ(0); }
+  #cl-services .cl-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease-out), opacity .35s ease; transform: translateZ(0); }
   /* Photos with no before pair still get a gentle hover zoom */
   #cl-services .cl-shot:not(.has-before):hover .cl-shot-after { transform: translateZ(24px) scale(1.08); }
   #cl-services .cl-shot .cl-shot-label {
     position: absolute; inset: 0; display: grid; place-items: center; padding: 14px; text-align: center;
     color: rgba(247,244,238,.55); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
   }
-  #cl-services .cl-shot.cl-noimg img { display: none; }
+  /* Images are revealed by opacity, NEVER display:none, so the browser always
+     loads them (a display:none + loading="lazy" image can deadlock: it never
+     loads, so its load event never fires, so it is never revealed). */
+  #cl-services .cl-shot img { opacity: 0; }
+  #cl-services .cl-shot img.is-loaded { opacity: 1; }
+  #cl-services .cl-shot.cl-failed img { display: none; }
 
   /* ---------- Before/after comparison reveal (follows the cursor) ---------- */
   #cl-services .cl-shot.has-before { cursor: ew-resize; }
@@ -246,7 +251,7 @@
   #cl-services .cl-shot-ba-tag .tb { opacity: 0; }
   #cl-services .cl-shot.is-comparing .cl-shot-ba-tag .ta { opacity: 0; }
   #cl-services .cl-shot.is-comparing .cl-shot-ba-tag .tb { opacity: 1; }
-  #cl-services .cl-shot:not(.cl-noimg) .cl-shot-label { display: none; }
+  #cl-services .cl-shot.has-photo .cl-shot-label { display: none; }
 
   /* ---------- Lightbox ---------- */
   #cl-services .cl-lightbox {
@@ -484,10 +489,10 @@ window.CL_SERVICES_PHOTOS = {
         </div>
       </div>
       <div class="cl-gallery cl-reveal" data-delay>
-        <figure class="cl-shot cl-noimg" data-cl-photo="bathrooms_1" data-cl-photo-before="bathrooms_1_before"><div class="cl-shot-label">[ Photo: bathroom project 1 ]</div><img class="cl-shot-after" alt="Bathroom remodel by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Bathroom remodel by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="bathrooms_2" data-cl-photo-before="bathrooms_2_before"><div class="cl-shot-label">[ Photo: bathroom project 2 ]</div><img class="cl-shot-after" alt="Bathroom remodel by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Bathroom remodel by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="bathrooms_3" data-cl-photo-before="bathrooms_3_before"><div class="cl-shot-label">[ Photo: bathroom project 3 ]</div><img class="cl-shot-after" alt="Bathroom remodel by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Bathroom remodel by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="bathrooms_4" data-cl-photo-before="bathrooms_4_before"><div class="cl-shot-label">[ Photo: bathroom project 4 ]</div><img class="cl-shot-after" alt="Bathroom remodel by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Bathroom remodel by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="bathrooms_1" data-cl-photo-before="bathrooms_1_before"><div class="cl-shot-label">[ Photo: bathroom project 1 ]</div><img class="cl-shot-after" alt="Bathroom remodel by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Bathroom remodel by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="bathrooms_2" data-cl-photo-before="bathrooms_2_before"><div class="cl-shot-label">[ Photo: bathroom project 2 ]</div><img class="cl-shot-after" alt="Bathroom remodel by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Bathroom remodel by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="bathrooms_3" data-cl-photo-before="bathrooms_3_before"><div class="cl-shot-label">[ Photo: bathroom project 3 ]</div><img class="cl-shot-after" alt="Bathroom remodel by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Bathroom remodel by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="bathrooms_4" data-cl-photo-before="bathrooms_4_before"><div class="cl-shot-label">[ Photo: bathroom project 4 ]</div><img class="cl-shot-after" alt="Bathroom remodel by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Bathroom remodel by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
       </div>
     </div>
   </section>
@@ -504,10 +509,10 @@ window.CL_SERVICES_PHOTOS = {
         </div>
       </div>
       <div class="cl-gallery cl-reveal" data-delay>
-        <figure class="cl-shot cl-noimg" data-cl-photo="basements_1" data-cl-photo-before="basements_1_before"><div class="cl-shot-label">[ Photo: basement project 1 ]</div><img class="cl-shot-after" alt="Basement finishing by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Basement finishing by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="basements_2" data-cl-photo-before="basements_2_before"><div class="cl-shot-label">[ Photo: basement project 2 ]</div><img class="cl-shot-after" alt="Basement finishing by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Basement finishing by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="basements_3" data-cl-photo-before="basements_3_before"><div class="cl-shot-label">[ Photo: basement project 3 ]</div><img class="cl-shot-after" alt="Basement finishing by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Basement finishing by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="basements_4" data-cl-photo-before="basements_4_before"><div class="cl-shot-label">[ Photo: basement project 4 ]</div><img class="cl-shot-after" alt="Basement finishing by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Basement finishing by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="basements_1" data-cl-photo-before="basements_1_before"><div class="cl-shot-label">[ Photo: basement project 1 ]</div><img class="cl-shot-after" alt="Basement finishing by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Basement finishing by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="basements_2" data-cl-photo-before="basements_2_before"><div class="cl-shot-label">[ Photo: basement project 2 ]</div><img class="cl-shot-after" alt="Basement finishing by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Basement finishing by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="basements_3" data-cl-photo-before="basements_3_before"><div class="cl-shot-label">[ Photo: basement project 3 ]</div><img class="cl-shot-after" alt="Basement finishing by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Basement finishing by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="basements_4" data-cl-photo-before="basements_4_before"><div class="cl-shot-label">[ Photo: basement project 4 ]</div><img class="cl-shot-after" alt="Basement finishing by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Basement finishing by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
       </div>
     </div>
   </section>
@@ -524,10 +529,10 @@ window.CL_SERVICES_PHOTOS = {
         </div>
       </div>
       <div class="cl-gallery cl-reveal" data-delay>
-        <figure class="cl-shot cl-noimg" data-cl-photo="cabanas_1" data-cl-photo-before="cabanas_1_before"><div class="cl-shot-label">[ Photo: cabana project 1 ]</div><img class="cl-shot-after" alt="Custom cabana built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Custom cabana built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="cabanas_2" data-cl-photo-before="cabanas_2_before"><div class="cl-shot-label">[ Photo: cabana project 2 ]</div><img class="cl-shot-after" alt="Custom cabana built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Custom cabana built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="cabanas_3" data-cl-photo-before="cabanas_3_before"><div class="cl-shot-label">[ Photo: cabana project 3 ]</div><img class="cl-shot-after" alt="Custom cabana built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Custom cabana built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="cabanas_4" data-cl-photo-before="cabanas_4_before"><div class="cl-shot-label">[ Photo: cabana project 4 ]</div><img class="cl-shot-after" alt="Custom cabana built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Custom cabana built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="cabanas_1" data-cl-photo-before="cabanas_1_before"><div class="cl-shot-label">[ Photo: cabana project 1 ]</div><img class="cl-shot-after" alt="Custom cabana built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Custom cabana built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="cabanas_2" data-cl-photo-before="cabanas_2_before"><div class="cl-shot-label">[ Photo: cabana project 2 ]</div><img class="cl-shot-after" alt="Custom cabana built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Custom cabana built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="cabanas_3" data-cl-photo-before="cabanas_3_before"><div class="cl-shot-label">[ Photo: cabana project 3 ]</div><img class="cl-shot-after" alt="Custom cabana built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Custom cabana built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="cabanas_4" data-cl-photo-before="cabanas_4_before"><div class="cl-shot-label">[ Photo: cabana project 4 ]</div><img class="cl-shot-after" alt="Custom cabana built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Custom cabana built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
       </div>
     </div>
   </section>
@@ -544,10 +549,10 @@ window.CL_SERVICES_PHOTOS = {
         </div>
       </div>
       <div class="cl-gallery cl-reveal" data-delay>
-        <figure class="cl-shot cl-noimg" data-cl-photo="additions_1" data-cl-photo-before="additions_1_before"><div class="cl-shot-label">[ Photo: addition project 1 ]</div><img class="cl-shot-after" alt="Home addition built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Home addition built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="additions_2" data-cl-photo-before="additions_2_before"><div class="cl-shot-label">[ Photo: addition project 2 ]</div><img class="cl-shot-after" alt="Home addition built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Home addition built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="additions_3" data-cl-photo-before="additions_3_before"><div class="cl-shot-label">[ Photo: addition project 3 ]</div><img class="cl-shot-after" alt="Home addition built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Home addition built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="additions_4" data-cl-photo-before="additions_4_before"><div class="cl-shot-label">[ Photo: addition project 4 ]</div><img class="cl-shot-after" alt="Home addition built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Home addition built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="additions_1" data-cl-photo-before="additions_1_before"><div class="cl-shot-label">[ Photo: addition project 1 ]</div><img class="cl-shot-after" alt="Home addition built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Home addition built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="additions_2" data-cl-photo-before="additions_2_before"><div class="cl-shot-label">[ Photo: addition project 2 ]</div><img class="cl-shot-after" alt="Home addition built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Home addition built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="additions_3" data-cl-photo-before="additions_3_before"><div class="cl-shot-label">[ Photo: addition project 3 ]</div><img class="cl-shot-after" alt="Home addition built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Home addition built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="additions_4" data-cl-photo-before="additions_4_before"><div class="cl-shot-label">[ Photo: addition project 4 ]</div><img class="cl-shot-after" alt="Home addition built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Home addition built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
       </div>
     </div>
   </section>
@@ -564,10 +569,10 @@ window.CL_SERVICES_PHOTOS = {
         </div>
       </div>
       <div class="cl-gallery cl-reveal" data-delay>
-        <figure class="cl-shot cl-noimg" data-cl-photo="decks_1" data-cl-photo-before="decks_1_before"><div class="cl-shot-label">[ Photo: deck project 1 ]</div><img class="cl-shot-after" alt="Custom deck built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Custom deck built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="decks_2" data-cl-photo-before="decks_2_before"><div class="cl-shot-label">[ Photo: deck project 2 ]</div><img class="cl-shot-after" alt="Custom deck built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Custom deck built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="decks_3" data-cl-photo-before="decks_3_before"><div class="cl-shot-label">[ Photo: deck project 3 ]</div><img class="cl-shot-after" alt="Custom deck built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Custom deck built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="decks_4" data-cl-photo-before="decks_4_before"><div class="cl-shot-label">[ Photo: deck project 4 ]</div><img class="cl-shot-after" alt="Custom deck built by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Custom deck built by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="decks_1" data-cl-photo-before="decks_1_before"><div class="cl-shot-label">[ Photo: deck project 1 ]</div><img class="cl-shot-after" alt="Custom deck built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Custom deck built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="decks_2" data-cl-photo-before="decks_2_before"><div class="cl-shot-label">[ Photo: deck project 2 ]</div><img class="cl-shot-after" alt="Custom deck built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Custom deck built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="decks_3" data-cl-photo-before="decks_3_before"><div class="cl-shot-label">[ Photo: deck project 3 ]</div><img class="cl-shot-after" alt="Custom deck built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Custom deck built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="decks_4" data-cl-photo-before="decks_4_before"><div class="cl-shot-label">[ Photo: deck project 4 ]</div><img class="cl-shot-after" alt="Custom deck built by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Custom deck built by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
       </div>
     </div>
   </section>
@@ -584,10 +589,10 @@ window.CL_SERVICES_PHOTOS = {
         </div>
       </div>
       <div class="cl-gallery cl-reveal" data-delay>
-        <figure class="cl-shot cl-noimg" data-cl-photo="siding_1" data-cl-photo-before="siding_1_before"><div class="cl-shot-label">[ Photo: siding project 1 ]</div><img class="cl-shot-after" alt="Siding and exterior repair by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Siding and exterior repair by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="siding_2" data-cl-photo-before="siding_2_before"><div class="cl-shot-label">[ Photo: siding project 2 ]</div><img class="cl-shot-after" alt="Siding and exterior repair by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Siding and exterior repair by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="siding_3" data-cl-photo-before="siding_3_before"><div class="cl-shot-label">[ Photo: siding project 3 ]</div><img class="cl-shot-after" alt="Siding and exterior repair by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Siding and exterior repair by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="siding_4" data-cl-photo-before="siding_4_before"><div class="cl-shot-label">[ Photo: siding project 4 ]</div><img class="cl-shot-after" alt="Siding and exterior repair by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Siding and exterior repair by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="siding_1" data-cl-photo-before="siding_1_before"><div class="cl-shot-label">[ Photo: siding project 1 ]</div><img class="cl-shot-after" alt="Siding and exterior repair by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Siding and exterior repair by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="siding_2" data-cl-photo-before="siding_2_before"><div class="cl-shot-label">[ Photo: siding project 2 ]</div><img class="cl-shot-after" alt="Siding and exterior repair by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Siding and exterior repair by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="siding_3" data-cl-photo-before="siding_3_before"><div class="cl-shot-label">[ Photo: siding project 3 ]</div><img class="cl-shot-after" alt="Siding and exterior repair by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Siding and exterior repair by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="siding_4" data-cl-photo-before="siding_4_before"><div class="cl-shot-label">[ Photo: siding project 4 ]</div><img class="cl-shot-after" alt="Siding and exterior repair by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Siding and exterior repair by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
       </div>
     </div>
   </section>
@@ -604,10 +609,10 @@ window.CL_SERVICES_PHOTOS = {
         </div>
       </div>
       <div class="cl-gallery cl-reveal" data-delay>
-        <figure class="cl-shot cl-noimg" data-cl-photo="commercial_1" data-cl-photo-before="commercial_1_before"><div class="cl-shot-label">[ Photo: commercial project 1 ]</div><img class="cl-shot-after" alt="Commercial renovation by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Commercial renovation by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="commercial_2" data-cl-photo-before="commercial_2_before"><div class="cl-shot-label">[ Photo: commercial project 2 ]</div><img class="cl-shot-after" alt="Commercial renovation by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Commercial renovation by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="commercial_3" data-cl-photo-before="commercial_3_before"><div class="cl-shot-label">[ Photo: commercial project 3 ]</div><img class="cl-shot-after" alt="Commercial renovation by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Commercial renovation by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
-        <figure class="cl-shot cl-noimg" data-cl-photo="commercial_4" data-cl-photo-before="commercial_4_before"><div class="cl-shot-label">[ Photo: commercial project 4 ]</div><img class="cl-shot-after" alt="Commercial renovation by Centerline Construction" loading="lazy" onload="this.closest('.cl-shot').classList.remove('cl-noimg')" onerror="this.closest('.cl-shot').classList.add('cl-noimg')"><img class="cl-shot-before" alt="Commercial renovation by Centerline Construction (before)" loading="lazy" onerror="this.style.display='none'"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="commercial_1" data-cl-photo-before="commercial_1_before"><div class="cl-shot-label">[ Photo: commercial project 1 ]</div><img class="cl-shot-after" alt="Commercial renovation by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Commercial renovation by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="commercial_2" data-cl-photo-before="commercial_2_before"><div class="cl-shot-label">[ Photo: commercial project 2 ]</div><img class="cl-shot-after" alt="Commercial renovation by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Commercial renovation by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="commercial_3" data-cl-photo-before="commercial_3_before"><div class="cl-shot-label">[ Photo: commercial project 3 ]</div><img class="cl-shot-after" alt="Commercial renovation by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Commercial renovation by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
+        <figure class="cl-shot" data-cl-photo="commercial_4" data-cl-photo-before="commercial_4_before"><div class="cl-shot-label">[ Photo: commercial project 4 ]</div><img class="cl-shot-after" alt="Commercial renovation by Centerline Construction" loading="lazy"><img class="cl-shot-before" loading="eager" alt="Commercial renovation by Centerline Construction (before)"><span class="cl-ba-handle"></span><span class="cl-shot-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span></figure>
       </div>
     </div>
   </section>
@@ -689,26 +694,57 @@ window.CL_SERVICES_PHOTOS = {
   if (!root) return;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* Apply photo URLs from the config list up top. The shot's onload/onerror
-     handlers (in the HTML) reveal the after photo or keep the label — so
-     this only needs to set src. "_before" keys set the comparison photo on
-     the matching shot instead, and flag it with .has-before so the hover
-     reveal (below) and its CSS engage for that square only. */
+  /* Apply photo URLs from the config list up top.
+     All load/failure detection happens HERE in JS on purpose — never via inline
+     onload/onerror attributes on the <img> tags. Squarespace's code-block
+     sanitizer can strip inline event handlers, and a hidden lazy-loaded image
+     may never fire load at all; either case would leave photos invisible
+     forever. This runs off events we attach ourselves, plus an immediate
+     already-cached check and a final sweep, so a photo shows if it can load. */
   var photoMap = window.CL_SERVICES_PHOTOS || {};
+
+  function photoLoaded(img) { return img.complete && img.naturalWidth > 0; }
+
+  function showPhoto(shot, img, isBefore) {
+    img.classList.add("is-loaded");
+    if (isBefore) { shot.classList.add("has-before"); }
+    else { shot.classList.add("has-photo"); shot.classList.remove("cl-failed"); }
+  }
+
+  function loadPhoto(shot, img, url, isBefore) {
+    img.addEventListener("load", function () { if (photoLoaded(img)) showPhoto(shot, img, isBefore); });
+    img.addEventListener("error", function () {
+      img.classList.remove("is-loaded");
+      if (isBefore) shot.classList.remove("has-before");
+      else if (!shot.classList.contains("has-photo")) shot.classList.add("cl-failed");
+    });
+    img.src = url;
+    if (photoLoaded(img)) showPhoto(shot, img, isBefore); // already cached
+  }
+
   Object.keys(photoMap).forEach(function (key) {
     var url = (photoMap[key] || "").trim();
     if (!url) return;
-    if (key.endsWith("_before")) {
-      var shotB = root.querySelector('[data-cl-photo-before="' + key + '"]');
-      if (!shotB) return;
-      shotB.querySelector(".cl-shot-before").src = url;
-      shotB.classList.add("has-before");
-    } else {
-      var shot = root.querySelector('[data-cl-photo="' + key + '"]');
-      if (!shot) return;
-      shot.querySelector(".cl-shot-after").src = url;
-    }
+    var isBefore = key.slice(-7) === "_before";
+    var sel = isBefore ? '[data-cl-photo-before="' + key + '"]' : '[data-cl-photo="' + key + '"]';
+    var shot = root.querySelector(sel);
+    if (!shot) return;
+    var img = shot.querySelector(isBefore ? ".cl-shot-before" : ".cl-shot-after");
+    if (img) loadPhoto(shot, img, url, isBefore);
   });
+
+  /* Safety net: if any load event was missed (slow network, bfcache restore,
+     an event that fired before our listener attached), catch it after page load. */
+  function sweepPhotos() {
+    root.querySelectorAll(".cl-shot img").forEach(function (img) {
+      if (!img.getAttribute("src")) return;
+      var shot = img.closest(".cl-shot");
+      if (photoLoaded(img)) showPhoto(shot, img, img.classList.contains("cl-shot-before"));
+    });
+  }
+  window.addEventListener("load", sweepPhotos);
+  setTimeout(sweepPhotos, 1200);
+  setTimeout(sweepPhotos, 4000);
 
   /* Scroll reveals */
   var reveals = root.querySelectorAll(".cl-reveal");
@@ -743,7 +779,7 @@ window.CL_SERVICES_PHOTOS = {
   var lightboxAfter = root.querySelector("[data-lightbox-after]");
   root.querySelectorAll(".cl-shot").forEach(function (shot) {
     shot.addEventListener("click", function () {
-      if (shot.classList.contains("cl-noimg")) return; // nothing real to enlarge yet
+      if (!shot.classList.contains("has-photo")) return; // nothing real to enlarge yet
       var afterImg = shot.querySelector(".cl-shot-after");
       var beforeImg = shot.classList.contains("has-before") ? shot.querySelector(".cl-shot-before") : null;
       if (beforeImg && beforeImg.getAttribute("src")) {

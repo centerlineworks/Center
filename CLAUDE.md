@@ -77,11 +77,20 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   Alfred pastes each image's URL (get it via Image Block on a hidden page → right-click →
   Copy Image Address, OR upload as a File like the videos to get a predictable `/s/` URL
   with no copying at all); JS applies it to `<img data-cl-photo="...">` tags.
-  LESSON: every photo spot's `<figure>`/`<div>` must default to the `.cl-noimg` class in
-  the HTML (not just on error) — an `<img>` with no `src` yet still renders a tiny broken
-  icon in Chrome/Safari otherwise. Reveal the photo via the `<img>`'s own `onload` handler
-  (remove `.cl-noimg`), and keep `onerror` to re-add it if a URL is ever wrong. Never rely
-  on JS alone to add `.cl-noimg` only reactively.
+  LESSON (hard-won, cost Alfred a day of debugging): an `<img>` with no `src` yet renders a
+  tiny broken icon, so photo slots need a "not loaded yet" state — but **never implement
+  that state with `display: none` on the image, and never depend on inline
+  `onload`/`onerror` attributes to undo it.** Two independent failure modes turn that into
+  a permanent deadlock where photos never appear on the live site (while looking fine in
+  the Squarespace editor): (1) a `display:none` or fully `clip-path`-clipped image with
+  `loading="lazy"` is never fetched, so its load event never fires, so it's never revealed;
+  (2) Squarespace's Code Block sanitizer can strip inline event-handler attributes.
+  The robust pattern, now used on the Services page: hide with `opacity: 0` (image still
+  loads and lays out), attach `load`/`error` listeners **in JS**, check
+  `img.complete && img.naturalWidth > 0` immediately for the already-cached case, and run a
+  `setTimeout`/`window.load` sweep as a safety net. Any image that is visually hidden or
+  clipped in its resting state (e.g. the before/after comparison image) must be
+  `loading="eager"` — lazy loading will never fetch it.
 - **Reducing upload friction**: when Alfred has a batch of photos ready, he can attach them
   directly in the chat — reuse the video pipeline's instinct (rename/organize/compress for
   web) and hand back the exact filenames before he uploads. Steer him toward uploading
