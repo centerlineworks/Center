@@ -248,12 +248,35 @@
     position: fixed; inset: 0; z-index: 999; background: rgba(10,9,13,.94);
     display: none; align-items: center; justify-content: center; padding: 40px 20px;
   }
+  /* Chromium/other browsers can leave a "stuck" position:sticky element's own
+     compositing layer painted above a later position:fixed sibling despite
+     its lower z-index. Fully un-stick the nav while the lightbox is open —
+     it's hidden behind the modal anyway, so there's no visual cost. */
+  #cl-services .cl-nav.cl-nav-frozen { position: static; }
   #cl-services .cl-lightbox.is-open { display: flex; }
-  #cl-services .cl-lightbox img { max-width: min(94vw, 1100px); max-height: 86vh; object-fit: contain; border-radius: 10px; }
   #cl-services .cl-lightbox-close {
-    position: absolute; top: 18px; right: 20px; width: 44px; height: 44px; border-radius: 50%;
+    position: absolute; top: 18px; right: 20px; z-index: 2; width: 44px; height: 44px; border-radius: 50%;
     border: 1.5px solid rgba(247,244,238,.4); background: rgba(255,255,255,.06); color: var(--paper);
     font-size: 22px; cursor: pointer; display: grid; place-items: center;
+  }
+  /* Single photo (no before pair) */
+  #cl-services .cl-lightbox-single { display: flex; }
+  #cl-services .cl-lightbox.is-compare .cl-lightbox-single { display: none; }
+  #cl-services .cl-lightbox-single img { max-width: min(94vw, 1100px); max-height: 86vh; object-fit: contain; border-radius: 10px; }
+  /* Before/after: shown zoomed in, side by side */
+  #cl-services .cl-lightbox-compare { display: none; gap: 18px; max-width: 96vw; max-height: 90vh; align-items: center; }
+  #cl-services .cl-lightbox.is-compare .cl-lightbox-compare { display: flex; }
+  #cl-services .cl-lightbox-compare figure { position: relative; flex: 1 1 0; min-width: 0; }
+  #cl-services .cl-lightbox-compare img { width: 100%; max-height: 84vh; object-fit: contain; border-radius: 10px; display: block; }
+  #cl-services .cl-lightbox-compare figcaption {
+    position: absolute; top: 14px; left: 14px; padding: 7px 14px; border-radius: 999px;
+    background: rgba(12,11,16,.75); color: var(--paper); font-size: 11.5px; font-weight: 800;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  #cl-services .cl-lightbox-compare .cl-lb-after figcaption { color: var(--gold); }
+  @media (max-width: 760px) {
+    #cl-services .cl-lightbox-compare { flex-direction: column; overflow-y: auto; max-height: 92vh; }
+    #cl-services .cl-lightbox-compare img { max-height: 40vh; }
   }
 
   /* ---------- Process ---------- */

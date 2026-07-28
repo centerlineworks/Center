@@ -307,10 +307,17 @@ window.CL_SERVICES_PHOTOS = {
     </div>
   </section>
 
-  <!-- Lightbox for tapping/clicking any gallery photo -->
+  <!-- Lightbox for tapping/clicking any gallery photo. Shots with a before
+       photo open a zoomed-in side-by-side compare instead of just the after. -->
   <div class="cl-lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Project photo">
     <button class="cl-lightbox-close" type="button" data-lightbox-close aria-label="Close">&times;</button>
-    <img data-lightbox-img alt="">
+    <div class="cl-lightbox-single" data-lightbox-single>
+      <img data-lightbox-img alt="">
+    </div>
+    <div class="cl-lightbox-compare" data-lightbox-compare>
+      <figure class="cl-lb-before"><img data-lightbox-before alt=""><figcaption>Before</figcaption></figure>
+      <figure class="cl-lb-after"><img data-lightbox-after alt=""><figcaption>After</figcaption></figure>
+    </div>
   </div>
 
   <!-- Sticky mobile action bar (hidden on desktop via CSS) -->
@@ -374,18 +381,36 @@ window.CL_SERVICES_PHOTOS = {
     sections.forEach(function (s) { if (s) navIo.observe(s); });
   }
 
-  /* Lightbox: click any real photo to view it large */
+  /* Lightbox: click any real photo to view it large. Shots with a before
+     photo open a zoomed-in side-by-side compare instead of a single photo. */
   var lightbox = root.querySelector("[data-lightbox]");
   var lightboxImg = root.querySelector("[data-lightbox-img]");
+  var lightboxBefore = root.querySelector("[data-lightbox-before]");
+  var lightboxAfter = root.querySelector("[data-lightbox-after]");
   root.querySelectorAll(".cl-shot").forEach(function (shot) {
     shot.addEventListener("click", function () {
       if (shot.classList.contains("cl-noimg")) return; // nothing real to enlarge yet
-      var img = shot.querySelector(".cl-shot-after");
-      lightboxImg.src = img.src; lightboxImg.alt = img.alt;
+      var afterImg = shot.querySelector(".cl-shot-after");
+      var beforeImg = shot.classList.contains("has-before") ? shot.querySelector(".cl-shot-before") : null;
+      if (beforeImg && beforeImg.getAttribute("src")) {
+        lightboxBefore.src = beforeImg.src; lightboxBefore.alt = beforeImg.alt;
+        lightboxAfter.src = afterImg.src; lightboxAfter.alt = afterImg.alt;
+        lightbox.classList.add("is-compare");
+      } else {
+        lightboxImg.src = afterImg.src; lightboxImg.alt = afterImg.alt;
+        lightbox.classList.remove("is-compare");
+      }
       lightbox.classList.add("is-open");
+      var nav = root.querySelector(".cl-nav");
+      if (nav) nav.classList.add("cl-nav-frozen");
     });
   });
-  function closeLightbox() { lightbox.classList.remove("is-open"); lightboxImg.src = ""; }
+  function closeLightbox() {
+    lightbox.classList.remove("is-open", "is-compare");
+    lightboxImg.src = ""; lightboxBefore.src = ""; lightboxAfter.src = "";
+    var nav = root.querySelector(".cl-nav");
+    if (nav) nav.classList.remove("cl-nav-frozen");
+  }
   root.querySelector("[data-lightbox-close]").addEventListener("click", closeLightbox);
   lightbox.addEventListener("click", function (e) { if (e.target === lightbox) closeLightbox(); });
   window.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLightbox(); });

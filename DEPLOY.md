@@ -150,8 +150,9 @@ other.
    after photo when you move away — no code changes needed, just paste the address. One
    pair is already set up (the first bathroom photo) as a working example. Leave a
    `_before` line blank and that square stays a normal photo with a gentle hover zoom.
-8. Click any real photo on the live page to open it full-size in a lightbox; click outside
-   it, the × button, or press Escape to close.
+8. Click any real photo on the live page to open it full-size in a lightbox — a photo with
+   a before pair opens a zoomed-in side-by-side before/after instead; click outside it, the
+   × button, or press Escape to close.
 9. Every "Explore Our Services" link on the About page already points here.
 
 ### If the Services page video isn't playing

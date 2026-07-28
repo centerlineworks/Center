@@ -111,7 +111,8 @@ A combined services-and-portfolio page — every service explained alongside rea
 photos, instead of splitting "Services" and "Portfolio" into separate pages.
 
 - **Seven services**, each with a description, a chip list of what's included, and a
-  **4-photo gallery**: Bathrooms, Basements, Cabanas, Additions, Decks & Outdoor, Siding &
+  large **2-up photo gallery** (4 photos per service, shown two per row so each one is
+  actually visible): Bathrooms, Basements, Cabanas, Additions, Decks & Outdoor, Siding &
   Exterior, and Commercial.
 - **Its own hero video** — a poolside cabana/pavilion project (`assets/services-hero.mp4`)
   — kept completely separate from the About page's video so each page can show different
@@ -129,7 +130,8 @@ photos, instead of splitting "Services" and "Portfolio" into separate pages.
   (IMG_2415 before → IMG_2657 after); every other photo slot has an empty, ready-to-fill
   `_before` counterpart.
 - **Sticky anchor nav** below the hero jumps to any service and highlights the one in view.
-- **Lightbox** — click any real (non-comparison) photo to view it full-size; click outside,
+- **Lightbox** — click any real photo to view it full-size; a photo with a before pair opens
+  a zoomed-in **side-by-side before/after** instead of just the after shot. Click outside,
   the × button, or press Escape to close. Empty photo spots aren't clickable.
 - **"How It Works"** 3-step process section (Consultation → Plan & Quote → Build &
   Walkthrough) and a trust strip linking to the About page's reviews.

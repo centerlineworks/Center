@@ -134,6 +134,16 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   feels directly connected to the mouse); `mouseleave` re-adds a transition and animates
   the clip back to fully hidden. A thin gold handle line follows the same X. Shots without
   a `_before` photo keep the plain hover-zoom instead — never show an inert handle/tag.
+  Clicking a `.has-before` shot opens the lightbox in a side-by-side compare mode (two
+  larger images) instead of the single-photo mode.
+  LESSON: a `position: sticky` element (the anchor nav) that has scrolled to its "stuck"
+  state can get its own compositing layer painted ABOVE a later `position: fixed` sibling
+  (the lightbox) despite a much higher z-index — happens specifically after the page has
+  scrolled, not on a fresh load, so it's easy to miss testing at scrollY 0. `transform:
+  translateZ(0)` / `isolation: isolate` on the fixed element did NOT fix it. The reliable
+  fix: toggle the sticky element to `position: static` for as long as the modal covering it
+  is open (add a class on open, remove on close) — it's hidden behind the modal anyway, so
+  there's no visual cost, and it sidesteps the layer-ordering bug entirely.
 
 ## Media pipeline
 
