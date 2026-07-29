@@ -1,7 +1,6 @@
 <!-- Centerline HOME page - PART 1 of 2
      Paste into: Page Settings -> Advanced -> Page Header Code Injection
-     for the HOME page (header injection is per-page, so this is separate
-     from the About and Services pages).
+     for the HOME page.
      Set the page title in Page Settings -> SEO to:
       Centerline Construction | Remodeling Contractor in Holly Springs & Canton, GA -->
 <meta charset="UTF-8">
@@ -73,7 +72,7 @@
         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/c9fb4b92-1bc0-4df6-a186-be51b293c7c6/basement333.jpg?format=1000w",
         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/5322ccd4-aebc-4342-9a05-a3e4ced4f948/IMG_1661-EDIT+%281%29.jpg?format=1000w"
       ],
-      "logo": "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/5322ccd4-aebc-4342-9a05-a3e4ced4f948/IMG_1661-EDIT+%281%29.jpg?format=1000w",
+      "logo": "https://www.centerlineworks.com/s/centerline-logo.png",
       "founder": { "@id": "https://www.centerlineworks.com/#alfred-tudela" },
       "address": {
         "@type": "PostalAddress",
@@ -229,53 +228,70 @@
   #cl-home .cl-btn-row { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 28px; }
   #cl-home .cl-btn-row--center { justify-content: center; }
 
-  /* ---------- HERO ---------- */
+  /* ---------- HERO (split editorial — deliberately unlike the About page) ---------- */
   #cl-home .cl-hero {
-    position: relative; min-height: 92vh; min-height: 92svh; display: grid; place-items: center;
-    text-align: center; overflow: hidden; padding: 132px 24px 96px; color: var(--paper);
-    background: radial-gradient(120% 90% at 50% 0%, #23222a 0%, #131218 55%, #0c0b10 100%);
-    perspective: 1000px;
+    position: relative; min-height: 94vh; min-height: 94svh; display: flex; align-items: center;
+    overflow: hidden; padding: 130px 0 96px; color: var(--paper); background: #0c0b10;
   }
   #cl-home .cl-video-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  /* Weighted to the left so the copy column stays readable and the photo side breathes */
   #cl-home .cl-scrim {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background: linear-gradient(180deg, rgba(12,11,16,.74) 0%, rgba(12,11,16,.55) 42%, rgba(12,11,16,.93) 100%);
+    background:
+      linear-gradient(97deg, rgba(12,11,16,.95) 0%, rgba(12,11,16,.88) 34%, rgba(12,11,16,.42) 62%, rgba(12,11,16,.66) 100%),
+      linear-gradient(180deg, rgba(12,11,16,.45) 0%, transparent 30%, rgba(12,11,16,.8) 100%);
   }
-  /* 3D blueprint floor */
-  #cl-home .cl-grid3d {
-    position: absolute; inset: -60% -30%; z-index: 1; pointer-events: none;
-    background-image:
-      linear-gradient(rgba(217,164,65,.16) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(217,164,65,.16) 1px, transparent 1px);
-    background-size: 58px 58px;
-    transform: rotateX(63deg) translateZ(-140px); transform-origin: 50% 100%;
-    mask-image: radial-gradient(72% 62% at 50% 58%, #000 28%, transparent 78%);
-    -webkit-mask-image: radial-gradient(72% 62% at 50% 58%, #000 28%, transparent 78%);
-    will-change: transform;
+  /* ---------- Brand lockup: the logo leads the page ---------- */
+  #cl-home .cl-logo {
+    display: block; width: clamp(230px, 30vw, 430px); margin-bottom: 22px;
+    animation: cl-logo-in 1s var(--ease-out) both;
   }
-  /* Signature rotating wireframe house (ties the site together) */
-  #cl-home .cl-house-stage { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; pointer-events: none; perspective: 1100px; }
-  #cl-home .cl-house { position: relative; width: 250px; height: 200px; transform-style: preserve-3d; opacity: .42; will-change: transform; }
-  #cl-home .cl-house i { position: absolute; border: 1.5px solid rgba(217,164,65,.8); background: rgba(217,164,65,.05); }
-  #cl-home .cl-house .f1 { width: 250px; height: 145px; bottom: 0; transform: translateZ(85px); }
-  #cl-home .cl-house .f2 { width: 250px; height: 145px; bottom: 0; transform: translateZ(-85px); }
-  #cl-home .cl-house .f3 { width: 170px; height: 145px; bottom: 0; left: -85px; transform: rotateY(90deg); transform-origin: right; }
-  #cl-home .cl-house .f4 { width: 170px; height: 145px; bottom: 0; right: -85px; transform: rotateY(-90deg); transform-origin: left; }
-  #cl-home .cl-house .r1 { width: 250px; height: 150px; bottom: 137px; transform-origin: bottom; transform: translateZ(85px) rotateX(56deg); }
-  #cl-home .cl-house .r2 { width: 250px; height: 150px; bottom: 137px; transform-origin: bottom; transform: translateZ(-85px) rotateX(-56deg); }
-  #cl-home .cl-house .d1 { width: 46px; height: 82px; bottom: 0; left: 102px; transform: translateZ(86px); }
-  #cl-home .cl-house .w1 { width: 42px; height: 42px; bottom: 62px; left: 28px; transform: translateZ(86px); }
-  #cl-home .cl-house .w2 { width: 42px; height: 42px; bottom: 62px; right: 28px; transform: translateZ(86px); }
+  @keyframes cl-logo-in { from { opacity: 0; transform: translateY(-14px) scale(.97) } to { opacity: 1; transform: none } }
+  #cl-home .cl-logo img { width: 100%; height: auto; display: block; opacity: 0; transition: opacity .45s ease; }
+  #cl-home .cl-logo img.is-loaded { opacity: 1; }
+  /* Styled stand-in until the real logo file is uploaded — keeps the brand
+     present instead of a blank space, and disappears the moment it loads. */
+  #cl-home .cl-logo.has-photo .cl-logo-fallback { display: none; }
+  #cl-home .cl-logo-fallback { display: block; border: 3px solid var(--gold); padding: 16px 22px 30px; position: relative; }
+  #cl-home .cl-logo-word {
+    display: block; font-weight: 900; font-size: clamp(30px, 4.6vw, 58px); line-height: .9;
+    letter-spacing: -.02em; text-transform: uppercase; text-align: center;
+    background: linear-gradient(100deg, #b07f22, #f0cf7a 45%, #d9a441);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  #cl-home .cl-logo-ribbon {
+    position: absolute; left: -8px; right: -8px; bottom: -2px; padding: 7px 0;
+    background: linear-gradient(100deg, #d9a441, #f0cf7a 50%, #b07f22);
+    color: #17140c; font-weight: 800; font-size: clamp(11px, 1.5vw, 16px);
+    letter-spacing: .3em; text-transform: uppercase; text-align: center;
+  }
 
-  #cl-home .cl-hero-inner { position: relative; z-index: 3; max-width: 940px; }
-  #cl-home .cl-hero .cl-kicker { color: var(--gold); justify-content: center; }
-  #cl-home .cl-hero h1 { font-size: clamp(40px, 7.4vw, 82px); text-transform: uppercase; letter-spacing: -.025em; }
-  #cl-home .cl-hero h1 .cl-serif { display: block; text-transform: none; color: var(--gold); font-size: .52em; letter-spacing: 0; margin-top: 6px; }
-  #cl-home .cl-hero p.cl-hero-sub { max-width: 60ch; margin: 18px auto 0; font-size: clamp(15.5px, 1.9vw, 18.5px); color: rgba(247,244,238,.86); }
-  #cl-home .cl-hero .cl-btn-row { justify-content: center; }
+  /* Thin gold rule that sweeps in under the eyebrow */
+  #cl-home .cl-hero-rule { display: block; width: 68px; height: 3px; background: var(--gold); margin-bottom: 22px; transform-origin: left; animation: cl-rule 1s var(--ease-out) both; }
+  @keyframes cl-rule { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+
+  #cl-home .cl-hero-inner {
+    position: relative; z-index: 3; width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: 1.06fr .94fr; gap: clamp(30px, 5vw, 64px); align-items: center; text-align: left;
+  }
+  /* copy always paints above the floating cards, however narrow the window gets */
+  #cl-home .cl-hero-copy { position: relative; z-index: 2; }
+  #cl-home .cl-hero .cl-kicker { color: var(--gold); }
+  #cl-home .cl-hero h1 { font-size: clamp(42px, 6.6vw, 88px); text-transform: uppercase; letter-spacing: -.035em; line-height: .92; }
+  #cl-home .cl-hero h1 .ln { display: block; opacity: 0; transform: translateY(26px) rotateX(14deg); animation: cl-line-in .9s var(--ease-out) forwards; }
+  #cl-home .cl-hero h1 .ln:nth-child(1) { animation-delay: .12s }
+  #cl-home .cl-hero h1 .ln:nth-child(2) { animation-delay: .26s }
+  #cl-home .cl-hero h1 .ln:nth-child(3) { animation-delay: .4s; color: var(--gold); }
+  @keyframes cl-line-in { to { opacity: 1; transform: none } }
+  #cl-home .cl-hero .cl-hero-serif {
+    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(19px, 2.5vw, 27px); color: var(--paper); margin-top: 16px; line-height: 1.25;
+  }
+  #cl-home .cl-hero p.cl-hero-sub { max-width: 50ch; margin: 14px 0 0; font-size: clamp(15px, 1.75vw, 17.5px); color: rgba(247,244,238,.82); }
+  #cl-home .cl-hero .cl-btn-row { justify-content: flex-start; }
 
   /* Above-the-fold trust chips */
-  #cl-home .cl-trustchips { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin-top: 26px; }
+  #cl-home .cl-trustchips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
   #cl-home .cl-trustchips span {
     display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border-radius: 999px;
     font-size: 12.5px; font-weight: 800; letter-spacing: .02em;
@@ -283,6 +299,39 @@
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   }
   #cl-home .cl-trustchips b { color: var(--gold); font-weight: 900; }
+
+  /* ---------- Hero proof stack: floating 3D project cards ---------- */
+  #cl-home .cl-proof { position: relative; aspect-ratio: 1 / 1.02; perspective: 1200px; }
+  #cl-home .cl-proof-card {
+    position: absolute; border-radius: 16px; overflow: hidden; background: #1d1c23;
+    border: 1px solid rgba(247,244,238,.16); box-shadow: 0 40px 80px -30px rgba(0,0,0,.85);
+    will-change: transform; transition: transform .5s var(--ease-out);
+  }
+  #cl-home .cl-proof-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+  #cl-home .cl-proof-card img.is-loaded { opacity: 1; }
+  #cl-home .cl-proof-card .cl-slot-label {
+    position: absolute; inset: 0; display: grid; place-items: center; padding: 14px; text-align: center;
+    color: rgba(247,244,238,.4); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+  }
+  #cl-home .cl-proof-card.has-photo .cl-slot-label { display: none; }
+  #cl-home .cl-proof-card b {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 34px 16px 13px;
+    background: linear-gradient(transparent, rgba(12,11,16,.94) 62%);
+    font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--paper);
+  }
+  /* every child of a card is absolutely positioned, so the card needs an explicit
+     aspect-ratio or it collapses to zero height */
+  #cl-home .cl-proof-1 { width: 58%; aspect-ratio: 4 / 5; top: 1%; left: 6%; transform: rotate(-4deg); }
+  #cl-home .cl-proof-2 { width: 60%; aspect-ratio: 4 / 3.2; bottom: 2%; right: 0; transform: rotate(3.5deg); }
+  #cl-home .cl-proof-badge {
+    position: absolute; z-index: 4; right: 4%; top: 6%; padding: 15px 19px; border-radius: 16px;
+    background: rgba(247,244,238,.97); color: var(--ink); text-align: center;
+    box-shadow: 0 30px 60px -22px rgba(0,0,0,.75); will-change: transform;
+  }
+  #cl-home .cl-proof-badge b { display: block; font-size: 30px; font-weight: 900; color: var(--gold-deep); line-height: 1; letter-spacing: -.03em; }
+  #cl-home .cl-proof-badge .cl-stars { display: block; font-size: 12px; letter-spacing: 2px; margin-top: 3px; }
+  #cl-home .cl-proof-badge small { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: rgba(18,16,12,.6); margin-top: 4px; }
+
   #cl-home .cl-scroll-cue {
     position: absolute; left: 50%; bottom: 18px; z-index: 3; transform: translateX(-50%);
     width: 1px; height: 40px; background: linear-gradient(var(--gold), transparent);
@@ -394,34 +443,52 @@
   #cl-home .cl-step h3 { font-size: 20px; margin-bottom: 8px; }
   #cl-home .cl-step p { font-size: 14.5px; color: rgba(18,16,12,.72); }
 
-  /* ---------- Owner ---------- */
-  #cl-home .cl-owner { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(30px, 5vw, 68px); align-items: center; }
-  #cl-home .cl-owner-media { position: relative; }
-  #cl-home .cl-owner-photo {
-    position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden;
-    background: linear-gradient(150deg, #2b2b33, #17161c); box-shadow: 0 40px 76px -30px rgba(0,0,0,.62);
+  /* ---------- Owner (video-led, offset editorial — not the About page's portrait+cameo) ---------- */
+  #cl-home .cl-owner { display: grid; grid-template-columns: 1.02fr .98fr; gap: clamp(28px, 4.5vw, 60px); align-items: center; }
+  #cl-home .cl-owner-video {
+    position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3.4;
+    background: #1d1c23; border: 1px solid rgba(247,244,238,.16);
+    box-shadow: 0 44px 84px -34px rgba(0,0,0,.8);
   }
-  #cl-home .cl-owner-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .4s ease; }
-  #cl-home .cl-owner-photo img.is-loaded { opacity: 1; }
-  #cl-home .cl-owner-photo .cl-slot-label { position: absolute; inset: 0; display: grid; place-items: center; padding: 18px; text-align: center; color: rgba(247,244,238,.45); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; }
-  #cl-home .cl-owner-photo.has-photo .cl-slot-label { display: none; }
-  #cl-home .cl-cameo {
-    position: absolute; width: 44%; right: -20px; bottom: -26px; border-radius: 13px; overflow: hidden;
-    aspect-ratio: 3 / 4; border: 5px solid #17161c; transform: rotate(4deg); background: #2b2b33;
-    box-shadow: 0 26px 52px -20px rgba(0,0,0,.66);
+  #cl-home .cl-owner-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #cl-home .cl-owner-video .cl-vtag {
+    position: absolute; z-index: 2; left: 16px; top: 16px; padding: 8px 15px; border-radius: 999px;
+    background: rgba(12,11,16,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
+    display: inline-flex; align-items: center; gap: 8px;
   }
-  #cl-home .cl-cameo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .4s ease; }
-  #cl-home .cl-cameo img.is-loaded { opacity: 1; }
+  #cl-home .cl-owner-video .cl-vtag i {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--gold); font-style: normal;
+    animation: cl-pulse 1.9s ease-in-out infinite;
+  }
+  @keyframes cl-pulse { 0%,100% { opacity: 1; transform: scale(1) } 50% { opacity: .35; transform: scale(.75) } }
+
+  /* Photo strip under the copy — three flat thumbnails, no overlap */
+  #cl-home .cl-owner-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-top: 24px; }
+  #cl-home .cl-owner-strip figure {
+    position: relative; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; cursor: zoom-in;
+    background: #24232b; border: 1px solid rgba(247,244,238,.14);
+    transition: transform .35s var(--ease-out), border-color .35s;
+  }
+  #cl-home .cl-owner-strip figure:hover { transform: translateY(-4px); border-color: rgba(217,164,65,.6); }
+  #cl-home .cl-owner-strip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .4s ease; }
+  #cl-home .cl-owner-strip img.is-loaded { opacity: 1; }
+  #cl-home .cl-owner-strip .cl-slot-label {
+    position: absolute; inset: 0; display: grid; place-items: center; padding: 10px; text-align: center;
+    color: rgba(247,244,238,.4); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  #cl-home .cl-owner-strip figure.has-photo .cl-slot-label { display: none; }
   #cl-home .cl-owner-badges { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
   #cl-home .cl-owner-badges span {
     padding: 9px 15px; border-radius: 999px; font-size: 12.5px; font-weight: 700;
     border: 1px solid rgba(217,164,65,.45); color: var(--gold); background: rgba(217,164,65,.08);
   }
   #cl-home blockquote.cl-pull {
-    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: clamp(18px, 2.3vw, 23px);
-    line-height: 1.45; border-left: 3px solid var(--gold); padding-left: 20px; margin: 22px 0 0;
+    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: clamp(17px, 2.1vw, 21px);
+    line-height: 1.45; border-left: 3px solid var(--gold); padding-left: 18px; margin: 20px 0 0;
     color: rgba(247,244,238,.92);
   }
+  #cl-home .cl-pull cite { display: block; font-style: normal; font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-top: 10px; }
 
   /* ---------- Reviews (Elfsight + instant-credibility header) ---------- */
   #cl-home .cl-rev-head { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; text-align: left; }
@@ -505,13 +572,18 @@
     #cl-home .cl-svc-grid, #cl-home .cl-values, #cl-home .cl-process, #cl-home .cl-rev-fallback { grid-template-columns: 1fr; }
     #cl-home .cl-work { grid-template-columns: 1fr; }
     #cl-home .cl-owner { grid-template-columns: 1fr; }
-    #cl-home .cl-owner-media { max-width: 420px; }
+    #cl-home .cl-hero-inner { grid-template-columns: 1fr; gap: 34px; }
+    #cl-home .cl-proof { max-width: 420px; margin: 0 auto; aspect-ratio: 1 / .82; }
     #cl-home .cl-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 26px 12px; }
   }
   @media (max-width: 767px) {
     #cl-home { padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
-    #cl-home .cl-hero { min-height: 88vh; min-height: 100svh; padding: 104px 22px 74px; }
-    #cl-home .cl-house { transform: scale(.72); opacity: .3; }
+    #cl-home .cl-hero { min-height: 88vh; min-height: 100svh; padding: 104px 0 74px; }
+    #cl-home .cl-hero-inner { padding: 0 22px; }
+    #cl-home .cl-proof { display: none; }
+    #cl-home .cl-hero h1 { font-size: clamp(40px, 13vw, 58px); }
+    #cl-home .cl-logo { width: clamp(210px, 62vw, 300px); margin-bottom: 18px; }
+    #cl-home .cl-owner-strip { grid-template-columns: repeat(3, 1fr); }
     #cl-home .cl-section { padding: 52px 0; }
     #cl-home .cl-wrap { padding: 0 22px; }
     /* Swipeable service + work rails */
@@ -545,8 +617,11 @@
   @media (prefers-reduced-motion: reduce) {
     #cl-home .cl-reveal { opacity: 1; transform: none; transition: none; }
     #cl-home .cl-scroll-cue { animation: none; }
-    #cl-home .cl-grid3d, #cl-home .cl-house, #cl-home [data-parallax],
-    #cl-home .cl-svc-card, #cl-home .cl-value { transform: none !important; }
+    #cl-home [data-parallax], #cl-home .cl-svc-card, #cl-home .cl-value { transform: none !important; }
+    #cl-home .cl-proof-card, #cl-home .cl-proof-badge { transform: none !important; }
+    #cl-home .cl-hero h1 .ln { opacity: 1; transform: none; animation: none; }
+    #cl-home .cl-hero-rule, #cl-home .cl-logo { animation: none; }
+    #cl-home .cl-owner-video .cl-vtag i { animation: none; }
     #cl-home .cl-svc-card img, #cl-home .cl-shot img { transition: opacity .3s ease !important; }
   }
 </style>

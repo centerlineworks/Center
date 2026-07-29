@@ -1,10 +1,7 @@
 <!-- Centerline HOME page - PART 2 of 2
      Paste into a single Code Block (type: HTML) on the Home page.
-     Fully responsive - the same code reshapes itself for phones
-     (swipe rails + sticky Free Estimate / Call / Email bar).
-     Your Elfsight reviews widget is already embedded in the reviews
-     section. The YOUR HOME PAGE PHOTOS list at the top is where you
-     add or swap photos. -->
+     Your Elfsight reviews widget is embedded in the reviews section.
+     The YOUR HOME PAGE PHOTOS list at the top holds the logo + photos. -->
 <script>
 /* =====================================================================
    YOUR HOME PAGE PHOTOS
@@ -20,6 +17,12 @@
    hover before/after comparison (and opens side-by-side when clicked).
    ===================================================================== */
 window.CL_HOME_PHOTOS = {
+  /* --- Logo (upload your logo as a FILE named exactly centerline-logo.png,
+         the same way you uploaded the videos, and this just works).
+         Use the version with WHITE "CONSTRUCTION" lettering and a transparent
+         background — the hero behind it is dark. --- */
+  logo:           "https://www.centerlineworks.com/s/centerline-logo.png",
+
   /* --- Services grid --- */
   svc_bathrooms:  "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/109a93a8-db30-4f33-92e6-00d5b6225adc/IMG_2657.jpg?format=1000w",
   svc_basements:  "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/c9fb4b92-1bc0-4df6-a186-be51b293c7c6/basement333.jpg?format=1000w",
@@ -35,9 +38,14 @@ window.CL_HOME_PHOTOS = {
   work_2:         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/c9fb4b92-1bc0-4df6-a186-be51b293c7c6/basement333.jpg?format=1000w",
   work_2_before:  "",
 
+  /* --- Hero floating cards --- */
+  hero_card_1:    "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/109a93a8-db30-4f33-92e6-00d5b6225adc/IMG_2657.jpg?format=1000w",
+  hero_card_2:    "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/107ad2e2-2304-4131-a92d-2441e4fca1a6/dji_fly_20260212_094138_86_1770907943613_photo.jpg?format=1500w",
+
   /* --- Alfred --- */
   alfred:         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/5322ccd4-aebc-4342-9a05-a3e4ced4f948/IMG_1661-EDIT+%281%29.jpg?format=1000w",
-  alfred_cedar:   "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/9ef20078-1fff-499a-8367-46429b722095/IMG_1176.JPG?format=1000w"
+  alfred_cedar:   "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/9ef20078-1fff-499a-8367-46429b722095/IMG_1176.JPG?format=1000w",
+  crew:           "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/3c7a4d4c-61e7-4a52-8c4c-bb1596682bf5/IMG_1704.JPG?format=1000w"
 };
 </script>
 
@@ -51,32 +59,55 @@ window.CL_HOME_PHOTOS = {
       <source src="https://www.centerlineworks.com/s/services-hero.mp4" type="video/mp4">
     </video>
     <div class="cl-scrim"></div>
-    <div class="cl-grid3d" data-grid3d aria-hidden="true"></div>
-    <div class="cl-house-stage" aria-hidden="true">
-      <div class="cl-house" data-house>
-        <i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="f4"></i>
-        <i class="r1"></i><i class="r2"></i><i class="d1"></i><i class="w1"></i><i class="w2"></i>
+
+    <div class="cl-hero-inner">
+      <div class="cl-hero-copy">
+        <div class="cl-logo" data-cl-photo="logo">
+          <img alt="Centerline Construction Company, LLC logo" loading="eager">
+          <span class="cl-logo-fallback" aria-hidden="true">
+            <span class="cl-logo-word">Centerline</span>
+            <span class="cl-logo-ribbon">Construction</span>
+          </span>
+        </div>
+        <p class="cl-kicker" data-parallax="0.04">Holly Springs · Canton · North Georgia</p>
+        <h1 data-parallax="0.09">
+          <span class="ln">Bathrooms.</span>
+          <span class="ln">Basements.</span>
+          <span class="ln">Cabanas.</span>
+        </h1>
+        <p class="cl-hero-serif" data-parallax="0.12">Built by a North Georgia family you can actually trust.</p>
+        <p class="cl-hero-sub" data-parallax="0.14">Additions, decks, siding and commercial work too — quoted honestly, finished on time, and cleaned up when we leave. Free estimates, every time.</p>
+        <div class="cl-btn-row" data-parallax="0.17">
+          <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Get My Free Estimate</a>
+          <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
+        </div>
+        <div class="cl-trustchips" data-parallax="0.2">
+          <span><b>★ 5.0</b> · 43 Reviews</span>
+          <span><b>18+</b> Years</span>
+          <span>Family-Owned</span>
+          <span>Free Estimates</span>
+        </div>
+      </div>
+
+      <div class="cl-proof" aria-hidden="true">
+        <figure class="cl-proof-card cl-proof-1" data-cl-photo="hero_card_1" data-depth="22">
+          <div class="cl-slot-label">[ Photo ]</div>
+          <img alt="" loading="eager">
+          <b>Bathrooms</b>
+        </figure>
+        <figure class="cl-proof-card cl-proof-2" data-cl-photo="hero_card_2" data-depth="-16">
+          <div class="cl-slot-label">[ Photo ]</div>
+          <img alt="" loading="eager">
+          <b>Outdoor Living</b>
+        </figure>
+        <div class="cl-proof-badge" data-depth="34">
+          <b>5.0</b>
+          <span class="cl-stars">★★★★★</span>
+          <small>43 Reviews</small>
+        </div>
       </div>
     </div>
 
-    <div class="cl-hero-inner">
-      <p class="cl-kicker" data-parallax="0.05">Holly Springs · Canton · North Georgia</p>
-      <h1 data-parallax="0.11">
-        Built on Faith.
-        <span class="cl-serif">Finished with craftsmanship.</span>
-      </h1>
-      <p class="cl-hero-sub" data-parallax="0.15">Family-owned remodeling since 2020 — bathrooms, basements, cabanas, additions, decks and more, built by a crew that shows up when they say they will.</p>
-      <div class="cl-btn-row" data-parallax="0.19">
-        <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Get My Free Estimate</a>
-        <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
-      </div>
-      <div class="cl-trustchips" data-parallax="0.22">
-        <span><b>★ 5.0</b> · 43 Reviews</span>
-        <span><b>18+</b> Years Experience</span>
-        <span>Family-Owned &amp; Faith-Driven</span>
-        <span>Free Estimates</span>
-      </div>
-    </div>
     <span class="cl-scroll-cue" aria-hidden="true"></span>
   </header>
 
@@ -219,20 +250,27 @@ window.CL_HOME_PHOTOS = {
   <!-- ================= MEET ALFRED ================= -->
   <section class="cl-section cl-dark" aria-labelledby="home-owner-h">
     <div class="cl-wrap cl-owner">
-      <div class="cl-owner-media cl-reveal">
-        <figure class="cl-owner-photo" data-cl-photo="alfred">
-          <div class="cl-slot-label">[ Photo: Alfred ]</div>
-          <img alt="Alfred Tudela, founder and CEO of Centerline Construction Company in Holly Springs, Georgia" loading="lazy">
-        </figure>
-        <figure class="cl-cameo" data-cl-photo="alfred_cedar">
-          <img alt="Alfred Tudela of Centerline Construction carrying a large cedar beam on a job site" loading="lazy">
-        </figure>
+      <div class="cl-owner-video cl-reveal">
+        <span class="cl-vtag"><i></i> On the job</span>
+        <video autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               poster="https://www.centerlineworks.com/s/hero-poster.jpg" aria-label="Centerline Construction crew framing a home addition">
+          <source src="https://www.centerlineworks.com/s/hero-loop.webm" type="video/webm">
+          <source src="https://www.centerlineworks.com/s/hero-loop.mp4" type="video/mp4">
+        </video>
       </div>
+
       <div class="cl-reveal">
         <p class="cl-kicker">Meet the owner</p>
         <h2 id="home-owner-h">Alfred Tudela, <span class="cl-serif" style="color:var(--gold)">founder &amp; CEO</span></h2>
-        <p class="cl-lede">Alfred didn't build Centerline from behind a desk. With 18+ years in residential and commercial construction, he still meets you on day one and swings a hammer alongside his crew — carpenters, tile setters and finish craftsmen who treat every home like their own.</p>
-        <blockquote class="cl-pull">"The CEO found the time to meet with us the first day. He is a fine gentleman with an enthusiastic demeanor."</blockquote>
+        <p class="cl-lede">18+ years in residential and commercial construction — and he still meets you on day one and works alongside the crew. Carpenters, tile setters and finish craftsmen who show up early, keep the site clean, and treat your home like their own.</p>
+        <blockquote class="cl-pull">"Alfred and his experts at Centerline were first-rate in every area. Their craftsmanship was beyond compare and so easy to work with."<cite>— Fedfanforeva · Google</cite></blockquote>
+
+        <div class="cl-owner-strip">
+          <figure data-cl-photo="alfred"><div class="cl-slot-label">[ Alfred ]</div><img class="cl-shot-after" alt="Alfred Tudela, founder and CEO of Centerline Construction in Holly Springs, Georgia" loading="lazy"></figure>
+          <figure data-cl-photo="alfred_cedar"><div class="cl-slot-label">[ Cedar beam ]</div><img class="cl-shot-after" alt="Alfred Tudela of Centerline Construction carrying a large cedar beam on a job site" loading="lazy"></figure>
+          <figure data-cl-photo="crew"><div class="cl-slot-label">[ Crew ]</div><img class="cl-shot-after" alt="The Centerline Construction crew at work on a North Georgia renovation" loading="lazy"></figure>
+        </div>
+
         <div class="cl-owner-badges">
           <span>⚒ 18+ Years in Construction</span>
           <span>✝ Youth Director, Rising Hills Church</span>
@@ -489,7 +527,7 @@ window.CL_HOME_PHOTOS = {
   var lbImg = root.querySelector("[data-lb-img]");
   var lbBefore = root.querySelector("[data-lb-before]");
   var lbAfter = root.querySelector("[data-lb-after]");
-  root.querySelectorAll(".cl-shot").forEach(function (shot) {
+  root.querySelectorAll(".cl-shot, .cl-owner-strip figure").forEach(function (shot) {
     shot.addEventListener("click", function () {
       if (!shot.classList.contains("has-photo")) return;
       var after = shot.querySelector(".cl-shot-after");
@@ -532,8 +570,17 @@ window.CL_HOME_PHOTOS = {
   /* ---------- Scroll-driven 3D: parallax + rotating wireframe house ---------- */
   var hero = root.querySelector(".cl-hero");
   var parallaxEls = root.querySelectorAll("[data-parallax]");
-  var house = root.querySelector("[data-house]");
-  var grid3d = root.querySelector("[data-grid3d]");
+  var depthEls = root.querySelectorAll("[data-depth]");
+  /* remember each card's resting rotation so scroll/mouse transforms keep it */
+  depthEls.forEach(function (el) {
+    var r = getComputedStyle(el).transform;
+    var deg = "0deg";
+    if (r && r !== "none") {
+      var m = r.match(/matrix\(([^)]+)\)/);
+      if (m) { var p = m[1].split(","); deg = (Math.atan2(parseFloat(p[1]), parseFloat(p[0])) * 180 / Math.PI).toFixed(2) + "deg"; }
+    }
+    el.setAttribute("data-base-rot", deg);
+  });
   var ticking = false;
   function onScroll() {
     if (ticking) return;
@@ -542,18 +589,16 @@ window.CL_HOME_PHOTOS = {
       var y = window.pageYOffset || document.documentElement.scrollTop;
       var heroH = hero ? hero.offsetHeight : window.innerHeight;
       if (y < heroH * 1.5) {
-        var progress = Math.min(y / heroH, 1.4);
         parallaxEls.forEach(function (el) {
           var speed = parseFloat(el.getAttribute("data-parallax")) || 0.1;
           el.style.transform = "translate3d(0," + (y * speed * -1) + "px,0)";
         });
-        if (house) {
-          house.style.transform =
-            "rotateX(" + (-11 + progress * 7) + "deg) rotateY(" + (26 + y * 0.11) + "deg)" +
-            " translateY(" + (progress * -56) + "px) scale(" + (1 + progress * 0.22) + ")";
-          house.style.opacity = Math.max(0.42 - progress * 0.36, 0);
-        }
-        if (grid3d) grid3d.style.transform = "rotateX(63deg) translateZ(-140px) translateY(" + (y * 0.17) + "px)";
+        /* the floating cards drift at their own depths as you scroll */
+        depthEls.forEach(function (el) {
+          var d = parseFloat(el.getAttribute("data-depth")) || 0;
+          var base = el.getAttribute("data-base-rot") || "0deg";
+          el.style.transform = "translate3d(0," + (y * (d / 260)) + "px,0) rotate(" + base + ")";
+        });
       }
       ticking = false;
     });
@@ -576,6 +621,26 @@ window.CL_HOME_PHOTOS = {
         card.style.transform = "perspective(900px) rotateY(0) rotateX(0)";
       });
     });
+
+    /* Hero cards lean with the cursor */
+    var heroEl = root.querySelector(".cl-hero");
+    if (heroEl && depthEls.length) {
+      heroEl.addEventListener("mousemove", function (ev) {
+        var r = heroEl.getBoundingClientRect();
+        var px = (ev.clientX - r.left) / r.width - 0.5;
+        var py = (ev.clientY - r.top) / r.height - 0.5;
+        depthEls.forEach(function (el) {
+          var d = parseFloat(el.getAttribute("data-depth")) || 0;
+          var base = el.getAttribute("data-base-rot") || "0deg";
+          el.style.transform = "translate3d(" + (px * d) + "px," + (py * d * 0.6) + "px,0) rotate(" + base + ")";
+        });
+      });
+      heroEl.addEventListener("mouseleave", function () {
+        depthEls.forEach(function (el) {
+          el.style.transform = "translate3d(0,0,0) rotate(" + (el.getAttribute("data-base-rot") || "0deg") + ")";
+        });
+      });
+    }
 
     /* Before/after reveal that tracks the cursor */
     root.querySelectorAll(".cl-shot").forEach(function (shot) {
