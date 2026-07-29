@@ -19,16 +19,18 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   section; three real reviews render behind it and hide via `.cl-elf-ready` once the widget
   paints (MutationObserver + height check + timed fallbacks), so the section is never empty
   and crawlers/AI still get review text. Preconnect to `elfsightcdn.com` sits in Part 1.
-  The hero is deliberately NOT the About hero: logo lockup + left-aligned stacked
-  service words ("Bathrooms. Basements. Cabanas.") + floating 3D project cards that lean
-  with the cursor, instead of About's centred statement over a wireframe house. The owner
-  section is video-led (the About crew clip) with a flat 3-photo strip, not About's
-  portrait+cameo overlap. Keep the two pages visually distinct — Alfred called this out.
-  The Centerline logo is `/s/centerline-logo.png` (white-lettering, transparent version)
-  and drives both the hero lockup and schema `logo`; a CSS lockup stands in until it's
-  uploaded. LESSON: an absolutely-positioned card whose children are ALL absolute has no
-  content to give it height — it collapses to ~0px unless you set an explicit
-  `aspect-ratio` (cost a debug cycle on the hero proof cards).
+  Hero: centred, led by a LARGE logo (`/s/centerline-logo.png`, clamp up to 680px) over
+  the video, then the slogan **"Straight lines. Straight answers."** — ties to the company
+  name and to the honesty theme that dominates the 43 reviews. It must NOT reuse About's
+  "Built on Faith / Finished with craftsmanship", and must not be a list of services
+  ("Bathrooms. Basements. Cabanas." was rejected — Alfred: "if I was a teacher I wouldn't
+  say apples.books.teaching"). Services belong in the subhead, not the headline.
+  NEVER recreate the logo in CSS/SVG — Alfred called a CSS lockup "totally botched". Drop
+  the real image in as-is; a plain dashed upload-reminder note is the only stand-in, and it
+  disappears once the file loads. The owner section is video-led (the About crew clip) with
+  a flat 3-photo strip, not About's portrait+cameo overlap.
+  LESSON: an absolutely-positioned card whose children are ALL absolute has no content to
+  give it height — it collapses to ~0px unless you set an explicit `aspect-ratio`.
   LESSON: on phones the service/work rows become horizontal swipe rails, and cards parked
   off-screen to the right never intersect the viewport, so their lazy images stay unloaded
   until swiped. An IntersectionObserver on each rail promotes every image inside it to

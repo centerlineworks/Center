@@ -234,70 +234,41 @@
   #cl-home .cl-btn-row { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 28px; }
   #cl-home .cl-btn-row--center { justify-content: center; }
 
-  /* ---------- HERO (split editorial — deliberately unlike the About page) ---------- */
+  /* ---------- HERO (centred, logo-led) ---------- */
   #cl-home .cl-hero {
-    position: relative; min-height: 94vh; min-height: 94svh; display: flex; align-items: center;
-    overflow: hidden; padding: 130px 0 96px; color: var(--paper); background: #0c0b10;
+    position: relative; min-height: 94vh; min-height: 94svh; display: grid; place-items: center;
+    text-align: center; overflow: hidden; padding: 130px 24px 96px; color: var(--paper); background: #0c0b10;
   }
   #cl-home .cl-video-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-  /* Weighted to the left so the copy column stays readable and the photo side breathes */
   #cl-home .cl-scrim {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background:
-      linear-gradient(97deg, rgba(12,11,16,.95) 0%, rgba(12,11,16,.88) 34%, rgba(12,11,16,.42) 62%, rgba(12,11,16,.66) 100%),
-      linear-gradient(180deg, rgba(12,11,16,.45) 0%, transparent 30%, rgba(12,11,16,.8) 100%);
+    background: linear-gradient(180deg, rgba(12,11,16,.78) 0%, rgba(12,11,16,.58) 40%, rgba(12,11,16,.92) 100%);
   }
-  /* ---------- Brand lockup: the logo leads the page ---------- */
-  #cl-home .cl-logo {
-    display: block; width: clamp(230px, 30vw, 430px); margin-bottom: 22px;
-    animation: cl-logo-in 1s var(--ease-out) both;
-  }
-  @keyframes cl-logo-in { from { opacity: 0; transform: translateY(-14px) scale(.97) } to { opacity: 1; transform: none } }
-  #cl-home .cl-logo img { width: 100%; height: auto; display: block; opacity: 0; transition: opacity .45s ease; }
+  #cl-home .cl-hero-inner { position: relative; z-index: 3; width: 100%; max-width: 1000px; }
+
+  /* ---------- Logo: dropped in as-is, never recreated ---------- */
+  #cl-home .cl-logo { display: block; width: clamp(280px, 52vw, 680px); margin: 0 auto 30px; }
+  #cl-home .cl-logo img { width: 100%; height: auto; display: block; opacity: 0; transition: opacity .5s ease; }
   #cl-home .cl-logo img.is-loaded { opacity: 1; }
-  /* Styled stand-in until the real logo file is uploaded — keeps the brand
-     present instead of a blank space, and disappears the moment it loads. */
-  #cl-home .cl-logo.has-photo .cl-logo-fallback { display: none; }
-  #cl-home .cl-logo-fallback { display: block; border: 3px solid var(--gold); padding: 16px 22px 30px; position: relative; }
-  #cl-home .cl-logo-word {
-    display: block; font-weight: 900; font-size: clamp(30px, 4.6vw, 58px); line-height: .9;
-    letter-spacing: -.02em; text-transform: uppercase; text-align: center;
-    background: linear-gradient(100deg, #b07f22, #f0cf7a 45%, #d9a441);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
+  /* plain upload reminder — only visible until the real file exists, and
+     deliberately nothing like the logo itself */
+  #cl-home .cl-logo-note {
+    display: block; border: 1px dashed rgba(217,164,65,.55); border-radius: 10px; padding: 24px 18px;
+    font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: rgba(247,244,238,.55);
   }
-  #cl-home .cl-logo-ribbon {
-    position: absolute; left: -8px; right: -8px; bottom: -2px; padding: 7px 0;
-    background: linear-gradient(100deg, #d9a441, #f0cf7a 50%, #b07f22);
-    color: #17140c; font-weight: 800; font-size: clamp(11px, 1.5vw, 16px);
-    letter-spacing: .3em; text-transform: uppercase; text-align: center;
-  }
+  #cl-home .cl-logo.has-photo .cl-logo-note { display: none; }
 
-  /* Thin gold rule that sweeps in under the eyebrow */
-  #cl-home .cl-hero-rule { display: block; width: 68px; height: 3px; background: var(--gold); margin-bottom: 22px; transform-origin: left; animation: cl-rule 1s var(--ease-out) both; }
-  @keyframes cl-rule { from { transform: scaleX(0) } to { transform: scaleX(1) } }
-
-  #cl-home .cl-hero-inner {
-    position: relative; z-index: 3; width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px;
-    display: grid; grid-template-columns: 1.06fr .94fr; gap: clamp(30px, 5vw, 64px); align-items: center; text-align: left;
+  #cl-home .cl-hero h1 {
+    font-size: clamp(38px, 6.2vw, 78px); text-transform: uppercase; letter-spacing: -.03em; line-height: .95;
   }
-  /* copy always paints above the floating cards, however narrow the window gets */
-  #cl-home .cl-hero-copy { position: relative; z-index: 2; }
-  #cl-home .cl-hero .cl-kicker { color: var(--gold); }
-  #cl-home .cl-hero h1 { font-size: clamp(42px, 6.6vw, 88px); text-transform: uppercase; letter-spacing: -.035em; line-height: .92; }
-  #cl-home .cl-hero h1 .ln { display: block; opacity: 0; transform: translateY(26px) rotateX(14deg); animation: cl-line-in .9s var(--ease-out) forwards; }
-  #cl-home .cl-hero h1 .ln:nth-child(1) { animation-delay: .12s }
-  #cl-home .cl-hero h1 .ln:nth-child(2) { animation-delay: .26s }
-  #cl-home .cl-hero h1 .ln:nth-child(3) { animation-delay: .4s; color: var(--gold); }
+  #cl-home .cl-hero h1 .ln { display: block; opacity: 0; transform: translateY(22px); animation: cl-line-in .85s var(--ease-out) forwards; }
+  #cl-home .cl-hero h1 .ln:nth-child(1) { animation-delay: .1s }
+  #cl-home .cl-hero h1 .ln:nth-child(2) { animation-delay: .26s; color: var(--gold); }
   @keyframes cl-line-in { to { opacity: 1; transform: none } }
-  #cl-home .cl-hero .cl-hero-serif {
-    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 700;
-    font-size: clamp(19px, 2.5vw, 27px); color: var(--paper); margin-top: 16px; line-height: 1.25;
-  }
-  #cl-home .cl-hero p.cl-hero-sub { max-width: 50ch; margin: 14px 0 0; font-size: clamp(15px, 1.75vw, 17.5px); color: rgba(247,244,238,.82); }
-  #cl-home .cl-hero .cl-btn-row { justify-content: flex-start; }
+  #cl-home .cl-hero p.cl-hero-sub { max-width: 62ch; margin: 20px auto 0; font-size: clamp(15.5px, 1.9vw, 18.5px); color: rgba(247,244,238,.86); }
+  #cl-home .cl-hero .cl-btn-row { justify-content: center; }
 
-  /* Above-the-fold trust chips */
-  #cl-home .cl-trustchips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
+  #cl-home .cl-trustchips { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin-top: 26px; }
   #cl-home .cl-trustchips span {
     display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border-radius: 999px;
     font-size: 12.5px; font-weight: 800; letter-spacing: .02em;
@@ -305,38 +276,6 @@
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   }
   #cl-home .cl-trustchips b { color: var(--gold); font-weight: 900; }
-
-  /* ---------- Hero proof stack: floating 3D project cards ---------- */
-  #cl-home .cl-proof { position: relative; aspect-ratio: 1 / 1.02; perspective: 1200px; }
-  #cl-home .cl-proof-card {
-    position: absolute; border-radius: 16px; overflow: hidden; background: #1d1c23;
-    border: 1px solid rgba(247,244,238,.16); box-shadow: 0 40px 80px -30px rgba(0,0,0,.85);
-    will-change: transform; transition: transform .5s var(--ease-out);
-  }
-  #cl-home .cl-proof-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
-  #cl-home .cl-proof-card img.is-loaded { opacity: 1; }
-  #cl-home .cl-proof-card .cl-slot-label {
-    position: absolute; inset: 0; display: grid; place-items: center; padding: 14px; text-align: center;
-    color: rgba(247,244,238,.4); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
-  }
-  #cl-home .cl-proof-card.has-photo .cl-slot-label { display: none; }
-  #cl-home .cl-proof-card b {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 34px 16px 13px;
-    background: linear-gradient(transparent, rgba(12,11,16,.94) 62%);
-    font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--paper);
-  }
-  /* every child of a card is absolutely positioned, so the card needs an explicit
-     aspect-ratio or it collapses to zero height */
-  #cl-home .cl-proof-1 { width: 58%; aspect-ratio: 4 / 5; top: 1%; left: 6%; transform: rotate(-4deg); }
-  #cl-home .cl-proof-2 { width: 60%; aspect-ratio: 4 / 3.2; bottom: 2%; right: 0; transform: rotate(3.5deg); }
-  #cl-home .cl-proof-badge {
-    position: absolute; z-index: 4; right: 4%; top: 6%; padding: 15px 19px; border-radius: 16px;
-    background: rgba(247,244,238,.97); color: var(--ink); text-align: center;
-    box-shadow: 0 30px 60px -22px rgba(0,0,0,.75); will-change: transform;
-  }
-  #cl-home .cl-proof-badge b { display: block; font-size: 30px; font-weight: 900; color: var(--gold-deep); line-height: 1; letter-spacing: -.03em; }
-  #cl-home .cl-proof-badge .cl-stars { display: block; font-size: 12px; letter-spacing: 2px; margin-top: 3px; }
-  #cl-home .cl-proof-badge small { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: rgba(18,16,12,.6); margin-top: 4px; }
 
   #cl-home .cl-scroll-cue {
     position: absolute; left: 50%; bottom: 18px; z-index: 3; transform: translateX(-50%);
@@ -578,17 +517,15 @@
     #cl-home .cl-svc-grid, #cl-home .cl-values, #cl-home .cl-process, #cl-home .cl-rev-fallback { grid-template-columns: 1fr; }
     #cl-home .cl-work { grid-template-columns: 1fr; }
     #cl-home .cl-owner { grid-template-columns: 1fr; }
-    #cl-home .cl-hero-inner { grid-template-columns: 1fr; gap: 34px; }
-    #cl-home .cl-proof { max-width: 420px; margin: 0 auto; aspect-ratio: 1 / .82; }
+
     #cl-home .cl-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 26px 12px; }
   }
   @media (max-width: 767px) {
     #cl-home { padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
     #cl-home .cl-hero { min-height: 88vh; min-height: 100svh; padding: 104px 0 74px; }
-    #cl-home .cl-hero-inner { padding: 0 22px; }
-    #cl-home .cl-proof { display: none; }
-    #cl-home .cl-hero h1 { font-size: clamp(40px, 13vw, 58px); }
-    #cl-home .cl-logo { width: clamp(210px, 62vw, 300px); margin-bottom: 18px; }
+    #cl-home .cl-hero { padding: 100px 22px 74px; }
+    #cl-home .cl-hero h1 { font-size: clamp(34px, 10.5vw, 50px); }
+    #cl-home .cl-logo { width: min(84vw, 380px); margin-bottom: 22px; }
     #cl-home .cl-owner-strip { grid-template-columns: repeat(3, 1fr); }
     #cl-home .cl-section { padding: 52px 0; }
     #cl-home .cl-wrap { padding: 0 22px; }
@@ -624,9 +561,8 @@
     #cl-home .cl-reveal { opacity: 1; transform: none; transition: none; }
     #cl-home .cl-scroll-cue { animation: none; }
     #cl-home [data-parallax], #cl-home .cl-svc-card, #cl-home .cl-value { transform: none !important; }
-    #cl-home .cl-proof-card, #cl-home .cl-proof-badge { transform: none !important; }
     #cl-home .cl-hero h1 .ln { opacity: 1; transform: none; animation: none; }
-    #cl-home .cl-hero-rule, #cl-home .cl-logo { animation: none; }
+    #cl-home .cl-logo img { transition: none; }
     #cl-home .cl-owner-video .cl-vtag i { animation: none; }
     #cl-home .cl-svc-card img, #cl-home .cl-shot img { transition: opacity .3s ease !important; }
   }
@@ -677,10 +613,6 @@ window.CL_HOME_PHOTOS = {
   work_2:         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/c9fb4b92-1bc0-4df6-a186-be51b293c7c6/basement333.jpg?format=1000w",
   work_2_before:  "",
 
-  /* --- Hero floating cards --- */
-  hero_card_1:    "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/109a93a8-db30-4f33-92e6-00d5b6225adc/IMG_2657.jpg?format=1000w",
-  hero_card_2:    "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/107ad2e2-2304-4131-a92d-2441e4fca1a6/dji_fly_20260212_094138_86_1770907943613_photo.jpg?format=1500w",
-
   /* --- Alfred --- */
   alfred:         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/5322ccd4-aebc-4342-9a05-a3e4ced4f948/IMG_1661-EDIT+%281%29.jpg?format=1000w",
   alfred_cedar:   "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/9ef20078-1fff-499a-8367-46429b722095/IMG_1176.JPG?format=1000w",
@@ -700,50 +632,24 @@ window.CL_HOME_PHOTOS = {
     <div class="cl-scrim"></div>
 
     <div class="cl-hero-inner">
-      <div class="cl-hero-copy">
-        <div class="cl-logo" data-cl-photo="logo">
-          <img alt="Centerline Construction Company, LLC logo" loading="eager">
-          <span class="cl-logo-fallback" aria-hidden="true">
-            <span class="cl-logo-word">Centerline</span>
-            <span class="cl-logo-ribbon">Construction</span>
-          </span>
-        </div>
-        <p class="cl-kicker" data-parallax="0.04">Holly Springs · Canton · North Georgia</p>
-        <h1 data-parallax="0.09">
-          <span class="ln">Bathrooms.</span>
-          <span class="ln">Basements.</span>
-          <span class="ln">Cabanas.</span>
-        </h1>
-        <p class="cl-hero-serif" data-parallax="0.12">Built by a North Georgia family you can actually trust.</p>
-        <p class="cl-hero-sub" data-parallax="0.14">Additions, decks, siding and commercial work too — quoted honestly, finished on time, and cleaned up when we leave. Free estimates, every time.</p>
-        <div class="cl-btn-row" data-parallax="0.17">
-          <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Get My Free Estimate</a>
-          <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
-        </div>
-        <div class="cl-trustchips" data-parallax="0.2">
-          <span><b>★ 5.0</b> · 43 Reviews</span>
-          <span><b>18+</b> Years</span>
-          <span>Family-Owned</span>
-          <span>Free Estimates</span>
-        </div>
+      <div class="cl-logo" data-cl-photo="logo">
+        <img alt="Centerline Construction Company, LLC" loading="eager">
+        <span class="cl-logo-note">Your logo appears here once centerline-logo.png is uploaded</span>
       </div>
-
-      <div class="cl-proof" aria-hidden="true">
-        <figure class="cl-proof-card cl-proof-1" data-cl-photo="hero_card_1" data-depth="22">
-          <div class="cl-slot-label">[ Photo ]</div>
-          <img alt="" loading="eager">
-          <b>Bathrooms</b>
-        </figure>
-        <figure class="cl-proof-card cl-proof-2" data-cl-photo="hero_card_2" data-depth="-16">
-          <div class="cl-slot-label">[ Photo ]</div>
-          <img alt="" loading="eager">
-          <b>Outdoor Living</b>
-        </figure>
-        <div class="cl-proof-badge" data-depth="34">
-          <b>5.0</b>
-          <span class="cl-stars">★★★★★</span>
-          <small>43 Reviews</small>
-        </div>
+      <h1 data-parallax="0.09">
+        <span class="ln">Straight lines.</span>
+        <span class="ln">Straight answers.</span>
+      </h1>
+      <p class="cl-hero-sub" data-parallax="0.13">North Georgia's family-owned remodeling crew — bathrooms, basements, cabanas, additions, decks and more. Quoted honestly, finished on time, and cleaned up when we leave.</p>
+      <div class="cl-btn-row" data-parallax="0.16">
+        <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Get My Free Estimate</a>
+        <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
+      </div>
+      <div class="cl-trustchips" data-parallax="0.19">
+        <span><b>★ 5.0</b> · 43 Reviews</span>
+        <span><b>18+</b> Years</span>
+        <span>Family-Owned</span>
+        <span>Free Estimates</span>
       </div>
     </div>
 
@@ -1209,17 +1115,7 @@ window.CL_HOME_PHOTOS = {
   /* ---------- Scroll-driven 3D: parallax + rotating wireframe house ---------- */
   var hero = root.querySelector(".cl-hero");
   var parallaxEls = root.querySelectorAll("[data-parallax]");
-  var depthEls = root.querySelectorAll("[data-depth]");
-  /* remember each card's resting rotation so scroll/mouse transforms keep it */
-  depthEls.forEach(function (el) {
-    var r = getComputedStyle(el).transform;
-    var deg = "0deg";
-    if (r && r !== "none") {
-      var m = r.match(/matrix\(([^)]+)\)/);
-      if (m) { var p = m[1].split(","); deg = (Math.atan2(parseFloat(p[1]), parseFloat(p[0])) * 180 / Math.PI).toFixed(2) + "deg"; }
-    }
-    el.setAttribute("data-base-rot", deg);
-  });
+
   var ticking = false;
   function onScroll() {
     if (ticking) return;
@@ -1232,12 +1128,7 @@ window.CL_HOME_PHOTOS = {
           var speed = parseFloat(el.getAttribute("data-parallax")) || 0.1;
           el.style.transform = "translate3d(0," + (y * speed * -1) + "px,0)";
         });
-        /* the floating cards drift at their own depths as you scroll */
-        depthEls.forEach(function (el) {
-          var d = parseFloat(el.getAttribute("data-depth")) || 0;
-          var base = el.getAttribute("data-base-rot") || "0deg";
-          el.style.transform = "translate3d(0," + (y * (d / 260)) + "px,0) rotate(" + base + ")";
-        });
+
       }
       ticking = false;
     });
@@ -1260,26 +1151,6 @@ window.CL_HOME_PHOTOS = {
         card.style.transform = "perspective(900px) rotateY(0) rotateX(0)";
       });
     });
-
-    /* Hero cards lean with the cursor */
-    var heroEl = root.querySelector(".cl-hero");
-    if (heroEl && depthEls.length) {
-      heroEl.addEventListener("mousemove", function (ev) {
-        var r = heroEl.getBoundingClientRect();
-        var px = (ev.clientX - r.left) / r.width - 0.5;
-        var py = (ev.clientY - r.top) / r.height - 0.5;
-        depthEls.forEach(function (el) {
-          var d = parseFloat(el.getAttribute("data-depth")) || 0;
-          var base = el.getAttribute("data-base-rot") || "0deg";
-          el.style.transform = "translate3d(" + (px * d) + "px," + (py * d * 0.6) + "px,0) rotate(" + base + ")";
-        });
-      });
-      heroEl.addEventListener("mouseleave", function () {
-        depthEls.forEach(function (el) {
-          el.style.transform = "translate3d(0,0,0) rotate(" + (el.getAttribute("data-base-rot") || "0deg") + ")";
-        });
-      });
-    }
 
     /* Before/after reveal that tracks the cursor */
     root.querySelectorAll(".cl-shot").forEach(function (shot) {

@@ -1,7 +1,7 @@
 <!-- Centerline HOME page - PART 2 of 2
      Paste into a single Code Block (type: HTML) on the Home page.
-     Your Elfsight reviews widget is embedded in the reviews section.
-     The YOUR HOME PAGE PHOTOS list at the top holds the logo + photos. -->
+     Upload your logo as a FILE named centerline-logo.png and it appears
+     in the hero automatically. Elfsight reviews are embedded below. -->
 <script>
 /* =====================================================================
    YOUR HOME PAGE PHOTOS
@@ -38,10 +38,6 @@ window.CL_HOME_PHOTOS = {
   work_2:         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/c9fb4b92-1bc0-4df6-a186-be51b293c7c6/basement333.jpg?format=1000w",
   work_2_before:  "",
 
-  /* --- Hero floating cards --- */
-  hero_card_1:    "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/109a93a8-db30-4f33-92e6-00d5b6225adc/IMG_2657.jpg?format=1000w",
-  hero_card_2:    "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/107ad2e2-2304-4131-a92d-2441e4fca1a6/dji_fly_20260212_094138_86_1770907943613_photo.jpg?format=1500w",
-
   /* --- Alfred --- */
   alfred:         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/5322ccd4-aebc-4342-9a05-a3e4ced4f948/IMG_1661-EDIT+%281%29.jpg?format=1000w",
   alfred_cedar:   "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/9ef20078-1fff-499a-8367-46429b722095/IMG_1176.JPG?format=1000w",
@@ -61,50 +57,24 @@ window.CL_HOME_PHOTOS = {
     <div class="cl-scrim"></div>
 
     <div class="cl-hero-inner">
-      <div class="cl-hero-copy">
-        <div class="cl-logo" data-cl-photo="logo">
-          <img alt="Centerline Construction Company, LLC logo" loading="eager">
-          <span class="cl-logo-fallback" aria-hidden="true">
-            <span class="cl-logo-word">Centerline</span>
-            <span class="cl-logo-ribbon">Construction</span>
-          </span>
-        </div>
-        <p class="cl-kicker" data-parallax="0.04">Holly Springs · Canton · North Georgia</p>
-        <h1 data-parallax="0.09">
-          <span class="ln">Bathrooms.</span>
-          <span class="ln">Basements.</span>
-          <span class="ln">Cabanas.</span>
-        </h1>
-        <p class="cl-hero-serif" data-parallax="0.12">Built by a North Georgia family you can actually trust.</p>
-        <p class="cl-hero-sub" data-parallax="0.14">Additions, decks, siding and commercial work too — quoted honestly, finished on time, and cleaned up when we leave. Free estimates, every time.</p>
-        <div class="cl-btn-row" data-parallax="0.17">
-          <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Get My Free Estimate</a>
-          <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
-        </div>
-        <div class="cl-trustchips" data-parallax="0.2">
-          <span><b>★ 5.0</b> · 43 Reviews</span>
-          <span><b>18+</b> Years</span>
-          <span>Family-Owned</span>
-          <span>Free Estimates</span>
-        </div>
+      <div class="cl-logo" data-cl-photo="logo">
+        <img alt="Centerline Construction Company, LLC" loading="eager">
+        <span class="cl-logo-note">Your logo appears here once centerline-logo.png is uploaded</span>
       </div>
-
-      <div class="cl-proof" aria-hidden="true">
-        <figure class="cl-proof-card cl-proof-1" data-cl-photo="hero_card_1" data-depth="22">
-          <div class="cl-slot-label">[ Photo ]</div>
-          <img alt="" loading="eager">
-          <b>Bathrooms</b>
-        </figure>
-        <figure class="cl-proof-card cl-proof-2" data-cl-photo="hero_card_2" data-depth="-16">
-          <div class="cl-slot-label">[ Photo ]</div>
-          <img alt="" loading="eager">
-          <b>Outdoor Living</b>
-        </figure>
-        <div class="cl-proof-badge" data-depth="34">
-          <b>5.0</b>
-          <span class="cl-stars">★★★★★</span>
-          <small>43 Reviews</small>
-        </div>
+      <h1 data-parallax="0.09">
+        <span class="ln">Straight lines.</span>
+        <span class="ln">Straight answers.</span>
+      </h1>
+      <p class="cl-hero-sub" data-parallax="0.13">North Georgia's family-owned remodeling crew — bathrooms, basements, cabanas, additions, decks and more. Quoted honestly, finished on time, and cleaned up when we leave.</p>
+      <div class="cl-btn-row" data-parallax="0.16">
+        <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Get My Free Estimate</a>
+        <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
+      </div>
+      <div class="cl-trustchips" data-parallax="0.19">
+        <span><b>★ 5.0</b> · 43 Reviews</span>
+        <span><b>18+</b> Years</span>
+        <span>Family-Owned</span>
+        <span>Free Estimates</span>
       </div>
     </div>
 
@@ -570,17 +540,7 @@ window.CL_HOME_PHOTOS = {
   /* ---------- Scroll-driven 3D: parallax + rotating wireframe house ---------- */
   var hero = root.querySelector(".cl-hero");
   var parallaxEls = root.querySelectorAll("[data-parallax]");
-  var depthEls = root.querySelectorAll("[data-depth]");
-  /* remember each card's resting rotation so scroll/mouse transforms keep it */
-  depthEls.forEach(function (el) {
-    var r = getComputedStyle(el).transform;
-    var deg = "0deg";
-    if (r && r !== "none") {
-      var m = r.match(/matrix\(([^)]+)\)/);
-      if (m) { var p = m[1].split(","); deg = (Math.atan2(parseFloat(p[1]), parseFloat(p[0])) * 180 / Math.PI).toFixed(2) + "deg"; }
-    }
-    el.setAttribute("data-base-rot", deg);
-  });
+
   var ticking = false;
   function onScroll() {
     if (ticking) return;
@@ -593,12 +553,7 @@ window.CL_HOME_PHOTOS = {
           var speed = parseFloat(el.getAttribute("data-parallax")) || 0.1;
           el.style.transform = "translate3d(0," + (y * speed * -1) + "px,0)";
         });
-        /* the floating cards drift at their own depths as you scroll */
-        depthEls.forEach(function (el) {
-          var d = parseFloat(el.getAttribute("data-depth")) || 0;
-          var base = el.getAttribute("data-base-rot") || "0deg";
-          el.style.transform = "translate3d(0," + (y * (d / 260)) + "px,0) rotate(" + base + ")";
-        });
+
       }
       ticking = false;
     });
@@ -621,26 +576,6 @@ window.CL_HOME_PHOTOS = {
         card.style.transform = "perspective(900px) rotateY(0) rotateX(0)";
       });
     });
-
-    /* Hero cards lean with the cursor */
-    var heroEl = root.querySelector(".cl-hero");
-    if (heroEl && depthEls.length) {
-      heroEl.addEventListener("mousemove", function (ev) {
-        var r = heroEl.getBoundingClientRect();
-        var px = (ev.clientX - r.left) / r.width - 0.5;
-        var py = (ev.clientY - r.top) / r.height - 0.5;
-        depthEls.forEach(function (el) {
-          var d = parseFloat(el.getAttribute("data-depth")) || 0;
-          var base = el.getAttribute("data-base-rot") || "0deg";
-          el.style.transform = "translate3d(" + (px * d) + "px," + (py * d * 0.6) + "px,0) rotate(" + base + ")";
-        });
-      });
-      heroEl.addEventListener("mouseleave", function () {
-        depthEls.forEach(function (el) {
-          el.style.transform = "translate3d(0,0,0) rotate(" + (el.getAttribute("data-base-rot") || "0deg") + ")";
-        });
-      });
-    }
 
     /* Before/after reveal that tracks the cursor */
     root.querySelectorAll(".cl-shot").forEach(function (shot) {
