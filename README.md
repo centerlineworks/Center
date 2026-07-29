@@ -1,8 +1,11 @@
 # Centerline Construction — Website Pages
 
 Custom pages for [centerlineworks.com](https://www.centerlineworks.com), built to drop into
-Squarespace with zero build tools. Two pages so far:
+Squarespace with zero build tools. Three pages so far:
 
+- **`home.html`** — the Home page: video hero with scroll-driven 3D, above-the-fold trust
+  signals, services, before/after work, process, Alfred, Elfsight reviews, service area and
+  FAQ (see "The Home page" section below).
 - **`index.html`** — the About page, with 3D scroll effects and a phone-only twin (Part 3).
 - **`services.html`** — the Services page: every service with its own photo gallery, in one
   fully responsive file (see "The Services page" section below).
@@ -146,3 +149,29 @@ photos, instead of splitting "Services" and "Portfolio" into separate pages.
   per offering in JSON-LD, plus title/meta/OG tags specific to Services.
 - See **[DEPLOY.md](DEPLOY.md#deploying-the-services-page)** for install steps, including
   uploading its own video files.
+
+
+## The Home page (`home.html`)
+
+Built to convert: the research-backed above-the-fold set (specific offer, click-to-call,
+review count, free-estimate CTA, trust chips) over a looping video, then proof.
+
+- **Scroll-driven 3D** — parallax hero layers, a wireframe house that rotates and scales as
+  you scroll, a perspective blueprint floor, sections that flip up in 3D, and mouse-tilt on
+  the service and value cards.
+- **Services grid** linking into the matching Services-page section, with a full-width
+  Commercial feature card.
+- **Featured work** with the cursor-tracking before/after reveal and a click-to-open
+  side-by-side lightbox.
+- **Reviews** — the Elfsight All-in-One widget embedded as supplied, with a 5.0 / 43-review
+  scoreboard above it and three real reviews rendered behind it that hide themselves once
+  the widget paints (no empty gap while loading; crawlers and AI still see review text).
+- **Local SEO** — service-area chips (Holly Springs, Canton, Woodstock, Ball Ground,
+  Acworth, Marietta, Kennesaw, Roswell, Alpharetta, Cherokee County) and geo meta tags.
+- **Schema/GEO** — `WebSite`, `WebPage`, `HomeAndConstructionBusiness` (full NAP, hours,
+  service area, offer catalog, `knowsAbout`, reserve action), `Person` for Alfred, and
+  `FAQPage`. No `aggregateRating` — Google doesn't allow self-marking third-party review
+  scores.
+- **Phone** — service/work rows become swipe rails, sticky Free Estimate / Call / Email bar.
+- Reuses the existing `services-hero.*` video and already-live photos, so there is nothing
+  new to upload.

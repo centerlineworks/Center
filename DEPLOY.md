@@ -1,9 +1,9 @@
 # Put the pages live on Squarespace — step by step
 
-This repo has two pages: **About** (`index.html`) and **Services** (`services.html`), each
-with its own pair of paste files in `squarespace/`. Steps 1–7 below cover the About page;
-jump to **"Deploying the Services page"** at the bottom once that's live — it reuses the
-same video files and skips most of the setup.
+This repo has three pages: **Home** (`home.html`), **About** (`index.html`) and
+**Services** (`services.html`), each with its own pair of paste files in `squarespace/`.
+Steps 1–7 below cover the About page; the **Services** and **Home** sections at the bottom
+cover those.
 
 Total time: about 15 minutes per page. You need the **Squarespace Business plan or higher**
 (code blocks with JavaScript don't run on the Personal plan).
@@ -168,3 +168,40 @@ from the About page's `hero-loop.*` files, uploaded in Step 3 above. If nothing 
   setting up About) — go back and upload these 3 specific files
 - Make sure you re-pasted the **current** `services-part1` and `services-part2` files from
   GitHub — an older paste from before the video existed won't reference it at all
+
+
+---
+
+## Deploying the Home page
+
+The home page is the one that has to land the client, so it leads with the video hero, the
+5.0 / 43-review trust chips and a free-estimate button above the fold, then walks visitors
+through services, real before/after work, why Centerline, the 3-step process, Alfred,
+reviews, service area and FAQ. Fully responsive in one file — on phones the service and
+work rows become swipe rails and a sticky **Free Estimate / Call / Email** bar sits in the
+thumb zone.
+
+1. In Squarespace open your existing **Home** page (or create a Blank Page and set it as
+   your homepage under Pages → ⋯ → *Set as Homepage*)
+2. Set the SEO title (Page Settings → SEO) to:
+   `Centerline Construction | Remodeling Contractor in Holly Springs & Canton, GA`
+3. Paste `squarespace/home-part1-header-injection.html` into
+   **Page Settings → Advanced → Page Header Code Injection** → Save
+4. Add a **Code** block (type: HTML) to the page, paste
+   `squarespace/home-part2-code-block.html`, Save
+5. **No new uploads needed** — it reuses the `services-hero.*` video already on your site
+   and photos already live on your other pages.
+6. **Your Elfsight reviews widget is already embedded** in the reviews section — the exact
+   embed code you provided, unchanged. Above it sits a "5.0 · 43 reviews" scoreboard, and
+   behind it three real reviews show instantly and hide themselves the moment the Elfsight
+   widget paints (so the section is never empty while the widget loads, and Google/AI can
+   still read real review text).
+7. **Photos**: the `YOUR HOME PAGE PHOTOS` list at the top of the code block. Cabanas and
+   Additions are the two waiting on a photo; everything else is pre-filled. Any `*_before`
+   line is optional — fill one in and that photo becomes a hover before/after comparison.
+
+### Want the home page to have its own hero video?
+
+Right now Home and Services share `services-hero.*`, so replacing that file changes both.
+If you'd rather they be independent, send me new footage and I'll encode it as
+`home-hero.*` — then only the home page changes when you swap it.

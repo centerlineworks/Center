@@ -6,6 +6,23 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
 
 ## Pages in this repo
 
+- **Home** — `home.html` → `squarespace/home-part1-header-injection.html` +
+  `home-part2-code-block.html`. Scope `#cl-home`. Responsive-first (no phone twin).
+  Conversion-led structure from 2026 contractor-site research: above the fold it carries a
+  specific offer, click-to-call, review count, free-estimate CTA and trust chips over the
+  video hero; then services grid (links into `/services#<anchor>`, Commercial spans the row
+  as a wide card), before/after featured work, values, 3-step process, Alfred, reviews,
+  service-area chips (local SEO), FAQ, video CTA. Reuses `services-hero.*` and photos
+  already live elsewhere, so it needs zero new uploads — note that swapping the Services
+  video therefore also changes Home until it gets its own `home-hero.*`.
+  Alfred's **Elfsight** All-in-One Reviews widget is embedded verbatim in the reviews
+  section; three real reviews render behind it and hide via `.cl-elf-ready` once the widget
+  paints (MutationObserver + height check + timed fallbacks), so the section is never empty
+  and crawlers/AI still get review text. Preconnect to `elfsightcdn.com` sits in Part 1.
+  LESSON: on phones the service/work rows become horizontal swipe rails, and cards parked
+  off-screen to the right never intersect the viewport, so their lazy images stay unloaded
+  until swiped. An IntersectionObserver on each rail promotes every image inside it to
+  `loading="eager"` as soon as the rail scrolls into view vertically.
 - **About** — `index.html` → `squarespace/part1-header-injection.html` +
   `part2-code-block.html` + `part3-phone-addon.html`. Desktop-first design with a bolted-on
   phone twin (see LESSON below on why that got complicated).

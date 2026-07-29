@@ -1,0 +1,602 @@
+<!-- Centerline HOME page - PART 2 of 2
+     Paste into a single Code Block (type: HTML) on the Home page.
+     Fully responsive - the same code reshapes itself for phones
+     (swipe rails + sticky Free Estimate / Call / Email bar).
+     Your Elfsight reviews widget is already embedded in the reviews
+     section. The YOUR HOME PAGE PHOTOS list at the top is where you
+     add or swap photos. -->
+<script>
+/* =====================================================================
+   YOUR HOME PAGE PHOTOS
+   Paste each picture's web address between the quotes. To get one:
+   put the photo on any page with a normal Image Block, view it on the
+   live site, right-click the image -> "Copy Image Address", paste here.
+
+   Slots already filled in reuse photos that are live on your other
+   pages. Blank ones show a small text label until you add a photo —
+   nothing ever looks broken.
+
+   Any "*_before" line is optional: fill it in and that photo becomes a
+   hover before/after comparison (and opens side-by-side when clicked).
+   ===================================================================== */
+window.CL_HOME_PHOTOS = {
+  /* --- Services grid --- */
+  svc_bathrooms:  "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/109a93a8-db30-4f33-92e6-00d5b6225adc/IMG_2657.jpg?format=1000w",
+  svc_basements:  "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/c9fb4b92-1bc0-4df6-a186-be51b293c7c6/basement333.jpg?format=1000w",
+  svc_cabanas:    "",
+  svc_additions:  "",
+  svc_decks:      "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/107ad2e2-2304-4131-a92d-2441e4fca1a6/dji_fly_20260212_094138_86_1770907943613_photo.jpg?format=1500w",
+  svc_siding:     "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/6100665d-cc71-416a-a8a0-1f5f148f1dc9/dji_fly_20260604_094024_92_1780580434718_photo.jpg?format=1500w",
+  svc_commercial: "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/a37f44eb-26de-4641-a88a-7911d222f61c/IMG_8669.JPG?format=1000w",
+
+  /* --- Featured work (the two big showcase photos) --- */
+  work_1:         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/109a93a8-db30-4f33-92e6-00d5b6225adc/IMG_2657.jpg?format=1000w",
+  work_1_before:  "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/c53acf3e-e496-46fb-b824-b069909ce19e/IMG_2415.JPG?format=1000w",
+  work_2:         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/c9fb4b92-1bc0-4df6-a186-be51b293c7c6/basement333.jpg?format=1000w",
+  work_2_before:  "",
+
+  /* --- Alfred --- */
+  alfred:         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/5322ccd4-aebc-4342-9a05-a3e4ced4f948/IMG_1661-EDIT+%281%29.jpg?format=1000w",
+  alfred_cedar:   "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/9ef20078-1fff-499a-8367-46429b722095/IMG_1176.JPG?format=1000w"
+};
+</script>
+
+<main id="cl-home">
+
+  <!-- ================= HERO ================= -->
+  <header class="cl-hero" aria-label="Centerline Construction — North Georgia remodeling">
+    <video class="cl-video-bg" autoplay muted loop playsinline webkit-playsinline preload="auto"
+           poster="https://www.centerlineworks.com/s/services-hero-poster.jpg" aria-hidden="true">
+      <source src="https://www.centerlineworks.com/s/services-hero.webm" type="video/webm">
+      <source src="https://www.centerlineworks.com/s/services-hero.mp4" type="video/mp4">
+    </video>
+    <div class="cl-scrim"></div>
+    <div class="cl-grid3d" data-grid3d aria-hidden="true"></div>
+    <div class="cl-house-stage" aria-hidden="true">
+      <div class="cl-house" data-house>
+        <i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="f4"></i>
+        <i class="r1"></i><i class="r2"></i><i class="d1"></i><i class="w1"></i><i class="w2"></i>
+      </div>
+    </div>
+
+    <div class="cl-hero-inner">
+      <p class="cl-kicker" data-parallax="0.05">Holly Springs · Canton · North Georgia</p>
+      <h1 data-parallax="0.11">
+        Built on Faith.
+        <span class="cl-serif">Finished with craftsmanship.</span>
+      </h1>
+      <p class="cl-hero-sub" data-parallax="0.15">Family-owned remodeling since 2020 — bathrooms, basements, cabanas, additions, decks and more, built by a crew that shows up when they say they will.</p>
+      <div class="cl-btn-row" data-parallax="0.19">
+        <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Get My Free Estimate</a>
+        <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
+      </div>
+      <div class="cl-trustchips" data-parallax="0.22">
+        <span><b>★ 5.0</b> · 43 Reviews</span>
+        <span><b>18+</b> Years Experience</span>
+        <span>Family-Owned &amp; Faith-Driven</span>
+        <span>Free Estimates</span>
+      </div>
+    </div>
+    <span class="cl-scroll-cue" aria-hidden="true"></span>
+  </header>
+
+  <!-- ================= STAT BAR ================= -->
+  <section class="cl-stats" aria-label="Centerline Construction at a glance">
+    <div class="cl-wrap cl-stats-grid">
+      <div class="cl-stat"><b data-count="18" data-suffix="+">0</b><span>Years Experience</span></div>
+      <div class="cl-stat"><b data-count="43">0</b><span>Five-Star Reviews</span></div>
+      <div class="cl-stat"><b data-count="100" data-suffix="%">0</b><span>Recommend Us</span></div>
+      <div class="cl-stat"><b data-count="2020">0</b><span>Family-Founded</span></div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="cl-section" aria-labelledby="home-svc-h">
+    <div class="cl-wrap">
+      <div class="cl-reveal">
+        <p class="cl-kicker">What we build</p>
+        <h2 id="home-svc-h">One crew. Every room of the house.</h2>
+        <p class="cl-lede">From a single wood-rot repair to a full basement build-out, Centerline handles residential and commercial projects across Holly Springs, Canton, Woodstock and North Georgia.</p>
+      </div>
+
+      <div class="cl-svc-grid cl-reveal">
+        <a class="cl-svc-card" href="https://www.centerlineworks.com/services#bathrooms" data-cl-photo="svc_bathrooms">
+          <div class="cl-slot-label">[ Photo: bathroom ]</div>
+          <img class="cl-shot-after" alt="Custom tile shower bathroom remodel by Centerline Construction in North Georgia" loading="lazy">
+          <figcaption><b>Bathrooms</b><span>Remodels</span></figcaption>
+        </a>
+        <a class="cl-svc-card" href="https://www.centerlineworks.com/services#basements" data-cl-photo="svc_basements">
+          <div class="cl-slot-label">[ Photo: basement ]</div>
+          <img class="cl-shot-after" alt="Finished basement by Centerline Construction in Cherokee County, Georgia" loading="lazy">
+          <figcaption><b>Basements</b><span>Finishing</span></figcaption>
+        </a>
+        <a class="cl-svc-card" href="https://www.centerlineworks.com/services#cabanas" data-cl-photo="svc_cabanas">
+          <div class="cl-slot-label">[ Photo: cabana / pavilion ]</div>
+          <img class="cl-shot-after" alt="Custom cabana and covered pavilion built by Centerline Construction" loading="lazy">
+          <figcaption><b>Cabanas</b><span>Outdoor living</span></figcaption>
+        </a>
+        <a class="cl-svc-card" href="https://www.centerlineworks.com/services#additions" data-cl-photo="svc_additions">
+          <div class="cl-slot-label">[ Photo: home addition ]</div>
+          <img class="cl-shot-after" alt="Home addition built by Centerline Construction in North Georgia" loading="lazy">
+          <figcaption><b>Additions</b><span>Built-on space</span></figcaption>
+        </a>
+        <a class="cl-svc-card" href="https://www.centerlineworks.com/services#decks" data-cl-photo="svc_decks">
+          <div class="cl-slot-label">[ Photo: deck ]</div>
+          <img class="cl-shot-after" alt="Custom deck and outdoor living space built by Centerline Construction" loading="lazy">
+          <figcaption><b>Decks &amp; Outdoor</b><span>Living spaces</span></figcaption>
+        </a>
+        <a class="cl-svc-card" href="https://www.centerlineworks.com/services#siding" data-cl-photo="svc_siding">
+          <div class="cl-slot-label">[ Photo: siding ]</div>
+          <img class="cl-shot-after" alt="Siding replacement and exterior repair by Centerline Construction" loading="lazy">
+          <figcaption><b>Siding &amp; Exterior</b><span>Repairs</span></figcaption>
+        </a>
+        <a class="cl-svc-card cl-svc-card--wide" href="https://www.centerlineworks.com/services#commercial" data-cl-photo="svc_commercial">
+          <div class="cl-slot-label">[ Photo: commercial project ]</div>
+          <img class="cl-shot-after" alt="Commercial renovation project by Centerline Construction in Georgia" loading="lazy">
+          <figcaption><b>Commercial</b><span>Renovations &amp; build-outs</span></figcaption>
+        </a>
+      </div>
+
+      <div class="cl-btn-row cl-reveal">
+        <a class="cl-btn cl-btn--dark-ghost" href="https://www.centerlineworks.com/services">See all services &amp; project photos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURED WORK ================= -->
+  <section class="cl-section" style="background:var(--paper-2)" aria-labelledby="home-work-h">
+    <div class="cl-wrap">
+      <div class="cl-reveal">
+        <p class="cl-kicker">Recent work</p>
+        <h2 id="home-work-h">See the difference for yourself.</h2>
+        <p class="cl-lede">Drag across a photo to reveal the before — or click it to open the full side-by-side.</p>
+      </div>
+      <div class="cl-work cl-reveal">
+        <figure class="cl-shot" data-cl-photo="work_1" data-cl-photo-before="work_1_before">
+          <div class="cl-slot-label">[ Photo: featured project 1 ]</div>
+          <img class="cl-shot-after" alt="Bathroom after a full remodel by Centerline Construction" loading="lazy">
+          <img class="cl-shot-before" loading="eager" alt="The same bathroom before Centerline Construction remodeled it">
+          <span class="cl-ba-handle"></span>
+          <span class="cl-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span>
+        </figure>
+        <figure class="cl-shot" data-cl-photo="work_2" data-cl-photo-before="work_2_before">
+          <div class="cl-slot-label">[ Photo: featured project 2 ]</div>
+          <img class="cl-shot-after" alt="Finished basement by Centerline Construction" loading="lazy">
+          <img class="cl-shot-before" loading="eager" alt="The same basement before Centerline Construction finished it">
+          <span class="cl-ba-handle"></span>
+          <span class="cl-ba-tag"><span class="tb">Before</span><span class="ta">After</span></span>
+        </figure>
+      </div>
+      <p class="cl-work-hint">Hover &amp; drag to compare · Click to enlarge</p>
+    </div>
+  </section>
+
+  <!-- ================= WHY CENTERLINE ================= -->
+  <section class="cl-section cl-dark" aria-labelledby="home-why-h">
+    <div class="cl-wrap">
+      <div class="cl-reveal">
+        <p class="cl-kicker">Why Centerline</p>
+        <h2 id="home-why-h">Three values. Zero shortcuts.</h2>
+      </div>
+      <div class="cl-values">
+        <article class="cl-value cl-reveal" data-tilt>
+          <div class="cl-ico" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5z"/></svg></div>
+          <h3>Faith</h3>
+          <p>A Christ-centered, family-based company. It's why we treat your home, your budget and your family the way we'd want ours treated.</p>
+        </article>
+        <article class="cl-value cl-reveal" data-tilt>
+          <div class="cl-ico" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 12H3M16 6H3M21 18H3"/><circle cx="18" cy="12" r="3"/></svg></div>
+          <h3>Integrity</h3>
+          <p>We show up when we say we will, tell you the truth about what your project needs, and the price you're quoted is the price you pay.</p>
+        </article>
+        <article class="cl-value cl-reveal" data-tilt>
+          <div class="cl-ico" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+          <h3>Craftsmanship</h3>
+          <p>Precision on every cut, tile and board — and a job site left clean at the end of the day. Quality is the standard, not the upgrade.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section class="cl-section" aria-labelledby="home-process-h">
+    <div class="cl-wrap">
+      <div class="cl-reveal" style="text-align:center">
+        <p class="cl-kicker" style="justify-content:center">How it works</p>
+        <h2 id="home-process-h">Three steps. No surprises.</h2>
+      </div>
+      <div class="cl-process">
+        <div class="cl-step cl-reveal"><b>STEP 1</b><h3>Free Estimate</h3><p>Call, text or request an estimate online. We walk the project with you and talk through options honestly.</p></div>
+        <div class="cl-step cl-reveal"><b>STEP 2</b><h3>Plan &amp; Quote</h3><p>You get a clear scope, quote and timeline up front — no moving targets once we start.</p></div>
+        <div class="cl-step cl-reveal"><b>STEP 3</b><h3>Build &amp; Walkthrough</h3><p>We build it right, clean up after ourselves, and walk the finished project with you before we call it done.</p></div>
+      </div>
+      <div class="cl-btn-row cl-btn-row--center cl-reveal">
+        <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Schedule My Free Estimate</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MEET ALFRED ================= -->
+  <section class="cl-section cl-dark" aria-labelledby="home-owner-h">
+    <div class="cl-wrap cl-owner">
+      <div class="cl-owner-media cl-reveal">
+        <figure class="cl-owner-photo" data-cl-photo="alfred">
+          <div class="cl-slot-label">[ Photo: Alfred ]</div>
+          <img alt="Alfred Tudela, founder and CEO of Centerline Construction Company in Holly Springs, Georgia" loading="lazy">
+        </figure>
+        <figure class="cl-cameo" data-cl-photo="alfred_cedar">
+          <img alt="Alfred Tudela of Centerline Construction carrying a large cedar beam on a job site" loading="lazy">
+        </figure>
+      </div>
+      <div class="cl-reveal">
+        <p class="cl-kicker">Meet the owner</p>
+        <h2 id="home-owner-h">Alfred Tudela, <span class="cl-serif" style="color:var(--gold)">founder &amp; CEO</span></h2>
+        <p class="cl-lede">Alfred didn't build Centerline from behind a desk. With 18+ years in residential and commercial construction, he still meets you on day one and swings a hammer alongside his crew — carpenters, tile setters and finish craftsmen who treat every home like their own.</p>
+        <blockquote class="cl-pull">"The CEO found the time to meet with us the first day. He is a fine gentleman with an enthusiastic demeanor."</blockquote>
+        <div class="cl-owner-badges">
+          <span>⚒ 18+ Years in Construction</span>
+          <span>✝ Youth Director, Rising Hills Church</span>
+          <span>🏠 Family-Owned &amp; Operated</span>
+        </div>
+        <div class="cl-btn-row">
+          <a class="cl-btn cl-btn--ghost" href="https://www.centerlineworks.com/about">Read our story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REVIEWS (Elfsight) ================= -->
+  <section class="cl-section" style="background:var(--paper-2)" aria-labelledby="home-rev-h">
+    <div class="cl-wrap">
+      <div class="cl-reveal" style="text-align:center">
+        <p class="cl-kicker" style="justify-content:center">Word of mouth</p>
+        <h2 id="home-rev-h">43 reviews. Every one of them five stars.</h2>
+        <div class="cl-rev-head">
+          <b>5.0</b>
+          <div>
+            <span class="cl-stars" aria-label="5 out of 5 stars">★★★★★</span>
+            <small>Across Google, Facebook, Yelp &amp; Nextdoor — 100% of reviewers recommend us.</small>
+          </div>
+        </div>
+        <div class="cl-platforms">
+          <span>Google</span><span>Facebook</span><span>Yelp</span><span>Nextdoor</span>
+        </div>
+      </div>
+
+      <div class="cl-elf-wrap cl-reveal" data-elf-wrap>
+        <!-- Real reviews render instantly (and are readable by Google + AI answer
+             engines even if the widget is slow or blocked). They hide themselves
+             the moment the Elfsight widget paints. -->
+        <div class="cl-rev-fallback" data-elf-fallback>
+          <article class="cl-rev-card">
+            <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>"Centerline Construction is an amazing company! Alfred and his team do phenomenal work. We are so pleased with the work they just finished in our basement. They are extremely hard working, very honest and always showed up when they said they would!"</blockquote>
+            <footer><cite>— Joni Dunnington</cite><span class="cl-rev-src">Google</span></footer>
+          </article>
+          <article class="cl-rev-card">
+            <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>"Prompt appointment scheduled when you call. Exceptional detail on all carpentry work &amp; drywall. Leaves work area spotless!! I would recommend them for any construction &amp; remodeling project."</blockquote>
+            <footer><cite>— Juanita Powell</cite><span class="cl-rev-src">Google</span></footer>
+          </article>
+          <article class="cl-rev-card">
+            <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>"Centerline did a great job repairing the damaged areas around our home, including trim and siding. The crew was professional, on time, and very detail-oriented… the pricing was fair with no surprises."</blockquote>
+            <footer><cite>— Albert Jaon</cite><span class="cl-rev-src">Facebook</span></footer>
+          </article>
+        </div>
+
+        <!-- Elfsight All-in-One Reviews | Untitled All-in-One Reviews -->
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="elfsight-app-8618b5c6-2014-40d4-a866-f29f7493d435" data-elfsight-app-lazy></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICE AREA (local SEO) ================= -->
+  <section class="cl-section cl-dark" aria-labelledby="home-area-h">
+    <div class="cl-wrap cl-reveal">
+      <p class="cl-kicker">Where we work</p>
+      <h2 id="home-area-h">Proudly serving North Georgia.</h2>
+      <p class="cl-lede">Based in Holly Springs and working throughout Cherokee County and the greater Atlanta area. If you're nearby and don't see your town listed, call us — odds are we've worked there.</p>
+      <div class="cl-areas">
+        <span>Holly Springs</span><span>Canton</span><span>Woodstock</span><span>Ball Ground</span>
+        <span>Acworth</span><span>Marietta</span><span>Kennesaw</span><span>Roswell</span>
+        <span>Alpharetta</span><span>Cherokee County</span><span>North Georgia</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="cl-section" aria-labelledby="home-faq-h">
+    <div class="cl-wrap">
+      <div class="cl-reveal" style="text-align:center">
+        <p class="cl-kicker" style="justify-content:center">Quick answers</p>
+        <h2 id="home-faq-h">Frequently asked questions</h2>
+      </div>
+      <div class="cl-faq cl-reveal">
+        <details><summary>What areas do you serve?</summary><p>We're based in Holly Springs, Georgia and serve Canton, Woodstock, Ball Ground, Acworth, Marietta, Cherokee County and communities throughout North Georgia and the greater Atlanta area.</p></details>
+        <details><summary>Do you offer free estimates?</summary><p>Yes — estimates are free. Call or text <a href="tel:+16783721274">(678) 372-1274</a> or <a href="https://www.centerlineworks.com/schedule">request one online</a>. You'll get a clear quote and timeline up front, and the price you're quoted is the price you pay.</p></details>
+        <details><summary>What kinds of projects do you take on?</summary><p>Bathroom remodels, basement finishing, custom cabanas and pavilions, home additions, decks and railing, siding, wood rot repair, cabinetry, exterior repairs and commercial renovations — from focused repairs to full-scale remodels.</p></details>
+        <details><summary>Who owns Centerline Construction?</summary><p>Alfred Tudela founded and owns Centerline Construction Company, LLC. He has 18+ years of construction experience and is personally involved in projects — meeting clients and working alongside his crew.</p></details>
+        <details><summary>What are your hours?</summary><p>Monday–Saturday 7:00am–6:00pm and Sunday 2:00pm–6:00pm.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="cl-section cl-cta" aria-labelledby="home-cta-h">
+    <video class="cl-video-bg" autoplay muted loop playsinline webkit-playsinline preload="metadata"
+           poster="https://www.centerlineworks.com/s/services-hero-poster.jpg" aria-hidden="true">
+      <source src="https://www.centerlineworks.com/s/services-hero.webm" type="video/webm">
+      <source src="https://www.centerlineworks.com/s/services-hero.mp4" type="video/mp4">
+    </video>
+    <div class="cl-scrim"></div>
+    <div class="cl-wrap cl-reveal">
+      <h2 id="home-cta-h">Let's find your project's <em>centerline.</em></h2>
+      <p>Tell us what you're picturing — bathroom, basement, cabana, addition or deck. The estimate is free, and the handshake still means something.</p>
+      <div class="cl-btn-row cl-btn-row--center">
+        <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Get My Free Estimate</a>
+        <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
+        <a class="cl-btn cl-btn--ghost" href="mailto:Info@centerlineworks.com">Email Us</a>
+      </div>
+      <small>Mon–Sat 7am–6pm · Sun 2pm–6pm · Holly Springs, GA</small>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="cl-lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Project photo">
+    <button class="cl-lightbox-close" type="button" data-lightbox-close aria-label="Close">&times;</button>
+    <div class="cl-lb-single" data-lb-single><img data-lb-img alt=""></div>
+    <div class="cl-lb-compare" data-lb-compare>
+      <figure class="cl-lb-before"><img data-lb-before alt=""><figcaption>Before</figcaption></figure>
+      <figure class="cl-lb-after"><img data-lb-after alt=""><figcaption>After</figcaption></figure>
+    </div>
+  </div>
+
+  <!-- Sticky mobile action bar (hidden on desktop) -->
+  <nav class="cl-mbar" aria-label="Quick actions">
+    <a class="gold" href="https://www.centerlineworks.com/schedule">Free Estimate</a>
+    <a href="tel:+16783721274">Call</a>
+    <a href="mailto:Info@centerlineworks.com">Email</a>
+  </nav>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.getElementById("cl-home");
+  if (!root) return;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Photos ----------
+     All load detection happens here in JS on purpose — never via inline
+     onload/onerror attributes (Squarespace's code-block sanitizer can strip
+     them) and never by hiding images with display:none (a hidden lazy image
+     is never fetched, so it would never reveal itself). Images sit at
+     opacity:0 until confirmed loaded. */
+  var photoMap = window.CL_HOME_PHOTOS || {};
+  function loaded(img) { return img.complete && img.naturalWidth > 0; }
+  function show(slot, img, isBefore) {
+    img.classList.add("is-loaded");
+    if (isBefore) slot.classList.add("has-before");
+    else slot.classList.add("has-photo");
+  }
+  function load(slot, img, url, isBefore) {
+    img.addEventListener("load", function () { if (loaded(img)) show(slot, img, isBefore); });
+    img.addEventListener("error", function () {
+      img.classList.remove("is-loaded");
+      if (isBefore) slot.classList.remove("has-before");
+    });
+    img.src = url;
+    if (loaded(img)) show(slot, img, isBefore);
+  }
+  Object.keys(photoMap).forEach(function (key) {
+    var url = (photoMap[key] || "").trim();
+    if (!url) return;
+    var isBefore = key.slice(-7) === "_before";
+    var slot = root.querySelector(isBefore ? '[data-cl-photo-before="' + key + '"]' : '[data-cl-photo="' + key + '"]');
+    if (!slot) return;
+    var img = isBefore ? slot.querySelector(".cl-shot-before") : slot.querySelector("img:not(.cl-shot-before)");
+    if (img) load(slot, img, url, isBefore);
+  });
+  function sweep() {
+    root.querySelectorAll("[data-cl-photo] img, [data-cl-photo-before] img").forEach(function (img) {
+      if (!img.getAttribute("src") || !loaded(img)) return;
+      var isBefore = img.classList.contains("cl-shot-before");
+      var slot = img.closest(isBefore ? "[data-cl-photo-before]" : "[data-cl-photo]");
+      if (slot) show(slot, img, isBefore);
+    });
+  }
+  window.addEventListener("load", sweep);
+  setTimeout(sweep, 1200); setTimeout(sweep, 4000);
+
+  /* On phones the service/work rows become horizontal swipe rails, so cards
+     parked off to the right never enter the viewport and their lazy images
+     would sit unloaded until swiped. As soon as a rail scrolls into view
+     vertically, promote every image inside it to eager so the whole rail is
+     ready before the visitor swipes. */
+  var rails = root.querySelectorAll(".cl-svc-grid, .cl-work");
+  if ("IntersectionObserver" in window) {
+    var railIo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll("img").forEach(function (img) {
+          if (img.getAttribute("src")) img.loading = "eager";
+        });
+        railIo.unobserve(e.target);
+      });
+    }, { rootMargin: "300px 0px" });
+    rails.forEach(function (el) { railIo.observe(el); });
+  } else {
+    rails.forEach(function (el) { el.querySelectorAll("img").forEach(function (i) { i.loading = "eager"; }); });
+  }
+
+  /* ---------- Scroll reveals ---------- */
+  var reveals = root.querySelectorAll(".cl-reveal");
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add("is-in"); });
+  }
+
+  /* ---------- Animated stat counters ---------- */
+  function runCounter(el) {
+    var target = parseInt(el.getAttribute("data-count"), 10);
+    var suffix = el.getAttribute("data-suffix") || "";
+    if (reduceMotion) { el.textContent = target + suffix; return; }
+    var start = null, dur = 1400;
+    requestAnimationFrame(function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    });
+  }
+  var counters = root.querySelectorAll("[data-count]");
+  if ("IntersectionObserver" in window) {
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { runCounter(e.target); cio.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    counters.forEach(function (el) { cio.observe(el); });
+  } else { counters.forEach(runCounter); }
+
+  /* ---------- Elfsight: hide our fallback reviews once the widget paints ---------- */
+  var elfWrap = root.querySelector("[data-elf-wrap]");
+  var elfApp = elfWrap && elfWrap.querySelector('[class*="elfsight-app-"]');
+  if (elfWrap && elfApp) {
+    var checkElf = function () {
+      if (elfApp.getBoundingClientRect().height > 60 || elfApp.children.length > 0) {
+        elfWrap.classList.add("cl-elf-ready");
+        return true;
+      }
+      return false;
+    };
+    if (!checkElf()) {
+      if ("MutationObserver" in window) {
+        var mo = new MutationObserver(function () { if (checkElf()) mo.disconnect(); });
+        mo.observe(elfApp, { childList: true, subtree: true });
+        setTimeout(function () { mo.disconnect(); }, 20000);
+      }
+      [1000, 2500, 5000, 9000].forEach(function (t) { setTimeout(checkElf, t); });
+    }
+  }
+
+  /* ---------- Lightbox (single, or side-by-side when a before photo exists) ---------- */
+  var lb = root.querySelector("[data-lightbox]");
+  var lbImg = root.querySelector("[data-lb-img]");
+  var lbBefore = root.querySelector("[data-lb-before]");
+  var lbAfter = root.querySelector("[data-lb-after]");
+  root.querySelectorAll(".cl-shot").forEach(function (shot) {
+    shot.addEventListener("click", function () {
+      if (!shot.classList.contains("has-photo")) return;
+      var after = shot.querySelector(".cl-shot-after");
+      var before = shot.classList.contains("has-before") ? shot.querySelector(".cl-shot-before") : null;
+      if (before && before.getAttribute("src")) {
+        lbBefore.src = before.src; lbBefore.alt = before.alt;
+        lbAfter.src = after.src; lbAfter.alt = after.alt;
+        lb.classList.add("is-compare");
+      } else {
+        lbImg.src = after.src; lbImg.alt = after.alt;
+        lb.classList.remove("is-compare");
+      }
+      lb.classList.add("is-open");
+    });
+  });
+  function closeLb() {
+    lb.classList.remove("is-open", "is-compare");
+    lbImg.src = ""; lbBefore.src = ""; lbAfter.src = "";
+  }
+  root.querySelector("[data-lightbox-close]").addEventListener("click", closeLb);
+  lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+  window.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLb(); });
+
+  if (reduceMotion) {
+    root.querySelectorAll(".cl-video-bg").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
+    return; /* everything below is decorative motion */
+  }
+
+  /* ---------- Nudge the hero videos (iPhone autoplay is picky) ---------- */
+  root.querySelectorAll(".cl-video-bg").forEach(function (v) {
+    v.muted = true; v.defaultMuted = true;
+    var tryPlay = function () { if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } };
+    tryPlay();
+    v.addEventListener("canplay", tryPlay);
+    ["touchstart", "click", "scroll"].forEach(function (ev) {
+      window.addEventListener(ev, tryPlay, { once: true, passive: true });
+    });
+  });
+
+  /* ---------- Scroll-driven 3D: parallax + rotating wireframe house ---------- */
+  var hero = root.querySelector(".cl-hero");
+  var parallaxEls = root.querySelectorAll("[data-parallax]");
+  var house = root.querySelector("[data-house]");
+  var grid3d = root.querySelector("[data-grid3d]");
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      var heroH = hero ? hero.offsetHeight : window.innerHeight;
+      if (y < heroH * 1.5) {
+        var progress = Math.min(y / heroH, 1.4);
+        parallaxEls.forEach(function (el) {
+          var speed = parseFloat(el.getAttribute("data-parallax")) || 0.1;
+          el.style.transform = "translate3d(0," + (y * speed * -1) + "px,0)";
+        });
+        if (house) {
+          house.style.transform =
+            "rotateX(" + (-11 + progress * 7) + "deg) rotateY(" + (26 + y * 0.11) + "deg)" +
+            " translateY(" + (progress * -56) + "px) scale(" + (1 + progress * 0.22) + ")";
+          house.style.opacity = Math.max(0.42 - progress * 0.36, 0);
+        }
+        if (grid3d) grid3d.style.transform = "rotateX(63deg) translateZ(-140px) translateY(" + (y * 0.17) + "px)";
+      }
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Mouse-tilt 3D (desktop pointers only) ---------- */
+  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (fine) {
+    root.querySelectorAll(".cl-svc-card, [data-tilt]").forEach(function (card) {
+      var max = card.classList.contains("cl-svc-card") ? 7 : 6;
+      card.addEventListener("mousemove", function (ev) {
+        var r = card.getBoundingClientRect();
+        var px = (ev.clientX - r.left) / r.width - 0.5;
+        var py = (ev.clientY - r.top) / r.height - 0.5;
+        card.style.transform = "perspective(900px) rotateY(" + (px * max) + "deg) rotateX(" + (py * -max) + "deg) translateZ(6px)";
+      });
+      card.addEventListener("mouseleave", function () {
+        card.style.transform = "perspective(900px) rotateY(0) rotateX(0)";
+      });
+    });
+
+    /* Before/after reveal that tracks the cursor */
+    root.querySelectorAll(".cl-shot").forEach(function (shot) {
+      var before = shot.querySelector(".cl-shot-before");
+      var handle = shot.querySelector(".cl-ba-handle");
+      if (!before || !handle) return;
+      function reveal(pct, animate) {
+        if (!shot.classList.contains("has-before")) return;
+        pct = Math.max(0, Math.min(100, pct));
+        var t = animate ? "clip-path .45s cubic-bezier(.16,1,.3,1)" : "none";
+        before.style.transition = t;
+        handle.style.transition = animate ? "left .45s cubic-bezier(.16,1,.3,1)" : "none";
+        before.style.clipPath = "inset(0 " + (100 - pct) + "% 0 0)";
+        handle.style.left = pct + "%";
+        shot.classList.toggle("is-comparing", pct > 2);
+      }
+      function pct(ev) { var r = shot.getBoundingClientRect(); return ((ev.clientX - r.left) / r.width) * 100; }
+      shot.addEventListener("mouseenter", function (e) { reveal(pct(e), false); });
+      shot.addEventListener("mousemove", function (e) { reveal(pct(e), false); });
+      shot.addEventListener("mouseleave", function () { reveal(0, true); });
+    });
+  }
+})();
+</script>
