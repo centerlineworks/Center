@@ -31,6 +31,14 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   now "Every room. Inside and out."); the process section must not mirror "Three values.
   Zero shortcuts." or claim a fixed number of steps (now "Making it easy. No surprises."
   with non-numbered phase labels).
+  Each "What we build" card can take an optional looping video via
+  `window.CL_HOME_VIDEOS` (same keys as the photo config). The card's photo is always the
+  fallback: the `<video>` layer sits above the photo at `opacity:0` and only gets
+  `.is-playing` on the real `playing` event, so a broken/slow clip is invisible rather than
+  a blank card. Videos are `preload="none"`, sources attached and played only when the card
+  intersects (200px margin), paused when it leaves, and skipped entirely under
+  `prefers-reduced-motion` or `connection.saveData`. `pointer-events:none` keeps the card
+  clickable as a link.
   **Review counts are config-driven**: `window.CL_REVIEWS` at the top of Part 2 holds the
   rating plus a per-platform count (google/facebook/yelp/nextdoor). JS sums them and fills
   every `[data-rev-total]`, `[data-rev-rating]`, the `[data-rev-count]` stat counter and the

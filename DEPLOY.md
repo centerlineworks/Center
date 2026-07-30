@@ -205,7 +205,13 @@ thumb zone.
    your rating and a count per platform. When Google gains a review, change that one number
    and the hero chip, the stat counter, the reviews headline and the platform badges all
    update themselves. (The Elfsight widget already pulls the actual review text live.)
-9. **Photos**: the `YOUR HOME PAGE PHOTOS` list at the top of the code block. Cabanas and
+9. **Optional videos on the "What we build" cards**: the `OPTIONAL VIDEOS` list at the top
+   of the code block has one line per card. Upload a short silent clip as a File and paste
+   its address; it fades in over that card's photo once it's actually playing. The photo
+   always loads first and stays as the fallback, so a slow or missing video never leaves a
+   blank card. Clips only load when the card scrolls into view, pause when it scrolls away,
+   and are skipped for visitors using reduce-motion or data saver.
+10. **Photos**: the `YOUR HOME PAGE PHOTOS` list at the top of the code block. Cabanas and
    Additions are the two waiting on a photo; everything else is pre-filled. Any `*_before`
    line is optional — fill one in and that photo becomes a hover before/after comparison.
 

@@ -316,6 +316,14 @@
     color: rgba(247,244,238,.42); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
   }
   #cl-home .cl-svc-card.has-photo .cl-slot-label { display: none; }
+  /* Optional video layer: sits above the photo, below the caption, and only
+     becomes visible once it is genuinely playing. pointer-events:none keeps
+     the whole card clickable as a link. */
+  #cl-home .cl-card-video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    z-index: 1; opacity: 0; transition: opacity .55s ease; pointer-events: none;
+  }
+  #cl-home .cl-card-video.is-playing { opacity: 1; }
   #cl-home .cl-svc-card figcaption {
     position: absolute; inset: auto 0 0 0; z-index: 2; padding: 46px 20px 18px;
     background: linear-gradient(transparent, rgba(12,11,16,.94) 62%); color: var(--paper);
@@ -608,6 +616,33 @@ window.CL_REVIEWS = {
   nextdoor: 2
 };
 
+/* =====================================================================
+   OPTIONAL VIDEOS FOR THE "WHAT WE BUILD" CARDS
+   Leave a line blank to just use the photo. Add a video and it fades in
+   over the photo once it's actually playing — the photo always loads first
+   and stays put as the fallback, so a slow or failed video never leaves a
+   blank card.
+
+   Upload each clip as a FILE (same way as the hero videos) and paste its
+   address, e.g. "https://www.centerlineworks.com/s/bathroom-reel.mp4".
+   Keep them short and silent (they play muted on loop). MP4 works
+   everywhere; you can also pass both formats as
+   ["...clip.webm", "...clip.mp4"] if you have them.
+
+   To save data they only load when the card scrolls into view, they pause
+   when it scrolls away, and they're skipped entirely for visitors who use
+   "reduce motion" or data saver.
+   ===================================================================== */
+window.CL_HOME_VIDEOS = {
+  svc_bathrooms:  "",
+  svc_basements:  "",
+  svc_cabanas:    "",
+  svc_additions:  "",
+  svc_decks:      "",
+  svc_siding:     "",
+  svc_commercial: ""
+};
+
 window.CL_HOME_PHOTOS = {
   /* --- Logo (upload your logo as a FILE named exactly centerline-logo.png,
          the same way you uploaded the videos, and this just works).
@@ -695,36 +730,43 @@ window.CL_HOME_PHOTOS = {
         <a class="cl-svc-card" href="https://www.centerlineworks.com/services#bathrooms" data-cl-photo="svc_bathrooms">
           <div class="cl-slot-label">[ Photo: bathroom ]</div>
           <img class="cl-shot-after" alt="Custom tile shower bathroom remodel by Centerline Construction in North Georgia" loading="lazy">
+          <video class="cl-card-video" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true"></video>
           <figcaption><b>Bathrooms</b><span>Remodels</span></figcaption>
         </a>
         <a class="cl-svc-card" href="https://www.centerlineworks.com/services#basements" data-cl-photo="svc_basements">
           <div class="cl-slot-label">[ Photo: basement ]</div>
           <img class="cl-shot-after" alt="Finished basement by Centerline Construction in Cherokee County, Georgia" loading="lazy">
+          <video class="cl-card-video" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true"></video>
           <figcaption><b>Basements</b><span>Finishing</span></figcaption>
         </a>
         <a class="cl-svc-card" href="https://www.centerlineworks.com/services#cabanas" data-cl-photo="svc_cabanas">
           <div class="cl-slot-label">[ Photo: cabana / pavilion ]</div>
           <img class="cl-shot-after" alt="Custom cabana and covered pavilion built by Centerline Construction" loading="lazy">
+          <video class="cl-card-video" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true"></video>
           <figcaption><b>Cabanas</b><span>Outdoor living</span></figcaption>
         </a>
         <a class="cl-svc-card" href="https://www.centerlineworks.com/services#additions" data-cl-photo="svc_additions">
           <div class="cl-slot-label">[ Photo: home addition ]</div>
           <img class="cl-shot-after" alt="Home addition built by Centerline Construction in North Georgia" loading="lazy">
+          <video class="cl-card-video" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true"></video>
           <figcaption><b>Additions</b><span>Built-on space</span></figcaption>
         </a>
         <a class="cl-svc-card" href="https://www.centerlineworks.com/services#decks" data-cl-photo="svc_decks">
           <div class="cl-slot-label">[ Photo: deck ]</div>
           <img class="cl-shot-after" alt="Custom deck and outdoor living space built by Centerline Construction" loading="lazy">
+          <video class="cl-card-video" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true"></video>
           <figcaption><b>Decks &amp; Outdoor</b><span>Living spaces</span></figcaption>
         </a>
         <a class="cl-svc-card" href="https://www.centerlineworks.com/services#siding" data-cl-photo="svc_siding">
           <div class="cl-slot-label">[ Photo: siding ]</div>
           <img class="cl-shot-after" alt="Siding replacement and exterior repair by Centerline Construction" loading="lazy">
+          <video class="cl-card-video" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true"></video>
           <figcaption><b>Siding &amp; Exterior</b><span>Repairs</span></figcaption>
         </a>
         <a class="cl-svc-card cl-svc-card--wide" href="https://www.centerlineworks.com/services#commercial" data-cl-photo="svc_commercial">
           <div class="cl-slot-label">[ Photo: commercial project ]</div>
           <img class="cl-shot-after" alt="Commercial renovation project by Centerline Construction in Georgia" loading="lazy">
+          <video class="cl-card-video" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true"></video>
           <figcaption><b>Commercial</b><span>Renovations &amp; build-outs</span></figcaption>
         </a>
       </div>
@@ -1061,6 +1103,75 @@ window.CL_HOME_PHOTOS = {
   } else {
     rails.forEach(function (el) { el.querySelectorAll("img").forEach(function (i) { i.loading = "eager"; }); });
   }
+
+  /* ---------- Optional per-card videos ----------
+     The photo underneath is the fallback and always stays; the video only
+     fades in after it actually starts playing. Loaded lazily when the card
+     scrolls near, paused when it leaves, skipped for reduced-motion or
+     data-saver visitors. */
+  (function () {
+    var vids = window.CL_HOME_VIDEOS || {};
+    var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (reduceMotion || (conn && conn.saveData)) return;
+
+    function typeFor(url) {
+      var u = url.split("?")[0].toLowerCase();
+      if (u.slice(-5) === ".webm") return "video/webm";
+      if (u.slice(-4) === ".ogv") return "video/ogg";
+      return "video/mp4";
+    }
+
+    var wired = [];
+    Object.keys(vids).forEach(function (key) {
+      var raw = vids[key];
+      var urls = (Object.prototype.toString.call(raw) === "[object Array]" ? raw : [raw])
+        .map(function (u) { return (u || "").trim(); })
+        .filter(function (u) { return !!u; });
+      if (!urls.length) return;
+      var card = root.querySelector('[data-cl-photo="' + key + '"]');
+      if (!card) return;
+      var video = card.querySelector(".cl-card-video");
+      if (!video) return;
+      video.muted = true; video.defaultMuted = true;
+      video.setAttribute("muted", "");
+      wired.push({ card: card, video: video, urls: urls, started: false });
+    });
+    if (!wired.length) return;
+
+    function start(item) {
+      if (item.started) return;
+      item.started = true;
+      item.urls.forEach(function (u) {
+        var s = document.createElement("source");
+        s.src = u; s.type = typeFor(u);
+        item.video.appendChild(s);
+      });
+      /* only reveal the video once it is really playing over the photo */
+      item.video.addEventListener("playing", function () { item.video.classList.add("is-playing"); });
+      item.video.addEventListener("error", function () { item.video.classList.remove("is-playing"); });
+      item.video.load();
+      var p = item.video.play();
+      if (p && p.catch) p.catch(function () { /* photo stays — nothing to do */ });
+    }
+
+    if ("IntersectionObserver" in window) {
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var item = wired.filter(function (w) { return w.card === e.target; })[0];
+          if (!item) return;
+          if (e.isIntersecting) {
+            start(item);
+            if (item.video.paused) { var p = item.video.play(); if (p && p.catch) p.catch(function () {}); }
+          } else if (item.started && !item.video.paused) {
+            item.video.pause();
+          }
+        });
+      }, { rootMargin: "200px 0px" });
+      wired.forEach(function (item) { vio.observe(item.card); });
+    } else {
+      wired.forEach(start);
+    }
+  })();
 
   /* ---------- Scroll reveals ---------- */
   var reveals = root.querySelectorAll(".cl-reveal");
