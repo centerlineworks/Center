@@ -20,11 +20,22 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   paints (MutationObserver + height check + timed fallbacks), so the section is never empty
   and crawlers/AI still get review text. Preconnect to `elfsightcdn.com` sits in Part 1.
   Hero: centred, led by a LARGE logo (`/s/centerline-logo.png`, clamp up to 680px) over
-  the video, then the slogan **"Straight lines. Straight answers."** — ties to the company
-  name and to the honesty theme that dominates the 43 reviews. It must NOT reuse About's
-  "Built on Faith / Finished with craftsmanship", and must not be a list of services
-  ("Bathrooms. Basements. Cabanas." was rejected — Alfred: "if I was a teacher I wouldn't
-  say apples.books.teaching"). Services belong in the subhead, not the headline.
+  the video, then the slogan **"Measure twice. Build once."** Slogan history — do not
+  regress: About's "Built on Faith / Finished with craftsmanship" is off limits here;
+  a service list ("Bathrooms. Basements. Cabanas.") was rejected ("if I was a teacher I
+  wouldn't say apples.books.teaching"); "Straight lines. Straight answers." was rejected as
+  "a weird slogan for a construction company". Alfred wants trade-rooted, not clever.
+  Services belong in the subhead, not the headline.
+  Copy rules he's asked for: don't lead with "family-owned" up top (it's fine lower down);
+  never imply a single crew ("One crew. Every room" was rejected as sounding understaffed —
+  now "Every room. Inside and out."); the process section must not mirror "Three values.
+  Zero shortcuts." or claim a fixed number of steps (now "Making it easy. No surprises."
+  with non-numbered phase labels).
+  **Review counts are config-driven**: `window.CL_REVIEWS` at the top of Part 2 holds the
+  rating plus a per-platform count (google/facebook/yelp/nextdoor). JS sums them and fills
+  every `[data-rev-total]`, `[data-rev-rating]`, the `[data-rev-count]` stat counter and the
+  platform badges, so bumping one platform updates the whole page. Never hardcode "43"
+  in visible copy again.
   NEVER recreate the logo in CSS/SVG — Alfred called a CSS lockup "totally botched". Drop
   the real image in as-is; a plain dashed upload-reminder note is the only stand-in, and it
   disappears once the file loads. The owner section is video-led (the About crew clip) with

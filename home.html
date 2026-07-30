@@ -591,6 +591,23 @@
    Any "*_before" line is optional: fill it in and that photo becomes a
    hover before/after comparison (and opens side-by-side when clicked).
    ===================================================================== */
+/* =====================================================================
+   YOUR REVIEW COUNTS — edit these numbers in ONE place and every mention
+   of your rating and review count on this page updates itself: the hero
+   chip, the stat counter, the reviews headline and the platform badges.
+
+   When Google gains a review, change ONLY the google number below.
+   The Elfsight widget further down already pulls the actual review text
+   live on its own — this just keeps the surrounding numbers honest.
+   ===================================================================== */
+window.CL_REVIEWS = {
+  rating:   "5.0",   /* your overall star rating */
+  google:   29,
+  facebook: 10,
+  yelp:     2,
+  nextdoor: 2
+};
+
 window.CL_HOME_PHOTOS = {
   /* --- Logo (upload your logo as a FILE named exactly centerline-logo.png,
          the same way you uploaded the videos, and this just works).
@@ -637,18 +654,17 @@ window.CL_HOME_PHOTOS = {
         <span class="cl-logo-note">Your logo appears here once centerline-logo.png is uploaded</span>
       </div>
       <h1 data-parallax="0.09">
-        <span class="ln">Straight lines.</span>
-        <span class="ln">Straight answers.</span>
+        <span class="ln">Measure twice.</span>
+        <span class="ln">Build once.</span>
       </h1>
-      <p class="cl-hero-sub" data-parallax="0.13">North Georgia's family-owned remodeling crew — bathrooms, basements, cabanas, additions, decks and more. Quoted honestly, finished on time, and cleaned up when we leave.</p>
+      <p class="cl-hero-sub" data-parallax="0.13">Bathrooms, basements, cabanas, additions, decks and more across Holly Springs, Canton and North Georgia — quoted honestly, finished on time, and cleaned up when we leave.</p>
       <div class="cl-btn-row" data-parallax="0.16">
         <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Get My Free Estimate</a>
         <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
       </div>
       <div class="cl-trustchips" data-parallax="0.19">
-        <span><b>★ 5.0</b> · 43 Reviews</span>
-        <span><b>18+</b> Years</span>
-        <span>Family-Owned</span>
+        <span><b>★ <span data-rev-rating>5.0</span></b> · <span data-rev-total>43</span> Reviews</span>
+        <span><b>18+</b> Years Experience</span>
         <span>Free Estimates</span>
       </div>
     </div>
@@ -660,7 +676,7 @@ window.CL_HOME_PHOTOS = {
   <section class="cl-stats" aria-label="Centerline Construction at a glance">
     <div class="cl-wrap cl-stats-grid">
       <div class="cl-stat"><b data-count="18" data-suffix="+">0</b><span>Years Experience</span></div>
-      <div class="cl-stat"><b data-count="43">0</b><span>Five-Star Reviews</span></div>
+      <div class="cl-stat"><b data-count="43" data-rev-count>0</b><span>Five-Star Reviews</span></div>
       <div class="cl-stat"><b data-count="100" data-suffix="%">0</b><span>Recommend Us</span></div>
       <div class="cl-stat"><b data-count="2020">0</b><span>Family-Founded</span></div>
     </div>
@@ -671,7 +687,7 @@ window.CL_HOME_PHOTOS = {
     <div class="cl-wrap">
       <div class="cl-reveal">
         <p class="cl-kicker">What we build</p>
-        <h2 id="home-svc-h">One crew. Every room of the house.</h2>
+        <h2 id="home-svc-h">Every room. Inside and out.</h2>
         <p class="cl-lede">From a single wood-rot repair to a full basement build-out, Centerline handles residential and commercial projects across Holly Springs, Canton, Woodstock and North Georgia.</p>
       </div>
 
@@ -778,13 +794,14 @@ window.CL_HOME_PHOTOS = {
   <section class="cl-section" aria-labelledby="home-process-h">
     <div class="cl-wrap">
       <div class="cl-reveal" style="text-align:center">
-        <p class="cl-kicker" style="justify-content:center">How it works</p>
-        <h2 id="home-process-h">Three steps. No surprises.</h2>
+        <p class="cl-kicker" style="justify-content:center">Working with us</p>
+        <h2 id="home-process-h">Making it easy. No surprises.</h2>
+        <p class="cl-lede" style="margin:0 auto">However big the project gets, you always know what's happening, what it costs, and what's next.</p>
       </div>
       <div class="cl-process">
-        <div class="cl-step cl-reveal"><b>STEP 1</b><h3>Free Estimate</h3><p>Call, text or request an estimate online. We walk the project with you and talk through options honestly.</p></div>
-        <div class="cl-step cl-reveal"><b>STEP 2</b><h3>Plan &amp; Quote</h3><p>You get a clear scope, quote and timeline up front — no moving targets once we start.</p></div>
-        <div class="cl-step cl-reveal"><b>STEP 3</b><h3>Build &amp; Walkthrough</h3><p>We build it right, clean up after ourselves, and walk the finished project with you before we call it done.</p></div>
+        <div class="cl-step cl-reveal"><b>Reach out</b><h3>Free Estimate</h3><p>Call, text or request one online. We walk the project with you and talk through options honestly.</p></div>
+        <div class="cl-step cl-reveal"><b>Before we start</b><h3>A Clear Quote</h3><p>You get the scope, price and timeline in writing up front — no moving targets once work begins.</p></div>
+        <div class="cl-step cl-reveal"><b>Start to finish</b><h3>Build &amp; Walkthrough</h3><p>Regular updates, a clean job site every evening, and a final walkthrough together before we call it done.</p></div>
       </div>
       <div class="cl-btn-row cl-btn-row--center cl-reveal">
         <a class="cl-btn cl-btn--gold" href="https://www.centerlineworks.com/schedule">Schedule My Free Estimate</a>
@@ -796,9 +813,10 @@ window.CL_HOME_PHOTOS = {
   <section class="cl-section cl-dark" aria-labelledby="home-owner-h">
     <div class="cl-wrap cl-owner">
       <div class="cl-owner-video cl-reveal">
-        <span class="cl-vtag"><i></i> On the job</span>
+        <!-- Swap these sources for any clip you like — job-site footage, or something
+             more personal. Upload as a File and point src at /s/<filename>. -->
         <video autoplay muted loop playsinline webkit-playsinline preload="metadata"
-               poster="assets/hero-poster.jpg" aria-label="Centerline Construction crew framing a home addition">
+               poster="assets/hero-poster.jpg" aria-label="Centerline Construction at work">
           <source src="assets/hero-loop.webm" type="video/webm">
           <source src="assets/hero-loop.mp4" type="video/mp4">
         </video>
@@ -833,15 +851,15 @@ window.CL_HOME_PHOTOS = {
     <div class="cl-wrap">
       <div class="cl-reveal" style="text-align:center">
         <p class="cl-kicker" style="justify-content:center">Word of mouth</p>
-        <h2 id="home-rev-h">43 reviews. Every one of them five stars.</h2>
+        <h2 id="home-rev-h"><span data-rev-total>43</span> reviews. Every one of them five stars.</h2>
         <div class="cl-rev-head">
-          <b>5.0</b>
+          <b data-rev-rating>5.0</b>
           <div>
             <span class="cl-stars" aria-label="5 out of 5 stars">★★★★★</span>
             <small>Across Google, Facebook, Yelp &amp; Nextdoor — 100% of reviewers recommend us.</small>
           </div>
         </div>
-        <div class="cl-platforms">
+        <div class="cl-platforms" data-rev-platforms>
           <span>Google</span><span>Facebook</span><span>Yelp</span><span>Nextdoor</span>
         </div>
       </div>
@@ -903,6 +921,9 @@ window.CL_HOME_PHOTOS = {
         <details><summary>Who owns Centerline Construction?</summary><p>Alfred Tudela founded and owns Centerline Construction Company, LLC. He has 18+ years of construction experience and is personally involved in projects — meeting clients and working alongside his crew.</p></details>
         <details><summary>What are your hours?</summary><p>Monday–Saturday 7:00am–6:00pm and Sunday 2:00pm–6:00pm.</p></details>
       </div>
+      <div class="cl-btn-row cl-btn-row--center cl-reveal">
+        <a class="cl-btn cl-btn--dark-ghost" href="https://www.centerlineworks.com/faqs-3">See more questions</a>
+      </div>
     </div>
   </section>
 
@@ -950,6 +971,33 @@ window.CL_HOME_PHOTOS = {
   var root = document.getElementById("cl-home");
   if (!root) return;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Review counts: one config, every mention on the page ---------- */
+  (function () {
+    var R = window.CL_REVIEWS;
+    if (!R) return;
+    var platforms = [["Google", R.google], ["Facebook", R.facebook], ["Yelp", R.yelp], ["Nextdoor", R.nextdoor]]
+      .filter(function (p) { return typeof p[1] === "number" && p[1] > 0; });
+    var total = platforms.reduce(function (n, p) { return n + p[1]; }, 0);
+
+    if (total > 0) {
+      root.querySelectorAll("[data-rev-total]").forEach(function (el) { el.textContent = total; });
+      /* the animated stat counter reads its target from data-count */
+      root.querySelectorAll("[data-rev-count]").forEach(function (el) { el.setAttribute("data-count", total); });
+    }
+    if (R.rating) root.querySelectorAll("[data-rev-rating]").forEach(function (el) { el.textContent = R.rating; });
+
+    /* platform badges show their own counts, so "just Google went up" is visible */
+    var wrap = root.querySelector("[data-rev-platforms]");
+    if (wrap && platforms.length) {
+      wrap.innerHTML = "";
+      platforms.forEach(function (p) {
+        var s = document.createElement("span");
+        s.textContent = p[0] + " " + p[1];
+        wrap.appendChild(s);
+      });
+    }
+  })();
 
   /* ---------- Photos ----------
      All load detection happens here in JS on purpose — never via inline

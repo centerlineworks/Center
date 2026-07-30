@@ -201,7 +201,11 @@ thumb zone.
    behind it three real reviews show instantly and hide themselves the moment the Elfsight
    widget paints (so the section is never empty while the widget loads, and Google/AI can
    still read real review text).
-8. **Photos**: the `YOUR HOME PAGE PHOTOS` list at the top of the code block. Cabanas and
+8. **Review counts**: the `YOUR REVIEW COUNTS` list at the very top of the code block holds
+   your rating and a count per platform. When Google gains a review, change that one number
+   and the hero chip, the stat counter, the reviews headline and the platform badges all
+   update themselves. (The Elfsight widget already pulls the actual review text live.)
+9. **Photos**: the `YOUR HOME PAGE PHOTOS` list at the top of the code block. Cabanas and
    Additions are the two waiting on a photo; everything else is pre-filled. Any `*_before`
    line is optional — fill one in and that photo becomes a hover before/after comparison.
 
