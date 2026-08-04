@@ -4,7 +4,7 @@ Custom pages for [centerlineworks.com](https://www.centerlineworks.com), built t
 Squarespace with zero build tools. Three pages so far:
 
 - **`home.html`** — the Home page: video hero with scroll-driven 3D, above-the-fold trust
-  signals, services, before/after work, process, Alfred, Elfsight reviews, service area and
+  signals, services, before/after work, process, Alfred, a full review carousel, service area and
   FAQ (see "The Home page" section below).
 - **`index.html`** — the About page, with 3D scroll effects and a phone-only twin (Part 3).
 - **`services.html`** — the Services page: every service with its own photo gallery, in one
@@ -163,9 +163,10 @@ review count, free-estimate CTA, trust chips) over a looping video, then proof.
   Commercial feature card.
 - **Featured work** with the cursor-tracking before/after reveal and a click-to-open
   side-by-side lightbox.
-- **Reviews** — the Elfsight All-in-One widget embedded as supplied, with a 5.0 / 43-review
-  scoreboard above it and three real reviews rendered behind it that hide themselves once
-  the widget paints (no empty gap while loading; crawlers and AI still see review text).
+- **Reviews** — a 5.0 / 43-review scoreboard with per-platform badges over a carousel of
+  all 39 real reviews: arrows, drag, swipe, keyboard, and gentle auto-advance that pauses
+  the moment you touch it. The review text is plain HTML, so Google and AI answer engines
+  read it whether or not JavaScript runs.
 - **Local SEO** — service-area chips (Holly Springs, Canton, Woodstock, Ball Ground,
   Acworth, Marietta, Kennesaw, Roswell, Alpharetta, Cherokee County) and geo meta tags.
 - **Schema/GEO** — `WebSite`, `WebPage`, `HomeAndConstructionBusiness` (full NAP, hours,

@@ -15,10 +15,17 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   service-area chips (local SEO), FAQ, video CTA. Reuses `services-hero.*` and photos
   already live elsewhere, so it needs zero new uploads — note that swapping the Services
   video therefore also changes Home until it gets its own `home-hero.*`.
-  Alfred's **Elfsight** All-in-One Reviews widget is embedded verbatim in the reviews
-  section; three real reviews render behind it and hide via `.cl-elf-ready` once the widget
-  paints (MutationObserver + height check + timed fallbacks), so the section is never empty
-  and crawlers/AI still get review text. Preconnect to `elfsightcdn.com` sits in Part 1.
+  Reviews are a **self-contained carousel**, not a widget. Alfred's Elfsight All-in-One
+  embed was removed at his request — "its not working right online" — along with its
+  preconnect and the `.cl-elf-ready` fallback-hiding JS. In its place all 39 review cards
+  live in the HTML (same copy as About's carousel) inside a scroll-snapping rail:
+  `.cl-revcar` + `.cl-revcar-track`, driven by native `scrollTo`, so touch swipe, trackpad,
+  drag and keyboard all work for free and the text stays crawlable with JS off. Arrows,
+  an `n / 39` counter, a gold progress rail and 4.6s auto-advance sit under it; autoplay
+  pauses on hover/focus/touch, only runs while the section is on screen, and is skipped
+  under `prefers-reduced-motion`. Card heights stretch to the row, so `blockquote` gets
+  `margin-block: auto` (short quotes centre instead of leaving a hole) and a
+  `-webkit-line-clamp` of 8 (6 on phones) caps the tallest one.
   Hero: centred, led by a LARGE logo (`/s/centerline-logo.png`, clamp up to 680px) over
   the video, then the headline **"Your dream. Built for reality."** — Alfred's own words,
   supplied verbatim after several rejected drafts; don't rewrite it. Slogan history — do not

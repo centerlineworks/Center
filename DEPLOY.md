@@ -198,15 +198,15 @@ thumb zone.
    file** method, keep the names exactly): `home-owner.mp4`, `home-owner.webm`,
    `home-owner-poster.jpg` from the `assets` folder. That's your own work-and-life reel.
    The hero still reuses `services-hero.*`, which is already on your site.
-7. **Your Elfsight reviews widget is already embedded** in the reviews section — the exact
-   embed code you provided, unchanged. Above it sits a "5.0 · 43 reviews" scoreboard, and
-   behind it three real reviews show instantly and hide themselves the moment the Elfsight
-   widget paints (so the section is never empty while the widget loads, and Google/AI can
-   still read real review text).
+7. **Reviews are built in** — no widget, nothing to configure. A "5.0 · 43 reviews"
+   scoreboard sits above a carousel holding all 39 of your real reviews. Visitors can use
+   the arrows, drag it, swipe it on a phone, or just let it advance on its own. To add a
+   new review later, find the review carousel in the code block, copy any
+   `<article class="cl-rev-card">` block, and change the quote, the name and the platform.
 8. **Review counts**: the `YOUR REVIEW COUNTS` list at the very top of the code block holds
    your rating and a count per platform. When Google gains a review, change that one number
    and the hero chip, the stat counter, the reviews headline and the platform badges all
-   update themselves. (The Elfsight widget already pulls the actual review text live.)
+   update themselves.
 9. **Optional videos on the "What we build" cards**: the `OPTIONAL VIDEOS` list at the top
    of the code block has one line per card. Upload a short silent clip as a File and paste
    its address; it fades in over that card's photo once it's actually playing. The photo

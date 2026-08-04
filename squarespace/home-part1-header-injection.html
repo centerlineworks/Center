@@ -186,8 +186,6 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Speeds up the Elfsight reviews widget in Part 2 -->
-<link rel="preconnect" href="https://elfsightcdn.com" crossorigin>
 <link rel="preconnect" href="https://images.squarespace-cdn.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
 
@@ -461,7 +459,7 @@
   }
   #cl-home .cl-pull cite { display: block; font-style: normal; font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-top: 10px; }
 
-  /* ---------- Reviews (Elfsight + instant-credibility header) ---------- */
+  /* ---------- Reviews (scoreboard + full review carousel) ---------- */
   #cl-home .cl-rev-head { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; text-align: left; }
   #cl-home .cl-rev-head > b { font-size: clamp(42px, 5.4vw, 60px); font-weight: 900; color: var(--gold-deep); letter-spacing: -.04em; line-height: 1; white-space: nowrap; flex: none; }
   #cl-home .cl-stars { color: var(--gold); letter-spacing: 2px; font-size: 17px; }
@@ -471,18 +469,68 @@
     padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .06em;
     background: #fff; border: 1px solid var(--line); color: var(--ink);
   }
-  #cl-home .cl-elf-wrap { margin-top: 36px; min-height: 240px; position: relative; }
-  /* Real reviews show instantly (and to crawlers/AI); hidden once Elfsight paints */
-  #cl-home .cl-rev-fallback { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  #cl-home .cl-elf-ready .cl-rev-fallback { display: none; }
-  #cl-home .cl-rev-card {
-    background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 24px;
-    display: flex; flex-direction: column; gap: 12px; box-shadow: 0 24px 46px -30px rgba(18,16,12,.4);
+  /* --- Review carousel: every review, in one scroll-snapping rail --- */
+  #cl-home .cl-revcar { margin-top: 38px; position: relative; }
+  #cl-home .cl-revcar-viewport { position: relative; }
+  /* Soft fade at both edges so cards slide out of view instead of being chopped */
+  #cl-home .cl-revcar-viewport::before,
+  #cl-home .cl-revcar-viewport::after {
+    content: ""; position: absolute; top: 0; bottom: 0; width: 64px; z-index: 3; pointer-events: none;
+    transition: opacity .3s ease;
   }
-  #cl-home .cl-rev-card blockquote { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 15.5px; line-height: 1.5; }
-  #cl-home .cl-rev-card footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  #cl-home .cl-revcar-viewport::before { left: -1px; background: linear-gradient(90deg, var(--paper-2), rgba(239,233,223,0)); }
+  #cl-home .cl-revcar-viewport::after  { right: -1px; background: linear-gradient(270deg, var(--paper-2), rgba(239,233,223,0)); }
+  #cl-home .cl-revcar[data-at="start"] .cl-revcar-viewport::before,
+  #cl-home .cl-revcar[data-at="end"] .cl-revcar-viewport::after { opacity: 0; }
+
+  #cl-home .cl-revcar-track {
+    display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; padding: 6px 0 26px; margin: -6px 0 0;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  #cl-home .cl-revcar-track::-webkit-scrollbar { display: none; }
+  #cl-home .cl-rev-card {
+    flex: 0 0 clamp(268px, 31.5%, 356px); scroll-snap-align: start;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px 24px;
+    display: flex; flex-direction: column; gap: 13px; position: relative; overflow: hidden;
+    box-shadow: 0 24px 46px -30px rgba(18,16,12,.4);
+    transition: transform .45s var(--ease-out), box-shadow .45s, border-color .45s;
+  }
+  #cl-home .cl-rev-card::before {
+    content: "\201C"; position: absolute; right: 16px; top: -18px; z-index: 0;
+    font-family: 'Fraunces', Georgia, serif; font-size: 132px; line-height: 1;
+    color: rgba(217,164,65,.16); pointer-events: none;
+  }
+  #cl-home .cl-rev-card:hover {
+    transform: translateY(-6px); border-color: rgba(217,164,65,.55);
+    box-shadow: 0 34px 60px -30px rgba(18,16,12,.5);
+  }
+  #cl-home .cl-rev-card > * { position: relative; z-index: 1; }
+  #cl-home .cl-rev-card blockquote {
+    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 15.5px; line-height: 1.55;
+    color: var(--ink);
+    display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden;
+    margin-block: auto;
+  }
+  #cl-home .cl-rev-card footer { margin-top: auto; padding-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid var(--line); }
   #cl-home .cl-rev-card cite { font-style: normal; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: rgba(18,16,12,.62); }
   #cl-home .cl-rev-src { flex: none; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; border: 1.5px solid rgba(217,164,65,.55); color: var(--gold-deep); background: rgba(217,164,65,.1); }
+
+  /* Controls */
+  #cl-home .cl-revcar-bar { display: flex; align-items: center; gap: 16px; margin-top: 6px; }
+  #cl-home .cl-revcar-rail { flex: 1; height: 3px; border-radius: 999px; background: rgba(18,16,12,.13); overflow: hidden; }
+  #cl-home .cl-revcar-rail i { display: block; height: 100%; width: 12%; border-radius: 999px; background: var(--gold-deep); transition: transform .35s var(--ease-out), width .35s var(--ease-out); }
+  #cl-home .cl-revcar-count { font-size: 12.5px; font-weight: 800; letter-spacing: .1em; color: rgba(18,16,12,.6); flex: none; font-variant-numeric: tabular-nums; }
+  #cl-home .cl-revcar-count b { color: var(--gold-deep); font-size: 15px; }
+  #cl-home .cl-revcar-btns { display: flex; gap: 9px; flex: none; }
+  #cl-home .cl-revcar-btns button {
+    width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font: inherit; font-size: 17px; line-height: 1;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+    display: grid; place-items: center;
+    transition: background .3s, color .3s, border-color .3s, transform .3s var(--ease-out);
+  }
+  #cl-home .cl-revcar-btns button:hover:not(:disabled) { background: var(--ink); color: var(--paper); border-color: var(--ink); transform: translateY(-2px); }
+  #cl-home .cl-revcar-btns button:disabled { opacity: .32; cursor: default; }
 
   /* ---------- Service area ---------- */
   #cl-home .cl-areas { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 26px; }
@@ -540,7 +588,7 @@
 
   /* ---------- Phone layout ---------- */
   @media (max-width: 900px) {
-    #cl-home .cl-svc-grid, #cl-home .cl-values, #cl-home .cl-process, #cl-home .cl-rev-fallback { grid-template-columns: 1fr; }
+    #cl-home .cl-svc-grid, #cl-home .cl-values, #cl-home .cl-process { grid-template-columns: 1fr; }
     #cl-home .cl-work { grid-template-columns: 1fr; }
     #cl-home .cl-owner { grid-template-columns: 1fr; }
 
@@ -556,13 +604,21 @@
     #cl-home .cl-section { padding: 52px 0; }
     #cl-home .cl-wrap { padding: 0 22px; }
     /* Swipeable service + work rails */
-    #cl-home .cl-svc-grid, #cl-home .cl-work, #cl-home .cl-rev-fallback {
+    #cl-home .cl-svc-grid, #cl-home .cl-work {
       display: flex; gap: 13px; overflow-x: auto; scroll-snap-type: x mandatory;
       margin: 26px -22px 0; padding: 4px 22px 8px; scroll-padding-left: 22px;
       -webkit-overflow-scrolling: touch; scrollbar-width: none;
     }
-    #cl-home .cl-svc-grid::-webkit-scrollbar, #cl-home .cl-work::-webkit-scrollbar, #cl-home .cl-rev-fallback::-webkit-scrollbar { display: none; }
-    #cl-home .cl-svc-card, #cl-home .cl-shot, #cl-home .cl-rev-card { flex: none; width: min(78vw, 320px); scroll-snap-align: start; }
+    #cl-home .cl-svc-grid::-webkit-scrollbar, #cl-home .cl-work::-webkit-scrollbar { display: none; }
+    #cl-home .cl-svc-card, #cl-home .cl-shot { flex: none; width: min(78vw, 320px); scroll-snap-align: start; }
+    /* Review rail runs edge to edge on phones; the fades sit over the page padding */
+    #cl-home .cl-revcar-track { margin: 0 -22px; padding: 6px 22px 26px; scroll-padding-left: 22px; -webkit-overflow-scrolling: touch; }
+    #cl-home .cl-revcar-viewport::before, #cl-home .cl-revcar-viewport::after { width: 26px; }
+    #cl-home .cl-rev-card { flex: 0 0 min(80vw, 330px); padding: 26px 22px 20px; }
+    /* one card fills the screen here, so cap the tallest quote to keep the rail short */
+    #cl-home .cl-rev-card blockquote { -webkit-line-clamp: 6; }
+    #cl-home .cl-revcar-bar { gap: 12px; }
+    #cl-home .cl-revcar-btns button { width: 40px; height: 40px; }
     /* the wide commercial card becomes a normal card in the swipe rail */
     #cl-home .cl-svc-card--wide { aspect-ratio: 4 / 3.1; }
     #cl-home .cl-btn { padding: 15px 26px; font-size: 14.5px; }

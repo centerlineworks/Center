@@ -24,8 +24,9 @@
    chip, the stat counter, the reviews headline and the platform badges.
 
    When Google gains a review, change ONLY the google number below.
-   The Elfsight widget further down already pulls the actual review text
-   live on its own — this just keeps the surrounding numbers honest.
+   The review carousel further down holds the actual review text as plain
+   HTML — to add a new one, copy any <article class="cl-rev-card"> block
+   there and change the quote, the name and the platform badge.
    ===================================================================== */
 window.CL_REVIEWS = {
   rating:   "5.0",   /* your overall star rating */
@@ -308,7 +309,7 @@ window.CL_HOME_PHOTOS = {
     </div>
   </section>
 
-  <!-- ================= REVIEWS (Elfsight) ================= -->
+  <!-- ================= REVIEWS (carousel) ================= -->
   <section class="cl-section" style="background:var(--paper-2)" aria-labelledby="home-rev-h">
     <div class="cl-wrap">
       <div class="cl-reveal" style="text-align:center">
@@ -326,31 +327,216 @@ window.CL_HOME_PHOTOS = {
         </div>
       </div>
 
-      <div class="cl-elf-wrap cl-reveal" data-elf-wrap>
-        <!-- Real reviews render instantly (and are readable by Google + AI answer
-             engines even if the widget is slow or blocked). They hide themselves
-             the moment the Elfsight widget paints. -->
-        <div class="cl-rev-fallback" data-elf-fallback>
-          <article class="cl-rev-card">
-            <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>"Centerline Construction is an amazing company! Alfred and his team do phenomenal work. We are so pleased with the work they just finished in our basement. They are extremely hard working, very honest and always showed up when they said they would!"</blockquote>
-            <footer><cite>— Joni Dunnington</cite><span class="cl-rev-src">Google</span></footer>
-          </article>
-          <article class="cl-rev-card">
-            <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>"Prompt appointment scheduled when you call. Exceptional detail on all carpentry work &amp; drywall. Leaves work area spotless!! I would recommend them for any construction &amp; remodeling project."</blockquote>
-            <footer><cite>— Juanita Powell</cite><span class="cl-rev-src">Google</span></footer>
-          </article>
-          <article class="cl-rev-card">
-            <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>"Centerline did a great job repairing the damaged areas around our home, including trim and siding. The crew was professional, on time, and very detail-oriented… the pricing was fair with no surprises."</blockquote>
-            <footer><cite>— Albert Jaon</cite><span class="cl-rev-src">Facebook</span></footer>
-          </article>
+      <!-- Every review we have, in one carousel: arrows, drag/swipe, auto-advance.
+           The text lives in the HTML so Google and AI answer engines can read it. -->
+      <div class="cl-revcar cl-reveal" data-revcar data-at="start">
+        <div class="cl-revcar-viewport">
+          <div class="cl-revcar-track" data-revcar-track tabindex="0" role="group" aria-label="Customer reviews, scrollable">
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred was very professional, responsive &amp; reasonable!”</blockquote>
+          <footer><cite>— Ed Zeer</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Top notch.”</blockquote>
+          <footer><cite>— David Faust</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Working with Centerline Construction was a fantastic experience from start to finish. Alfred and team was professional, punctual, and highly skilled. The quality of their work exceeded our expectations, and they kept the project on time. Communication was clear throughout, and they went above and beyond to make sure everything was perfect. I highly recommend Centerline Construction for any construction project. Thank you! Linda Carter”</blockquote>
+          <footer><cite>— Linda Carter</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Prompt appointment scheduled when you call. Exceptional detail on all carpentry work &amp; drywall. Completes any items that need attention &amp; repair that are found during construction and leaves work area spotless!! I would recommend them for any construction &amp; remodeling project. Work is exceptional and done over and above your expectations!”</blockquote>
+          <footer><cite>— Juanita Powell</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“1000% Recommend Alfred and his team!!<br>Knowledgeable and a man of his word!<br>Respectful, neat, and fast. Didn’t have us sign off until we were completely satisfied which we were! Love my outdoor fireplace!”</blockquote>
+          <footer><cite>— Christine V</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline did a great job repairing the damaged areas around our home, including trim and siding. The crew was professional, on time, and very detail-oriented. Everything was explained clearly, and the pricing was fair with no surprises. The quality of the work really shows, and we’re very happy with the results. I would definitely call them again for future repairs and recommend them to others.”</blockquote>
+          <footer><cite>— Albert Jaon</cite><span class="cl-rev-src">Facebook</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Had a hole knocked into the drywall and Alfred responded to my social media require repairs. He and his tech, Kyle, were friendly, neat and considerate. They fixed the hole and you can’t tell anything ever happened. Reasonable rates and great work! Would definitely hire them again and i highly recommend them!”</blockquote>
+          <footer><cite>— karen snyder</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction recently resealed my master bathroom shower after I’d been having some water issues, and they did a fantastic job. They were professional from start to finish, easy to talk to, and really flexible with scheduling. I especially appreciated how thoroughly they cleaned up after themselves — it made the whole process so convenient. Their pricing was also very reasonable. I’m really happy with the work they did and would definitely recommend Centerline Construction to anyone needing bathroom repairs or maintenance!”</blockquote>
+          <footer><cite>— Mary Lammens</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“I had a fantastic experience with Alfred an Centerline Construction. Was quoted a price to put Christmas lights up and then he found out they were the Govee lights and a bit different. He kept the price the same and included some extras to make it look how I wanted by hiding additional wires, etc. Was very quick and communication was top notch. Would highly recommend him and will be using him for future projects.”</blockquote>
+          <footer><cite>— Ryan Flouer</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline did an outstanding job at installing the cabana roof on our outdoor kitchen. The communication was thorough and the integration with the existing outdoor kitchen was exceptional. Even helped me hang the TV while they were wrapping up.”</blockquote>
+          <footer><cite>— Steve Calbert</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“I’ve had the pleasure of working with Alfred. He rented a trailer from me and treated it like his own and was punctual.”</blockquote>
+          <footer><cite>— Luis Arevalo</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred and his experts at Centerline were first-rate in every area. They worked extremely hard, their craftsmanship was beyond compare and so easy to work with. Alfred made everything so easy for us! We won’t hesitate to hire Alfred and Centerline again and have several jobs in mind. We would give 10 ⭐️s if we could!”</blockquote>
+          <footer><cite>— Fedfanforeva</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Excellent contractor!”</blockquote>
+          <footer><cite>— Kenny Knox</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction remodeled our front porch and we couldn’t be happier with the results. Communication was easy and they always followed through with their replies. They were dependable and reasonably priced. The final cost was the same as the quote given and the craftsmanship impeccable. We have hired the company for our next project. Highly recommended them to our neighbors who have commented on our beautiful porch.”</blockquote>
+          <footer><cite>— Kevin Little</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred and team were here when needed and created a seamless installation.”</blockquote>
+          <footer><cite>— Jonathan Brooks</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred is the absolute best!<br>He handled all of my issues quickly, expertly, and cleaned up everything afterwards.<br>He went over and above and came out multiple times due to the weather, because he wanted to make sure everything was done right.<br>He is very personable and a pleasure to work with!<br>Thank you!!”</blockquote>
+          <footer><cite>— Debbie Welchel</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Great work, professional, reasonable prices and very reliable.<br>We initially hired Centerline to replace a deck, they did such a great job that we called them back to do some additional work. My neighbors saw their work and hired them as well!<br>Highly recommend this company.”</blockquote>
+          <footer><cite>— Sandy Ruben</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Great job fixing my soffit. Much appreciated!!”</blockquote>
+          <footer><cite>— Jon Kruk</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred and his crew did a phenomenal job at our house. First they replaced our whole deck/ poured the concrete landing and the finishes are just top notch. They also replaced two of our exterior doors. Great communication, on time, and friendly service. Any handy man work please hit them up! - Renata and Fabricio”</blockquote>
+          <footer><cite>— Fabricio De Melo</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“We are absolutely thrilled with the service we received from Alfred and the team at Centerline Construction! From start to finish, his professionalism, responsiveness, and respect were clear in every interaction. Alfred and his team completely rebuilt our shower. They were helpful with all the choices (including a shampoo niche, shaving ledge, glass door and matching hardware) and kept us in the loop the whole time. In addition to the full shower remodel, he corrected an existing exhaust fan issue and installed a new one. Alfred also oversaw the templating and installation of our new countertop, installed our new faucets, and fixed the plumbing. He went above and beyond helping cut the existing drawers to fit the larger sinks.<br><br>We unexpectedly needed a new hot water heater on short notice. Alfred came through for us immediately, continuing his commitment to customer service.<br><br>What stood out the most was Alfred&#x27;s reliability and the quality of his work. Each task was completed on time and with a level of craftsmanship that is hard to come by. His friendly demeanor and willingness to go above and beyond made the entire process stress-free. If you&#x27;re looking for a skilled contractor who delivers top-notch service and results, we highly recommend Alfred and his team. They&#x27;ve met and exceeded our expectations, and we are excited about all the improvements to our home.”</blockquote>
+          <footer><cite>— Christine Lago</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred was referred to us by Home Depot and was a true professional from the start. He installed our new dishwasher and replaced the old built-in frame with a removable cover in case we ran into any issues. Alfred repaired and installed pocket doors and plantation shutters with great attention to detail. He also handled other small projects around the house, which was very helpful. He was respectful in our home and very responsive through calls and texts. We look forward to working with Alfred again on future projects.”</blockquote>
+          <footer><cite>— Betty Vanstrom</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction Company is absolutely the best company I have ever worked with. The crew that came to my house were polite, friendly, and professional. The work they did went above and beyond what I expected. The CEO, Alfred Tudela, a working CEO worked with us personally and provided the best solutions to accomplish our project. Alfred is vert easy and great to work with. Without any hesitation I highly recommend this company for your repair and/or construction needs.”</blockquote>
+          <footer><cite>— Russ Palumbo</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction is an amazing company! Alfred and his team do phenomenal work. We are so pleased with the work they just finished in our basement. They are extremely hard working, very honest and always showed up when they said they would! We would HIGHLY recommend them to anyone!”</blockquote>
+          <footer><cite>— Joni Dunnington</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Centerline Construction Company LLC led by Alfred will have my recommendation anytime because I can testify to the company’s professionalism, competence and uniqueness. They handled my project with a high level of expertise which includes dealing with insurance matters. With this, I make bold to say they have earned my vote of confidence. 5 Star+”</blockquote>
+          <footer><cite>— williams Erinle</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Our church recently had a new AC unit installed and to access the space to install the unit the company had to cut a huge hole in our ceiling. Alfred answered the phone AND came out the same day I called and started work! The most refreshing part working with him was his professional response and communication!!! He kept me up to date on each step of the process! His work was stellar. It looks like nothing ever happened. I highly recommend Alfred a s Centerline Construction!!!”</blockquote>
+          <footer><cite>— Jesse Horne</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred and Centerline did an amazing job on a porch construction detail we needed. Five stars on things that matter to me when hiring a contractor: responsiveness, quality work, and great communication. Thank you!”</blockquote>
+          <footer><cite>— Kelly Hartman</cite><span class="cl-rev-src">Facebook</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Great job, amazing attention to detail, and fast service! I had centerline do work on a deck area, while working I pointed out how I always have a wet spot in my backyard. Alfred told me I can fix that quoted me the work added a drainage reservoir or something like that, and I haven’t had a problem since.”</blockquote>
+          <footer><cite>— Rafael Tudela</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“The CEO found the time to meet with us the first day. He is a fine gentleman with an enthusiastic demeanor. He was able to review our situation and evaluate the time needed to complete our project. We were pleased to realize that this company would suit our project perfectly. We have had problems with our Master Bathroom.His professional knowledge was exactly what we wanted.”</blockquote>
+          <footer><cite>— Diane P.</cite><span class="cl-rev-src">Yelp</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“We had an excellent experience with Centerline replacing rotted brick molding trim, sheathing, and siding. Super professional, honest, very reasonable rates, and excellent quality work! Would highly recommend and will be a first choice for future projects.”</blockquote>
+          <footer><cite>— Mike Singletary</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred Tudela is so knowledgeable, every time I need any kind of work done he exceeds my expectations. His attention detail is unsurpassed. He is prompt, responds quickly, and he honest with pricing and repair expectations. I won’t ever use anyone else.”</blockquote>
+          <footer><cite>— Catalina McCauley</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Amazing work! Completely transformed our laundry/mudroom. Worked quickly and professionally and super detailed. We were so happy with the end result. Highly recommend for any home remodel or project!”</blockquote>
+          <footer><cite>— Natalia Bechtold</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Highly recommend centerline construction. Amazing attention to detail I’ve used them for outdoor projects as well as indoor. And best of all they were quick and stuck with their quoted price here’s a before and after of a floating shelf pantry they did exactly what I wanted”</blockquote>
+          <footer><cite>— Ruben Toldo</cite><span class="cl-rev-src">Nextdoor</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Alfred responded to a FB post I made looking for a small job on replacing a water spigot/ water hydrant at my personal property. He followed my instructions on how to reach me, have me a quote, and how he would handle it. We discussed time, price, and other details.<br><br>Alfred kept me in touch on his ETA, the parts, and the project as he was working on it.<br><br>It&#x27;s rare to have a contractor do what they say they will and arrive on time. I was impressed that Alfred did both.<br><br>I&#x27;m very satisfied with the job that Centerline Construction completed at my property. thank you.”</blockquote>
+          <footer><cite>— Cassandra Bickel</cite><span class="cl-rev-src">Google</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Amazing work! Completely transformed our laundry/mudroom. Worked quickly and professionally and super detailed. Very fair pricing and We were so happy with the end result. Worth every penny! Highly recommend for any home remodel or project!”</blockquote>
+          <footer><cite>— Natalia B.</cite><span class="cl-rev-src">Yelp</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“As a general contractor, I cannot stress the importance of having amazing subcontractors like Centerline Construction. Alfred and his team are always friendly, punctual, knowledgeable, and provide quality work. I am thankful to be able to count on this team whenever the need arises. Thanks Alfred!”</blockquote>
+          <footer><cite>— Hannah Lilley</cite><span class="cl-rev-src">Facebook</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Always a pleasure to work with the Centerline Construction team. We know when we collaborate on any project with Centerline the customer will get an awesome finished product. Reliable and trustworthy company who always gets the job done right the first time!”</blockquote>
+          <footer><cite>— American Installations &amp; Renovations</cite><span class="cl-rev-src">Facebook</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Awesome company with great communication. I subcontracted these guys for a basement remodel they showed up when said and did great work with homeowners still living in the home. Highly recommend Alfred and his team!”</blockquote>
+          <footer><cite>— Max Lilley</cite><span class="cl-rev-src">Facebook</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“We’ve had several projects tackled by Centerline Construction and work has been top notch! From furniture building, lighting fixture replacement, remodeling, etc., they were excellent from the beginning of the job to the very end! We have no hesitation in calling on Centerline for future work!”</blockquote>
+          <footer><cite>— Kristen Reier Faust</cite><span class="cl-rev-src">Facebook</span></footer>
+        </article>
+        <article class="cl-rev-card">
+          <div class="cl-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“this guy Alfred knows his stuff. we were selling our house, and the deck/ handrail was in a bad way. we called centerline, he came out and brought us up to code, finished when he said they would, and was very fair with the price. I 100% reccommend these guys, they are top notch”</blockquote>
+          <footer><cite>— Heath Lawson</cite><span class="cl-rev-src">Facebook</span></footer>
+        </article>
+          </div>
         </div>
-
-        <!-- Elfsight All-in-One Reviews | Untitled All-in-One Reviews -->
-        <script src="https://elfsightcdn.com/platform.js" async></script>
-        <div class="elfsight-app-8618b5c6-2014-40d4-a866-f29f7493d435" data-elfsight-app-lazy></div>
+        <div class="cl-revcar-bar">
+          <span class="cl-revcar-count"><b data-revcar-now>1</b> / <span data-revcar-total>39</span></span>
+          <span class="cl-revcar-rail" aria-hidden="true"><i data-revcar-rail></i></span>
+          <span class="cl-revcar-btns">
+            <button type="button" data-revcar-prev aria-label="Previous review">‹</button>
+            <button type="button" data-revcar-next aria-label="Next review">›</button>
+          </span>
+        </div>
       </div>
     </div>
   </section>
@@ -625,24 +811,99 @@ window.CL_HOME_PHOTOS = {
     counters.forEach(function (el) { cio.observe(el); });
   } else { counters.forEach(runCounter); }
 
-  /* ---------- Elfsight: hide our fallback reviews once the widget paints ---------- */
-  var elfWrap = root.querySelector("[data-elf-wrap]");
-  var elfApp = elfWrap && elfWrap.querySelector('[class*="elfsight-app-"]');
-  if (elfWrap && elfApp) {
-    var checkElf = function () {
-      if (elfApp.getBoundingClientRect().height > 60 || elfApp.children.length > 0) {
-        elfWrap.classList.add("cl-elf-ready");
-        return true;
+  /* ---------- Review carousel ----------
+     Built on native scrolling, so touch swipe, trackpad and keyboard all work
+     for free and the reviews stay readable (and crawlable) with JS switched off.
+     The arrows and auto-advance just call scrollTo on the same rail. */
+  var revcar = root.querySelector("[data-revcar]");
+  if (revcar) {
+    var rTrack = revcar.querySelector("[data-revcar-track]");
+    var rCards = rTrack ? [].slice.call(rTrack.querySelectorAll(".cl-rev-card")) : [];
+    if (rTrack && rCards.length) {
+      var rNow = revcar.querySelector("[data-revcar-now]");
+      var rTotalEl = revcar.querySelector("[data-revcar-total]");
+      var rRail = revcar.querySelector("[data-revcar-rail]");
+      var rPrev = revcar.querySelector("[data-revcar-prev]");
+      var rNext = revcar.querySelector("[data-revcar-next]");
+      var rTimer = null, rPaused = false;
+
+      if (rTotalEl) rTotalEl.textContent = rCards.length;
+
+      var rStep = function () {
+        /* gap included: distance between two card left edges */
+        if (rCards.length > 1) return rCards[1].offsetLeft - rCards[0].offsetLeft;
+        return rCards[0].getBoundingClientRect().width;
+      };
+      var rMax = function () { return rTrack.scrollWidth - rTrack.clientWidth; };
+
+      var rSync = function () {
+        var max = rMax();
+        var x = rTrack.scrollLeft;
+        var idx = Math.round(x / rStep());
+        if (idx < 0) idx = 0;
+        if (idx > rCards.length - 1) idx = rCards.length - 1;
+        /* at the far right the last card IS on screen, so show the total */
+        if (rNow) rNow.textContent = (max > 0 && x >= max - 2) ? rCards.length : idx + 1;
+        if (rRail) {
+          var visible = Math.max(1, Math.round(rTrack.clientWidth / rStep()));
+          var pct = Math.min(100, (visible / rCards.length) * 100);
+          rRail.style.width = pct + "%";
+          rRail.style.transform = "translateX(" + (max > 0 ? (x / max) * ((100 / pct) * 100 - 100) : 0) + "%)";
+        }
+        revcar.setAttribute("data-at", x <= 2 ? "start" : (x >= max - 2 ? "end" : "mid"));
+        if (rPrev) rPrev.disabled = x <= 2;
+        if (rNext) rNext.disabled = x >= max - 2;
+      };
+
+      var rGo = function (dir, wrap) {
+        var max = rMax();
+        var target = rTrack.scrollLeft + dir * rStep();
+        if (wrap && dir > 0 && rTrack.scrollLeft >= max - 2) target = 0;
+        rTrack.scrollTo({ left: Math.max(0, Math.min(max, target)), behavior: "smooth" });
+      };
+
+      if (rPrev) rPrev.addEventListener("click", function () { rGo(-1); rBump(); });
+      if (rNext) rNext.addEventListener("click", function () { rGo(1); rBump(); });
+
+      /* Arrow keys when the rail itself has focus */
+      rTrack.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight") { e.preventDefault(); rGo(1); rBump(); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); rGo(-1); rBump(); }
+      });
+
+      var rTick;
+      rTrack.addEventListener("scroll", function () {
+        if (rTick) cancelAnimationFrame(rTick);
+        rTick = requestAnimationFrame(rSync);
+      }, { passive: true });
+      window.addEventListener("resize", rSync);
+
+      /* Auto-advance, unless the visitor is interacting or prefers less motion */
+      function rBump() { rPaused = false; rStart(); }
+      function rStop() { if (rTimer) { clearInterval(rTimer); rTimer = null; } }
+      function rStart() {
+        rStop();
+        if (reduceMotion) return;
+        rTimer = setInterval(function () { if (!rPaused && !document.hidden) rGo(1, true); }, 4600);
       }
-      return false;
-    };
-    if (!checkElf()) {
-      if ("MutationObserver" in window) {
-        var mo = new MutationObserver(function () { if (checkElf()) mo.disconnect(); });
-        mo.observe(elfApp, { childList: true, subtree: true });
-        setTimeout(function () { mo.disconnect(); }, 20000);
-      }
-      [1000, 2500, 5000, 9000].forEach(function (t) { setTimeout(checkElf, t); });
+      ["mouseenter", "focusin", "pointerdown", "touchstart"].forEach(function (ev) {
+        revcar.addEventListener(ev, function () { rPaused = true; }, { passive: true });
+      });
+      ["mouseleave", "focusout"].forEach(function (ev) {
+        revcar.addEventListener(ev, function () { rPaused = false; }, { passive: true });
+      });
+      revcar.addEventListener("touchend", function () {
+        setTimeout(function () { rPaused = false; }, 4000);
+      }, { passive: true });
+
+      /* Only run the timer while the section is actually on screen */
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { en.isIntersecting ? rStart() : rStop(); });
+        }, { threshold: 0.15 }).observe(revcar);
+      } else { rStart(); }
+
+      rSync();
     }
   }
 
