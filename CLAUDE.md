@@ -78,8 +78,18 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   in visible copy again.
   NEVER recreate the logo in CSS/SVG — Alfred called a CSS lockup "totally botched". Drop
   the real image in as-is; a plain dashed upload-reminder note is the only stand-in, and it
-  disappears once the file loads. The owner section is video-led (`home-owner.*`, Alfred's
-  own work-and-life reel) with a flat 3-photo strip, not About's portrait+cameo overlap.
+  disappears once the file loads.
+  LESSON: the theme paints a **white background onto `<img>` inside code blocks**, which
+  shows as a solid slab behind a transparent PNG logo over the video hero. `#cl-home img`
+  now sets `background-color: transparent`, and `.cl-logo`/`.cl-logo img` force
+  `background/border/box-shadow/border-radius/padding` off with `!important` (an id+class
+  selector beats the theme's `!important` on specificity). Backgrounds belong on the
+  figure/wrapper around a photo, never on the `<img>`.
+  LESSON: chip/pill rules must use the **direct-child** combinator. `.cl-trustchips span`
+  also matched the nested `<span data-rev-rating>` / `<span data-rev-total>` that the review
+  script fills in, so each number got its own pill inside the chip; `> span` fixes it.
+  The owner section is video-led (`home-owner.*`, Alfred's own work-and-life reel) with a
+  flat 3-photo strip, not About's portrait+cameo overlap.
   That reel is vertical phone footage, so the frame is its **native `aspect-ratio: 9/16`**
   (`max-width: 400px`, narrower grid column). LESSON: do NOT use a shorter frame and let
   `object-fit: cover` crop it — a 4:5 frame cut the top and bottom off every shot and

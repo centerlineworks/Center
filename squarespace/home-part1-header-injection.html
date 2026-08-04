@@ -201,7 +201,10 @@
     width: 100%; max-width: 100vw; overflow-x: hidden;
   }
   #cl-home *, #cl-home *::before, #cl-home *::after { box-sizing: border-box; margin: 0; min-width: 0; }
-  #cl-home img { max-width: 100%; display: block; }
+  /* No image on this page ever wants a theme-supplied background behind it —
+     transparent PNGs would show it as a solid slab. Backgrounds live on the
+     figure/wrapper around a photo, never on the <img> itself. */
+  #cl-home img { max-width: 100%; display: block; background-color: transparent; }
   /* Theme-bleed guard: every text element inherits its section's colour */
   #cl-home :is(h1,h2,h3,h4,p,blockquote,summary,cite,small,li,figcaption,span,div,b,strong,em) { color: inherit; }
   #cl-home .cl-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
@@ -249,7 +252,16 @@
   }
   #cl-home .cl-hero-inner { position: relative; z-index: 3; width: 100%; max-width: 1000px; }
 
-  /* ---------- Logo: dropped in as-is, never recreated ---------- */
+  /* ---------- Logo: dropped in as-is, never recreated ----------
+     The Squarespace theme likes to paint a background (and sometimes a border or
+     radius) onto images inside code blocks, which shows up as a white slab behind
+     a transparent PNG. Nothing here ever wants that, so it is forced off. */
+  #cl-home .cl-logo,
+  #cl-home .cl-logo img {
+    background: none !important; background-color: transparent !important;
+    border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+    padding: 0 !important; outline: 0 !important;
+  }
   #cl-home .cl-logo { display: block; width: clamp(280px, 52vw, 680px); margin: 0 auto 30px; }
   #cl-home .cl-logo img { width: 100%; height: auto; display: block; opacity: 0; transition: opacity .5s ease; }
   #cl-home .cl-logo img.is-loaded { opacity: 1; }
@@ -272,7 +284,9 @@
   #cl-home .cl-hero .cl-btn-row { justify-content: center; }
 
   #cl-home .cl-trustchips { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin-top: 26px; }
-  #cl-home .cl-trustchips span {
+  /* direct children only — the rating/count are nested <span>s that the review-count
+     script fills in, and they must not each become a chip of their own */
+  #cl-home .cl-trustchips > span {
     display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border-radius: 999px;
     font-size: 12.5px; font-weight: 800; letter-spacing: .02em;
     color: var(--paper); background: rgba(12,11,16,.5); border: 1px solid rgba(217,164,65,.5);
