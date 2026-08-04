@@ -1,9 +1,9 @@
 # Put the pages live on Squarespace — step by step
 
-This repo has three pages: **Home** (`home.html`), **About** (`index.html`) and
-**Services** (`services.html`), each with its own pair of paste files in `squarespace/`.
-Steps 1–7 below cover the About page; the **Services** and **Home** sections at the bottom
-cover those.
+This repo has four pages: **Home** (`home.html`), **About** (`index.html`),
+**Services** (`services.html`) and **Schedule** (`schedule.html`), each with its own pair of
+paste files in `squarespace/`. Steps 1–7 below cover the About page; the **Services**,
+**Home** and **Schedule** sections at the bottom cover those.
 
 Total time: about 15 minutes per page. You need the **Squarespace Business plan or higher**
 (code blocks with JavaScript don't run on the Personal plan).
@@ -242,3 +242,35 @@ for normal visitors, because it needs that `?cldebug=1` on the end of the addres
 Right now Home and Services share `services-hero.*`, so replacing that file changes both.
 If you'd rather they be independent, send me new footage and I'll encode it as
 `home-hero.*` — then only the home page changes when you swap it.
+
+---
+
+## Deploying the Schedule page
+
+The schedule page is where every "Schedule an Estimate" button on the other pages lands. It
+walks a visitor through six short questions on a deck of cards that turns in 3D, then hands
+the finished request straight to your inbox.
+
+**How the request reaches you:** a code block can't store form submissions on its own, so
+when someone presses **Send My Request** their email app opens with everything already
+written out and addressed to Info@centerlineworks.com. They press send; you get a tidy
+summary. There's also a **Copy Details** button and a click-to-call, so nobody gets stuck.
+
+1. **Pages** → **+** → **Blank Page**, name it **Schedule**, set its URL slug to `/schedule`
+   (all the other pages already point there)
+2. Set the SEO title (Page Settings → SEO) to:
+   `Schedule a Free Estimate | Centerline Construction — Holly Springs & Canton, GA`
+3. Paste `squarespace/schedule-part1-header-injection.html` into
+   **Page Settings → Advanced → Page Header Code Injection** → Save
+4. Add a **Code** block (type: HTML) to the page, paste
+   `squarespace/schedule-part2-code-block.html`, Save
+5. **Nothing to upload.** The hero reuses `services-hero.*`, already on your site, and your
+   logo is built into the code the same way as on the home page.
+6. To change where requests go, edit the short list at the very top of the code block —
+   it holds the email address and phone number, nothing else.
+
+### Want requests saved in Squarespace instead of emailed?
+
+Add a Squarespace **Form Block** underneath the code block and it will collect submissions
+in Squarespace's own storage. Tell me and I'll add a "or fill in the form below" hand-off
+so the two don't compete with each other.

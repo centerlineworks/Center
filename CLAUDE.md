@@ -165,6 +165,25 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   poolside cabana/pavilion clip, intentionally decoupled from the About page's
   `hero-loop.*` files so editing one page's video never risks the other's. Never reuse
   the About page's hero filenames for a different page's different footage.
+- **Schedule** — `schedule.html` → `squarespace/schedule-part1-header-injection.html` +
+  `schedule-part2-code-block.html`. Scope `#cl-sched`. Responsive-first. The landing point for
+  every "Schedule an Estimate" button on the other pages, so the slug must stay `/schedule`.
+  Centrepiece is a **six-card 3D deck** (`.cl-stage` holds the `perspective`, cards are
+  absolutely positioned siblings): what we're building (multi-pick) → where → when → budget →
+  contact details → review. The spent card goes `is-behind` (rotateY 34deg, translateZ -300px),
+  the next sits `is-ahead` mirrored, only `is-active` is visible. `sizeStage()` animates the
+  stage height to the active card — call it after ANY content change (option toggle, summary
+  render, resize, font load) or the card overflows its container.
+  Cards that are turned away get `tabindex="-1"` on every control and `aria-hidden`, so
+  keyboard focus can never land on an off-screen field. Enter advances (except in the textarea).
+  **There is no backend.** A Squarespace code block cannot store submissions, so the deck ends
+  by writing a formatted `mailto:` onto the send button's own `href` (refreshed in
+  `renderSummary`). LESSON: set it as an anchor `href`, never `window.location.href` in a click
+  handler — mobile Safari blocks the scripted version, and an href is also testable. Copy-to-
+  clipboard and click-to-call sit beside it as fallbacks. Only name and phone are required.
+  Answers persist to `localStorage` (`cl_sched_v1`) so a refresh doesn't wipe the form.
+  Hours section highlights today and computes an open/closed flag in the visitor's browser.
+  The logo is the same embedded WebP data URI as Home. Reuses `services-hero.*` — no uploads.
 - Each page has its own `<title>`/meta/JSON-LD but shares the same design tokens, fonts,
   and `#cl-<page>`-scoped CSS pattern — copy the foundation from the most recent page
   rather than reinventing it.

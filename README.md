@@ -1,7 +1,7 @@
 # Centerline Construction — Website Pages
 
 Custom pages for [centerlineworks.com](https://www.centerlineworks.com), built to drop into
-Squarespace with zero build tools. Three pages so far:
+Squarespace with zero build tools. Four pages so far:
 
 - **`home.html`** — the Home page: video hero with scroll-driven 3D, above-the-fold trust
   signals, services, before/after work, process, Alfred, a full review carousel, service area and
@@ -9,6 +9,8 @@ Squarespace with zero build tools. Three pages so far:
 - **`index.html`** — the About page, with 3D scroll effects and a phone-only twin (Part 3).
 - **`services.html`** — the Services page: every service with its own photo gallery, in one
   fully responsive file (see "The Services page" section below).
+- **`schedule.html`** — the Schedule page: a six-step estimate builder on a deck of cards
+  that turns in 3D, ending in a pre-written email to Centerline (see below).
 
 ## What's inside
 
@@ -181,3 +183,32 @@ review count, free-estimate CTA, trust chips) over a looping video, then proof.
 - **Phone** — service/work rows become swipe rails, sticky Free Estimate / Call / Email bar.
 - Reuses the existing `services-hero.*` hero video and already-live photos; the only new
   uploads are the logo and the three `home-owner.*` files.
+
+
+## The Schedule page (`schedule.html`)
+
+Where every "Schedule an Estimate" button lands. Built as an interactive estimate builder
+rather than a plain contact form.
+
+- **A 3D card deck** — six questions, each on its own card. Cards share one perspective, so
+  the one you've finished turns away to the left while the next turns in from the right.
+  A progress rail tracks where you are and lets you jump back to anything already answered.
+- **The questions**: what we're building (multi-pick tiles), where, when you'd like to
+  start, budget range, how to reach you, then a review card showing exactly what will be
+  sent.
+- **Tiles tilt toward the cursor** in real 3D and stamp a gold check when picked; the whole
+  thing flattens out automatically for reduce-motion visitors.
+- **Nothing is lost** — answers are saved as you go, so a refresh or an accidental back
+  button doesn't wipe the form.
+- **Sends without a server** — the finished request opens the visitor's email app with a
+  formatted summary already written and addressed to Centerline. Copy-to-clipboard and
+  click-to-call sit beside it for anyone who'd rather not use email.
+- **Only name and phone are required**, validated inline before the review step; everything
+  else can be skipped.
+- **Keyboard and screen-reader safe** — Enter advances, and cards that are turned away are
+  taken out of the tab order so focus never lands off-screen.
+- **Live hours** — today's row is highlighted and the page says whether Centerline is open
+  right now, worked out in the visitor's own browser.
+- **SEO/GEO** — `ContactPage`, `BreadcrumbList`, a `ReserveAction` on the business entity,
+  and a scheduling-specific `FAQPage` mirroring the visible FAQ.
+- See **[DEPLOY.md](DEPLOY.md#deploying-the-schedule-page)** for install steps.
