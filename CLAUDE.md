@@ -85,6 +85,20 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   `background/border/box-shadow/border-radius/padding` off with `!important` (an id+class
   selector beats the theme's `!important` on specificity). Backgrounds belong on the
   figure/wrapper around a photo, never on the `<img>`.
+  LESSON: that CSS guard was NOT the whole story — Alfred's `centerline-logo.png` is itself
+  **flattened onto white**, and no CSS can fix pixels. `knockoutLogo()` in Part 2 redraws
+  the logo on a canvas and clears the white, gated behind `window.CL_LOGO_KNOCKOUT`.
+  Do NOT implement this as "remove every white pixel" — the logo's `CONSTRUCTION` lettering
+  is knocked out in WHITE inside the gold banner and would be punched full of holes. It is
+  a **flood fill seeded from the image border**, plus a second pass that clears enclosed
+  regions only when they are both ≥2% of the image and span ≥25% of a dimension (that is
+  the space inside the logo's own outlined frame; the banner letters are far too small to
+  qualify). Fringe pixels get an alpha ramp and are un-mixed from white so the outline
+  doesn't read as a milky halo over the video. If the flood finds <2% opaque background the
+  file was already transparent and the `src` is left untouched. Costs ~190ms once, on load,
+  before the logo's fade-in paints — so there is no flash of the white version. Canvas is
+  same-origin here (`/s/…` on centerlineworks.com), so it is not tainted; the whole thing is
+  wrapped in try/catch and falls back to the original image.
   LESSON: chip/pill rules must use the **direct-child** combinator. `.cl-trustchips span`
   also matched the nested `<span data-rev-rating>` / `<span data-rev-total>` that the review
   script fills in, so each number got its own pill inside the chip; `> span` fixes it.

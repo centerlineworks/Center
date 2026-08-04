@@ -767,11 +767,22 @@ window.CL_HOME_VIDEOS = {
   svc_commercial: ""
 };
 
+/* =====================================================================
+   LOGO BACKGROUND
+   Logo files are very often saved flattened onto white, which shows up as a
+   white box sitting over the video behind it. The page clears that white for
+   you automatically: it only removes white that runs in from the OUTSIDE
+   EDGES of the file (plus the space enclosed by the logo's own frame), so the
+   white "CONSTRUCTION" lettering inside the gold banner is never touched.
+   A logo that is already transparent is left exactly as uploaded.
+   Set this to false if you ever want the file used completely untouched.
+   ===================================================================== */
+window.CL_LOGO_KNOCKOUT = true;
+
 window.CL_HOME_PHOTOS = {
   /* --- Logo (upload your logo as a FILE named exactly centerline-logo.png,
          the same way you uploaded the videos, and this just works).
-         Use the version with WHITE "CONSTRUCTION" lettering and a transparent
-         background — the hero behind it is dark. --- */
+         Transparent or white-backed both work — see the note above. --- */
   logo:           "https://www.centerlineworks.com/s/centerline-logo.png",
 
   /* --- Services grid --- */
@@ -1359,10 +1370,114 @@ window.CL_HOME_PHOTOS = {
      opacity:0 until confirmed loaded. */
   var photoMap = window.CL_HOME_PHOTOS || {};
   function loaded(img) { return img.complete && img.naturalWidth > 0; }
+
+  /* ---------- Logo background knockout ----------
+     Logo exports are very often flattened onto white, and a white slab behind
+     the logo ruins the video hero. This redraws the logo on a canvas and floods
+     the white away starting from the OUTSIDE EDGES only, so white that is part
+     of the artwork — the knocked-out "CONSTRUCTION" lettering inside the gold
+     banner — is never touched, because it isn't connected to the border.
+     A logo that is already transparent finds nothing to remove and is left
+     exactly as it is. Set window.CL_LOGO_KNOCKOUT = false to switch it off. */
+  function knockoutLogo(img) {
+    if (window.CL_LOGO_KNOCKOUT === false || img._knocked) return;
+    img._knocked = true;
+    var w = img.naturalWidth, h = img.naturalHeight;
+    if (!w || !h || w * h > 9e6) return;
+    try {
+      var cv = document.createElement("canvas");
+      cv.width = w; cv.height = h;
+      var ctx = cv.getContext("2d", { willReadFrequently: true });
+      ctx.drawImage(img, 0, 0);
+      var id = ctx.getImageData(0, 0, w, h), d = id.data;
+
+      /* a pixel counts as background if it is bright and near-neutral */
+      function isBg(i) {
+        var r = d[i], g = d[i + 1], b = d[i + 2];
+        if (d[i + 3] < 8) return true;                       /* already clear */
+        var mx = Math.max(r, g, b), mn = Math.min(r, g, b);
+        return mn >= 206 && (mx - mn) <= 26;
+      }
+
+      /* mark: 0 = untested, 1 = keep (artwork), 2 = background */
+      var mark = new Uint8Array(w * h);
+      var stack = [], p, x, y, n, hits = 0;
+      for (x = 0; x < w; x++) { stack.push(x); stack.push((h - 1) * w + x); }
+      for (y = 0; y < h; y++) { stack.push(y * w); stack.push(y * w + w - 1); }
+
+      while (stack.length) {
+        p = stack.pop();
+        if (mark[p]) continue;
+        if (!isBg(p * 4)) { mark[p] = 1; continue; }
+        mark[p] = 2;
+        if (d[p * 4 + 3] >= 8) hits++;   /* only count real (opaque) background */
+        x = p % w; y = (p - x) / w;
+        if (x > 0) stack.push(p - 1);
+        if (x < w - 1) stack.push(p + 1);
+        if (y > 0) stack.push(p - w);
+        if (y < h - 1) stack.push(p + w);
+      }
+
+      /* Regions the outside flood can't reach: the space enclosed by the logo's
+         own outlined frame is background too, but so are the knocked-out letters
+         in the banner — and they must stay. Only a region that is both large and
+         spans a good part of the artwork is treated as background. */
+      var minArea = w * h * 0.02, spanX = w * 0.25, spanY = h * 0.25;
+      for (p = 0; p < w * h; p++) {
+        if (mark[p]) continue;
+        if (!isBg(p * 4)) { mark[p] = 1; continue; }
+        var list = [p], qi, q, qx, qy, minX = w, maxX = 0, minY = h, maxY = 0;
+        mark[p] = 3;
+        for (qi = 0; qi < list.length; qi++) {
+          q = list[qi];
+          qx = q % w; qy = (q - qx) / w;
+          if (qx < minX) minX = qx;
+          if (qx > maxX) maxX = qx;
+          if (qy < minY) minY = qy;
+          if (qy > maxY) maxY = qy;
+          if (qx > 0) { n = q - 1; if (!mark[n]) { if (isBg(n * 4)) { mark[n] = 3; list.push(n); } else mark[n] = 1; } }
+          if (qx < w - 1) { n = q + 1; if (!mark[n]) { if (isBg(n * 4)) { mark[n] = 3; list.push(n); } else mark[n] = 1; } }
+          if (qy > 0) { n = q - w; if (!mark[n]) { if (isBg(n * 4)) { mark[n] = 3; list.push(n); } else mark[n] = 1; } }
+          if (qy < h - 1) { n = q + w; if (!mark[n]) { if (isBg(n * 4)) { mark[n] = 3; list.push(n); } else mark[n] = 1; } }
+        }
+        var big = list.length >= minArea && ((maxX - minX) >= spanX || (maxY - minY) >= spanY);
+        for (qi = 0; qi < list.length; qi++) {
+          mark[list[qi]] = big ? 2 : 1;
+          if (big && d[list[qi] * 4 + 3] >= 8) hits++;
+        }
+      }
+
+      /* nothing white to remove — the file is already transparent */
+      if (hits < w * h * 0.02) return;
+
+      /* clear the background, ramping alpha over the softer fringe pixels
+         so the edge stays smooth instead of turning jagged */
+      for (p = 0; p < w * h; p++) {
+        if (mark[p] !== 2) continue;
+        var i = p * 4;
+        if (!isBg(i)) continue;
+        var lum = (d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114);
+        var a = (242 - lum) / 36;        /* 1 against the artwork, 0 at pure white */
+        if (a <= 0.02) { d[i + 3] = 0; continue; }
+        if (a > 1) a = 1;
+        /* un-mix the white these edge pixels were blended into, so the outline
+           doesn't read as a milky halo once the video shows through */
+        d[i] = Math.max(0, Math.min(255, (d[i] - 255 * (1 - a)) / a));
+        d[i + 1] = Math.max(0, Math.min(255, (d[i + 1] - 255 * (1 - a)) / a));
+        d[i + 2] = Math.max(0, Math.min(255, (d[i + 2] - 255 * (1 - a)) / a));
+        d[i + 3] = Math.round(d[i + 3] * a);
+      }
+      ctx.putImageData(id, 0, 0);
+      var out = cv.toDataURL("image/png");
+      if (out && out.length > 64) img.src = out;
+    } catch (e) { /* cross-origin canvas or no 2d context — keep the original */ }
+  }
+
   function show(slot, img, isBefore) {
     img.classList.add("is-loaded");
     if (isBefore) slot.classList.add("has-before");
     else slot.classList.add("has-photo");
+    if (slot.classList.contains("cl-logo")) knockoutLogo(img);
   }
   function load(slot, img, url, isBefore) {
     img.addEventListener("load", function () { if (loaded(img)) show(slot, img, isBefore); });
