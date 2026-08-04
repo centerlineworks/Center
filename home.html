@@ -489,29 +489,53 @@
   #cl-home .cl-revcar[data-at="start"] .cl-revcar-viewport::before,
   #cl-home .cl-revcar[data-at="end"] .cl-revcar-viewport::after { opacity: 0; }
 
+  /* The scroller itself carries the perspective, so every card is a plane in the
+     same 3D space. (A scroll container is always transform-style: flat, so the
+     depth has to come from the parent's perspective, not preserve-3d.) */
   #cl-home .cl-revcar-track {
     display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory;
-    scroll-behavior: smooth; padding: 6px 0 26px; margin: -6px 0 0;
+    scroll-behavior: smooth; padding: 24px 0 44px; margin: -24px 0 -18px;
     scrollbar-width: none; -ms-overflow-style: none;
+    perspective: 1500px; perspective-origin: 50% 46%;
   }
   #cl-home .cl-revcar-track::-webkit-scrollbar { display: none; }
   #cl-home .cl-rev-card {
     flex: 0 0 clamp(268px, 31.5%, 356px); scroll-snap-align: start;
-    background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px 24px;
+    background: linear-gradient(155deg, #fff 0%, #fdfbf7 58%, #f6f1e8 100%);
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px 24px;
     display: flex; flex-direction: column; gap: 13px; position: relative; overflow: hidden;
     box-shadow: 0 24px 46px -30px rgba(18,16,12,.4);
-    transition: transform .45s var(--ease-out), box-shadow .45s, border-color .45s;
+    transform-origin: 50% 50%; backface-visibility: hidden;
+    transition: box-shadow .5s var(--ease-out), border-color .5s;
   }
+  /* Big serif quote mark, floated as the card's back layer */
   #cl-home .cl-rev-card::before {
-    content: "\201C"; position: absolute; right: 16px; top: -18px; z-index: 0;
-    font-family: 'Fraunces', Georgia, serif; font-size: 132px; line-height: 1;
-    color: rgba(217,164,65,.16); pointer-events: none;
+    content: "\201C"; position: absolute; right: 14px; top: -22px; z-index: 0;
+    font-family: 'Fraunces', Georgia, serif; font-size: 148px; line-height: 1;
+    color: rgba(217,164,65,.15); pointer-events: none;
+    transition: color .5s ease, transform .6s var(--ease-out);
   }
-  #cl-home .cl-rev-card:hover {
-    transform: translateY(-6px); border-color: rgba(217,164,65,.55);
-    box-shadow: 0 34px 60px -30px rgba(18,16,12,.5);
+  /* Light sweeps across the card as it turns to face you — one pass, then gone,
+     so it reads as a reflection rather than washing the card out */
+  #cl-home .cl-rev-card::after {
+    content: ""; position: absolute; inset: -20% -40%; z-index: 1; pointer-events: none; opacity: 0;
+    background: linear-gradient(112deg, rgba(255,255,255,0) 38%, rgba(255,255,255,.85) 50%, rgba(255,255,255,0) 62%);
   }
-  #cl-home .cl-rev-card > * { position: relative; z-index: 1; }
+  @keyframes cl-sheen {
+    0%   { opacity: 0; transform: translateX(-42%); }
+    22%  { opacity: 1; }
+    100% { opacity: 0; transform: translateX(42%); }
+  }
+  #cl-home .cl-rev-card > * { position: relative; z-index: 2; }
+
+  /* The card nearest the middle of the rail steps forward out of the wall */
+  #cl-home .cl-rev-card.is-focus {
+    border-color: rgba(217,164,65,.6);
+    box-shadow: 0 46px 78px -34px rgba(18,16,12,.62), 0 0 0 1px rgba(217,164,65,.18);
+  }
+  #cl-home .cl-rev-card.is-focus::before { color: rgba(217,164,65,.3); transform: translateY(6px) rotate(-4deg); }
+  #cl-home .cl-rev-card.is-focus::after { animation: cl-sheen 1.05s var(--ease-out) 1; }
+  #cl-home .cl-rev-card:hover { border-color: rgba(217,164,65,.7); }
   #cl-home .cl-rev-card blockquote {
     font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 15.5px; line-height: 1.55;
     color: var(--ink);
@@ -653,6 +677,11 @@
     #cl-home .cl-logo img { transition: none; }
     #cl-home .cl-owner-video .cl-vtag i { animation: none; }
     #cl-home .cl-svc-card img, #cl-home .cl-shot img { transition: opacity .3s ease !important; }
+    /* reviews stay a flat, readable rail — no depth, no sheen, no auto-advance */
+    #cl-home .cl-revcar-track { perspective: none; scroll-behavior: auto; }
+    #cl-home .cl-rev-card { transform: none !important; opacity: 1 !important; }
+    #cl-home .cl-rev-card::after { animation: none; opacity: 0; }
+    #cl-home .cl-rev-card.is-focus::before { transform: none; }
   }
 </style>
 <!-- ============================================================
@@ -1495,31 +1524,77 @@ window.CL_HOME_PHOTOS = {
         if (rCards.length > 1) return rCards[1].offsetLeft - rCards[0].offsetLeft;
         return rCards[0].getBoundingClientRect().width;
       };
-      var rMax = function () { return rTrack.scrollWidth - rTrack.clientWidth; };
+      /* Measured from layout, not scrollWidth: Chrome folds the cards' 3D
+         transforms into scrollable overflow, which makes scrollWidth drift by a
+         few dozen pixels and the "at the end" test flicker. */
+      var rMax = function () {
+        var first = rCards[0], last = rCards[rCards.length - 1];
+        var cs = getComputedStyle(rTrack);
+        var pad = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+        var content = (last.offsetLeft + last.offsetWidth) - first.offsetLeft;
+        return Math.max(0, Math.round(content + pad - rTrack.clientWidth));
+      };
 
+      /* --- 3D depth wall ---------------------------------------------------
+         Every card is a plane inside the track's perspective. The one nearest
+         the middle of the rail faces you square-on; the rest swing away on the
+         Y axis and sink back in Z, so scrolling reads as turning a wall of
+         cards rather than sliding a strip. Recomputed per animation frame off
+         the real scroll position, so it tracks a drag or a swipe exactly. */
+      var rDepth = function () {
+        if (reduceMotion) return;
+        var mid = rTrack.scrollLeft + rTrack.clientWidth / 2;
+        var focus = null, best = Infinity;
+        rCards.forEach(function (card) {
+          var c = card.offsetLeft + card.offsetWidth / 2;
+          var d = (c - mid) / card.offsetWidth;   /* distance in card widths */
+          if (Math.abs(d) > 3.2) {                 /* far off-screen: park it flat */
+            if (card._d !== "off") {
+              card.style.transform = ""; card.style.opacity = ""; card.style.zIndex = "";
+              card._d = "off";
+            }
+            card.classList.remove("is-focus");
+            return;
+          }
+          card._d = null;
+          var k = Math.max(-2.2, Math.min(2.2, d));
+          var a = Math.abs(k);
+          card.style.transform =
+            "rotateY(" + (-k * 17) + "deg) translateZ(" + (-a * 128) + "px) scale(" + (1.045 - a * 0.09) + ")";
+          card.style.opacity = String(1 - a * 0.2);
+          card.style.zIndex = String(50 - Math.round(a * 10));
+          if (a < best) { best = a; focus = card; }
+        });
+        rCards.forEach(function (card) { card.classList.toggle("is-focus", card === focus); });
+      };
+
+      /* scroll-snap re-settles a few pixels after the 3D scale is applied, so the
+         "we're at the very start / very end" test needs a little slack */
+      var EDGE = 8;
       var rSync = function () {
+        rDepth();
         var max = rMax();
         var x = rTrack.scrollLeft;
         var idx = Math.round(x / rStep());
         if (idx < 0) idx = 0;
         if (idx > rCards.length - 1) idx = rCards.length - 1;
         /* at the far right the last card IS on screen, so show the total */
-        if (rNow) rNow.textContent = (max > 0 && x >= max - 2) ? rCards.length : idx + 1;
+        if (rNow) rNow.textContent = (max > 0 && x >= max - EDGE) ? rCards.length : idx + 1;
         if (rRail) {
           var visible = Math.max(1, Math.round(rTrack.clientWidth / rStep()));
           var pct = Math.min(100, (visible / rCards.length) * 100);
           rRail.style.width = pct + "%";
           rRail.style.transform = "translateX(" + (max > 0 ? (x / max) * ((100 / pct) * 100 - 100) : 0) + "%)";
         }
-        revcar.setAttribute("data-at", x <= 2 ? "start" : (x >= max - 2 ? "end" : "mid"));
-        if (rPrev) rPrev.disabled = x <= 2;
-        if (rNext) rNext.disabled = x >= max - 2;
+        revcar.setAttribute("data-at", x <= EDGE ? "start" : (x >= max - EDGE ? "end" : "mid"));
+        if (rPrev) rPrev.disabled = x <= EDGE;
+        if (rNext) rNext.disabled = x >= max - EDGE;
       };
 
       var rGo = function (dir, wrap) {
         var max = rMax();
         var target = rTrack.scrollLeft + dir * rStep();
-        if (wrap && dir > 0 && rTrack.scrollLeft >= max - 2) target = 0;
+        if (wrap && dir > 0 && rTrack.scrollLeft >= max - EDGE) target = 0;
         rTrack.scrollTo({ left: Math.max(0, Math.min(max, target)), behavior: "smooth" });
       };
 
@@ -1565,6 +1640,9 @@ window.CL_HOME_PHOTOS = {
       } else { rStart(); }
 
       rSync();
+      /* fonts and the reveal transition both change card widths — re-measure after */
+      window.addEventListener("load", rSync);
+      setTimeout(rSync, 900);
     }
   }
 

@@ -163,10 +163,13 @@ review count, free-estimate CTA, trust chips) over a looping video, then proof.
   Commercial feature card.
 - **Featured work** with the cursor-tracking before/after reveal and a click-to-open
   side-by-side lightbox.
-- **Reviews** — a 5.0 / 43-review scoreboard with per-platform badges over a carousel of
-  all 39 real reviews: arrows, drag, swipe, keyboard, and gentle auto-advance that pauses
-  the moment you touch it. The review text is plain HTML, so Google and AI answer engines
-  read it whether or not JavaScript runs.
+- **Reviews** — a 5.0 / 43-review scoreboard with per-platform badges over a **3D carousel**
+  of all 39 real reviews. The cards sit in a shared perspective: the one in the middle turns
+  to face you and catches a sweep of light, the rest swing away on their axis and sink back,
+  all driven off the real scroll position so a drag or swipe tracks your finger exactly.
+  Arrows, keyboard, an n/39 counter, a progress rail and gentle auto-advance that pauses the
+  moment you touch it. The review text is plain HTML, so Google and AI answer engines read it
+  whether or not JavaScript runs, and reduce-motion visitors get a flat, readable rail.
 - **Local SEO** — service-area chips (Holly Springs, Canton, Woodstock, Ball Ground,
   Acworth, Marietta, Kennesaw, Roswell, Alpharetta, Cherokee County) and geo meta tags.
 - **Schema/GEO** — `WebSite`, `WebPage`, `HomeAndConstructionBusiness` (full NAP, hours,

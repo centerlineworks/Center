@@ -834,31 +834,77 @@ window.CL_HOME_PHOTOS = {
         if (rCards.length > 1) return rCards[1].offsetLeft - rCards[0].offsetLeft;
         return rCards[0].getBoundingClientRect().width;
       };
-      var rMax = function () { return rTrack.scrollWidth - rTrack.clientWidth; };
+      /* Measured from layout, not scrollWidth: Chrome folds the cards' 3D
+         transforms into scrollable overflow, which makes scrollWidth drift by a
+         few dozen pixels and the "at the end" test flicker. */
+      var rMax = function () {
+        var first = rCards[0], last = rCards[rCards.length - 1];
+        var cs = getComputedStyle(rTrack);
+        var pad = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+        var content = (last.offsetLeft + last.offsetWidth) - first.offsetLeft;
+        return Math.max(0, Math.round(content + pad - rTrack.clientWidth));
+      };
 
+      /* --- 3D depth wall ---------------------------------------------------
+         Every card is a plane inside the track's perspective. The one nearest
+         the middle of the rail faces you square-on; the rest swing away on the
+         Y axis and sink back in Z, so scrolling reads as turning a wall of
+         cards rather than sliding a strip. Recomputed per animation frame off
+         the real scroll position, so it tracks a drag or a swipe exactly. */
+      var rDepth = function () {
+        if (reduceMotion) return;
+        var mid = rTrack.scrollLeft + rTrack.clientWidth / 2;
+        var focus = null, best = Infinity;
+        rCards.forEach(function (card) {
+          var c = card.offsetLeft + card.offsetWidth / 2;
+          var d = (c - mid) / card.offsetWidth;   /* distance in card widths */
+          if (Math.abs(d) > 3.2) {                 /* far off-screen: park it flat */
+            if (card._d !== "off") {
+              card.style.transform = ""; card.style.opacity = ""; card.style.zIndex = "";
+              card._d = "off";
+            }
+            card.classList.remove("is-focus");
+            return;
+          }
+          card._d = null;
+          var k = Math.max(-2.2, Math.min(2.2, d));
+          var a = Math.abs(k);
+          card.style.transform =
+            "rotateY(" + (-k * 17) + "deg) translateZ(" + (-a * 128) + "px) scale(" + (1.045 - a * 0.09) + ")";
+          card.style.opacity = String(1 - a * 0.2);
+          card.style.zIndex = String(50 - Math.round(a * 10));
+          if (a < best) { best = a; focus = card; }
+        });
+        rCards.forEach(function (card) { card.classList.toggle("is-focus", card === focus); });
+      };
+
+      /* scroll-snap re-settles a few pixels after the 3D scale is applied, so the
+         "we're at the very start / very end" test needs a little slack */
+      var EDGE = 8;
       var rSync = function () {
+        rDepth();
         var max = rMax();
         var x = rTrack.scrollLeft;
         var idx = Math.round(x / rStep());
         if (idx < 0) idx = 0;
         if (idx > rCards.length - 1) idx = rCards.length - 1;
         /* at the far right the last card IS on screen, so show the total */
-        if (rNow) rNow.textContent = (max > 0 && x >= max - 2) ? rCards.length : idx + 1;
+        if (rNow) rNow.textContent = (max > 0 && x >= max - EDGE) ? rCards.length : idx + 1;
         if (rRail) {
           var visible = Math.max(1, Math.round(rTrack.clientWidth / rStep()));
           var pct = Math.min(100, (visible / rCards.length) * 100);
           rRail.style.width = pct + "%";
           rRail.style.transform = "translateX(" + (max > 0 ? (x / max) * ((100 / pct) * 100 - 100) : 0) + "%)";
         }
-        revcar.setAttribute("data-at", x <= 2 ? "start" : (x >= max - 2 ? "end" : "mid"));
-        if (rPrev) rPrev.disabled = x <= 2;
-        if (rNext) rNext.disabled = x >= max - 2;
+        revcar.setAttribute("data-at", x <= EDGE ? "start" : (x >= max - EDGE ? "end" : "mid"));
+        if (rPrev) rPrev.disabled = x <= EDGE;
+        if (rNext) rNext.disabled = x >= max - EDGE;
       };
 
       var rGo = function (dir, wrap) {
         var max = rMax();
         var target = rTrack.scrollLeft + dir * rStep();
-        if (wrap && dir > 0 && rTrack.scrollLeft >= max - 2) target = 0;
+        if (wrap && dir > 0 && rTrack.scrollLeft >= max - EDGE) target = 0;
         rTrack.scrollTo({ left: Math.max(0, Math.min(max, target)), behavior: "smooth" });
       };
 
@@ -904,6 +950,9 @@ window.CL_HOME_PHOTOS = {
       } else { rStart(); }
 
       rSync();
+      /* fonts and the reveal transition both change card widths — re-measure after */
+      window.addEventListener("load", rSync);
+      setTimeout(rSync, 900);
     }
   }
 

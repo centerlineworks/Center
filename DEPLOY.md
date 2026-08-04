@@ -199,8 +199,9 @@ thumb zone.
    `home-owner-poster.jpg` from the `assets` folder. That's your own work-and-life reel.
    The hero still reuses `services-hero.*`, which is already on your site.
 7. **Reviews are built in** — no widget, nothing to configure. A "5.0 · 43 reviews"
-   scoreboard sits above a carousel holding all 39 of your real reviews. Visitors can use
-   the arrows, drag it, swipe it on a phone, or just let it advance on its own. To add a
+   scoreboard sits above a 3D carousel holding all 39 of your real reviews: the middle card
+   turns to face the visitor while the others angle away behind it. They can use the arrows,
+   drag it, swipe it on a phone, or just let it turn on its own. To add a
    new review later, find the review carousel in the code block, copy any
    `<article class="cl-rev-card">` block, and change the quote, the name and the platform.
 8. **Review counts**: the `YOUR REVIEW COUNTS` list at the very top of the code block holds

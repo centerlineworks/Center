@@ -26,6 +26,19 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   under `prefers-reduced-motion`. Card heights stretch to the row, so `blockquote` gets
   `margin-block: auto` (short quotes centre instead of leaving a hole) and a
   `-webkit-line-clamp` of 8 (6 on phones) caps the tallest one.
+  It is a **3D depth wall**, not About's coverflow: `perspective` sits on the *track*
+  (a scroll container is always `transform-style: flat`, so depth has to come from the
+  parent's perspective — `preserve-3d` on the scroller would be ignored), and a rAF'd
+  scroll handler gives each card `rotateY(-k*17deg) translateZ(-a*128px) scale(1.045-a*.09)`
+  plus falling opacity, where `k` is its distance from the rail's centre in card widths.
+  Cards past |k|>3.2 are parked flat once so only ~7 elements are touched per frame. The
+  centre card gets `.is-focus` (gold border, deeper shadow, tilted quote mark, one-shot
+  `cl-sheen` light sweep — animated once, never left on, or it washes the card out).
+  LESSON: do NOT derive the end-of-rail test from `scrollWidth` here — Chrome folds the
+  cards' 3D transforms into scrollable overflow, so `scrollWidth` drifts tens of pixels and
+  the "at end" state flickers (next stays enabled, counter sticks at 37/39). Measure the
+  max scroll from layout instead: last card's `offsetLeft + offsetWidth` minus the first
+  card's `offsetLeft`, plus the track's horizontal padding, minus `clientWidth`.
   Hero: centred, led by a LARGE logo (`/s/centerline-logo.png`, clamp up to 680px) over
   the video, then the headline **"Your dream. Built for reality."** — Alfred's own words,
   supplied verbatim after several rejected drafts; don't rewrite it. Slogan history — do not
