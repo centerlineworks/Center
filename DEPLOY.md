@@ -194,8 +194,10 @@ thumb zone.
    **white "CONSTRUCTION" lettering on a transparent background** — the hero behind it is
    dark. Until it's uploaded the page shows a styled stand-in lockup, so nothing looks
    broken; the real logo takes over automatically the moment the file exists.
-6. **No other uploads needed** — the hero reuses `services-hero.*` and the owner section
-   reuses the About page's `hero-loop.*` crew video, both already on your site.
+6. **Upload the Meet the Owner video** (3 files, same Link editor → **File** → **Upload
+   file** method, keep the names exactly): `home-owner.mp4`, `home-owner.webm`,
+   `home-owner-poster.jpg` from the `assets` folder. That's your own work-and-life reel.
+   The hero still reuses `services-hero.*`, which is already on your site.
 7. **Your Elfsight reviews widget is already embedded** in the reviews section — the exact
    embed code you provided, unchanged. Above it sits a "5.0 · 43 reviews" scoreboard, and
    behind it three real reviews show instantly and hide themselves the moment the Elfsight

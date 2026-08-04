@@ -46,8 +46,18 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   in visible copy again.
   NEVER recreate the logo in CSS/SVG — Alfred called a CSS lockup "totally botched". Drop
   the real image in as-is; a plain dashed upload-reminder note is the only stand-in, and it
-  disappears once the file loads. The owner section is video-led (the About crew clip) with
-  a flat 3-photo strip, not About's portrait+cameo overlap.
+  disappears once the file loads. The owner section is video-led (`home-owner.*`, Alfred's
+  own work-and-life reel) with a flat 3-photo strip, not About's portrait+cameo overlap.
+  That reel is vertical phone footage, so the frame is portrait — `aspect-ratio: 4/5`,
+  `max-width: 460px`, in the narrower grid column — and the cover crop that gives us also
+  swallows the letterbox bars a few of the source shots carry.
+  LESSON: footage Alfred sends may be a repost montage with **burned-in watermarks**
+  (a TikTok logo + someone's handle, an Instagram repost tag). Always build a
+  second-by-second contact sheet before encoding, flag them, and cut those shots out with
+  a `trim`/`concat` filter graph rather than shipping them — a competitor's or a repost
+  account's handle on the company homepage is worse than a shorter video. Phone exports
+  are also often **HEVC/H.265**, which Chrome and Firefox won't reliably decode, so they
+  always need a real H.264 + VP9 transcode, never a straight upload.
   LESSON: an absolutely-positioned card whose children are ALL absolute has no content to
   give it height — it collapses to ~0px unless you set an explicit `aspect-ratio`.
   LESSON: on phones the service/work rows become horizontal swipe rails, and cards parked

@@ -172,6 +172,8 @@ review count, free-estimate CTA, trust chips) over a looping video, then proof.
   service area, offer catalog, `knowsAbout`, reserve action), `Person` for Alfred, and
   `FAQPage`. No `aggregateRating` — Google doesn't allow self-marking third-party review
   scores.
+- **Meet the owner** — a portrait (phone-shaped) video frame playing `assets/home-owner.*`,
+  Alfred's own reel mixing job sites with family life, beside a three-photo strip.
 - **Phone** — service/work rows become swipe rails, sticky Free Estimate / Call / Email bar.
-- Reuses the existing `services-hero.*` video and already-live photos, so there is nothing
-  new to upload.
+- Reuses the existing `services-hero.*` hero video and already-live photos; the only new
+  uploads are the logo and the three `home-owner.*` files.

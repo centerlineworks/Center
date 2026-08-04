@@ -397,9 +397,12 @@
   #cl-home .cl-step p { font-size: 14.5px; color: rgba(18,16,12,.72); }
 
   /* ---------- Owner (video-led, offset editorial — not the About page's portrait+cameo) ---------- */
-  #cl-home .cl-owner { display: grid; grid-template-columns: 1.02fr .98fr; gap: clamp(28px, 4.5vw, 60px); align-items: center; }
+  #cl-home .cl-owner { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(28px, 4.5vw, 60px); align-items: center; }
+  /* Portrait frame — the owner reel is phone footage (9:16); a 4:5 cover crop
+     trims the letterbox bars some of the source clips carry. */
   #cl-home .cl-owner-video {
-    position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3.4;
+    position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5;
+    max-width: 460px; margin-inline: auto; width: 100%;
     background: #1d1c23; border: 1px solid rgba(247,244,238,.16);
     box-shadow: 0 44px 84px -34px rgba(0,0,0,.8);
   }
@@ -855,12 +858,13 @@ window.CL_HOME_PHOTOS = {
   <section class="cl-section cl-dark" aria-labelledby="home-owner-h">
     <div class="cl-wrap cl-owner">
       <div class="cl-owner-video cl-reveal">
-        <!-- Swap these sources for any clip you like — job-site footage, or something
-             more personal. Upload as a File and point src at /s/<filename>. -->
+        <!-- Alfred's own reel: job sites mixed with family/life. Swap these sources for any
+             clip you like — upload as a File and point src at /s/<filename>. -->
         <video autoplay muted loop playsinline webkit-playsinline preload="metadata"
-               poster="assets/hero-poster.jpg" aria-label="Centerline Construction at work">
-          <source src="assets/hero-loop.webm" type="video/webm">
-          <source src="assets/hero-loop.mp4" type="video/mp4">
+               poster="assets/home-owner-poster.jpg"
+               aria-label="Alfred Tudela and the Centerline Construction crew on job sites, and away from work with his family">
+          <source src="assets/home-owner.webm" type="video/webm">
+          <source src="assets/home-owner.mp4" type="video/mp4">
         </video>
       </div>
 
