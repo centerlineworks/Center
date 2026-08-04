@@ -20,7 +20,8 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   paints (MutationObserver + height check + timed fallbacks), so the section is never empty
   and crawlers/AI still get review text. Preconnect to `elfsightcdn.com` sits in Part 1.
   Hero: centred, led by a LARGE logo (`/s/centerline-logo.png`, clamp up to 680px) over
-  the video, then the slogan **"Measure twice. Build once."** Slogan history — do not
+  the video, then the headline **"Your dream. Built for reality."** — Alfred's own words,
+  supplied verbatim after several rejected drafts; don't rewrite it. Slogan history — do not
   regress: About's "Built on Faith / Finished with craftsmanship" is off limits here;
   a service list ("Bathrooms. Basements. Cabanas.") was rejected ("if I was a teacher I
   wouldn't say apples.books.teaching"); "Straight lines. Straight answers." was rejected as
@@ -30,7 +31,13 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   one real idea, keep the town names for local SEO, and let the services grid carry the
   service keywords. "The work you can't see is the work we're proudest of" was also
   rejected ("again a terrible quote") — he wants the subhead to be a SLOGAN, punchy and
-  quotable, not a description. Now **"We don't cut corners. We frame them."**
+  quotable, not a description. "Measure twice. Build once." and "We don't cut corners. We
+  frame them." both shipped and were then replaced — Alfred settled it himself by writing
+  the hero copy: headline "Your dream. Built for reality.", subhead "From inspired
+  renovations to extraordinary outdoor spaces, Centerline builds your vision with integrity,
+  precision, and craftsmanship that lasts." It carries no town names, so the service-area
+  chips, stat bar, meta description and JSON-LD are now the only local-SEO signals up top —
+  leave them intact.
   Copy rules he's asked for: don't lead with "family-owned" up top (it's fine lower down);
   never imply a single crew ("One crew. Every room" was rejected as sounding understaffed —
   now "Every room. Inside and out."); the process section must not mirror "Three values.
