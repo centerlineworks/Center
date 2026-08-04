@@ -189,13 +189,9 @@ thumb zone.
    **Page Settings → Advanced → Page Header Code Injection** → Save
 4. Add a **Code** block (type: HTML) to the page, paste
    `squarespace/home-part2-code-block.html`, Save
-5. **Upload your logo** (one new file). Same method as the videos: Link editor → **File**
-   → **Upload file**, and name it exactly **`centerline-logo.png`**. Until it's uploaded the
-   page shows a dashed reminder box, and the real logo takes over the moment the file exists.
-   **A white background in the file is fine** — the page clears it for you. It only removes
-   white that runs in from the outside edges of the image (and the space inside the logo's
-   own frame), so the white "CONSTRUCTION" lettering inside the gold banner stays white. If
-   your file is already transparent it's used exactly as uploaded, untouched.
+5. **The logo needs no upload at all.** It is built into the code block itself, already
+   cleaned up — the white background that came with your file has been removed, so it sits
+   straight over the video with nothing behind it.
 6. **Upload the Meet the Owner video** (3 files, same Link editor → **File** → **Upload
    file** method, keep the names exactly): `home-owner.mp4`, `home-owner.webm`,
    `home-owner-poster.jpg` from the `assets` folder. That's your own work-and-life reel.

@@ -85,7 +85,28 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   `background/border/box-shadow/border-radius/padding` off with `!important` (an id+class
   selector beats the theme's `!important` on specificity). Backgrounds belong on the
   figure/wrapper around a photo, never on the `<img>`.
-  LESSON: that CSS guard was NOT the whole story — Alfred's `centerline-logo.png` is itself
+  RESOLVED: the logo is now **embedded in Part 2 as a WebP data URI** on the
+  `CL_HOME_PHOTOS.logo` line — no upload, no `/s/` URL, no canvas, nothing that can fail
+  quietly. `assets/centerline-logo-source.jpg` is Alfred's original; the cleaned artwork is
+  `assets/centerline-logo-transparent.png/.webp`. The build step is
+  `scratchpad/embed_logo.py` (git history) — strip white, crop to the artwork, cap at
+  1100px, emit WebP q92 (43KB vs 176KB for RGBA PNG; a palette PNG bands the gold gradient
+  badly, so don't). A `.cl-logo`-only `error` handler falls back to the `/s/` URL.
+  ROOT CAUSE, after three wrong fixes: the file Alfred uploaded as `centerline-logo.png`
+  **was a JPEG** — `format: JPEG, mode: RGB`, no alpha channel. JPEG cannot store
+  transparency at all, so there was never anything to show through. ALWAYS check the real
+  format (`PIL.Image.open(...).format`) before theorising about CSS or canvas.
+  LESSON: I could not see the live site — the agent proxy 403s centerlineworks.com and the
+  Squarespace CDN; only GitHub (`raw.githubusercontent.com`, git push/pull) gets out. Say
+  that plainly instead of shipping speculative fixes. To get a file from Alfred, ask him to
+  **commit it to the repo on github.com** — images pasted inline in chat are visible to us
+  but never land on disk; only real file attachments (his `.mov`/`.xlsx`) do.
+  LESSON: the white-removal rule is **connectivity-based, not colour-based**: flood from the
+  border, then clear enclosed near-white regions. On this logo every enclosed white region
+  is background (the space inside the frame AND the counter of the R in CENTERLINE), because
+  `CONSTRUCTION` is set in BLACK, not white as earlier notes assumed — so the "keep small
+  enclosed regions" guard had to go, or the R kept a white blob in its hole.
+  LESSON (superseded but keep): that CSS guard was NOT the whole story — the file is itself
   **flattened onto white**, and no CSS can fix pixels. `knockoutLogo()` in Part 2 redraws
   the logo on a canvas and clears the white, gated behind `window.CL_LOGO_KNOCKOUT`.
   Do NOT implement this as "remove every white pixel" — the logo's `CONSTRUCTION` lettering
