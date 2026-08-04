@@ -200,7 +200,12 @@
 
   /* ---------- THE ROOM: one continuous lit 3D space ---------- */
   #cl-sched .cl-room {
-    position: relative; overflow: hidden; min-height: 100vh; min-height: 100svh;
+    /* clip, not hidden: an overflow:hidden box can still be scrolled by the
+       browser when something inside it takes focus, and the faces of the drum
+       stick far out to the sides — that dragged the whole room sideways the
+       moment a form field was focused */
+    position: relative; overflow: hidden; overflow: clip;
+    min-height: 100vh; min-height: 100svh;
     display: flex; align-items: center;
     padding: clamp(80px, 9vh, 130px) 0 clamp(60px, 7vh, 100px);
     background:
@@ -214,14 +219,54 @@
     transform: translateX(-50%) perspective(520px) rotateX(74deg);
     transform-origin: 50% 100%;
     background-image:
-      linear-gradient(rgba(217,164,65,.30) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(217,164,65,.22) 1px, transparent 1px);
+      linear-gradient(rgba(217,164,65,.20) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(217,164,65,.14) 1px, transparent 1px);
     background-size: 90px 90px;
     -webkit-mask-image: linear-gradient(180deg, transparent, #000 55%, rgba(0,0,0,.35));
     mask-image: linear-gradient(180deg, transparent, #000 55%, rgba(0,0,0,.35));
     animation: cl-floor 18s linear infinite;
   }
   @keyframes cl-floor { to { background-position: 0 900px, 0 0; } }
+  /* ---------- THE MAP: real North Georgia, behind everything ----------
+     Coordinates are the towns' actual latitude/longitude, projected flat, so
+     the layout and the road corridors between them are true to the ground.
+     The camera drifts from town to town on its own and locks onto whichever
+     one the visitor picks on question two. */
+  #cl-sched .cl-mapwrap {
+    position: absolute; inset: 0; z-index: 0; overflow: hidden; overflow: clip; pointer-events: none;
+    /* faintest where the words and the drum sit, strongest out at the edges,
+       so the map reads as the room's wallpaper rather than a competing layer */
+    -webkit-mask-image: radial-gradient(105% 95% at 50% 48%, rgba(0,0,0,.20), rgba(0,0,0,.55) 46%, #000 84%);
+    mask-image: radial-gradient(105% 95% at 50% 48%, rgba(0,0,0,.20), rgba(0,0,0,.55) 46%, #000 84%);
+  }
+  #cl-sched .cl-map { position: absolute; inset: -6%; width: 112%; height: 112%; opacity: .32; }
+  #cl-sched .cl-map-cam { transition: transform 2.4s var(--ease-out); transform-origin: 0 0; }
+  #cl-sched .cl-contour { fill: none; stroke: rgba(217,164,65,.09); stroke-width: 1.4; }
+  #cl-sched .cl-road { fill: none; stroke: rgba(217,164,65,.30); stroke-width: 2.4; stroke-linecap: round; }
+  #cl-sched .cl-pin-halo { fill: rgba(217,164,65,.09); transform: scale(.4); transform-origin: center;
+    transition: transform .6s var(--ease-out), fill .6s ease; }
+  #cl-sched .cl-pin-dot { fill: rgba(240,205,134,.5); r: 5; transition: fill .5s ease, r .5s var(--ease-out); }
+  #cl-sched .cl-pin-label {
+    font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .06em;
+    text-anchor: middle; fill: rgba(247,244,238,.34); transition: fill .5s ease;
+  }
+  #cl-sched .cl-pin.is-live .cl-pin-dot { fill: var(--gold-lite); r: 7; }
+  #cl-sched .cl-pin.is-live .cl-pin-label { fill: var(--gold-lite); }
+  #cl-sched .cl-pin.is-live .cl-pin-halo { transform: scale(1.5); fill: rgba(217,164,65,.20); }
+  #cl-sched .cl-pin.is-picked .cl-pin-dot { fill: #fff; r: 8; }
+  #cl-sched .cl-pin.is-picked .cl-pin-label { fill: #fff; }
+  #cl-sched .cl-pin.is-picked .cl-pin-halo { transform: scale(2); fill: rgba(217,164,65,.30); }
+  /* the town the camera is on, named in the corner */
+  #cl-sched .cl-map-tag {
+    position: absolute; left: clamp(20px, 3vw, 40px); bottom: 22px; z-index: 2;
+    display: inline-flex; align-items: center; gap: 9px; padding: 8px 15px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--gold); background: rgba(11,10,14,.6); border: 1px solid rgba(217,164,65,.35);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  #cl-sched .cl-map-tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); font-style: normal; }
+  #cl-sched .cl-map-tag b { color: var(--paper); font-weight: 800; letter-spacing: .04em; text-transform: none; font-size: 13px; }
+
   /* a soft overhead light pooling on the drum */
   #cl-sched .cl-beam {
     position: absolute; top: -18%; right: 6%; width: 60%; height: 90%; z-index: 0; pointer-events: none;
@@ -317,7 +362,7 @@
      The hood clips the sides of the prism to its own column — without it the
      faces swinging round at 60 degrees reach out over the headline. Vertical
      padding + matching negative margin keeps the drop shadow from being cut. */
-  #cl-sched .cl-drum-hood { overflow: hidden; padding: 46px 0; margin: -46px 0; }
+  #cl-sched .cl-drum-hood { overflow: hidden; overflow: clip; padding: 46px 0; margin: -46px 0; }
   #cl-sched .cl-drum { perspective: 1500px; perspective-origin: 50% 46%; }
   #cl-sched .cl-drum-body {
     position: relative; width: var(--face-w); height: var(--face-h); margin: 0 auto;
@@ -384,6 +429,39 @@
   #cl-sched .cl-field.is-bad :is(input, textarea) { border-color: #b3402f; box-shadow: 0 0 0 4px rgba(179,64,47,.15); }
   #cl-sched .cl-err { font-size: 11.5px; font-weight: 700; color: #b3402f; display: none; }
   #cl-sched .cl-field.is-bad .cl-err { display: block; }
+
+  /* ---------- Squarespace's own Form Block, lifted onto the last face ----------
+     We only restyle it and fill it in — the visitor presses Squarespace's real
+     Submit button, so the submission goes through Squarespace exactly as if the
+     form were sitting on the page by itself. */
+  #cl-sched .cl-formslot:empty { display: none; }
+  #cl-sched .cl-formslot .sqs-block,
+  #cl-sched .cl-formslot .sqs-block-content { padding: 0 !important; margin: 0 !important; }
+  #cl-sched .cl-formslot .form-item { margin: 0 0 9px !important; padding: 0 !important; }
+  #cl-sched .cl-formslot :is(label, .title, .description) {
+    font-size: 10.5px !important; font-weight: 800 !important; letter-spacing: .13em !important;
+    text-transform: uppercase !important; color: rgba(18,16,12,.55) !important; margin-bottom: 4px !important;
+  }
+  #cl-sched .cl-formslot :is(input[type="text"], input[type="tel"], input[type="email"], input[type="number"], textarea, select) {
+    font-family: inherit !important; font-size: 14.5px !important; color: var(--ink) !important;
+    background: #fff !important; border: 2px solid rgba(18,16,12,.1) !important; border-radius: 10px !important;
+    padding: 10px 12px !important; width: 100% !important; box-shadow: none !important;
+  }
+  #cl-sched .cl-formslot :is(input, textarea):focus {
+    outline: none !important; border-color: var(--gold) !important; box-shadow: 0 0 0 4px rgba(217,164,65,.2) !important;
+  }
+  #cl-sched .cl-formslot textarea { min-height: 70px !important; resize: none !important; }
+  #cl-sched .cl-formslot :is(.form-button-wrapper, .sqs-block-form .form-button-wrapper) { margin-top: 12px !important; }
+  #cl-sched .cl-formslot :is(input[type="submit"], button[type="submit"], .sqs-system-button) {
+    font-family: inherit !important; font-weight: 800 !important; font-size: 15px !important;
+    background: linear-gradient(140deg, var(--gold-lite), var(--gold-deep)) !important; color: #17140c !important;
+    border: 0 !important; border-radius: 999px !important; padding: 14px 26px !important; width: 100% !important;
+    cursor: pointer !important; box-shadow: 0 18px 34px -18px rgba(176,127,34,.8) !important;
+  }
+  #cl-sched .cl-formslot .field-list > .field:not(:last-child) { margin-bottom: 9px; }
+  /* the note that only shows when there is no form block to use */
+  #cl-sched .cl-nomail { display: none; }
+  #cl-sched .cl-nomail.is-on { display: block; }
 
   /* review face */
   #cl-sched .cl-sent { display: none; margin-top: 12px; padding: 13px 15px; border-radius: 11px; font-size: 13px;
@@ -548,6 +626,8 @@
     #cl-sched .cl-cube .f { transform: translateZ(14px); }
     #cl-sched .cl-cube .t { transform: rotateX(90deg) translateZ(14px); }
     #cl-sched .cl-plate, #cl-sched .cl-plate:hover { transform: none; }
+    #cl-sched .cl-map { opacity: .24; }
+    #cl-sched .cl-map-tag { left: 16px; bottom: 14px; font-size: 10.5px; padding: 7px 12px; }
     #cl-sched .cl-plate.is-today { transform: translateZ(20px); }
     #cl-sched .cl-turn { width: 44px; height: 44px; }
 
@@ -567,6 +647,7 @@
   /* ---------- Reduced motion: the room stops moving, the drum stops turning ---------- */
   @media (prefers-reduced-motion: reduce) {
     #cl-sched .cl-floor { animation: none; }
+    #cl-sched .cl-map-cam { transition: none; }
     #cl-sched .cl-drum-body { transition: none; }
     #cl-sched .cl-face { transition: opacity .2s ease; }
     #cl-sched .cl-cube { transition: none; }
@@ -607,8 +688,78 @@ window.CL_SCHEDULE = {
 
   <!-- ============ THE ROOM: console + drum, no video hero ============ -->
   <section class="cl-room" aria-labelledby="cl-h1">
+    <div class="cl-mapwrap" aria-hidden="true">
+      <svg class="cl-map" viewBox="0 0 1000 676.8" preserveAspectRatio="xMidYMid slice"
+           aria-hidden="true" focusable="false">
+        <g class="cl-map-cam" data-cam>
+        <ellipse class="cl-contour" cx="520" cy="300" rx="120" ry="74"></ellipse>
+        <ellipse class="cl-contour" cx="520" cy="300" rx="200" ry="124"></ellipse>
+        <ellipse class="cl-contour" cx="520" cy="300" rx="290" ry="179"></ellipse>
+        <ellipse class="cl-contour" cx="520" cy="300" rx="380" ry="235"></ellipse>
+        <ellipse class="cl-contour" cx="350" cy="500" rx="120" ry="74"></ellipse>
+        <ellipse class="cl-contour" cx="350" cy="500" rx="200" ry="124"></ellipse>
+        <ellipse class="cl-contour" cx="350" cy="500" rx="290" ry="179"></ellipse>
+        <ellipse class="cl-contour" cx="350" cy="500" rx="380" ry="235"></ellipse>
+        <ellipse class="cl-contour" cx="700" cy="470" rx="120" ry="74"></ellipse>
+        <ellipse class="cl-contour" cx="700" cy="470" rx="200" ry="124"></ellipse>
+        <ellipse class="cl-contour" cx="700" cy="470" rx="290" ry="179"></ellipse>
+        <ellipse class="cl-contour" cx="700" cy="470" rx="380" ry="235"></ellipse>
+        <path class="cl-road" d="M 450.1 589.1 Q 447.4 496.1 480.6 409.1 Q 489.4 362.1 515.6 322.2 Q 504.8 284.6 509.2 245.7 Q 553.4 172.6 622.3 122.1"></path>
+        <path class="cl-road" d="M 450.1 589.1 Q 408.7 552.9 384.5 503.5 Q 348.6 483.8 323.1 451.8"></path>
+        <path class="cl-road" d="M 638.4 503.7 Q 665.8 465.4 705.9 440.6"></path>
+        <path class="cl-road" d="M 323.1 451.8 Q 397.6 414.7 480.6 409.1 Q 569.0 440.6 638.4 503.7"></path>
+        <path class="cl-road" d="M 509.2 245.7 Q 627.0 323.5 705.9 440.6"></path>
+        <g class="cl-pin" data-town="Ball Ground" transform="translate(622.3 122.1)">
+          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-dot" r="7"></circle>
+          <text class="cl-pin-label" y="-14">Ball Ground</text>
+        </g>
+        <g class="cl-pin" data-town="Canton" transform="translate(509.2 245.7)">
+          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-dot" r="7"></circle>
+          <text class="cl-pin-label" y="-14">Canton</text>
+        </g>
+        <g class="cl-pin" data-town="Holly Springs" transform="translate(515.6 322.2)">
+          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-dot" r="7"></circle>
+          <text class="cl-pin-label" y="-14">Holly Springs</text>
+        </g>
+        <g class="cl-pin" data-town="Woodstock" transform="translate(480.6 409.1)">
+          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-dot" r="7"></circle>
+          <text class="cl-pin-label" y="-14">Woodstock</text>
+        </g>
+        <g class="cl-pin" data-town="Kennesaw" transform="translate(384.5 503.5)">
+          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-dot" r="7"></circle>
+          <text class="cl-pin-label" y="-14">Kennesaw</text>
+        </g>
+        <g class="cl-pin" data-town="Acworth" transform="translate(323.1 451.8)">
+          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-dot" r="7"></circle>
+          <text class="cl-pin-label" y="-14">Acworth</text>
+        </g>
+        <g class="cl-pin" data-town="Marietta" transform="translate(450.1 589.1)">
+          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-dot" r="7"></circle>
+          <text class="cl-pin-label" y="-14">Marietta</text>
+        </g>
+        <g class="cl-pin" data-town="Roswell" transform="translate(638.4 503.7)">
+          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-dot" r="7"></circle>
+          <text class="cl-pin-label" y="-14">Roswell</text>
+        </g>
+        <g class="cl-pin" data-town="Alpharetta" transform="translate(705.9 440.6)">
+          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-dot" r="7"></circle>
+          <text class="cl-pin-label" y="-14">Alpharetta</text>
+        </g>
+        </g>
+      </svg>
+    </div>
     <div class="cl-floor" aria-hidden="true"></div>
     <div class="cl-beam" aria-hidden="true"></div>
+    <p class="cl-map-tag"><i></i> Serving <b data-map-tag>North Georgia</b></p>
 
     <div class="cl-console">
 
@@ -681,6 +832,7 @@ window.CL_SCHEDULE = {
                   <button type="button" class="cl-opt" data-val="Marietta">Marietta</button>
                   <button type="button" class="cl-opt" data-val="Kennesaw">Kennesaw</button>
                   <button type="button" class="cl-opt" data-val="Roswell">Roswell</button>
+                  <button type="button" class="cl-opt" data-val="Alpharetta">Alpharetta</button>
                   <button type="button" class="cl-opt" data-val="Somewhere else">Somewhere else</button>
                 </div>
                 <div class="cl-fields" style="margin-top:12px">
@@ -767,12 +919,15 @@ window.CL_SCHEDULE = {
               <h3>That's everything.</h3>
               <p class="cl-hint">The work order on the left is what we'll get. Send it and we'll be in touch to set a time.</p>
               <div class="cl-face-body">
-                <div class="cl-fields">
-                  <div class="cl-field cl-field--wide">
-                    <label>Ready to send</label>
-                    <p style="font-size:14.5px;color:rgba(18,16,12,.7)">Pressing send opens your email with all of it already written
-                      out and addressed to us — you just hit send. Rather not use email? Copy it, or call and we'll take it down.</p>
-                  </div>
+                <!-- If a Squarespace Form Block exists on this page, the script
+                     lifts it in here and fills it in from the answers above, so
+                     the visitor just presses Submit and it lands in your inbox.
+                     With no form block on the page this stays empty and the
+                     send button falls back to opening their email app. -->
+                <div class="cl-formslot" data-form-slot></div>
+                <div class="cl-nomail" data-no-form>
+                  <p style="font-size:14.5px;color:rgba(18,16,12,.7)">Pressing send opens your email with all of it already written
+                    out and addressed to us — you just hit send. Rather not use email? Copy it, or call and we'll take it down.</p>
                 </div>
                 <div class="cl-sent" data-sent>
                   <b>Your email is open and ready.</b>
@@ -932,6 +1087,76 @@ window.CL_SCHEDULE = {
   }
 
   /* =====================================================================
+     THE MAP
+     Real latitude/longitude for every town we serve, projected flat, with the
+     road corridors that actually link them. The camera tours the area on its
+     own until someone picks a town on question two — then it flies there and
+     stays. Coordinates below are in the SVG's own 1000-wide space.
+     ===================================================================== */
+  var MAP_W = 1000, MAP_H = 676.8;
+  var TOWNS = {
+    "Ball Ground": [622.3, 122.1],
+    "Canton": [509.2, 245.7],
+    "Holly Springs": [515.6, 322.2],
+    "Woodstock": [480.6, 409.1],
+    "Kennesaw": [384.5, 503.5],
+    "Acworth": [323.1, 451.8],
+    "Marietta": [450.1, 589.1],
+    "Roswell": [638.4, 503.7],
+    "Alpharetta": [705.9, 440.6]
+  };
+  var mapCam = root.querySelector("[data-cam]");
+  var mapTag = root.querySelector("[data-map-tag]");
+  var mapPins = {};
+  root.querySelectorAll(".cl-pin").forEach(function (g) { mapPins[g.getAttribute("data-town")] = g; });
+  var tourTimer = null, tourAt = 0, mapLocked = false;
+  var tourOrder = Object.keys(TOWNS);
+
+  function flyTo(name, lock) {
+    if (!mapCam) return;
+    var t = TOWNS[name];
+    Object.keys(mapPins).forEach(function (k) {
+      mapPins[k].classList.toggle("is-live", !lock && k === name);
+      mapPins[k].classList.toggle("is-picked", !!lock && k === name);
+    });
+    if (mapTag) mapTag.textContent = t ? name : "North Georgia";
+    if (!t) { mapCam.style.transform = ""; return; }
+    /* scale about the town, then slide it back to the middle of the frame */
+    var z = lock ? 1.5 : 1.18;
+    var x = MAP_W / 2 - t[0] * z, y = MAP_H / 2 - t[1] * z;
+    mapCam.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) scale(" + z + ")";
+  }
+  function startTour() {
+    if (mapLocked || reduceMotion || tourTimer) return;
+    tourTimer = setInterval(function () {
+      if (document.hidden) return;
+      tourAt = (tourAt + 1) % tourOrder.length;
+      flyTo(tourOrder[tourAt], false);
+    }, 4200);
+    flyTo(tourOrder[tourAt], false);
+  }
+  function lockMap(name) {
+    if (!TOWNS[name]) {                       /* "Somewhere else" — pull back out */
+      mapLocked = false;
+      Object.keys(mapPins).forEach(function (k) { mapPins[k].classList.remove("is-picked"); });
+      startTour();
+      return;
+    }
+    mapLocked = true;
+    if (tourTimer) { clearInterval(tourTimer); tourTimer = null; }
+    flyTo(name, true);
+  }
+  /* only run the tour while the room is actually on screen */
+  if ("IntersectionObserver" in window && mapCam) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) startTour();
+        else if (tourTimer) { clearInterval(tourTimer); tourTimer = null; }
+      });
+    }, { threshold: 0.05 }).observe(root.querySelector(".cl-room"));
+  }
+
+  /* =====================================================================
      THE DRUM
      Six faces standing on the sides of a hexagonal prism. On a wide screen
      the whole body turns 60 degrees per question, so you watch the next one
@@ -1009,10 +1234,10 @@ window.CL_SCHEDULE = {
     });
     var last = at === N - 1;
     nextBtn.hidden = last;
-    sendBtn.hidden = !last;
+    sendBtn.hidden = !last || sendBtn.dataset.replaced === "1";
     backBtn.disabled = at === 0;
     fwdBtn.disabled = at >= seen && at !== N - 1 ? false : at === N - 1;
-    if (last) updateSend();
+    if (last) { updateSend(); fillSquarespaceForm(); }
   }
 
   function go(n) {
@@ -1104,6 +1329,7 @@ window.CL_SCHEDULE = {
           else { answers[key] = val; btn.classList.add("is-on"); }
         }
         save(); paintTicket();
+        if (key === "town") lockMap(answers[key]);
       });
       if (canHover && !reduceMotion) {
         btn.addEventListener("mousemove", function (e) {
@@ -1191,9 +1417,107 @@ window.CL_SCHEDULE = {
   }
   sendBtn.addEventListener("click", function (e) {
     if (!validate(faces[N - 2])) { e.preventDefault(); go(N - 2); return; }
+    if (sqForm) {
+      e.preventDefault();
+      fillSquarespaceForm();
+      var submit = sqForm.querySelector("input[type=submit], button[type=submit], .sqs-system-button");
+      if (submit && submit.focus) submit.focus({ preventScroll: true });
+      return;
+    }
     var sent = root.querySelector("[data-sent]");
     if (sent) sent.classList.add("is-on");
   });
+
+  /* =====================================================================
+     SQUARESPACE FORM BRIDGE
+     If a Form Block exists anywhere on this page, lift it onto the last face
+     and fill it in from the answers. The visitor then presses Squarespace's
+     own Submit button, so the submission is stored in Form Submissions and
+     emailed to whichever address the block is set to — no third-party service,
+     nothing faked. If there is no form block, everything falls back to the
+     pre-written email exactly as before.
+     ===================================================================== */
+  var formSlot = root.querySelector("[data-form-slot]");
+  var noFormNote = root.querySelector("[data-no-form]");
+  var sqForm = null;
+
+  function findSquarespaceForm() {
+    var block = document.querySelector(
+      ".sqs-block-form, .form-block, [data-block-type='9']");
+    if (!block || root.contains(block)) return null;
+    return block;
+  }
+
+  function labelTextOf(item) {
+    var l = item.querySelector("label, .title, legend");
+    return (l ? l.textContent : "").toLowerCase();
+  }
+
+  /* Set a value the way a framework-managed input will actually notice */
+  function setValue(el, v) {
+    if (!el || v === undefined || v === null) return;
+    var proto = el.tagName === "TEXTAREA" ? window.HTMLTextAreaElement : window.HTMLInputElement;
+    var setter = Object.getOwnPropertyDescriptor(proto.prototype, "value");
+    if (setter && setter.set) setter.set.call(el, v); else el.value = v;
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  function fillSquarespaceForm() {
+    if (!sqForm) return;
+    var items = sqForm.querySelectorAll(".form-item, .field, fieldset");
+    var usedDetails = false;
+    items.forEach(function (item) {
+      var label = labelTextOf(item);
+      var inputs = item.querySelectorAll("input:not([type=submit]):not([type=hidden]), textarea, select");
+      if (!inputs.length) return;
+      var first = inputs[0];
+      var type = (first.getAttribute("type") || "").toLowerCase();
+
+      if (label.indexOf("name") > -1 || item.classList.contains("name")) {
+        var parts = (answers.name || "").trim().split(/\s+/);
+        if (inputs.length >= 2) {                       /* First / Last pair */
+          setValue(inputs[0], parts[0] || "");
+          setValue(inputs[1], parts.slice(1).join(" ") || "");
+        } else setValue(first, answers.name || "");
+        return;
+      }
+      if (type === "tel" || label.indexOf("phone") > -1 || label.indexOf("number") > -1) {
+        setValue(first, answers.phone || ""); return;
+      }
+      if (type === "email" || label.indexOf("email") > -1) {
+        setValue(first, answers.email || ""); return;
+      }
+      if (first.tagName === "TEXTAREA" && !usedDetails) {
+        usedDetails = true;
+        setValue(first, asText()); return;
+      }
+      /* any other single line box: hand it the project list, once */
+      if (!usedDetails && (label.indexOf("project") > -1 || label.indexOf("detail") > -1 ||
+                           label.indexOf("message") > -1 || label.indexOf("subject") > -1)) {
+        usedDetails = true;
+        setValue(first, asText());
+      }
+    });
+  }
+
+  function mountSquarespaceForm() {
+    var block = findSquarespaceForm();
+    if (!block || !formSlot) {
+      if (noFormNote) noFormNote.classList.add("is-on");
+      return;
+    }
+    sqForm = block;
+    formSlot.appendChild(block);
+    /* the form block may only appear after our script has run, so clear the
+       fallback note that was shown while we were still looking for it */
+    if (noFormNote) noFormNote.classList.remove("is-on");
+    /* Squarespace's own Submit button is now sitting on the face, so ours would
+       just be a second button doing the same job */
+    sendBtn.dataset.replaced = "1";
+    sendBtn.hidden = true;
+    fillSquarespaceForm();
+  }
 
   var copyBtn = root.querySelector("[data-copy]");
   if (copyBtn) {
@@ -1232,10 +1556,26 @@ window.CL_SCHEDULE = {
     go(dx < 0 ? at + 1 : at - 1);
   });
 
+  /* belt and braces for browsers without overflow:clip — if anything ever does
+     scroll these boxes, put them straight back */
+  [root.querySelector(".cl-room"), root.querySelector(".cl-drum-hood")].forEach(function (box) {
+    if (!box) return;
+    box.addEventListener("scroll", function () {
+      if (box.scrollLeft) box.scrollLeft = 0;
+      if (box.scrollTop) box.scrollTop = 0;
+    }, { passive: true });
+  });
+
   window.addEventListener("resize", layout);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   layout();
   paintTicket();
+  mountSquarespaceForm();
+  window.addEventListener("load", function () { if (!sqForm) mountSquarespaceForm(); });
+  [600, 1800, 4000].forEach(function (t) {
+    setTimeout(function () { if (!sqForm) mountSquarespaceForm(); }, t);
+  });
+  if (answers.town) lockMap(answers.town);
 
   /* ---------- Hours ---------- */
   var hoursBox = root.querySelector("[data-hours]");

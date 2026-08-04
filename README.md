@@ -10,7 +10,7 @@ Squarespace with zero build tools. Four pages so far:
 - **`services.html`** — the Services page: every service with its own photo gallery, in one
   fully responsive file (see "The Services page" section below).
 - **`schedule.html`** — the Schedule page: a six-sided drum you turn to answer questions,
-  set in a dark 3D room, ending in a pre-written email to Centerline (see below).
+  set in a dark 3D room over a live map of the service area (see below).
 
 ## What's inside
 
@@ -207,9 +207,14 @@ rather than a plain contact form.
   thing flattens out automatically for reduce-motion visitors.
 - **Nothing is lost** — answers are saved as you go, so a refresh or an accidental back
   button doesn't wipe the form.
-- **Sends without a server** — the finished request opens the visitor's email app with a
-  formatted summary already written and addressed to Centerline. Copy-to-clipboard and
-  click-to-call sit beside it for anyone who'd rather not use email.
+- **A live map of the service area** behind it all — the towns' real coordinates, the roads
+  that actually connect them, and a camera drifting from town to town. Pick where the project
+  is and the map flies there and drops a pin.
+- **Sends itself** — add a Squarespace Form Block to the page and the drum lifts it onto the
+  last face, fills in every field from the answers, and the visitor presses Squarespace's own
+  Submit; it lands in Form Submissions and in your inbox. With no form block it falls back to
+  opening the visitor's email app with the whole request pre-written. Copy-to-clipboard and
+  click-to-call sit beside both.
 - **Only name and phone are required**, validated inline before the review step; everything
   else can be skipped.
 - **Keyboard and screen-reader safe** — Enter advances, and cards that are turned away are

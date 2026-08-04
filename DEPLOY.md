@@ -269,8 +269,27 @@ summary. There's also a **Copy Details** button and a click-to-call, so nobody g
 6. To change where requests go, edit the short list at the very top of the code block —
    it holds the email address and phone number, nothing else.
 
-### Want requests saved in Squarespace instead of emailed?
+### Getting requests emailed to you automatically (recommended)
 
-Add a Squarespace **Form Block** underneath the code block and it will collect submissions
-in Squarespace's own storage. Tell me and I'll add a "or fill in the form below" hand-off
-so the two don't compete with each other.
+Out of the box the last step opens the visitor's own email app with everything written out.
+That works everywhere, but they have to press send in their mail program. To have requests
+arrive by themselves — and be saved in Squarespace — add a **Form Block**:
+
+1. Edit the Schedule page and add a **Form Block** anywhere below the code block
+2. Give it these four fields, in this order — the wording matters, the page matches on it:
+   - **Name** (Name field, or a plain text field called "Name")
+   - **Phone Number** (text)
+   - **Email Address** (email)
+   - **Tell us about your project** (text area)
+3. In the block's **Storage** settings choose **Email** and enter
+   `Info@centerlineworks.com`
+4. Save
+
+That's all. The page finds that form, lifts it onto the last face of the drum, and fills in
+every field from the answers — name split into first and last if your form has both boxes,
+and the whole work order dropped into the project box. The visitor presses **Submit** and it
+goes through Squarespace exactly as a normal form would: stored under Form Submissions and
+emailed to you. Nothing is faked and there's no outside service involved.
+
+If the form block is ever removed, the page notices and quietly goes back to the email
+hand-off, so the page never breaks.

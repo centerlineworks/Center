@@ -192,9 +192,22 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   areas so the ticket sits under the headline on desktop but AFTER the drum on phones.
   Cards that are turned away get `tabindex="-1"` on every control and `aria-hidden`, so
   keyboard focus can never land on an off-screen field. Enter advances (except in the textarea).
-  **There is no backend.** A Squarespace code block cannot store submissions, so the deck ends
-  by writing a formatted `mailto:` onto the send button's own `href` (refreshed in
-  `renderSummary`). LESSON: set it as an anchor `href`, never `window.location.href` in a click
+  Behind everything sits a **real map of the service area** — the towns' actual lat/long
+  projected flat (`tools/` has the generator), the road corridors that genuinely link them,
+  and a camera that tours town to town every 4.2s. Picking a town on question two flies the
+  camera there and locks it; "Somewhere else" releases it. Kept at ~.3 opacity behind a
+  radial mask that is *faintest in the middle*, or it fights the headline and the drum.
+  **Email delivery**: a Squarespace code block cannot store submissions, so by default the
+  deck writes a formatted `mailto:` onto the send button's own `href`. If a **Form Block**
+  exists anywhere on the page, `mountSquarespaceForm()` lifts it onto the last face, restyles
+  it, and fills it from the answers (matching fields by label text; a First/Last name pair is
+  split automatically) — the visitor presses Squarespace's OWN Submit, so it stores and emails
+  through Squarespace with nothing faked and no third party. Our send button hides itself when
+  that happens. Remove the form block and it silently reverts to the mailto.
+  LESSON: `overflow: hidden` is still *programmatically scrollable* — focusing a form field
+  inside a face rotated 60° made the browser scroll `.cl-room` sideways and drag the whole
+  console off screen. `overflow: clip` on `.cl-room`, `.cl-drum-hood` and `.cl-mapwrap` fixes
+  it, with a scroll listener resetting `scrollLeft` as a fallback. LESSON: set it as an anchor `href`, never `window.location.href` in a click
   handler — mobile Safari blocks the scripted version, and an href is also testable. Copy-to-
   clipboard and click-to-call sit beside it as fallbacks. Only name and phone are required.
   Answers persist to `localStorage` (`cl_sched_v1`) so a refresh doesn't wipe the form.
