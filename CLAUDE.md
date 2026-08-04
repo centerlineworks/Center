@@ -168,12 +168,28 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
 - **Schedule** — `schedule.html` → `squarespace/schedule-part1-header-injection.html` +
   `schedule-part2-code-block.html`. Scope `#cl-sched`. Responsive-first. The landing point for
   every "Schedule an Estimate" button on the other pages, so the slug must stay `/schedule`.
-  Centrepiece is a **six-card 3D deck** (`.cl-stage` holds the `perspective`, cards are
-  absolutely positioned siblings): what we're building (multi-pick) → where → when → budget →
-  contact details → review. The spent card goes `is-behind` (rotateY 34deg, translateZ -300px),
-  the next sits `is-ahead` mirrored, only `is-active` is visible. `sizeStage()` animates the
-  stage height to the active card — call it after ANY content change (option toggle, summary
-  render, resize, font load) or the card overflows its container.
+  LESSON: the first build reused the house style — video hero, centred logo, stacked
+  cream/dark bands — and Alfred rejected it outright ("you totally copied the other ones…
+  where is all the 3d items i said"). This page deliberately shares NOTHING structural with
+  the others: no video, no hero band, no alternating sections. It is one dark room in
+  perspective (`.cl-room`) with a drifting grid floor and a two-column console, and the tool
+  is the first thing on screen rather than something you scroll to.
+  Centrepiece is a **six-sided drum** — a real hexagonal prism. Faces sit at
+  `rotateY(i*60deg) translateZ(R)` where `R = faceWidth/2 / tan(pi/6)`, and the body turns
+  `translateZ(-R) rotateY(-at*60deg)`, so you watch the next question come round.
+  LESSON: faces MUST get `backface-visibility: hidden` **and** `pointer-events: none` unless
+  `.is-front` — otherwise the far side of the drum wins hit testing and swallows every click
+  on the front face (Playwright reported the budget face intercepting clicks meant for the
+  first one). LESSON: the prism is far wider than its column, so the side faces reach over
+  the headline — `.cl-drum-hood` clips them with `overflow:hidden` plus vertical padding and
+  matching negative margin so the drop shadow survives.
+  Faces are a fixed `--face-h` with `.cl-face-body { overflow-y:auto }`, so no height
+  animation is needed. Below 768px the prism is too deep: faces flip on the spot
+  (`rotateY(±88deg)`) instead, switched by `layout()` on resize.
+  Beside it a **work order writes itself** — `.cl-ticket` gains a line per answer with a
+  `cl-ink` flip-in, tilts to the mouse, and counts "n of 5 filled in". Progress is six little
+  **cubes** that roll `rotateX(-90deg)` to show a gold tick face. `.cl-console` uses grid
+  areas so the ticket sits under the headline on desktop but AFTER the drum on phones.
   Cards that are turned away get `tabindex="-1"` on every control and `aria-hidden`, so
   keyboard focus can never land on an off-screen field. Enter advances (except in the textarea).
   **There is no backend.** A Squarespace code block cannot store submissions, so the deck ends

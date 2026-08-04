@@ -22,321 +22,302 @@ window.CL_SCHEDULE = {
 
 <main id="cl-sched">
 
-  <!-- ================= HERO ================= -->
-  <header class="cl-hero" aria-label="Schedule a free estimate with Centerline Construction">
-    <video class="cl-video-bg" autoplay muted loop playsinline webkit-playsinline preload="auto"
-           poster="https://www.centerlineworks.com/s/services-hero-poster.jpg" aria-hidden="true">
-      <source src="https://www.centerlineworks.com/s/services-hero.webm" type="video/webm">
-      <source src="https://www.centerlineworks.com/s/services-hero.mp4" type="video/mp4">
-    </video>
-    <div class="cl-scrim"></div>
-    <div class="cl-grid3d" aria-hidden="true"></div>
+  <!-- ============ THE ROOM: console + drum, no video hero ============ -->
+  <section class="cl-room" aria-labelledby="cl-h1">
+    <div class="cl-floor" aria-hidden="true"></div>
+    <div class="cl-beam" aria-hidden="true"></div>
 
-    <div class="cl-hero-inner">
-      <div class="cl-logo" data-cl-logo>
-        <img alt="Centerline Construction Company, LLC" loading="eager">
-      </div>
-      <h1>
-        <span class="ln">Book your</span>
-        <span class="ln gold">free estimate.</span>
-      </h1>
-      <p class="cl-hero-sub">A couple of quick questions and we'll come look at the project in person. No fee, no obligation, and a written quote in your hands before anything gets started.</p>
-      <div class="cl-btn-row cl-btn-row--center">
-        <a class="cl-btn cl-btn--gold" href="#cl-start" data-scroll>Start My Estimate</a>
-        <a class="cl-btn cl-btn--ghost" href="tel:+16783721274">Call (678) 372-1274</a>
-      </div>
-      <div class="cl-trustchips">
-        <span><b>★ 5.0</b> · 43 Reviews</span>
-        <span><b>18+</b> Years Experience</span>
-        <span>Free Estimates</span>
-        <span>Mon–Sat 7am–6pm</span>
-      </div>
-    </div>
-  </header>
+    <div class="cl-console">
 
-  <!-- ================= THE BOOKING DECK ================= -->
-  <section class="cl-section cl-booker" id="cl-start" aria-labelledby="cl-book-h">
-    <div class="cl-wrap">
-      <div class="cl-booker-head cl-reveal">
-        <p class="cl-kicker">Your estimate</p>
-        <h2 id="cl-book-h">Tell us what you're building.</h2>
-        <p class="cl-lede" style="margin:0 auto">Six short questions. Nothing is required except a name and a number
-          to reach you on — skip anything you're not sure about yet.</p>
+      <!-- LEFT: words + the work order that writes itself -->
+      <div class="cl-desk">
+        <div class="cl-logo" data-cl-logo>
+          <img alt="Centerline Construction Company, LLC" loading="eager">
+        </div>
+        <p class="cl-kicker">Free estimate · no obligation</p>
+        <h1 class="cl-lede-h1" id="cl-h1">Let's build<span class="gold">your quote.</span></h1>
+        <p class="cl-blurb">Six questions on the drum. Answer what you know, skip what you don't —
+          we'll come look at the real thing and put the price in writing before anything starts.</p>
       </div>
 
-      <!-- progress rail -->
-      <div class="cl-steps cl-reveal" role="group" aria-label="Progress through the estimate questions" data-steps></div>
-
-      <!-- the 3D card deck -->
-      <div class="cl-stage cl-reveal" data-stage>
-
-        <!-- 1 · what -->
-        <section class="cl-card" data-card aria-label="Step 1: what we're building">
-          <h3>What can we build for you?</h3>
-          <p class="cl-hint">Pick as many as you like — <b>tap again to unpick</b>.</p>
-          <div class="cl-opts" data-opts="work" data-multi="1">
-            <button type="button" class="cl-opt" data-val="Bathroom remodel">Bathroom<small>Tile, tubs, walk-in showers</small></button>
-            <button type="button" class="cl-opt" data-val="Basement finishing">Basement<small>Full build-outs and bars</small></button>
-            <button type="button" class="cl-opt" data-val="Cabana / pavilion">Cabana or Pavilion<small>Poolside and outdoor living</small></button>
-            <button type="button" class="cl-opt" data-val="Home addition">Addition<small>More room, built to match</small></button>
-            <button type="button" class="cl-opt" data-val="Deck &amp; outdoor">Deck &amp; Outdoor<small>Decking, railing, screens</small></button>
-            <button type="button" class="cl-opt" data-val="Siding &amp; exterior">Siding &amp; Exterior<small>Siding, trim, wood rot</small></button>
-            <button type="button" class="cl-opt" data-val="Kitchen remodel">Kitchen<small>Cabinetry and countertops</small></button>
-            <button type="button" class="cl-opt" data-val="Commercial project">Commercial<small>Offices, retail, build-outs</small></button>
-            <button type="button" class="cl-opt" data-val="Something else">Something else<small>Tell us below</small></button>
-          </div>
-          <div class="cl-card-foot">
-            <span class="cl-skip">Not sure yet? Just carry on.</span>
-            <span class="cl-spacer"></span>
-            <button type="button" class="cl-btn cl-btn--gold" data-next>Next</button>
-          </div>
-        </section>
-
-        <!-- 2 · where -->
-        <section class="cl-card" data-card aria-label="Step 2: where the project is">
-          <h3>Where's the project?</h3>
-          <p class="cl-hint">So we know how far we're driving — we cover Cherokee County and the wider North Georgia area.</p>
-          <div class="cl-opts" data-opts="town">
-            <button type="button" class="cl-opt" data-val="Holly Springs">Holly Springs</button>
-            <button type="button" class="cl-opt" data-val="Canton">Canton</button>
-            <button type="button" class="cl-opt" data-val="Woodstock">Woodstock</button>
-            <button type="button" class="cl-opt" data-val="Ball Ground">Ball Ground</button>
-            <button type="button" class="cl-opt" data-val="Acworth">Acworth</button>
-            <button type="button" class="cl-opt" data-val="Marietta">Marietta</button>
-            <button type="button" class="cl-opt" data-val="Kennesaw">Kennesaw</button>
-            <button type="button" class="cl-opt" data-val="Roswell">Roswell</button>
-            <button type="button" class="cl-opt" data-val="Somewhere else">Somewhere else</button>
-          </div>
-          <div class="cl-fields" style="margin-top:16px">
-            <div class="cl-field cl-field--wide">
-              <label for="cl-zip">Street or ZIP <span>(optional)</span></label>
-              <input id="cl-zip" type="text" autocomplete="postal-code" data-field="zip" placeholder="e.g. 30115">
+      <!-- the work order: its own grid cell, so on a phone it can sit AFTER the
+           drum — the tool first, the paperwork second -->
+      <div class="cl-ticket-wrap">
+          <div class="cl-ticket" data-ticket>
+            <h2>Work order · draft</h2>
+            <dl data-ticket-list>
+              <div class="cl-trow" data-t="work"><dt>Project</dt><dd>—</dd></div>
+              <div class="cl-trow" data-t="town"><dt>Location</dt><dd>—</dd></div>
+              <div class="cl-trow" data-t="timing"><dt>Timing</dt><dd>—</dd></div>
+              <div class="cl-trow" data-t="budget"><dt>Budget</dt><dd>—</dd></div>
+              <div class="cl-trow" data-t="who"><dt>Contact</dt><dd>—</dd></div>
+            </dl>
+            <div class="cl-ticket-foot">
+              <span data-filled><b>0</b> of 5 filled in</span>
             </div>
-          </div>
-          <div class="cl-card-foot">
-            <button type="button" class="cl-back" data-back>‹ Back</button>
-            <span class="cl-spacer"></span>
-            <button type="button" class="cl-btn cl-btn--gold" data-next>Next</button>
-          </div>
-        </section>
-
-        <!-- 3 · when -->
-        <section class="cl-card" data-card aria-label="Step 3: when you would like to start">
-          <h3>When would you like to start?</h3>
-          <p class="cl-hint">A rough answer is fine. It only helps us work out where you fit in the schedule.</p>
-          <div class="cl-opts cl-opts--2" data-opts="timing">
-            <button type="button" class="cl-opt" data-val="As soon as possible">As soon as possible<small>You're ready to go</small></button>
-            <button type="button" class="cl-opt" data-val="Within a month">Within a month<small>Lining things up now</small></button>
-            <button type="button" class="cl-opt" data-val="One to three months">1 – 3 months<small>Planning ahead</small></button>
-            <button type="button" class="cl-opt" data-val="Three to six months">3 – 6 months<small>Early days</small></button>
-            <button type="button" class="cl-opt" data-val="Just gathering ideas">Just gathering ideas<small>No date in mind</small></button>
-            <button type="button" class="cl-opt" data-val="It's urgent — damage or a leak">It's urgent<small>Damage, a leak, something failing</small></button>
-          </div>
-          <div class="cl-card-foot">
-            <button type="button" class="cl-back" data-back>‹ Back</button>
-            <span class="cl-spacer"></span>
-            <button type="button" class="cl-btn cl-btn--gold" data-next>Next</button>
-          </div>
-        </section>
-
-        <!-- 4 · budget -->
-        <section class="cl-card" data-card aria-label="Step 4: budget range">
-          <h3>Have a budget in mind?</h3>
-          <p class="cl-hint">Completely optional — but it saves everyone time, and we'll tell you straight if it doesn't match the job.</p>
-          <div class="cl-opts" data-opts="budget">
-            <button type="button" class="cl-opt" data-val="Under $10,000">Under $10k</button>
-            <button type="button" class="cl-opt" data-val="$10,000 – $25,000">$10k – $25k</button>
-            <button type="button" class="cl-opt" data-val="$25,000 – $50,000">$25k – $50k</button>
-            <button type="button" class="cl-opt" data-val="$50,000 – $100,000">$50k – $100k</button>
-            <button type="button" class="cl-opt" data-val="Over $100,000">$100k+</button>
-            <button type="button" class="cl-opt" data-val="Rather not say yet">Rather not say</button>
-          </div>
-          <div class="cl-card-foot">
-            <button type="button" class="cl-back" data-back>‹ Back</button>
-            <span class="cl-spacer"></span>
-            <button type="button" class="cl-btn cl-btn--gold" data-next>Next</button>
-          </div>
-        </section>
-
-        <!-- 5 · details -->
-        <section class="cl-card" data-card aria-label="Step 5: how to reach you">
-          <h3>How do we reach you?</h3>
-          <p class="cl-hint">Just a name and a number is enough. We'll be in touch to agree a time.</p>
-          <div class="cl-fields">
-            <div class="cl-field">
-              <label for="cl-name">Your name <span>*</span></label>
-              <input id="cl-name" type="text" autocomplete="name" data-field="name" data-required="1" placeholder="First and last">
-              <span class="cl-err">Please add your name so we know who we're calling.</span>
-            </div>
-            <div class="cl-field">
-              <label for="cl-phone">Phone <span>*</span></label>
-              <input id="cl-phone" type="tel" autocomplete="tel" data-field="phone" data-required="1" placeholder="(678) 555-0100">
-              <span class="cl-err">We need a number to reach you on.</span>
-            </div>
-            <div class="cl-field">
-              <label for="cl-email">Email <span>(optional)</span></label>
-              <input id="cl-email" type="email" autocomplete="email" data-field="email" placeholder="you@example.com">
-            </div>
-            <div class="cl-field">
-              <label for="cl-best">Best time to call</label>
-              <select id="cl-best" data-field="best">
-                <option value="">Any time</option>
-                <option>Mornings</option>
-                <option>Afternoons</option>
-                <option>Evenings</option>
-                <option>Weekends</option>
-              </select>
-            </div>
-            <div class="cl-field cl-field--wide">
-              <label for="cl-notes">Anything else we should know?</label>
-              <textarea id="cl-notes" data-field="notes" placeholder="Rough sizes, what's there now, a look you're going for, access, anything at all."></textarea>
-            </div>
-          </div>
-          <div class="cl-card-foot">
-            <button type="button" class="cl-back" data-back>‹ Back</button>
-            <span class="cl-spacer"></span>
-            <button type="button" class="cl-btn cl-btn--gold" data-next>Review My Request</button>
-          </div>
-        </section>
-
-        <!-- 6 · review -->
-        <section class="cl-card" data-card aria-label="Step 6: review and send">
-          <h3>Here's what we'll send.</h3>
-          <p class="cl-hint">Have a look, then hit send — it opens your email with all of this already written out.</p>
-          <dl class="cl-summary" data-summary></dl>
-          <div class="cl-card-foot">
-            <button type="button" class="cl-back" data-back>‹ Back</button>
-            <span class="cl-spacer"></span>
-            <button type="button" class="cl-btn cl-btn--dark-ghost" data-copy>Copy Details</button>
-            <a class="cl-btn cl-btn--gold" href="#" data-send>Send My Request</a>
-          </div>
-          <div class="cl-sent" data-sent>
-            <b>Your email is open and ready.</b>
-            <p>Press send in your email app and it's with us. Prefer to talk it through?
-              Call <a href="tel:+16783721274" style="color:var(--gold-deep);font-weight:800">(678) 372-1274</a> —
-              we're happy to take it over the phone.</p>
-          </div>
-        </section>
-
+        </div>
       </div>
+
+      <!-- RIGHT: the drum -->
+      <div class="cl-rig">
+        <div class="cl-cubes" data-cubes role="group" aria-label="Progress"></div>
+
+        <div class="cl-drum-hood">
+        <div class="cl-drum" data-drum>
+          <div class="cl-drum-body" data-drum-body>
+
+            <!-- 1 -->
+            <section class="cl-face" data-face aria-label="Question 1: what we're building">
+              <h3>What are we building?</h3>
+              <p class="cl-hint">Pick as many as you like — <b>tap again to unpick</b>.</p>
+              <div class="cl-face-body">
+                <div class="cl-opts" data-opts="work" data-multi="1">
+                  <button type="button" class="cl-opt" data-val="Bathroom remodel">Bathroom<small>Tile, tubs, walk-in showers</small></button>
+                  <button type="button" class="cl-opt" data-val="Basement finishing">Basement<small>Full build-outs and bars</small></button>
+                  <button type="button" class="cl-opt" data-val="Cabana / pavilion">Cabana or Pavilion<small>Poolside and outdoor living</small></button>
+                  <button type="button" class="cl-opt" data-val="Home addition">Addition<small>More room, built to match</small></button>
+                  <button type="button" class="cl-opt" data-val="Deck &amp; outdoor">Deck &amp; Outdoor<small>Decking, railing, screens</small></button>
+                  <button type="button" class="cl-opt" data-val="Siding &amp; exterior">Siding &amp; Exterior<small>Siding, trim, wood rot</small></button>
+                  <button type="button" class="cl-opt" data-val="Kitchen remodel">Kitchen<small>Cabinetry and countertops</small></button>
+                  <button type="button" class="cl-opt" data-val="Commercial project">Commercial<small>Offices, retail, build-outs</small></button>
+                </div>
+              </div>
+            </section>
+
+            <!-- 2 -->
+            <section class="cl-face" data-face aria-label="Question 2: where the project is">
+              <h3>Where is it?</h3>
+              <p class="cl-hint">So we know how far we're driving.</p>
+              <div class="cl-face-body">
+                <div class="cl-opts cl-opts--3" data-opts="town">
+                  <button type="button" class="cl-opt" data-val="Holly Springs">Holly Springs</button>
+                  <button type="button" class="cl-opt" data-val="Canton">Canton</button>
+                  <button type="button" class="cl-opt" data-val="Woodstock">Woodstock</button>
+                  <button type="button" class="cl-opt" data-val="Ball Ground">Ball Ground</button>
+                  <button type="button" class="cl-opt" data-val="Acworth">Acworth</button>
+                  <button type="button" class="cl-opt" data-val="Marietta">Marietta</button>
+                  <button type="button" class="cl-opt" data-val="Kennesaw">Kennesaw</button>
+                  <button type="button" class="cl-opt" data-val="Roswell">Roswell</button>
+                  <button type="button" class="cl-opt" data-val="Somewhere else">Somewhere else</button>
+                </div>
+                <div class="cl-fields" style="margin-top:12px">
+                  <div class="cl-field cl-field--wide">
+                    <label for="cl-zip">Street or ZIP <span>(optional)</span></label>
+                    <input id="cl-zip" type="text" autocomplete="postal-code" data-field="zip" placeholder="e.g. 30115">
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 3 -->
+            <section class="cl-face" data-face aria-label="Question 3: when you would like to start">
+              <h3>When would you start?</h3>
+              <p class="cl-hint">A rough answer is fine — it just tells us where you fit.</p>
+              <div class="cl-face-body">
+                <div class="cl-opts" data-opts="timing">
+                  <button type="button" class="cl-opt" data-val="As soon as possible">As soon as possible<small>Ready to go</small></button>
+                  <button type="button" class="cl-opt" data-val="Within a month">Within a month<small>Lining it up now</small></button>
+                  <button type="button" class="cl-opt" data-val="One to three months">1 – 3 months<small>Planning ahead</small></button>
+                  <button type="button" class="cl-opt" data-val="Three to six months">3 – 6 months<small>Early days</small></button>
+                  <button type="button" class="cl-opt" data-val="Just gathering ideas">Just gathering ideas<small>No date yet</small></button>
+                  <button type="button" class="cl-opt" data-val="Urgent — damage or a leak">It's urgent<small>Damage or a leak</small></button>
+                </div>
+              </div>
+            </section>
+
+            <!-- 4 -->
+            <section class="cl-face" data-face aria-label="Question 4: budget range">
+              <h3>Budget in mind?</h3>
+              <p class="cl-hint">Optional — but it saves time, and we'll tell you straight if it doesn't fit the job.</p>
+              <div class="cl-face-body">
+                <div class="cl-opts" data-opts="budget">
+                  <button type="button" class="cl-opt" data-val="Under $10,000">Under $10k</button>
+                  <button type="button" class="cl-opt" data-val="$10,000 – $25,000">$10k – $25k</button>
+                  <button type="button" class="cl-opt" data-val="$25,000 – $50,000">$25k – $50k</button>
+                  <button type="button" class="cl-opt" data-val="$50,000 – $100,000">$50k – $100k</button>
+                  <button type="button" class="cl-opt" data-val="Over $100,000">$100k+</button>
+                  <button type="button" class="cl-opt" data-val="Rather not say yet">Rather not say</button>
+                </div>
+              </div>
+            </section>
+
+            <!-- 5 -->
+            <section class="cl-face" data-face aria-label="Question 5: how to reach you">
+              <h3>How do we reach you?</h3>
+              <p class="cl-hint">A name and a number is all we really need.</p>
+              <div class="cl-face-body">
+                <div class="cl-fields">
+                  <div class="cl-field">
+                    <label for="cl-name">Your name <span>*</span></label>
+                    <input id="cl-name" type="text" autocomplete="name" data-field="name" data-required="1" placeholder="First and last">
+                    <span class="cl-err">We need a name.</span>
+                  </div>
+                  <div class="cl-field">
+                    <label for="cl-phone">Phone <span>*</span></label>
+                    <input id="cl-phone" type="tel" autocomplete="tel" data-field="phone" data-required="1" placeholder="(678) 555-0100">
+                    <span class="cl-err">We need a number to call.</span>
+                  </div>
+                  <div class="cl-field">
+                    <label for="cl-email">Email <span>(optional)</span></label>
+                    <input id="cl-email" type="email" autocomplete="email" data-field="email" placeholder="you@example.com">
+                  </div>
+                  <div class="cl-field">
+                    <label for="cl-best">Best time to call</label>
+                    <select id="cl-best" data-field="best">
+                      <option value="">Any time</option>
+                      <option>Mornings</option>
+                      <option>Afternoons</option>
+                      <option>Evenings</option>
+                      <option>Weekends</option>
+                    </select>
+                  </div>
+                  <div class="cl-field cl-field--wide">
+                    <label for="cl-notes">Anything else?</label>
+                    <textarea id="cl-notes" data-field="notes" placeholder="Rough sizes, what's there now, access, a look you're after."></textarea>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 6 -->
+            <section class="cl-face" data-face aria-label="Question 6: send it">
+              <h3>That's everything.</h3>
+              <p class="cl-hint">The work order on the left is what we'll get. Send it and we'll be in touch to set a time.</p>
+              <div class="cl-face-body">
+                <div class="cl-fields">
+                  <div class="cl-field cl-field--wide">
+                    <label>Ready to send</label>
+                    <p style="font-size:14.5px;color:rgba(18,16,12,.7)">Pressing send opens your email with all of it already written
+                      out and addressed to us — you just hit send. Rather not use email? Copy it, or call and we'll take it down.</p>
+                  </div>
+                </div>
+                <div class="cl-sent" data-sent>
+                  <b>Your email is open and ready.</b>
+                  Press send in your email app and it's with us.
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+        </div>
+
+        <div class="cl-drive">
+          <button type="button" class="cl-turn" data-back aria-label="Previous question">‹</button>
+          <button type="button" class="cl-go" data-next>Next</button>
+          <a class="cl-go" href="#" data-send hidden>Send My Request</a>
+          <button type="button" class="cl-turn" data-fwd aria-label="Next question">›</button>
+        </div>
+        <p class="cl-drive-note">
+          <button type="button" class="cl-turn" data-copy
+            style="width:auto;height:auto;padding:6px 13px;border-radius:999px;font-size:12.5px;font-weight:800">Copy details</button>
+          <span style="margin:0 8px">or call</span><a href="tel:+16783721274">(678) 372-1274</a>
+        </p>
+      </div>
+
     </div>
   </section>
 
-  <!-- ================= WHAT HAPPENS NEXT ================= -->
-  <section class="cl-section cl-dark" aria-labelledby="cl-next-h">
-    <div class="cl-wrap">
-      <div class="cl-reveal" style="text-align:center">
-        <p class="cl-kicker" style="justify-content:center">After you send it</p>
-        <h2 id="cl-next-h">No mystery. No pressure.</h2>
-        <p class="cl-lede" style="margin:0 auto">Here's exactly how it goes from the moment your request lands.</p>
-      </div>
-      <div class="cl-next">
-        <article class="cl-reveal" data-tilt>
-          <b>First</b>
-          <h3>We get in touch</h3>
-          <p>A call or a text to say we've got it, ask anything that isn't clear, and find a time that actually suits you — evenings and Saturdays included.</p>
-        </article>
-        <article class="cl-reveal" data-tilt>
-          <b>Then</b>
-          <h3>We walk it with you</h3>
-          <p>We come out and look at the real thing. Measurements, what's behind the walls, what's possible and what isn't. Ask us anything while we're there.</p>
-        </article>
-        <article class="cl-reveal" data-tilt>
-          <b>After that</b>
-          <h3>You get it in writing</h3>
-          <p>Scope, price and timeline on paper. Take your time with it — nothing is booked and nothing is owed until you say go.</p>
-        </article>
-      </div>
-      <div class="cl-btn-row cl-btn-row--center cl-reveal">
-        <a class="cl-btn cl-btn--ghost" href="https://www.centerlineworks.com/services">See What We Build</a>
-      </div>
+  <!-- ============ THE RUNWAY ============ -->
+  <section class="cl-runway" aria-labelledby="cl-next-h">
+    <div class="cl-runway-head">
+      <p class="cl-kicker">After you send it</p>
+      <h2 id="cl-next-h">No mystery. No pressure.</h2>
+      <p>Exactly how it goes from the moment your request lands.</p>
+    </div>
+    <div class="cl-arc">
+      <article>
+        <div class="n">1</div>
+        <h3>We get in touch</h3>
+        <p>A call or a text to say we've got it, ask anything that isn't clear, and find a time that suits you — evenings and Saturdays included.</p>
+      </article>
+      <article>
+        <div class="n">2</div>
+        <h3>We walk it with you</h3>
+        <p>We come out and look at the real thing. Measurements, what's behind the walls, what's possible and what isn't. Ask us anything while we're there.</p>
+      </article>
+      <article>
+        <div class="n">3</div>
+        <h3>You get it in writing</h3>
+        <p>Scope, price and timeline on paper. Take your time — nothing is booked and nothing is owed until you say go.</p>
+      </article>
     </div>
   </section>
 
-  <!-- ================= HOURS ================= -->
-  <section class="cl-section" style="background:var(--paper-2)" aria-labelledby="cl-hours-h">
-    <div class="cl-wrap cl-hours">
-      <div class="cl-reveal">
+  <!-- ============ HOURS ============ -->
+  <section class="cl-when" aria-labelledby="cl-hours-h">
+    <div class="cl-when-grid">
+      <div>
         <span class="cl-openflag" data-openflag><i></i> Checking hours…</span>
         <p class="cl-kicker">When we're around</p>
         <h2 id="cl-hours-h">Six days a week, and Sunday afternoons.</h2>
-        <p class="cl-lede">Send a request whenever it suits you — the form is open all night. Anything that
+        <p>Send a request whenever it suits you — the drum is open all night. Anything that
           arrives after hours gets picked up the next morning.</p>
-        <div class="cl-btn-row">
-          <a class="cl-btn cl-btn--dark-ghost" href="mailto:Info@centerlineworks.com">Email Us Instead</a>
-        </div>
       </div>
-      <div class="cl-hours-card cl-reveal" data-hours>
-        <div class="cl-hours-row" data-day="1"><span>Monday</span><span>7:00am – 6:00pm</span></div>
-        <div class="cl-hours-row" data-day="2"><span>Tuesday</span><span>7:00am – 6:00pm</span></div>
-        <div class="cl-hours-row" data-day="3"><span>Wednesday</span><span>7:00am – 6:00pm</span></div>
-        <div class="cl-hours-row" data-day="4"><span>Thursday</span><span>7:00am – 6:00pm</span></div>
-        <div class="cl-hours-row" data-day="5"><span>Friday</span><span>7:00am – 6:00pm</span></div>
-        <div class="cl-hours-row" data-day="6"><span>Saturday</span><span>7:00am – 6:00pm</span></div>
-        <div class="cl-hours-row" data-day="0"><span>Sunday</span><span>2:00pm – 6:00pm</span></div>
+      <div class="cl-plates" data-hours>
+        <div class="cl-plate" data-day="1"><b>Monday</b><span>7:00am – 6:00pm</span></div>
+        <div class="cl-plate" data-day="2"><b>Tuesday</b><span>7:00am – 6:00pm</span></div>
+        <div class="cl-plate" data-day="3"><b>Wednesday</b><span>7:00am – 6:00pm</span></div>
+        <div class="cl-plate" data-day="4"><b>Thursday</b><span>7:00am – 6:00pm</span></div>
+        <div class="cl-plate" data-day="5"><b>Friday</b><span>7:00am – 6:00pm</span></div>
+        <div class="cl-plate" data-day="6"><b>Saturday</b><span>7:00am – 6:00pm</span></div>
+        <div class="cl-plate" data-day="0"><b>Sunday</b><span>2:00pm – 6:00pm</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ================= FAQ ================= -->
-  <section class="cl-section" aria-labelledby="cl-faq-h">
-    <div class="cl-wrap">
-      <div class="cl-reveal" style="text-align:center">
+  <!-- ============ FAQ ============ -->
+  <section class="cl-faq-sec" aria-labelledby="cl-faq-h">
+    <div class="cl-faq">
+      <div class="cl-faq-head">
         <p class="cl-kicker" style="justify-content:center">Before you book</p>
-        <h2 id="cl-faq-h">Questions people ask us first.</h2>
+        <h2 id="cl-faq-h">Questions people ask first.</h2>
       </div>
-      <div class="cl-faq cl-reveal">
-        <details open>
-          <summary>Do you charge for estimates?</summary>
-          <p>No. Estimates are free and there's no obligation attached. We come out, walk the project with you, and put the scope, price and timeline in writing before anything is scheduled.</p>
-        </details>
-        <details>
-          <summary>How soon can you come out?</summary>
-          <p>It depends on the week and where you are, but we'll tell you honestly when we get in touch rather than leaving you guessing. If something is actively causing damage, say so in the notes and we'll treat it that way.</p>
-        </details>
-        <details>
-          <summary>Is my job too small?</summary>
-          <p>No. We handle everything from a single stretch of rotten trim to full basement build-outs, additions and commercial renovations. Small jobs done well are how most of our bigger ones started.</p>
-        </details>
-        <details>
-          <summary>What should I have ready?</summary>
-          <p>Nothing formal. Photos help, and a rough budget range helps more, but plenty of projects begin with nothing but a walk through the room and a conversation about what you want out of it.</p>
-        </details>
-        <details>
-          <summary>What areas do you cover?</summary>
-          <p>Holly Springs, Canton, Woodstock, Ball Ground, Acworth, Marietta, Kennesaw, Roswell, Alpharetta and the wider Cherokee County and North Georgia area. If you're just outside that, ask anyway.</p>
-        </details>
-        <details>
-          <summary>Who actually turns up?</summary>
-          <p>Alfred Tudela, the owner, or one of the crew who'll be doing the work — not a salesperson who hands you off afterwards. Eighteen-plus years on the tools between the walkthrough and the quote.</p>
-        </details>
-      </div>
+      <details open>
+        <summary>Do you charge for estimates?</summary>
+        <p>No. Estimates are free and there's no obligation attached. We come out, walk the project with you, and put the scope, price and timeline in writing before anything is scheduled.</p>
+      </details>
+      <details>
+        <summary>How soon can you come out?</summary>
+        <p>It depends on the week and where you are, but we'll tell you honestly when we get in touch rather than leaving you guessing. If something is actively causing damage, say so and we'll treat it that way.</p>
+      </details>
+      <details>
+        <summary>Is my job too small?</summary>
+        <p>No. We handle everything from a single stretch of rotten trim to full basement build-outs, additions and commercial renovations. Small jobs done well are how most of our bigger ones started.</p>
+      </details>
+      <details>
+        <summary>What should I have ready?</summary>
+        <p>Nothing formal. Photos help, and a rough budget range helps more, but plenty of projects begin with nothing but a walk through the room and a conversation about what you want out of it.</p>
+      </details>
+      <details>
+        <summary>What areas do you cover?</summary>
+        <p>Holly Springs, Canton, Woodstock, Ball Ground, Acworth, Marietta, Kennesaw, Roswell, Alpharetta and the wider Cherokee County and North Georgia area. If you're just outside that, ask anyway.</p>
+      </details>
+      <details>
+        <summary>Who actually turns up?</summary>
+        <p>Alfred Tudela, the owner, or one of the crew who'll be doing the work — not a salesperson who hands you off afterwards. Eighteen-plus years on the tools between the walkthrough and the quote.</p>
+      </details>
     </div>
   </section>
 
-  <!-- ================= CLOSING CTA ================= -->
-  <section class="cl-section cl-cta" aria-labelledby="cl-cta-h">
-    <div class="cl-grid3d" aria-hidden="true"></div>
-    <div class="cl-wrap cl-reveal">
-      <h2 id="cl-cta-h">Rather just talk it through?</h2>
-      <p class="cl-lede" style="margin:14px auto 0;color:rgba(247,244,238,.82)">Pick up the phone. You'll get a
-        straight answer about whether we're the right people for the job — and if we're not, we'll tell you that too.</p>
-      <div class="cl-btn-row cl-btn-row--center">
-        <a class="cl-btn cl-btn--gold" href="tel:+16783721274">Call (678) 372-1274</a>
-        <a class="cl-btn cl-btn--ghost" href="mailto:Info@centerlineworks.com">Info@centerlineworks.com</a>
-      </div>
+  <!-- ============ CLOSING ============ -->
+  <section class="cl-end" aria-labelledby="cl-end-h">
+    <div class="cl-floor" aria-hidden="true" style="opacity:.5"></div>
+    <h2 id="cl-end-h" style="position:relative;z-index:2">Rather just talk it through?</h2>
+    <p style="position:relative;z-index:2">Pick up the phone. You'll get a straight answer about whether we're the
+      right people for the job — and if we're not, we'll tell you that too.</p>
+    <div class="cl-end-row">
+      <a class="cl-go" style="flex:none" href="tel:+16783721274">Call (678) 372-1274</a>
+      <a class="cl-ghost" href="mailto:Info@centerlineworks.com">Info@centerlineworks.com</a>
     </div>
   </section>
 
-  <!-- sticky phone bar -->
   <nav class="cl-bar" aria-label="Quick contact">
-    <a class="is-primary" href="#cl-start" data-scroll>Free Estimate</a>
-    <a href="tel:+16783721274">Call</a>
+    <a class="is-primary" href="tel:+16783721274">Call</a>
     <a href="mailto:Info@centerlineworks.com">Email</a>
   </nav>
 
 </main>
-
 <script>
 (function () {
   "use strict";
@@ -344,11 +325,11 @@ window.CL_SCHEDULE = {
   if (!root) return;
   var CFG = window.CL_SCHEDULE || {};
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canHover = window.matchMedia("(hover: hover)").matches;
 
   /* ---------- Logo ----------
-     Load detection happens here in JS on purpose — never with inline
-     onload/onerror attributes, which Squarespace's code-block sanitiser can
-     strip out. */
+     Load detection in JS on purpose — Squarespace's code-block sanitiser can
+     strip inline onload/onerror attributes. */
   var logoBox = root.querySelector("[data-cl-logo]");
   if (logoBox && CFG.logo) {
     var logoImg = logoBox.querySelector("img");
@@ -367,308 +348,319 @@ window.CL_SCHEDULE = {
     setTimeout(markLoaded, 1200);
   }
 
-  /* ---------- Reveal on scroll ---------- */
-  var reveals = root.querySelectorAll(".cl-reveal");
-  if ("IntersectionObserver" in window && !reduceMotion) {
-    var rio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("is-in"); rio.unobserve(e.target); }
+  /* =====================================================================
+     THE DRUM
+     Six faces standing on the sides of a hexagonal prism. On a wide screen
+     the whole body turns 60 degrees per question, so you watch the next one
+     come round. A phone hasn't the room for that much depth, so there the
+     faces flip on the spot instead — same idea, shallower.
+     ===================================================================== */
+  var drum = root.querySelector("[data-drum]");
+  var body = root.querySelector("[data-drum-body]");
+  var faces = body ? [].slice.call(body.querySelectorAll("[data-face]")) : [];
+  if (!drum || !faces.length) return;
+
+  var N = faces.length, STEP = 360 / N;
+  var at = 0, seen = 0, deep = false;
+
+  var answers = { work: [], town: "", zip: "", timing: "", budget: "",
+                  name: "", phone: "", email: "", best: "", notes: "" };
+  try {
+    var stored = JSON.parse(localStorage.getItem("cl_sched_v2") || "null");
+    if (stored && typeof stored === "object") {
+      Object.keys(answers).forEach(function (k) {
+        if (stored[k] !== undefined && stored[k] !== null) answers[k] = stored[k];
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-    reveals.forEach(function (el) { rio.observe(el); });
-  } else {
-    reveals.forEach(function (el) { el.classList.add("is-in"); });
+    }
+  } catch (e) { /* private mode */ }
+  function save() { try { localStorage.setItem("cl_sched_v2", JSON.stringify(answers)); } catch (e) {} }
+
+  /* radius of the prism: half a face divided by tan(180/N) */
+  function radius() {
+    var w = faces[0].getBoundingClientRect().width;
+    return (w / 2) / Math.tan(Math.PI / N);
   }
 
-  /* ---------- Mouse tilt on the "what happens next" cards ---------- */
-  if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
-    root.querySelectorAll("[data-tilt]").forEach(function (card) {
-      card.addEventListener("mousemove", function (e) {
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width - 0.5;
-        var py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = "perspective(900px) rotateY(" + (px * 9) + "deg) rotateX(" + (-py * 9) + "deg) translateY(-5px)";
+  function layout() {
+    deep = window.matchMedia("(min-width: 768px)").matches;
+    if (deep) {
+      var R = radius();
+      body.style.transformStyle = "preserve-3d";
+      faces.forEach(function (f, i) {
+        f.style.transform = "rotateY(" + (i * STEP) + "deg) translateZ(" + R + "px)";
       });
-      card.addEventListener("mouseleave", function () { card.style.transform = ""; });
+      body.dataset.r = R;
+    } else {
+      body.style.transformStyle = "preserve-3d";
+      faces.forEach(function (f, i) {
+        f.style.transform = i === at ? "rotateY(0deg)" : "rotateY(" + (i < at ? 88 : -88) + "deg)";
+      });
+      body.dataset.r = 0;
+    }
+    turn();
+  }
+
+  function turn() {
+    if (deep) {
+      body.style.transform = "translateZ(-" + body.dataset.r + "px) rotateY(" + (-at * STEP) + "deg)";
+    } else {
+      body.style.transform = "none";
+      faces.forEach(function (f, i) {
+        f.style.transform = i === at ? "rotateY(0deg)" : "rotateY(" + (i < at ? 88 : -88) + "deg)";
+      });
+    }
+    faces.forEach(function (f, i) {
+      var front = i === at;
+      f.classList.toggle("is-front", front);
+      f.setAttribute("aria-hidden", front ? "false" : "true");
+      /* nothing behind the front face may catch keyboard focus */
+      f.querySelectorAll("button, input, select, textarea, a").forEach(function (el) {
+        if (front) el.removeAttribute("tabindex");
+        else el.setAttribute("tabindex", "-1");
+      });
     });
+    cubes.forEach(function (c, i) {
+      c.classList.toggle("is-done", i < at);
+      c.classList.toggle("is-now", i === at);
+      c.disabled = i > seen;
+    });
+    var last = at === N - 1;
+    nextBtn.hidden = last;
+    sendBtn.hidden = !last;
+    backBtn.disabled = at === 0;
+    fwdBtn.disabled = at >= seen && at !== N - 1 ? false : at === N - 1;
+    if (last) updateSend();
   }
 
-  /* ---------- Smooth scroll for the in-page jump links ---------- */
-  root.querySelectorAll("[data-scroll]").forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      var target = document.querySelector(a.getAttribute("href"));
-      if (!target) return;
-      e.preventDefault();
-      target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  function go(n) {
+    if (n < 0 || n > N - 1) return;
+    /* the contact face has to be filled in before the last one */
+    if (n === N - 1 && !validate(faces[N - 2])) { n = N - 2; }
+    at = n;
+    if (n > seen) seen = n;
+    turn();
+  }
+
+  /* --- progress cubes --- */
+  var cubeBox = root.querySelector("[data-cubes]");
+  var cubes = faces.map(function (f, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "cl-cube";
+    b.innerHTML = '<span class="f">' + (i + 1) + '</span><span class="t">✓</span>';
+    b.setAttribute("aria-label", "Question " + (i + 1) + " of " + N);
+    b.addEventListener("click", function () { if (i <= seen) go(i); });
+    cubeBox.appendChild(b);
+    return b;
+  });
+
+  var nextBtn = root.querySelector("[data-next]");
+  var sendBtn = root.querySelector("[data-send]");
+  var backBtn = root.querySelector("[data-back]");
+  var fwdBtn = root.querySelector("[data-fwd]");
+  nextBtn.addEventListener("click", function () { go(at + 1); });
+  backBtn.addEventListener("click", function () { go(at - 1); });
+  fwdBtn.addEventListener("click", function () { go(at + 1); });
+
+  /* --- the work order on the left --- */
+  var ticket = root.querySelector("[data-ticket]");
+  var rows = {};
+  root.querySelectorAll("[data-t]").forEach(function (r) { rows[r.getAttribute("data-t")] = r; });
+  var filledOut = root.querySelector("[data-filled]");
+
+  function ink(key, text) {
+    var row = rows[key];
+    if (!row) return;
+    var dd = row.querySelector("dd");
+    var next = text || "—";
+    if (dd.textContent === next) return;
+    dd.textContent = next;
+    row.classList.toggle("is-set", !!text);
+    row.classList.remove("is-fresh");
+    void row.offsetWidth;               /* restart the animation */
+    if (text) row.classList.add("is-fresh");
+  }
+
+  function paintTicket() {
+    ink("work", answers.work.join(", "));
+    ink("town", [answers.town, answers.zip].filter(Boolean).join(" · "));
+    ink("timing", answers.timing);
+    ink("budget", answers.budget);
+    ink("who", [answers.name, answers.phone].filter(Boolean).join(" · "));
+    var n = ["work", "town", "timing", "budget", "who"].filter(function (k) {
+      return rows[k] && rows[k].classList.contains("is-set");
+    }).length;
+    if (filledOut) filledOut.innerHTML = "<b>" + n + "</b> of 5 filled in";
+  }
+
+  if (ticket && canHover && !reduceMotion) {
+    ticket.parentNode.addEventListener("mousemove", function (e) {
+      var r = ticket.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      ticket.style.transform = "rotateY(" + (px * 10) + "deg) rotateX(" + (-py * 10) + "deg) translateZ(14px)";
+    });
+    ticket.parentNode.addEventListener("mouseleave", function () { ticket.style.transform = ""; });
+  }
+
+  /* --- option tiles --- */
+  root.querySelectorAll("[data-opts]").forEach(function (group) {
+    var key = group.getAttribute("data-opts");
+    var multi = group.getAttribute("data-multi") === "1";
+    group.querySelectorAll(".cl-opt").forEach(function (btn) {
+      var val = btn.getAttribute("data-val");
+      if (multi ? answers[key].indexOf(val) > -1 : answers[key] === val) btn.classList.add("is-on");
+      btn.addEventListener("click", function () {
+        if (multi) {
+          var list = answers[key], hit = list.indexOf(val);
+          if (hit > -1) { list.splice(hit, 1); btn.classList.remove("is-on"); }
+          else { list.push(val); btn.classList.add("is-on"); }
+        } else {
+          group.querySelectorAll(".cl-opt").forEach(function (o) { o.classList.remove("is-on"); });
+          if (answers[key] === val) answers[key] = "";
+          else { answers[key] = val; btn.classList.add("is-on"); }
+        }
+        save(); paintTicket();
+      });
+      if (canHover && !reduceMotion) {
+        btn.addEventListener("mousemove", function (e) {
+          var r = btn.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          btn.style.transform = "perspective(600px) rotateY(" + (px * 9) + "deg) rotateX(" + (-py * 9) + "deg) translateY(-3px)";
+        });
+        btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
+      }
     });
   });
 
-  /* =====================================================================
-     THE BOOKING DECK
-     Six cards sharing one perspective. Only the active card is reachable —
-     the others are turned away, hidden from screen readers and from the tab
-     order, so keyboard users never land on an off-screen field.
-     ===================================================================== */
-  var stage = root.querySelector("[data-stage]");
-  var cards = stage ? [].slice.call(stage.querySelectorAll("[data-card]")) : [];
-  var railBox = root.querySelector("[data-steps]");
-  if (stage && cards.length) {
-    var at = 0, seen = 0;
-    var answers = { work: [], town: "", zip: "", timing: "", budget: "",
-                    name: "", phone: "", email: "", best: "", notes: "" };
+  /* --- text fields --- */
+  root.querySelectorAll("[data-field]").forEach(function (el) {
+    var key = el.getAttribute("data-field");
+    if (answers[key]) el.value = answers[key];
+    var sync = function () {
+      answers[key] = el.value;
+      save(); paintTicket();
+      var wrap = el.closest(".cl-field");
+      if (wrap && el.value.trim()) wrap.classList.remove("is-bad");
+    };
+    el.addEventListener("input", sync);
+    el.addEventListener("change", sync);
+  });
 
-    /* --- restore anything typed before a refresh --- */
-    try {
-      var saved = JSON.parse(localStorage.getItem("cl_sched_v1") || "null");
-      if (saved && typeof saved === "object") {
-        Object.keys(answers).forEach(function (k) {
-          if (saved[k] !== undefined && saved[k] !== null) answers[k] = saved[k];
-        });
-      }
-    } catch (e) { /* private mode, or nothing stored */ }
-    function save() {
-      try { localStorage.setItem("cl_sched_v1", JSON.stringify(answers)); } catch (e) {}
-    }
-
-    /* --- progress rail --- */
-    var dots = [], lines = [];
-    cards.forEach(function (card, i) {
-      if (i) {
-        var ln = document.createElement("span");
-        ln.className = "cl-step-line";
-        ln.innerHTML = "<i></i>";
-        railBox.appendChild(ln);
-        lines.push(ln.firstChild);
-      }
-      var d = document.createElement("button");
-      d.type = "button";
-      d.className = "cl-step-dot";
-      d.textContent = i + 1;
-      d.setAttribute("aria-label", "Go to question " + (i + 1) + " of " + cards.length);
-      d.addEventListener("click", function () { if (i <= seen) go(i); });
-      railBox.appendChild(d);
-      dots.push(d);
+  function validate(face) {
+    var ok = true;
+    face.querySelectorAll("[data-required]").forEach(function (el) {
+      var wrap = el.closest(".cl-field");
+      if (!el.value.trim()) { if (wrap) wrap.classList.add("is-bad"); ok = false; }
+      else if (wrap) wrap.classList.remove("is-bad");
     });
-
-    function sizeStage() {
-      var active = cards[at];
-      if (active) stage.style.height = active.offsetHeight + "px";
+    if (!ok) {
+      var bad = face.querySelector(".cl-field.is-bad input");
+      if (bad) setTimeout(function () { bad.focus(); }, 500);
     }
-
-    function paint() {
-      cards.forEach(function (card, i) {
-        var state = i === at ? "is-active" : (i < at ? "is-behind" : "is-ahead");
-        card.classList.remove("is-active", "is-behind", "is-ahead");
-        card.classList.add(state);
-        card.setAttribute("aria-hidden", i === at ? "false" : "true");
-        /* keep hidden cards out of the tab order */
-        card.querySelectorAll("button, input, select, textarea, a").forEach(function (el) {
-          if (i === at) el.removeAttribute("tabindex");
-          else el.setAttribute("tabindex", "-1");
-        });
-      });
-      dots.forEach(function (d, i) {
-        d.classList.toggle("is-now", i === at);
-        d.classList.toggle("is-done", i < at);
-        d.disabled = i > seen;
-      });
-      lines.forEach(function (i, idx) { i.style.width = idx < at ? "100%" : "0"; });
-      sizeStage();
-    }
-
-    function go(n) {
-      if (n < 0 || n > cards.length - 1) return;
-      at = n;
-      if (n > seen) seen = n;
-      paint();
-      if (n === cards.length - 1) renderSummary();
-      /* keep the card in view without yanking the page around */
-      var box = stage.getBoundingClientRect();
-      if (box.top < 70 || box.top > window.innerHeight * 0.5) {
-        stage.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
-      }
-    }
-
-    /* --- option tiles --- */
-    root.querySelectorAll("[data-opts]").forEach(function (group) {
-      var key = group.getAttribute("data-opts");
-      var multi = group.getAttribute("data-multi") === "1";
-      group.querySelectorAll(".cl-opt").forEach(function (btn) {
-        var val = btn.getAttribute("data-val");
-        /* reflect anything restored from a previous visit */
-        if (multi ? answers[key].indexOf(val) > -1 : answers[key] === val) btn.classList.add("is-on");
-        btn.addEventListener("click", function () {
-          if (multi) {
-            var list = answers[key], hit = list.indexOf(val);
-            if (hit > -1) { list.splice(hit, 1); btn.classList.remove("is-on"); }
-            else { list.push(val); btn.classList.add("is-on"); }
-          } else {
-            group.querySelectorAll(".cl-opt").forEach(function (o) { o.classList.remove("is-on"); });
-            if (answers[key] === val) { answers[key] = ""; }
-            else { answers[key] = val; btn.classList.add("is-on"); }
-          }
-          save();
-          sizeStage();
-        });
-        /* a gentle 3D press so the tiles feel physical */
-        if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
-          btn.addEventListener("mousemove", function (e) {
-            var r = btn.getBoundingClientRect();
-            var px = (e.clientX - r.left) / r.width - 0.5;
-            var py = (e.clientY - r.top) / r.height - 0.5;
-            btn.style.transform = "perspective(700px) rotateY(" + (px * 8) + "deg) rotateX(" + (-py * 8) + "deg) translateY(-3px)";
-          });
-          btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
-        }
-      });
-    });
-
-    /* --- text fields --- */
-    root.querySelectorAll("[data-field]").forEach(function (el) {
-      var key = el.getAttribute("data-field");
-      if (answers[key]) el.value = answers[key];
-      el.addEventListener("input", function () {
-        answers[key] = el.value;
-        save();
-        var wrap = el.closest(".cl-field");
-        if (wrap && el.value.trim()) wrap.classList.remove("is-bad");
-      });
-      el.addEventListener("change", function () { answers[key] = el.value; save(); });
-    });
-
-    function validate(card) {
-      var ok = true;
-      card.querySelectorAll("[data-required]").forEach(function (el) {
-        var wrap = el.closest(".cl-field");
-        if (!el.value.trim()) { if (wrap) wrap.classList.add("is-bad"); ok = false; }
-        else if (wrap) wrap.classList.remove("is-bad");
-      });
-      if (!ok) {
-        var bad = card.querySelector(".cl-field.is-bad input");
-        if (bad) bad.focus();
-      }
-      return ok;
-    }
-
-    root.querySelectorAll("[data-next]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var card = b.closest("[data-card]");
-        if (!validate(card)) return;
-        go(at + 1);
-      });
-    });
-    root.querySelectorAll("[data-back]").forEach(function (b) {
-      b.addEventListener("click", function () { go(at - 1); });
-    });
-
-    /* Enter moves on, except inside the notes box where it should make a new line */
-    stage.addEventListener("keydown", function (e) {
-      if (e.key !== "Enter" || e.shiftKey) return;
-      var t = e.target;
-      if (t.tagName === "TEXTAREA" || t.tagName === "BUTTON" || t.tagName === "A") return;
-      e.preventDefault();
-      var nextBtn = cards[at].querySelector("[data-next]");
-      if (nextBtn) nextBtn.click();
-    });
-
-    /* --- the summary + the handoff to email --- */
-    function lines_() {
-      var out = [];
-      out.push(["Project", answers.work.length ? answers.work.join(", ") : "Not specified yet"]);
-      out.push(["Location", [answers.town, answers.zip].filter(Boolean).join(" · ") || "Not specified yet"]);
-      out.push(["Timing", answers.timing || "Not specified yet"]);
-      out.push(["Budget", answers.budget || "Not specified yet"]);
-      out.push(["Name", answers.name || "—"]);
-      out.push(["Phone", answers.phone || "—"]);
-      if (answers.email) out.push(["Email", answers.email]);
-      if (answers.best) out.push(["Best time to call", answers.best]);
-      if (answers.notes) out.push(["Notes", answers.notes]);
-      return out;
-    }
-
-    function renderSummary() {
-      var dl = root.querySelector("[data-summary]");
-      if (!dl) return;
-      dl.innerHTML = "";
-      lines_().forEach(function (row) {
-        var wrap = document.createElement("div");
-        wrap.className = "cl-sum-row";
-        var dt = document.createElement("dt");
-        dt.textContent = row[0];
-        var dd = document.createElement("dd");
-        dd.textContent = row[1];
-        wrap.appendChild(dt); wrap.appendChild(dd);
-        dl.appendChild(wrap);
-      });
-      updateSendHref();
-      sizeStage();
-    }
-
-    function asText() {
-      return lines_().map(function (r) { return r[0] + ": " + r[1]; }).join("\n");
-    }
-
-    /* The send button is a real link carrying a real mailto: address, refreshed
-       whenever the summary is drawn. Some phone browsers refuse a mailto set
-       from script during a click, but they always follow an anchor's own href. */
-    var sendBtn = root.querySelector("[data-send]");
-    function updateSendHref() {
-      if (!sendBtn) return;
-      var who = answers.name ? " — " + answers.name : "";
-      var what = answers.work.length ? " (" + answers.work.join(", ") + ")" : "";
-      var subject = "Estimate request" + who + what;
-      var body = "Hi Centerline,\n\nI'd like to book a free estimate.\n\n" + asText() +
-                 "\n\nSent from centerlineworks.com/schedule";
-      sendBtn.setAttribute("href", "mailto:" + (CFG.email || "Info@centerlineworks.com") +
-        "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body));
-    }
-    if (sendBtn) {
-      sendBtn.addEventListener("click", function (e) {
-        /* name and phone live on the previous card — check them before sending */
-        var detailCard = cards[cards.length - 2];
-        if (detailCard && !validate(detailCard)) { e.preventDefault(); go(cards.length - 2); return; }
-        var sent = sendBtn.closest("[data-card]").querySelector("[data-sent]");
-        if (sent) { sent.classList.add("is-on"); sizeStage(); }
-      });
-    }
-
-    var copyBtn = root.querySelector("[data-copy]");
-    if (copyBtn) {
-      copyBtn.addEventListener("click", function () {
-        var text = asText();
-        var done = function () {
-          var old = copyBtn.textContent;
-          copyBtn.textContent = "Copied ✓";
-          setTimeout(function () { copyBtn.textContent = old; }, 2000);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(done, done);
-        } else {
-          var ta = document.createElement("textarea");
-          ta.value = text; ta.setAttribute("readonly", "");
-          ta.style.position = "fixed"; ta.style.opacity = "0";
-          document.body.appendChild(ta); ta.select();
-          try { document.execCommand("copy"); } catch (err) {}
-          document.body.removeChild(ta);
-          done();
-        }
-      });
-    }
-
-    window.addEventListener("resize", sizeStage);
-    window.addEventListener("load", sizeStage);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeStage);
-    setTimeout(sizeStage, 400);
-    paint();
+    return ok;
   }
 
-  /* ---------- Hours: mark today, and say whether we're open ---------- */
+  /* Enter turns the drum, except in the notes box */
+  drum.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" || e.shiftKey) return;
+    var t = e.target;
+    if (t.tagName === "TEXTAREA" || t.tagName === "BUTTON" || t.tagName === "A") return;
+    e.preventDefault();
+    go(at + 1);
+  });
+  /* left/right arrows spin it too, when focus is on the drum chrome */
+  root.addEventListener("keydown", function (e) {
+    var t = e.target;
+    if (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT") return;
+    if (e.key === "ArrowRight" && at < seen) { e.preventDefault(); go(at + 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(at - 1); }
+  });
+
+  /* --- what actually gets sent --- */
+  function lines() {
+    var out = [];
+    out.push(["Project", answers.work.length ? answers.work.join(", ") : "Not specified yet"]);
+    out.push(["Location", [answers.town, answers.zip].filter(Boolean).join(" · ") || "Not specified yet"]);
+    out.push(["Timing", answers.timing || "Not specified yet"]);
+    out.push(["Budget", answers.budget || "Not specified yet"]);
+    out.push(["Name", answers.name || "—"]);
+    out.push(["Phone", answers.phone || "—"]);
+    if (answers.email) out.push(["Email", answers.email]);
+    if (answers.best) out.push(["Best time to call", answers.best]);
+    if (answers.notes) out.push(["Notes", answers.notes]);
+    return out;
+  }
+  function asText() { return lines().map(function (r) { return r[0] + ": " + r[1]; }).join("\n"); }
+
+  /* The send button is a real link carrying a real mailto:. Some phone
+     browsers refuse a mailto assigned from script during a click, but they
+     always follow an anchor's own href. */
+  function updateSend() {
+    var who = answers.name ? " — " + answers.name : "";
+    var what = answers.work.length ? " (" + answers.work.join(", ") + ")" : "";
+    var bodyText = "Hi Centerline,\n\nI'd like to book a free estimate.\n\n" + asText() +
+                   "\n\nSent from centerlineworks.com/schedule";
+    sendBtn.setAttribute("href", "mailto:" + (CFG.email || "Info@centerlineworks.com") +
+      "?subject=" + encodeURIComponent("Estimate request" + who + what) +
+      "&body=" + encodeURIComponent(bodyText));
+  }
+  sendBtn.addEventListener("click", function (e) {
+    if (!validate(faces[N - 2])) { e.preventDefault(); go(N - 2); return; }
+    var sent = root.querySelector("[data-sent]");
+    if (sent) sent.classList.add("is-on");
+  });
+
+  var copyBtn = root.querySelector("[data-copy]");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", function () {
+      var text = asText();
+      var done = function () {
+        var old = copyBtn.textContent;
+        copyBtn.textContent = "Copied ✓";
+        setTimeout(function () { copyBtn.textContent = old; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, done);
+      } else {
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", "");
+        ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); } catch (err) {}
+        document.body.removeChild(ta);
+        done();
+      }
+    });
+  }
+
+  /* --- drag the drum to spin it --- */
+  var dragFrom = null;
+  drum.addEventListener("pointerdown", function (e) {
+    if (e.target.closest("button, input, textarea, select, a")) return;
+    dragFrom = e.clientX;
+  });
+  window.addEventListener("pointerup", function (e) {
+    if (dragFrom === null) return;
+    var dx = e.clientX - dragFrom;
+    dragFrom = null;
+    if (Math.abs(dx) < 60) return;
+    go(dx < 0 ? at + 1 : at - 1);
+  });
+
+  window.addEventListener("resize", layout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+  layout();
+  paintTicket();
+
+  /* ---------- Hours ---------- */
   var hoursBox = root.querySelector("[data-hours]");
   var flag = root.querySelector("[data-openflag]");
   if (hoursBox) {
     var now = new Date(), day = now.getDay(), mins = now.getHours() * 60 + now.getMinutes();
-    var row = hoursBox.querySelector('[data-day="' + day + '"]');
-    if (row) row.classList.add("is-today");
+    var todayRow = hoursBox.querySelector('[data-day="' + day + '"]');
+    if (todayRow) todayRow.classList.add("is-today");
     if (flag) {
       var open = day === 0 ? (mins >= 840 && mins < 1080) : (mins >= 420 && mins < 1080);
       flag.innerHTML = open

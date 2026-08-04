@@ -9,8 +9,8 @@ Squarespace with zero build tools. Four pages so far:
 - **`index.html`** — the About page, with 3D scroll effects and a phone-only twin (Part 3).
 - **`services.html`** — the Services page: every service with its own photo gallery, in one
   fully responsive file (see "The Services page" section below).
-- **`schedule.html`** — the Schedule page: a six-step estimate builder on a deck of cards
-  that turns in 3D, ending in a pre-written email to Centerline (see below).
+- **`schedule.html`** — the Schedule page: a six-sided drum you turn to answer questions,
+  set in a dark 3D room, ending in a pre-written email to Centerline (see below).
 
 ## What's inside
 
@@ -190,9 +190,16 @@ review count, free-estimate CTA, trust chips) over a looping video, then proof.
 Where every "Schedule an Estimate" button lands. Built as an interactive estimate builder
 rather than a plain contact form.
 
-- **A 3D card deck** — six questions, each on its own card. Cards share one perspective, so
-  the one you've finished turns away to the left while the next turns in from the right.
-  A progress rail tracks where you are and lets you jump back to anything already answered.
+- **Built like nothing else on the site** — no video hero, no stacked cream/dark bands. The
+  page opens as one dark room in perspective with a lit grid floor, and the tool is the first
+  thing you see rather than something you scroll down to.
+- **A six-sided drum** — a real hexagonal prism carrying one question per face. Press Next
+  and the whole body turns 60°, so you watch the next question swing round. Drag it to spin
+  it, or use the arrow keys.
+- **A work order that writes itself** — beside the drum, a floating card gains a line every
+  time you answer something, tilts toward your mouse, and counts how much is filled in.
+- **Progress cubes** — six little cubes that roll over to show a gold tick as you go, and
+  click to jump back to anything already answered.
 - **The questions**: what we're building (multi-pick tiles), where, when you'd like to
   start, budget range, how to reach you, then a review card showing exactly what will be
   sent.
