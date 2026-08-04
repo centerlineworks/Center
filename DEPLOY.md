@@ -220,6 +220,27 @@ thumb zone.
    Additions are the two waiting on a photo; everything else is pre-filled. Any `*_before`
    line is optional — fill one in and that photo becomes a hover before/after comparison.
 
+### If the logo still shows a white box behind it
+
+The page removes a white background from the logo file automatically. To see whether
+that is running on your live site, visit:
+
+    https://www.centerlineworks.com/?cldebug=1
+
+A small black box appears in the bottom-left corner. **Only you see it** — it never shows
+for normal visitors, because it needs that `?cldebug=1` on the end of the address.
+
+- **No black box at all** → the page is still running an older copy of the code. Re-paste
+  `home-part1-header-injection.html` and `home-part2-code-block.html`, save, then hard-refresh
+  (Ctrl+Shift+R, or Cmd+Shift+R on a Mac).
+- **`status : white-removed`** → the white was stripped out. If you still see a white box, it
+  is coming from somewhere other than the logo file — tell me and I'll chase it.
+- **`status : blocked: SecurityError`** → the browser wouldn't let the page read the logo's
+  pixels. Send me that line and I'll work around it.
+- **`status : already-transparent`** → your file has no white background to remove.
+- **`status : knockout never ran`** with a size of `0 x 0` → the logo file isn't loading at
+  all; check that the address on the `source :` line opens in your browser.
+
 ### Want the home page to have its own hero video?
 
 Right now Home and Services share `services-hero.*`, so replacing that file changes both.

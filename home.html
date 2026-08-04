@@ -1382,13 +1382,31 @@ window.CL_HOME_PHOTOS = {
   function knockoutLogo(img) {
     if (window.CL_LOGO_KNOCKOUT === false || img._knocked) return;
     img._knocked = true;
-    var w = img.naturalWidth, h = img.naturalHeight;
-    if (!w || !h || w * h > 9e6) return;
+    var url = img.currentSrc || img.getAttribute("src") || "";
+    if (!url || url.slice(0, 5) === "data:") return;
+
+    /* Reading pixels back off a canvas is blocked for images the browser
+       considers cross-origin. Squarespace may serve /s/ files from its own CDN
+       host, which would silently kill the knockout — so if the direct attempt
+       is refused, retry through a proper CORS request. The cache-buster matters:
+       without it the browser can hand back the copy it already fetched without
+       CORS headers, and that copy taints the canvas all over again. */
+    if (!runKnockout(img, img)) {
+      var probe = new Image();
+      probe.crossOrigin = "anonymous";
+      probe.onload = function () { runKnockout(probe, img); };
+      probe.src = url + (url.indexOf("?") > -1 ? "&" : "?") + "clk=1";
+    }
+  }
+
+  function runKnockout(source, target) {
+    var w = source.naturalWidth, h = source.naturalHeight;
+    if (!w || !h || w * h > 9e6) return true;   /* nothing sensible to do */
     try {
       var cv = document.createElement("canvas");
       cv.width = w; cv.height = h;
       var ctx = cv.getContext("2d", { willReadFrequently: true });
-      ctx.drawImage(img, 0, 0);
+      ctx.drawImage(source, 0, 0);
       var id = ctx.getImageData(0, 0, w, h), d = id.data;
 
       /* a pixel counts as background if it is bright and near-neutral */
@@ -1448,7 +1466,7 @@ window.CL_HOME_PHOTOS = {
       }
 
       /* nothing white to remove — the file is already transparent */
-      if (hits < w * h * 0.02) return;
+      if (hits < w * h * 0.02) { window.CL_LOGO_STATUS = "already-transparent"; return true; }
 
       /* clear the background, ramping alpha over the softer fringe pixels
          so the edge stays smooth instead of turning jagged */
@@ -1469,8 +1487,19 @@ window.CL_HOME_PHOTOS = {
       }
       ctx.putImageData(id, 0, 0);
       var out = cv.toDataURL("image/png");
-      if (out && out.length > 64) img.src = out;
-    } catch (e) { /* cross-origin canvas or no 2d context — keep the original */ }
+      if (out && out.length > 64) {
+        target.src = out;
+        window.CL_LOGO_STATUS = "white-removed";
+        return true;
+      }
+      return false;
+    } catch (e) {
+      /* canvas is tainted (the file came from another host without CORS) or
+         there is no 2d context — leave the visible image exactly as it is and
+         let the caller retry through a CORS request */
+      window.CL_LOGO_STATUS = "blocked: " + (e && e.name ? e.name : "error");
+      return false;
+    }
   }
 
   function show(slot, img, isBefore) {
@@ -1507,6 +1536,29 @@ window.CL_HOME_PHOTOS = {
   }
   window.addEventListener("load", sweep);
   setTimeout(sweep, 1200); setTimeout(sweep, 4000);
+
+  /* Logo diagnostic. Invisible to visitors — it only appears if you add
+     ?cldebug=1 to the page address, e.g.
+       https://www.centerlineworks.com/?cldebug=1
+     It reports whether the white background was removed, and if not, why. */
+  if (/[?&]cldebug/.test(location.search)) {
+    setTimeout(function () {
+      var img = root.querySelector(".cl-logo img");
+      var src = img ? (img.currentSrc || img.getAttribute("src") || "") : "(no logo image)";
+      var box = document.createElement("div");
+      box.setAttribute("style",
+        "position:fixed;left:10px;bottom:10px;z-index:99999;max-width:min(92vw,560px);" +
+        "background:#12100c;color:#f7f4ee;border:2px solid #d9a441;border-radius:10px;" +
+        "padding:12px 14px;font:12px/1.5 monospace;word-break:break-all;white-space:pre-wrap");
+      box.textContent =
+        "LOGO CHECK\n" +
+        "status : " + (window.CL_LOGO_STATUS || "knockout never ran") + "\n" +
+        "switch : " + (window.CL_LOGO_KNOCKOUT === false ? "OFF" : "ON") + "\n" +
+        "size   : " + (img ? img.naturalWidth + " x " + img.naturalHeight : "-") + "\n" +
+        "source : " + (src.slice(0, 5) === "data:" ? "rewritten in the browser (data:image/png)" : src);
+      document.body.appendChild(box);
+    }, 3000);
+  }
 
   /* On phones the service/work rows become horizontal swipe rails, so cards
      parked off to the right never enter the viewport and their lazy images
