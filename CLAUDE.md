@@ -50,7 +50,9 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   own work-and-life reel) with a flat 3-photo strip, not About's portrait+cameo overlap.
   That reel is vertical phone footage, so the frame is portrait — `aspect-ratio: 4/5`,
   `max-width: 460px`, in the narrower grid column — and the cover crop that gives us also
-  swallows the letterbox bars a few of the source shots carry.
+  swallows the letterbox bars a few of the source shots carry. The free-diving/shark shot
+  (9.65–12.45s in the source) is slowed to 0.7× via a `trim`/`setpts`/`concat` graph at
+  Alfred's request — re-apply that if the reel is ever re-encoded from the original.
   LESSON: footage Alfred sends may carry **burned-in social watermarks** (a TikTok logo +
   handle, an Instagram tag). Build a second-by-second contact sheet before encoding and
   **ask** — don't assume they're a repost. On this reel `@basshole37` / `bhari_3377` are
