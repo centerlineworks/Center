@@ -51,13 +51,13 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   That reel is vertical phone footage, so the frame is portrait — `aspect-ratio: 4/5`,
   `max-width: 460px`, in the narrower grid column — and the cover crop that gives us also
   swallows the letterbox bars a few of the source shots carry.
-  LESSON: footage Alfred sends may be a repost montage with **burned-in watermarks**
-  (a TikTok logo + someone's handle, an Instagram repost tag). Always build a
-  second-by-second contact sheet before encoding, flag them, and cut those shots out with
-  a `trim`/`concat` filter graph rather than shipping them — a competitor's or a repost
-  account's handle on the company homepage is worse than a shorter video. Phone exports
-  are also often **HEVC/H.265**, which Chrome and Firefox won't reliably decode, so they
-  always need a real H.264 + VP9 transcode, never a straight upload.
+  LESSON: footage Alfred sends may carry **burned-in social watermarks** (a TikTok logo +
+  handle, an Instagram tag). Build a second-by-second contact sheet before encoding and
+  **ask** — don't assume they're a repost. On this reel `@basshole37` / `bhari_3377` are
+  Alfred's own accounts, so the shots stayed in full; the 4:5 cover crop happens to trim
+  bottom-edge tags anyway. Only cut footage he says isn't his. Phone exports are also
+  often **HEVC/H.265**, which Chrome and Firefox won't reliably decode, so they always
+  need a real H.264 + VP9 transcode, never a straight upload.
   LESSON: an absolutely-positioned card whose children are ALL absolute has no content to
   give it height — it collapses to ~0px unless you set an explicit `aspect-ratio`.
   LESSON: on phones the service/work rows become horizontal swipe rails, and cards parked
