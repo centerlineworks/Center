@@ -136,7 +136,18 @@
         "https://images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/9ef20078-1fff-499a-8367-46429b722095/IMG_1176.JPG?format=1000w"
       ],
       "url": "https://www.centerlineworks.com/about",
-      "sameAs": [ "https://www.linkedin.com/in/alfredtudela/" ]
+      "sameAs": [ "https://www.linkedin.com/in/alfredtudela/" ],
+      "affiliation": {
+        "@type": "Church",
+        "name": "Rising Hills Church",
+        "url": "https://risinghills.churchcenter.com/home",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Canton",
+          "addressRegion": "GA",
+          "addressCountry": "US"
+        }
+      }
     },
     {
       "@type": "FAQPage",
@@ -392,11 +403,12 @@
 
   /* ---------- Owner (video-led, offset editorial — not the About page's portrait+cameo) ---------- */
   #cl-home .cl-owner { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(28px, 4.5vw, 60px); align-items: center; }
-  /* Portrait frame — the owner reel is phone footage (9:16); a 4:5 cover crop
-     trims the letterbox bars some of the source clips carry. */
+  /* Portrait frame at the reel's native 9:16 — anything shorter cover-crops the top
+     and bottom off the vertical phone footage and cuts people's heads out of shot.
+     Watermarks and letterbox bars are handled in the encode, not by cropping here. */
   #cl-home .cl-owner-video {
-    position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5;
-    max-width: 460px; margin-inline: auto; width: 100%;
+    position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 9 / 16;
+    max-width: 400px; margin-inline: auto; width: 100%;
     background: #1d1c23; border: 1px solid rgba(247,244,238,.16);
     box-shadow: 0 44px 84px -34px rgba(0,0,0,.8);
   }
@@ -429,10 +441,19 @@
   }
   #cl-home .cl-owner-strip figure.has-photo .cl-slot-label { display: none; }
   #cl-home .cl-owner-badges { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
-  #cl-home .cl-owner-badges span {
+  #cl-home .cl-owner-badges :is(span, a) {
     padding: 9px 15px; border-radius: 999px; font-size: 12.5px; font-weight: 700;
     border: 1px solid rgba(217,164,65,.45); color: var(--gold); background: rgba(217,164,65,.08);
   }
+  #cl-home .cl-owner-badges a {
+    text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+    transition: background .3s, border-color .3s, transform .3s var(--ease-out);
+  }
+  #cl-home .cl-owner-badges a:hover,
+  #cl-home .cl-owner-badges a:focus-visible {
+    background: rgba(217,164,65,.2); border-color: var(--gold); transform: translateY(-2px);
+  }
+  #cl-home .cl-owner-badges a::after { content: "↗"; font-size: 11px; opacity: .8; }
   #cl-home blockquote.cl-pull {
     font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: clamp(17px, 2.1vw, 21px);
     line-height: 1.45; border-left: 3px solid var(--gold); padding-left: 18px; margin: 20px 0 0;

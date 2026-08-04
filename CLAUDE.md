@@ -27,8 +27,10 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   "a weird slogan for a construction company". Alfred wants trade-rooted, not clever.
   The hero subhead must NOT be a service list either — "Bathrooms, basements, cabanas,
   additions, decks and more … cleaned up when we leave" got "SOOO stupid". Give the subhead
-  one real idea (currently "The work you can't see is the work we're proudest of"), keep the
-  town names for local SEO, and let the services grid carry the service keywords.
+  one real idea, keep the town names for local SEO, and let the services grid carry the
+  service keywords. "The work you can't see is the work we're proudest of" was also
+  rejected ("again a terrible quote") — he wants the subhead to be a SLOGAN, punchy and
+  quotable, not a description. Now **"We don't cut corners. We frame them."**
   Copy rules he's asked for: don't lead with "family-owned" up top (it's fine lower down);
   never imply a single crew ("One crew. Every room" was rejected as sounding understaffed —
   now "Every room. Inside and out."); the process section must not mirror "Three values.
@@ -51,16 +53,22 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   the real image in as-is; a plain dashed upload-reminder note is the only stand-in, and it
   disappears once the file loads. The owner section is video-led (`home-owner.*`, Alfred's
   own work-and-life reel) with a flat 3-photo strip, not About's portrait+cameo overlap.
-  That reel is vertical phone footage, so the frame is portrait — `aspect-ratio: 4/5`,
-  `max-width: 460px`, in the narrower grid column — and the cover crop that gives us also
-  swallows the letterbox bars a few of the source shots carry. The free-diving/shark shot
-  (9.65–12.45s in the source) is slowed to 0.7× via a `trim`/`setpts`/`concat` graph at
-  Alfred's request — re-apply that if the reel is ever re-encoded from the original.
+  That reel is vertical phone footage, so the frame is its **native `aspect-ratio: 9/16`**
+  (`max-width: 400px`, narrower grid column). LESSON: do NOT use a shorter frame and let
+  `object-fit: cover` crop it — a 4:5 frame cut the top and bottom off every shot and
+  Alfred came back with "some of the videos have my head cropped out of them". Fix framing
+  problems in the **encode**, never with a display crop. The single `trim`/`setpts`/`concat`
+  graph that builds the reel does all of it — re-apply every piece if it is ever re-encoded
+  from the original:
+  · the free-diving/shark shot (9.65–12.45s in the source) is slowed to 0.7× at his request;
+  · 6.15–7.75s is cropped `990:1760:45:0` to drop the `bhari_3377` tag along the bottom;
+  · 14.75–20.35s is cropped `768:1365:40:277` to drop the TikTok logo + `@basshole37`
+    handle on the right (he asked for it out — "seems inappropriate") and the letterbox
+    bars in the same pass.
   LESSON: footage Alfred sends may carry **burned-in social watermarks** (a TikTok logo +
-  handle, an Instagram tag). Build a second-by-second contact sheet before encoding and
-  **ask** — don't assume they're a repost. On this reel `@basshole37` / `bhari_3377` are
-  Alfred's own accounts, so the shots stayed in full; the 4:5 cover crop happens to trim
-  bottom-edge tags anyway. Only cut footage he says isn't his. Phone exports are also
+  handle, an Instagram tag) and letterbox bars. Build a second-by-second contact sheet
+  before encoding and **ask** — don't assume they're a repost; these are his own accounts,
+  so nothing gets deleted, it just gets cropped out of frame. Phone exports are also
   often **HEVC/H.265**, which Chrome and Firefox won't reliably decode, so they always
   need a real H.264 + VP9 transcode, never a straight upload.
   LESSON: an absolutely-positioned card whose children are ALL absolute has no content to
@@ -254,7 +262,8 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   rot repair, cabinetry, exterior repairs, commercial.
 - 43 five-star reviews (5.0) across Google 29 / Facebook 10 / Yelp 2 / Nextdoor 2 — full
   text baked into the review carousel (39 cards after dropping cross-platform duplicates).
-- Alfred is Youth Director at Rising Hills Church in **Canton, GA** (not Woodstock).
+- Alfred is Youth Director at Rising Hills Church in **Canton, GA** (not Woodstock) —
+  https://risinghills.churchcenter.com/home (linked from the Home owner badges + JSON-LD).
 - All 11 photo spots are baked into `index.html` as real
   `images.squarespace-cdn.com/content/v1/6671a6d51ae36c17f36be63b/...` URLs (Alfred
   supplied them by editing part2 on GitHub — watch for his direct GitHub edits and
