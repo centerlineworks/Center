@@ -25,7 +25,10 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   a service list ("Bathrooms. Basements. Cabanas.") was rejected ("if I was a teacher I
   wouldn't say apples.books.teaching"); "Straight lines. Straight answers." was rejected as
   "a weird slogan for a construction company". Alfred wants trade-rooted, not clever.
-  Services belong in the subhead, not the headline.
+  The hero subhead must NOT be a service list either — "Bathrooms, basements, cabanas,
+  additions, decks and more … cleaned up when we leave" got "SOOO stupid". Give the subhead
+  one real idea (currently "The work you can't see is the work we're proudest of"), keep the
+  town names for local SEO, and let the services grid carry the service keywords.
   Copy rules he's asked for: don't lead with "family-owned" up top (it's fine lower down);
   never imply a single crew ("One crew. Every room" was rejected as sounding understaffed —
   now "Every room. Inside and out."); the process section must not mirror "Three values.
