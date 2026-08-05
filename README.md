@@ -211,8 +211,9 @@ rather than a plain contact form.
   that actually connect them, and a camera drifting from town to town. Pick where the project
   is and the map flies there and drops a pin.
 - **Sends itself** — add a Squarespace Form Block to the page and the drum lifts it onto the
-  last face, fills in every field from the answers, and the visitor presses Squarespace's own
-  Submit; it lands in Form Submissions and in your inbox. With no form block it falls back to
+  last face, fills it in from the answers, and the visitor presses Squarespace's own Submit;
+  it lands in Form Submissions and in your inbox. The page removes its own contact question
+  when that happens, so nothing is asked twice. With no form block it falls back to
   opening the visitor's email app with the whole request pre-written. Copy-to-clipboard and
   click-to-call sit beside both.
 - **Only name and phone are required**, validated inline before the review step; everything

@@ -204,6 +204,22 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   split automatically) — the visitor presses Squarespace's OWN Submit, so it stores and emails
   through Squarespace with nothing faked and no third party. Our send button hides itself when
   that happens. Remove the form block and it silently reverts to the mailto.
+  **One step, not two**: mounting the form also DELETES our own contact face
+  (`[data-contact-face]`) so nobody types their name twice — the drum drops to a five-sided
+  prism, `N`/`STEP` are recomputed and `buildCubes()` re-runs. `bindFormToTicket()` then
+  listens to the form's own name/phone/email boxes so the work order keeps filling in. Never
+  hardcode the question count in copy — it changes depending on whether the form is there.
+  Question one carries a full-width **"Something else"** tile (`[data-other]`) that unfolds a
+  textarea (`answers.workOther`); `workList()` merges it with the picked tiles everywhere.
+  LESSON: the map camera must NOT centre the picked town — that puts it behind the drum,
+  which is exactly what Alfred flagged. `mapTarget()` picks the spot in ROOM coordinates
+  (over the drum, above the hood on desktop; a dedicated top strip on phones, which is why
+  the phone `.cl-room` has 158px of top padding) and converts to SVG units, undoing the
+  `preserveAspectRatio="slice"` scale and centring offset.
+  LESSON: do NOT put `opacity` on the `<svg>` — it dims the picked pin along with the
+  wallpaper. Each layer carries its own alpha so the chosen town can be full white.
+  LESSON: on phones the faces flip in place, so a turned-away face renders as a bright
+  sliver down the middle of the front one — `.cl-face:not(.is-front) { opacity: 0 }` there.
   LESSON: `overflow: hidden` is still *programmatically scrollable* — focusing a form field
   inside a face rotated 60° made the browser scroll `.cl-room` sideways and drag the whole
   console off screen. `overflow: clip` on `.cl-room`, `.cl-drum-hood` and `.cl-mapwrap` fixes

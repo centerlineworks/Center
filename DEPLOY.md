@@ -286,10 +286,13 @@ arrive by themselves — and be saved in Squarespace — add a **Form Block**:
 4. Save
 
 That's all. The page finds that form, lifts it onto the last face of the drum, and fills in
-every field from the answers — name split into first and last if your form has both boxes,
-and the whole work order dropped into the project box. The visitor presses **Submit** and it
-goes through Squarespace exactly as a normal form would: stored under Form Submissions and
-emailed to you. Nothing is faked and there's no outside service involved.
+the project box with the whole work order. The visitor presses **Submit** and it goes through
+Squarespace exactly as a normal form would: stored under Form Submissions and emailed to you.
+Nothing is faked and there's no outside service involved.
+
+**Nobody types anything twice.** As soon as the form block is found, the page removes its own
+"How do we reach you?" question — the drum drops from six sides to five and your form becomes
+the last step. Whatever they type into it also appears on the work order as they go.
 
 If the form block is ever removed, the page notices and quietly goes back to the email
 hand-off, so the page never breaks.

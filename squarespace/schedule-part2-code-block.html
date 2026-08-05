@@ -46,47 +46,47 @@ window.CL_SCHEDULE = {
         <path class="cl-road" d="M 323.1 451.8 Q 397.6 414.7 480.6 409.1 Q 569.0 440.6 638.4 503.7"></path>
         <path class="cl-road" d="M 509.2 245.7 Q 627.0 323.5 705.9 440.6"></path>
         <g class="cl-pin" data-town="Ball Ground" transform="translate(622.3 122.1)">
-          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-halo" r="18"></circle>
           <circle class="cl-pin-dot" r="7"></circle>
           <text class="cl-pin-label" y="-14">Ball Ground</text>
         </g>
         <g class="cl-pin" data-town="Canton" transform="translate(509.2 245.7)">
-          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-halo" r="18"></circle>
           <circle class="cl-pin-dot" r="7"></circle>
           <text class="cl-pin-label" y="-14">Canton</text>
         </g>
         <g class="cl-pin" data-town="Holly Springs" transform="translate(515.6 322.2)">
-          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-halo" r="18"></circle>
           <circle class="cl-pin-dot" r="7"></circle>
           <text class="cl-pin-label" y="-14">Holly Springs</text>
         </g>
         <g class="cl-pin" data-town="Woodstock" transform="translate(480.6 409.1)">
-          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-halo" r="18"></circle>
           <circle class="cl-pin-dot" r="7"></circle>
           <text class="cl-pin-label" y="-14">Woodstock</text>
         </g>
         <g class="cl-pin" data-town="Kennesaw" transform="translate(384.5 503.5)">
-          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-halo" r="18"></circle>
           <circle class="cl-pin-dot" r="7"></circle>
           <text class="cl-pin-label" y="-14">Kennesaw</text>
         </g>
         <g class="cl-pin" data-town="Acworth" transform="translate(323.1 451.8)">
-          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-halo" r="18"></circle>
           <circle class="cl-pin-dot" r="7"></circle>
           <text class="cl-pin-label" y="-14">Acworth</text>
         </g>
         <g class="cl-pin" data-town="Marietta" transform="translate(450.1 589.1)">
-          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-halo" r="18"></circle>
           <circle class="cl-pin-dot" r="7"></circle>
           <text class="cl-pin-label" y="-14">Marietta</text>
         </g>
         <g class="cl-pin" data-town="Roswell" transform="translate(638.4 503.7)">
-          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-halo" r="18"></circle>
           <circle class="cl-pin-dot" r="7"></circle>
           <text class="cl-pin-label" y="-14">Roswell</text>
         </g>
         <g class="cl-pin" data-town="Alpharetta" transform="translate(705.9 440.6)">
-          <circle class="cl-pin-halo" r="26"></circle>
+          <circle class="cl-pin-halo" r="18"></circle>
           <circle class="cl-pin-dot" r="7"></circle>
           <text class="cl-pin-label" y="-14">Alpharetta</text>
         </g>
@@ -106,7 +106,7 @@ window.CL_SCHEDULE = {
         </div>
         <p class="cl-kicker">Free estimate · no obligation</p>
         <h1 class="cl-lede-h1" id="cl-h1">Let's build<span class="gold">your quote.</span></h1>
-        <p class="cl-blurb">Six questions on the drum. Answer what you know, skip what you don't —
+        <p class="cl-blurb">A few quick questions on the drum. Answer what you know, skip what you don't —
           we'll come look at the real thing and put the price in writing before anything starts.</p>
       </div>
 
@@ -150,6 +150,13 @@ window.CL_SCHEDULE = {
                   <button type="button" class="cl-opt" data-val="Siding &amp; exterior">Siding &amp; Exterior<small>Siding, trim, wood rot</small></button>
                   <button type="button" class="cl-opt" data-val="Kitchen remodel">Kitchen<small>Cabinetry and countertops</small></button>
                   <button type="button" class="cl-opt" data-val="Commercial project">Commercial<small>Offices, retail, build-outs</small></button>
+                  <button type="button" class="cl-opt cl-opt--other" data-val="Other" data-other>Something else<small>Tell us in your own words</small></button>
+                </div>
+                <!-- opens up the moment "Something else" is picked -->
+                <div class="cl-other" data-other-box>
+                  <label for="cl-other">In your own words</label>
+                  <textarea id="cl-other" data-field="workOther"
+                    placeholder="Screened porch, garage conversion, whole-house refresh — whatever you have in mind."></textarea>
                 </div>
               </div>
             </section>
@@ -213,7 +220,7 @@ window.CL_SCHEDULE = {
             </section>
 
             <!-- 5 -->
-            <section class="cl-face" data-face aria-label="Question 5: how to reach you">
+            <section class="cl-face" data-face data-contact-face aria-label="Question 5: how to reach you">
               <h3>How do we reach you?</h3>
               <p class="cl-hint">A name and a number is all we really need.</p>
               <div class="cl-face-body">
@@ -253,7 +260,7 @@ window.CL_SCHEDULE = {
             <!-- 6 -->
             <section class="cl-face" data-face aria-label="Question 6: send it">
               <h3>That's everything.</h3>
-              <p class="cl-hint">The work order on the left is what we'll get. Send it and we'll be in touch to set a time.</p>
+              <p class="cl-hint">Last bit — how do we reach you? Everything on the work order comes with it.</p>
               <div class="cl-face-body">
                 <!-- If a Squarespace Form Block exists on this page, the script
                      lifts it in here and fills it in from the answers above, so
@@ -448,6 +455,29 @@ window.CL_SCHEDULE = {
   var tourTimer = null, tourAt = 0, mapLocked = false;
   var tourOrder = Object.keys(TOWNS);
 
+  /* Where on screen the focused town should land. Dead centre would hide it
+     behind the drum, so it is parked in the clear band above the questions —
+     over the drum on a wide screen, top-centre on a phone. */
+  function mapTarget() {
+    var svg = root.querySelector(".cl-map");
+    var room = root.querySelector(".cl-room");
+    var hood = root.querySelector(".cl-drum-hood");
+    var box = svg.getBoundingClientRect(), rm = room.getBoundingClientRect();
+    var wide = window.matchMedia("(min-width: 1181px)").matches;
+    /* pick the spot in the ROOM first, then convert — much easier to reason about */
+    var rx, ry;
+    if (wide) {
+      var rig = root.querySelector(".cl-rig").getBoundingClientRect();
+      rx = (rig.left + rig.width / 2) - rm.left;               /* over the drum */
+      ry = Math.max(60, (hood.getBoundingClientRect().top - rm.top) - 88);
+    } else {
+      rx = rm.width / 2;                                        /* the strip up top */
+      ry = 112;
+    }
+    return { px: (rm.left + rx) - box.left, py: (rm.top + ry) - box.top,
+             w: box.width, h: box.height };
+  }
+
   function flyTo(name, lock) {
     if (!mapCam) return;
     var t = TOWNS[name];
@@ -456,12 +486,26 @@ window.CL_SCHEDULE = {
       mapPins[k].classList.toggle("is-picked", !!lock && k === name);
     });
     if (mapTag) mapTag.textContent = t ? name : "North Georgia";
+    mapLast = t ? [name, lock] : null;
     if (!t) { mapCam.style.transform = ""; return; }
-    /* scale about the town, then slide it back to the middle of the frame */
+
     var z = lock ? 1.5 : 1.18;
-    var x = MAP_W / 2 - t[0] * z, y = MAP_H / 2 - t[1] * z;
-    mapCam.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) scale(" + z + ")";
+    var g = mapTarget();
+    /* preserveAspectRatio="slice" scales the viewBox by whichever axis is
+       tighter and centres the overflow — undo that to convert screen pixels
+       back into the SVG's own coordinates */
+    var s = Math.max(g.w / MAP_W, g.h / MAP_H);
+    var ox = (g.w - MAP_W * s) / 2, oy = (g.h - MAP_H * s) / 2;
+    var tx = (g.px - ox) / s - t[0] * z;
+    var ty = (g.py - oy) / s - t[1] * z;
+    mapCam.style.transform = "translate(" + tx.toFixed(1) + "px," + ty.toFixed(1) + "px) scale(" + z + ")";
   }
+
+  /* re-aim if the window changes shape while a town is locked */
+  var mapLast = null;
+  window.addEventListener("resize", function () {
+    if (mapLast) flyTo(mapLast[0], mapLast[1]);
+  });
   function startTour() {
     if (mapLocked || reduceMotion || tourTimer) return;
     tourTimer = setInterval(function () {
@@ -507,7 +551,7 @@ window.CL_SCHEDULE = {
   var N = faces.length, STEP = 360 / N;
   var at = 0, seen = 0, deep = false;
 
-  var answers = { work: [], town: "", zip: "", timing: "", budget: "",
+  var answers = { work: [], workOther: "", town: "", zip: "", timing: "", budget: "",
                   name: "", phone: "", email: "", best: "", notes: "" };
   try {
     var stored = JSON.parse(localStorage.getItem("cl_sched_v2") || "null");
@@ -578,25 +622,32 @@ window.CL_SCHEDULE = {
 
   function go(n) {
     if (n < 0 || n > N - 1) return;
-    /* the contact face has to be filled in before the last one */
-    if (n === N - 1 && !validate(faces[N - 2])) { n = N - 2; }
+    /* while we're falling back to email, name and phone have to be filled in
+       first; with a real form on the last face, Squarespace validates its own */
+    var gate = root.querySelector("[data-contact-face]");
+    if (n === N - 1 && gate && faces.indexOf(gate) > -1 && !validate(gate)) { n = faces.indexOf(gate); }
     at = n;
     if (n > seen) seen = n;
     turn();
   }
 
-  /* --- progress cubes --- */
+  /* --- progress cubes (rebuilt if the drum loses a face) --- */
   var cubeBox = root.querySelector("[data-cubes]");
-  var cubes = faces.map(function (f, i) {
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = "cl-cube";
-    b.innerHTML = '<span class="f">' + (i + 1) + '</span><span class="t">✓</span>';
-    b.setAttribute("aria-label", "Question " + (i + 1) + " of " + N);
-    b.addEventListener("click", function () { if (i <= seen) go(i); });
-    cubeBox.appendChild(b);
-    return b;
-  });
+  var cubes = [];
+  function buildCubes() {
+    cubeBox.innerHTML = "";
+    cubes = faces.map(function (f, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "cl-cube";
+      b.innerHTML = '<span class="f">' + (i + 1) + '</span><span class="t">✓</span>';
+      b.setAttribute("aria-label", "Question " + (i + 1) + " of " + N);
+      b.addEventListener("click", function () { if (i <= seen) go(i); });
+      cubeBox.appendChild(b);
+      return b;
+    });
+  }
+  buildCubes();
 
   var nextBtn = root.querySelector("[data-next]");
   var sendBtn = root.querySelector("[data-send]");
@@ -625,8 +676,15 @@ window.CL_SCHEDULE = {
     if (text) row.classList.add("is-fresh");
   }
 
+  /* the tiles they picked, plus whatever they typed into "Something else" */
+  function workList() {
+    var list = answers.work.filter(function (v) { return v !== "Other"; });
+    if (answers.workOther.trim()) list.push(answers.workOther.trim());
+    return list;
+  }
+
   function paintTicket() {
-    ink("work", answers.work.join(", "));
+    ink("work", workList().join(", "));
     ink("town", [answers.town, answers.zip].filter(Boolean).join(" · "));
     ink("timing", answers.timing);
     ink("budget", answers.budget);
@@ -666,6 +724,7 @@ window.CL_SCHEDULE = {
         }
         save(); paintTicket();
         if (key === "town") lockMap(answers[key]);
+        if (btn.hasAttribute("data-other")) toggleOther(btn.classList.contains("is-on"));
       });
       if (canHover && !reduceMotion) {
         btn.addEventListener("mousemove", function (e) {
@@ -678,6 +737,19 @@ window.CL_SCHEDULE = {
       }
     });
   });
+
+  /* --- "Something else": unfold the box, focus it, and clear it if unpicked --- */
+  var otherBox = root.querySelector("[data-other-box]");
+  var otherField = otherBox ? otherBox.querySelector("textarea") : null;
+  function toggleOther(open) {
+    if (!otherBox) return;
+    otherBox.classList.toggle("is-open", open);
+    if (open) {
+      setTimeout(function () { if (otherField) otherField.focus({ preventScroll: true }); }, 260);
+    } else if (otherField) {
+      otherField.value = ""; answers.workOther = ""; save(); paintTicket();
+    }
+  }
 
   /* --- text fields --- */
   root.querySelectorAll("[data-field]").forEach(function (el) {
@@ -726,7 +798,7 @@ window.CL_SCHEDULE = {
   /* --- what actually gets sent --- */
   function lines() {
     var out = [];
-    out.push(["Project", answers.work.length ? answers.work.join(", ") : "Not specified yet"]);
+    out.push(["Project", workList().length ? workList().join(", ") : "Not specified yet"]);
     out.push(["Location", [answers.town, answers.zip].filter(Boolean).join(" · ") || "Not specified yet"]);
     out.push(["Timing", answers.timing || "Not specified yet"]);
     out.push(["Budget", answers.budget || "Not specified yet"]);
@@ -744,7 +816,7 @@ window.CL_SCHEDULE = {
      always follow an anchor's own href. */
   function updateSend() {
     var who = answers.name ? " — " + answers.name : "";
-    var what = answers.work.length ? " (" + answers.work.join(", ") + ")" : "";
+    var what = workList().length ? " (" + workList().join(", ") + ")" : "";
     var bodyText = "Hi Centerline,\n\nI'd like to book a free estimate.\n\n" + asText() +
                    "\n\nSent from centerlineworks.com/schedule";
     sendBtn.setAttribute("href", "mailto:" + (CFG.email || "Info@centerlineworks.com") +
@@ -752,7 +824,8 @@ window.CL_SCHEDULE = {
       "&body=" + encodeURIComponent(bodyText));
   }
   sendBtn.addEventListener("click", function (e) {
-    if (!validate(faces[N - 2])) { e.preventDefault(); go(N - 2); return; }
+    var gate = root.querySelector("[data-contact-face]");
+    if (gate && faces.indexOf(gate) > -1 && !validate(gate)) { e.preventDefault(); go(faces.indexOf(gate)); return; }
     if (sqForm) {
       e.preventDefault();
       fillSquarespaceForm();
@@ -837,6 +910,32 @@ window.CL_SCHEDULE = {
     });
   }
 
+  /* Watch the mounted form's own name/phone/email boxes so the work order on
+     the left keeps filling in, and so the pre-written email still works if
+     someone switches to it. */
+  function bindFormToTicket() {
+    if (!sqForm) return;
+    sqForm.querySelectorAll(".form-item, .field, fieldset").forEach(function (item) {
+      var label = labelTextOf(item);
+      var inputs = item.querySelectorAll("input:not([type=submit]):not([type=hidden]), textarea, select");
+      if (!inputs.length) return;
+      var type = (inputs[0].getAttribute("type") || "").toLowerCase();
+      var key = null;
+      if (label.indexOf("name") > -1 || item.classList.contains("name")) key = "name";
+      else if (type === "tel" || label.indexOf("phone") > -1) key = "phone";
+      else if (type === "email" || label.indexOf("email") > -1) key = "email";
+      if (!key) return;
+      inputs.forEach(function (el) {
+        el.addEventListener("input", function () {
+          if (key === "name" && inputs.length >= 2) {
+            answers.name = [inputs[0].value, inputs[1].value].filter(Boolean).join(" ").trim();
+          } else answers[key] = el.value;
+          save(); paintTicket();
+        });
+      });
+    });
+  }
+
   function mountSquarespaceForm() {
     var block = findSquarespaceForm();
     if (!block || !formSlot) {
@@ -845,6 +944,24 @@ window.CL_SCHEDULE = {
     }
     sqForm = block;
     formSlot.appendChild(block);
+
+    /* One step, not two: the form asks for name, phone and email itself, so
+       drop our own contact question rather than making anyone type it twice.
+       The drum becomes a five-sided prism and the cubes are rebuilt to match. */
+    var contactFace = root.querySelector("[data-contact-face]");
+    if (contactFace && faces.indexOf(contactFace) > -1) {
+      var wasAt = at;
+      contactFace.parentNode.removeChild(contactFace);
+      faces = [].slice.call(body.querySelectorAll("[data-face]"));
+      N = faces.length;
+      STEP = 360 / N;
+      at = Math.min(wasAt, N - 1);
+      seen = Math.min(seen, N - 1);
+      buildCubes();
+      layout();
+    }
+    /* keep the work order honest by reading the form's own boxes */
+    bindFormToTicket();
     /* the form block may only appear after our script has run, so clear the
        fallback note that was shown while we were still looking for it */
     if (noFormNote) noFormNote.classList.remove("is-on");
@@ -906,6 +1023,11 @@ window.CL_SCHEDULE = {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   layout();
   paintTicket();
+  if (answers.work.indexOf("Other") > -1 || answers.workOther) {
+    var otherBtn = root.querySelector("[data-other]");
+    if (otherBtn) otherBtn.classList.add("is-on");
+    toggleOther(true);
+  }
   mountSquarespaceForm();
   window.addEventListener("load", function () { if (!sqForm) mountSquarespaceForm(); });
   [600, 1800, 4000].forEach(function (t) {

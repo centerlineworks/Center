@@ -230,26 +230,31 @@
     position: absolute; inset: 0; z-index: 0; overflow: hidden; overflow: clip; pointer-events: none;
     /* faintest where the words and the drum sit, strongest out at the edges,
        so the map reads as the room's wallpaper rather than a competing layer */
-    -webkit-mask-image: radial-gradient(105% 95% at 50% 48%, rgba(0,0,0,.20), rgba(0,0,0,.55) 46%, #000 84%);
-    mask-image: radial-gradient(105% 95% at 50% 48%, rgba(0,0,0,.20), rgba(0,0,0,.55) 46%, #000 84%);
+    /* faint right where the words and the drum sit, but left clear across the
+       top band — that's where a picked town is flown to, so it has to read */
+    -webkit-mask-image: radial-gradient(115% 78% at 50% 66%, rgba(0,0,0,.14), rgba(0,0,0,.45) 42%, #000 76%);
+    mask-image: radial-gradient(115% 78% at 50% 66%, rgba(0,0,0,.14), rgba(0,0,0,.45) 42%, #000 76%);
   }
-  #cl-sched .cl-map { position: absolute; inset: -6%; width: 112%; height: 112%; opacity: .32; }
+  /* No opacity on the <svg> itself — that would dim the picked pin along with
+     everything else. Each layer carries its own alpha instead, so the town the
+     visitor chose can come through at full strength over faint wallpaper. */
+  #cl-sched .cl-map { position: absolute; inset: -6%; width: 112%; height: 112%; }
   #cl-sched .cl-map-cam { transition: transform 2.4s var(--ease-out); transform-origin: 0 0; }
-  #cl-sched .cl-contour { fill: none; stroke: rgba(217,164,65,.09); stroke-width: 1.4; }
-  #cl-sched .cl-road { fill: none; stroke: rgba(217,164,65,.30); stroke-width: 2.4; stroke-linecap: round; }
-  #cl-sched .cl-pin-halo { fill: rgba(217,164,65,.09); transform: scale(.4); transform-origin: center;
+  #cl-sched .cl-contour { fill: none; stroke: rgba(217,164,65,.04); stroke-width: 1.4; }
+  #cl-sched .cl-road { fill: none; stroke: rgba(217,164,65,.13); stroke-width: 2.4; stroke-linecap: round; }
+  #cl-sched .cl-pin-halo { fill: rgba(217,164,65,.04); transform: scale(.4); transform-origin: center;
     transition: transform .6s var(--ease-out), fill .6s ease; }
-  #cl-sched .cl-pin-dot { fill: rgba(240,205,134,.5); r: 5; transition: fill .5s ease, r .5s var(--ease-out); }
+  #cl-sched .cl-pin-dot { fill: rgba(240,205,134,.2); r: 5; transition: fill .5s ease, r .5s var(--ease-out); }
   #cl-sched .cl-pin-label {
     font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .06em;
-    text-anchor: middle; fill: rgba(247,244,238,.34); transition: fill .5s ease;
+    text-anchor: middle; fill: rgba(247,244,238,.14); transition: fill .5s ease;
   }
-  #cl-sched .cl-pin.is-live .cl-pin-dot { fill: var(--gold-lite); r: 7; }
-  #cl-sched .cl-pin.is-live .cl-pin-label { fill: var(--gold-lite); }
-  #cl-sched .cl-pin.is-live .cl-pin-halo { transform: scale(1.5); fill: rgba(217,164,65,.20); }
+  #cl-sched .cl-pin.is-live .cl-pin-dot { fill: rgba(240,205,134,.85); r: 7; }
+  #cl-sched .cl-pin.is-live .cl-pin-label { fill: rgba(240,205,134,.7); }
+  #cl-sched .cl-pin.is-live .cl-pin-halo { transform: scale(1.05); fill: rgba(217,164,65,.13); }
   #cl-sched .cl-pin.is-picked .cl-pin-dot { fill: #fff; r: 8; }
   #cl-sched .cl-pin.is-picked .cl-pin-label { fill: #fff; }
-  #cl-sched .cl-pin.is-picked .cl-pin-halo { transform: scale(2); fill: rgba(217,164,65,.30); }
+  #cl-sched .cl-pin.is-picked .cl-pin-halo { transform: scale(1.25); fill: rgba(217,164,65,.26); }
   /* the town the camera is on, named in the corner */
   #cl-sched .cl-map-tag {
     position: absolute; left: clamp(20px, 3vw, 40px); bottom: 22px; z-index: 2;
@@ -406,6 +411,25 @@
     animation: cl-pop .35s var(--ease-out);
   }
   @keyframes cl-pop { from { transform: scale(0) rotate(-40deg); opacity: 0 } to { transform: none; opacity: 1 } }
+
+  /* "Something else" — the tile spans the row and unfolds a box under the grid */
+  #cl-sched .cl-opt--other { grid-column: 1 / -1; }
+  #cl-sched .cl-other {
+    display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: 0;
+    transition: grid-template-rows .45s var(--ease-out), opacity .35s ease, margin-top .45s var(--ease-out);
+  }
+  #cl-sched .cl-other > * { overflow: hidden; }
+  #cl-sched .cl-other.is-open { grid-template-rows: 1fr; opacity: 1; margin-top: 10px; }
+  #cl-sched .cl-other label {
+    display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--gold-deep); margin-bottom: 5px;
+  }
+  #cl-sched .cl-other textarea {
+    font-family: inherit; font-size: 14.5px; color: var(--ink); background: #fff; width: 100%;
+    border: 2px solid var(--gold); border-radius: 12px; padding: 11px 13px; min-height: 84px; resize: none;
+    box-shadow: 0 0 0 4px rgba(217,164,65,.16);
+  }
+  #cl-sched .cl-other textarea:focus { outline: none; box-shadow: 0 0 0 5px rgba(217,164,65,.28); }
 
   /* fields inside a face */
   #cl-sched .cl-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; }
@@ -607,12 +631,16 @@
   /* ---------- Phone: the drum is too deep, so faces slide instead ---------- */
   @media (max-width: 767px) {
     #cl-sched { padding-bottom: calc(74px + env(safe-area-inset-bottom)); --face-w: 100%; --face-h: 500px; }
-    #cl-sched .cl-room { padding: 78px 0 56px; }
+    /* the extra top padding is the strip the map flies the picked town into */
+    #cl-sched .cl-room { padding: 158px 0 56px; }
     #cl-sched .cl-console { padding: 0 16px; }
     #cl-sched .cl-lede-h1 { font-size: clamp(31px, 9vw, 44px); }
     #cl-sched .cl-drum { perspective: 900px; }
     #cl-sched .cl-drum-body { width: 100%; }
     #cl-sched .cl-face { padding: 22px 18px 20px; border-radius: 16px; }
+    /* the faces flip in place here rather than orbiting, so a turned-away face
+       shows as a thin bright sliver down the middle — fade them right out */
+    #cl-sched .cl-face:not(.is-front) { opacity: 0; }
     #cl-sched .cl-opts, #cl-sched .cl-opts--3 { grid-template-columns: 1fr; }
     #cl-sched .cl-fields { grid-template-columns: 1fr; }
     #cl-sched .cl-cubes { gap: 8px; }
@@ -620,7 +648,6 @@
     #cl-sched .cl-cube .f { transform: translateZ(14px); }
     #cl-sched .cl-cube .t { transform: rotateX(90deg) translateZ(14px); }
     #cl-sched .cl-plate, #cl-sched .cl-plate:hover { transform: none; }
-    #cl-sched .cl-map { opacity: .24; }
     #cl-sched .cl-map-tag { left: 16px; bottom: 14px; font-size: 10.5px; padding: 7px 12px; }
     #cl-sched .cl-plate.is-today { transform: translateZ(20px); }
     #cl-sched .cl-turn { width: 44px; height: 44px; }
