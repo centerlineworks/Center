@@ -301,3 +301,35 @@ has to scroll inside the card to find it.
 
 If the form block is ever removed, the page notices and quietly goes back to the email
 hand-off, so the page never breaks.
+
+---
+
+## Adding the llms.txt file (AI assistants)
+
+`llms.txt` is a plain-text summary of your business, written for AI assistants like ChatGPT,
+Claude, Perplexity and Gemini rather than for people. It lives at
+`centerlineworks.com/llms.txt`. Squarespace can generate one for you automatically, but the
+automatic version is assembled from your page text and misses things — your hours, the review
+counts, the towns you cover, what to tell someone who asks.
+
+The one in this repo, **[`llms.txt`](llms.txt)**, is written by hand from the verified facts.
+
+**To install it:**
+
+1. In Squarespace go to **Settings → Marketing** and find the **llms.txt** (or "AI tools" /
+   "AI crawlers") panel. Depending on your version it may sit under
+   **Settings → Developer Tools** or **Settings → Crawlers**.
+2. Turn the feature **on**.
+3. Choose the **custom / edit content** option rather than the auto-generated one.
+4. Open `llms.txt` from this repo, select everything, copy it, and paste it into the box.
+5. Save, then check `https://www.centerlineworks.com/llms.txt` in a browser — you should see
+   the plain text.
+
+**Keep it in sync.** If the phone number, hours, review count or service list changes, update
+`llms.txt` here and re-paste it. It's the one place all of those facts sit together in plain
+language.
+
+**Honest expectations:** llms.txt is a new convention and not every AI company reads it yet —
+Google has said it doesn't use it for search. It costs nothing and it can only help, but the
+things that actually move the needle are the structured data already built into every page,
+the visible FAQ answers, and your Google Business Profile.

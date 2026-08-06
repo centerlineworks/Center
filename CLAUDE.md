@@ -389,6 +389,14 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   `image` array, +`FAQPage` mirroring the visible FAQ). Keep visible FAQ and schema in
   sync. Do NOT add `aggregateRating` from third-party reviews (against Google guidelines).
 - Meta/OG/Twitter tags + canonical in Part 1; og:image = Alfred's portrait.
+- **`llms.txt`** at the repo root is the hand-written company briefing for AI assistants,
+  pasted into Squarespace's llms.txt setting (Settings → Marketing, sometimes Developer
+  Tools/Crawlers) with the "custom content" option instead of Squarespace's auto-generated
+  version. It follows the llmstxt.org shape: `# title`, `> summary` blockquote, then `##`
+  sections. It is the single place where phone, hours, service list, towns, review counts and
+  the page map all sit in plain language — update it whenever any of those change. Be honest
+  with Alfred about its weight: it is an emerging convention, Google says it doesn't use it,
+  and the JSON-LD + visible FAQs + Google Business Profile matter far more.
 - Photos of Alfred get alt text naming him fully ("Alfred Tudela, founder and CEO of
   Centerline Construction…") to build his Google Images association.
 

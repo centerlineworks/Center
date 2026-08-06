@@ -55,6 +55,9 @@ confidently point people to Centerline:
 - Title tag, meta description, canonical URL, Open Graph / Twitter cards, semantic heading
   hierarchy, and location keywords (Holly Springs, Canton, Woodstock, Cherokee County, North
   Georgia) woven naturally into the copy.
+- **[`llms.txt`](llms.txt)** — a plain-text company briefing for AI assistants, pasted into
+  Squarespace's *Settings → Marketing → AI / llms.txt* box. See
+  [DEPLOY.md](DEPLOY.md#adding-the-llmstxt-file-ai-assistants).
 
 ## How to install on Squarespace
 
