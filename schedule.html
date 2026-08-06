@@ -475,12 +475,14 @@
     outline: none !important; border-color: var(--gold) !important; box-shadow: 0 0 0 4px rgba(217,164,65,.2) !important;
   }
   #cl-sched .cl-formslot textarea { min-height: 70px !important; resize: none !important; }
-  #cl-sched .cl-formslot :is(.form-button-wrapper, .sqs-block-form .form-button-wrapper) { margin-top: 12px !important; }
-  #cl-sched .cl-formslot :is(input[type="submit"], button[type="submit"], .sqs-system-button) {
-    font-family: inherit !important; font-weight: 800 !important; font-size: 15px !important;
-    background: linear-gradient(140deg, var(--gold-lite), var(--gold-deep)) !important; color: #17140c !important;
-    border: 0 !important; border-radius: 999px !important; padding: 14px 26px !important; width: 100% !important;
-    cursor: pointer !important; box-shadow: 0 18px 34px -18px rgba(176,127,34,.8) !important;
+  /* Squarespace's own Submit is kept in the page — it is what actually sends —
+     but tucked out of sight, because it sat below the fold inside the face's
+     scroll area where nobody found it. The big gold button under the drum
+     becomes "Submit" instead and clicks this one for them. */
+  #cl-sched .cl-formslot .form-button-wrapper {
+    position: absolute !important; width: 1px !important; height: 1px !important;
+    padding: 0 !important; margin: -1px !important; overflow: hidden !important;
+    clip-path: inset(50%) !important; border: 0 !important;
   }
   #cl-sched .cl-formslot .field-list > .field:not(:last-child) { margin-bottom: 9px; }
   /* the note that only shows when there is no form block to use */
@@ -951,7 +953,7 @@ window.CL_SCHEDULE = {
             <!-- 6 -->
             <section class="cl-face" data-face aria-label="Question 6: send it">
               <h3>That's everything.</h3>
-              <p class="cl-hint">Last bit — how do we reach you? Everything on the work order comes with it.</p>
+              <p class="cl-hint">Last bit — how do we reach you? Fill these in and hit <b>Submit</b> below.</p>
               <div class="cl-face-body">
                 <!-- If a Squarespace Form Block exists on this page, the script
                      lifts it in here and fills it in from the answers above, so
@@ -1305,7 +1307,7 @@ window.CL_SCHEDULE = {
     });
     var last = at === N - 1;
     nextBtn.hidden = last;
-    sendBtn.hidden = !last || sendBtn.dataset.replaced === "1";
+    sendBtn.hidden = !last;
     backBtn.disabled = at === 0;
     fwdBtn.disabled = at >= seen && at !== N - 1 ? false : at === N - 1;
     if (last) { updateSend(); fillSquarespaceForm(); }
@@ -1521,7 +1523,11 @@ window.CL_SCHEDULE = {
       e.preventDefault();
       fillSquarespaceForm();
       var submit = sqForm.querySelector("input[type=submit], button[type=submit], .sqs-system-button");
-      if (submit && submit.focus) submit.focus({ preventScroll: true });
+      if (submit) {
+        submit.click();                  /* Squarespace validates and sends */
+      } else if (sqForm.requestSubmit) {
+        sqForm.requestSubmit();
+      }
       return;
     }
     var sent = root.querySelector("[data-sent]");
@@ -1656,11 +1662,13 @@ window.CL_SCHEDULE = {
     /* the form block may only appear after our script has run, so clear the
        fallback note that was shown while we were still looking for it */
     if (noFormNote) noFormNote.classList.remove("is-on");
-    /* Squarespace's own Submit button is now sitting on the face, so ours would
-       just be a second button doing the same job */
-    sendBtn.dataset.replaced = "1";
-    sendBtn.hidden = true;
+    /* our big gold button becomes the Submit — Squarespace's own is hidden and
+       clicked on their behalf, so the real submission still goes through it */
+    sendBtn.textContent = "Submit My Request";
+    var realSubmit = sqForm.querySelector("input[type=submit], button[type=submit], .sqs-system-button");
+    if (realSubmit) realSubmit.setAttribute("tabindex", "-1");
     fillSquarespaceForm();
+    turn();
   }
 
   var copyBtn = root.querySelector("[data-copy]");

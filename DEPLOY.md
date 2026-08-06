@@ -294,5 +294,10 @@ Nothing is faked and there's no outside service involved.
 "How do we reach you?" question — the drum drops from six sides to five and your form becomes
 the last step. Whatever they type into it also appears on the work order as they go.
 
+**One obvious button.** The big gold button under the drum reads "Next" through the questions
+and turns into **Submit My Request** on the last one. Your form block's own Submit button is
+hidden, and the gold button presses it — so there's only ever one thing to click, and nobody
+has to scroll inside the card to find it.
+
 If the form block is ever removed, the page notices and quietly goes back to the email
 hand-off, so the page never breaks.

@@ -202,8 +202,12 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
   exists anywhere on the page, `mountSquarespaceForm()` lifts it onto the last face, restyles
   it, and fills it from the answers (matching fields by label text; a First/Last name pair is
   split automatically) — the visitor presses Squarespace's OWN Submit, so it stores and emails
-  through Squarespace with nothing faked and no third party. Our send button hides itself when
-  that happens. Remove the form block and it silently reverts to the mailto.
+  through Squarespace with nothing faked and no third party. Remove the form block and it
+  silently reverts to the mailto.
+  Squarespace's OWN submit button is visually hidden (clip-path, `tabindex="-1"` — kept in the
+  DOM because it is what actually sends) and the big gold button under the drum becomes
+  "Submit My Request", clicking theirs for them. LESSON: it was originally left in place inside
+  the face's scroll area, where it fell below the fold and nobody found it.
   **One step, not two**: mounting the form also DELETES our own contact face
   (`[data-contact-face]`) so nobody types their name twice — the drum drops to a five-sided
   prism, `N`/`STEP` are recomputed and `buildCubes()` re-runs. `bindFormToTicket()` then
