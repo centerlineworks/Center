@@ -1,0 +1,839 @@
+<title>Centerline — Getting to the top of Google</title>
+
+<style>
+@font-face{font-family:"Archivo";font-style:normal;font-weight:400 900;font-display:swap;
+  src:url(data:font/woff2;base64,__ARCHIVO__) format("woff2");}
+@font-face{font-family:"Fraunces";font-style:italic;font-weight:600 700;font-display:swap;
+  src:url(data:font/woff2;base64,__FRAUNCES__) format("woff2");}
+
+:root{
+  --ink:#12100c; --paper:#f7f4ee; --paper-2:#efe9df;
+  --gold:#d9a441; --gold-deep:#b07f22;
+  --bg:var(--paper); --surface:#fffdf9; --surface-2:var(--paper-2);
+  --text:var(--ink); --muted:#6b6355; --line:#ddd4c4;
+  --rule:#c9bda7; --paste-bg:#fffdf8; --paste-line:#e4d9c0;
+  --shadow:0 1px 2px rgba(18,16,12,.05), 0 10px 30px -18px rgba(18,16,12,.28);
+  --closer-bg:#12100c; --closer-text:#f7f4ee; --closer-muted:#bdb3a1;
+  --closer-line:#2c281f; --closer-edge:transparent;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#141310; --surface:#1d1b16; --surface-2:#232019;
+    --text:#ece6db; --muted:#9c9384; --line:#332f26;
+    --rule:#413b2e; --paste-bg:#211e17; --paste-line:#3b3529;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px -20px rgba(0,0,0,.8);
+    --closer-bg:#211e17; --closer-text:#ece6db; --closer-muted:#a49a89;
+    --closer-line:#3b3529; --closer-edge:#3b3529;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141310; --surface:#1d1b16; --surface-2:#232019;
+  --text:#ece6db; --muted:#9c9384; --line:#332f26;
+  --rule:#413b2e; --paste-bg:#211e17; --paste-line:#3b3529;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px -20px rgba(0,0,0,.8);
+  --closer-bg:#211e17; --closer-text:#ece6db; --closer-muted:#a49a89;
+  --closer-line:#3b3529; --closer-edge:#3b3529;
+}
+:root[data-theme="light"]{
+  --bg:#f7f4ee; --surface:#fffdf9; --surface-2:#efe9df;
+  --text:#12100c; --muted:#6b6355; --line:#ddd4c4;
+  --rule:#c9bda7; --paste-bg:#fffdf8; --paste-line:#e4d9c0;
+  --shadow:0 1px 2px rgba(18,16,12,.05), 0 10px 30px -18px rgba(18,16,12,.28);
+  --closer-bg:#12100c; --closer-text:#f7f4ee; --closer-muted:#bdb3a1;
+  --closer-line:#2c281f; --closer-edge:transparent;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Archivo",ui-sans-serif,system-ui,sans-serif;
+  font-size:17px; line-height:1.62; font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px; margin:0 auto; padding:0 24px 120px;}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 40px; border-bottom:2px solid var(--text);}
+.eyebrow{
+  font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--gold-deep); margin:0 0 20px;
+}
+@media (prefers-color-scheme: dark){ .eyebrow{color:var(--gold);} }
+:root[data-theme="dark"] .eyebrow{color:var(--gold);}
+:root[data-theme="light"] .eyebrow{color:var(--gold-deep);}
+h1{
+  font-size:clamp(38px,6.4vw,72px); font-weight:900; line-height:.98;
+  letter-spacing:-.028em; margin:0 0 22px; text-wrap:balance; max-width:16ch;
+}
+h1 .lo{display:block; color:var(--muted); font-weight:800;}
+.standfirst{
+  font-size:clamp(17px,2vw,20px); line-height:1.55; max-width:60ch;
+  color:var(--muted); margin:0;
+}
+.mast-meta{
+  display:flex; flex-wrap:wrap; gap:10px 28px; margin-top:30px;
+  font-size:12.5px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--muted); font-variant-numeric:tabular-nums;
+}
+
+/* ---------- shell ---------- */
+.shell{display:block;}
+@media (min-width:1080px){
+  .shell{display:grid; grid-template-columns:200px minmax(0,1fr); gap:64px; align-items:start;}
+}
+
+/* ---------- contents rail ---------- */
+.rail{display:none;}
+@media (min-width:1080px){
+  .rail{
+    display:block; position:sticky; top:32px; padding-top:52px;
+    font-size:13px; line-height:1.4;
+  }
+  .rail h2{
+    font-size:11px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 14px;
+  }
+  .rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px;}
+  .rail a{
+    display:flex; gap:9px; padding:5px 8px 5px 0; text-decoration:none;
+    color:var(--muted); border-radius:5px; transition:color .18s;
+  }
+  .rail a:hover{color:var(--text);}
+  .rail a .n{
+    font-variant-numeric:tabular-nums; font-weight:700; opacity:.55; min-width:15px;
+  }
+  .rail a.on{color:var(--text); font-weight:600;}
+  .rail a.on .n{color:var(--gold-deep); opacity:1;}
+}
+:root[data-theme="dark"] .rail a.on .n{color:var(--gold);}
+@media (prefers-color-scheme: dark){ .rail a.on .n{color:var(--gold);} }
+:root[data-theme="light"] .rail a.on .n{color:var(--gold-deep);}
+
+/* ---------- steps ---------- */
+.step{padding:52px 0; border-bottom:1px solid var(--line);}
+.step:last-of-type{border-bottom:0;}
+.step-head{display:flex; gap:20px; align-items:baseline; margin-bottom:8px;}
+.step-n{
+  font-size:13px; font-weight:800; letter-spacing:.1em;
+  font-variant-numeric:tabular-nums; color:var(--gold-deep);
+  padding-top:4px; white-space:nowrap;
+}
+@media (prefers-color-scheme: dark){ .step-n{color:var(--gold);} }
+:root[data-theme="dark"] .step-n{color:var(--gold);}
+:root[data-theme="light"] .step-n{color:var(--gold-deep);}
+h2{
+  font-size:clamp(25px,3.4vw,36px); font-weight:900; line-height:1.08;
+  letter-spacing:-.02em; margin:0; text-wrap:balance;
+}
+h3{
+  font-size:15px; font-weight:800; letter-spacing:.02em;
+  margin:34px 0 10px; text-wrap:balance;
+}
+h3 + p, h3 + ul, h3 + .paste, h3 + .grid{margin-top:0;}
+p{margin:0 0 15px; max-width:66ch;}
+.lede{font-size:18.5px; color:var(--text); max-width:64ch; margin-top:16px;}
+strong{font-weight:700;}
+em{font-family:"Fraunces",Georgia,serif; font-style:italic; font-weight:600;}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--gold);
+  text-underline-offset:3px; text-decoration-thickness:1.5px;}
+a:hover{text-decoration-thickness:2.5px;}
+a:focus-visible, button:focus-visible{
+  outline:2.5px solid var(--gold); outline-offset:3px; border-radius:3px;
+}
+ul{margin:0 0 15px; padding-left:20px; max-width:66ch;}
+li{margin-bottom:7px;}
+li::marker{color:var(--gold-deep);}
+@media (prefers-color-scheme: dark){ li::marker{color:var(--gold);} }
+:root[data-theme="dark"] li::marker{color:var(--gold);}
+:root[data-theme="light"] li::marker{color:var(--gold-deep);}
+code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.87em;
+  background:var(--surface-2); padding:2px 6px; border-radius:4px;
+}
+
+/* ---------- paste panels ---------- */
+.paste{
+  background:var(--paste-bg); border:1px solid var(--paste-line);
+  border-left:3px solid var(--gold); border-radius:4px;
+  padding:16px 18px 18px; margin:0 0 18px; max-width:68ch;
+  box-shadow:var(--shadow); position:relative;
+}
+.paste-top{
+  display:flex; justify-content:space-between; align-items:center; gap:16px;
+  margin-bottom:11px; padding-bottom:9px; border-bottom:1px dashed var(--paste-line);
+}
+.paste-label{
+  font-size:10.5px; font-weight:800; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--muted);
+}
+.copy{
+  font-family:inherit; font-size:11px; font-weight:700; letter-spacing:.09em;
+  text-transform:uppercase; cursor:pointer;
+  background:transparent; color:var(--muted);
+  border:1px solid var(--paste-line); border-radius:4px; padding:5px 11px;
+  transition:color .16s, border-color .16s, background .16s;
+}
+.copy:hover{color:var(--text); border-color:var(--rule);}
+.copy.done{color:var(--gold-deep); border-color:var(--gold);}
+:root[data-theme="dark"] .copy.done{color:var(--gold);}
+@media (prefers-color-scheme: dark){ .copy.done{color:var(--gold);} }
+:root[data-theme="light"] .copy.done{color:var(--gold-deep);}
+.paste-body{font-size:15.5px; line-height:1.58;}
+.paste-body p{margin:0 0 11px; max-width:none;}
+.paste-body p:last-child{margin-bottom:0;}
+.paste.mono .paste-body{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13.5px; line-height:1.7;
+  white-space:pre-wrap; overflow-x:auto;
+}
+.count{
+  font-variant-numeric:tabular-nums; font-size:11px; font-weight:600;
+  color:var(--muted); margin-top:11px; padding-top:9px;
+  border-top:1px dashed var(--paste-line);
+}
+
+/* ---------- aside ---------- */
+.aside{
+  border-left:2px solid var(--rule); padding:2px 0 2px 20px;
+  margin:22px 0; max-width:62ch; color:var(--muted);
+  font-family:"Fraunces",Georgia,serif; font-style:italic; font-weight:600;
+  font-size:17px; line-height:1.55;
+}
+.aside strong{font-family:"Archivo",sans-serif; font-style:normal; font-weight:800;}
+
+/* ---------- data table ---------- */
+.tablewrap{overflow-x:auto; margin:0 0 18px; max-width:68ch;}
+table{border-collapse:collapse; width:100%; font-size:15px;}
+th,td{text-align:left; padding:10px 16px 10px 0; border-bottom:1px solid var(--line);
+  vertical-align:top;}
+th{
+  font-size:10.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); border-bottom:1.5px solid var(--rule); white-space:nowrap;
+}
+td:first-child{font-weight:600; white-space:nowrap; padding-right:32px;}
+
+/* ---------- service cards ---------- */
+.grid{display:grid; gap:14px; margin:0 0 18px; max-width:74ch;}
+@media (min-width:720px){ .grid{grid-template-columns:1fr 1fr;} }
+.svc{
+  background:var(--surface); border:1px solid var(--line); border-radius:4px;
+  padding:14px 16px 15px; box-shadow:var(--shadow);
+}
+.svc h4{
+  font-size:13.5px; font-weight:800; margin:0 0 7px; letter-spacing:.01em;
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+}
+.svc p{font-size:14.5px; line-height:1.5; margin:0; color:var(--muted); max-width:none;}
+.mini{
+  font-family:inherit; font-size:9.5px; font-weight:800; letter-spacing:.1em;
+  text-transform:uppercase; cursor:pointer; flex-shrink:0;
+  background:transparent; color:var(--muted);
+  border:1px solid var(--line); border-radius:3px; padding:3px 7px;
+  transition:color .16s, border-color .16s;
+}
+.mini:hover{color:var(--text); border-color:var(--rule);}
+.mini.done{color:var(--gold-deep); border-color:var(--gold);}
+:root[data-theme="dark"] .mini.done{color:var(--gold);}
+@media (prefers-color-scheme: dark){ .mini.done{color:var(--gold);} }
+:root[data-theme="light"] .mini.done{color:var(--gold-deep);}
+
+/* ---------- chips ---------- */
+.chips{display:flex; flex-wrap:wrap; gap:7px; margin:0 0 18px; max-width:68ch;}
+.chips span{
+  font-size:13px; font-weight:600; color:var(--text);
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:100px; padding:4px 13px;
+}
+
+/* ---------- closing panel ---------- */
+.closer{
+  background:var(--closer-bg); color:var(--closer-text); border-radius:6px;
+  border:1px solid var(--closer-edge);
+  padding:40px 34px 38px; margin-top:56px;
+}
+.closer h2{color:var(--closer-text);}
+.closer p{color:var(--closer-muted);}
+.closer .eyebrow{color:var(--gold); margin-bottom:16px;}
+.closer ul{color:var(--closer-muted);}
+.closer li::marker{color:var(--gold);}
+.closer strong{color:var(--closer-text);}
+.closer .kicker{
+  margin-top:28px; padding-top:22px; border-top:1px solid var(--closer-line);
+  font-family:"Fraunces",Georgia,serif; font-style:italic; font-weight:600;
+  font-size:19px; line-height:1.5; color:var(--closer-text); max-width:56ch;
+}
+
+.foot{
+  margin-top:44px; padding-top:22px; border-top:1px solid var(--line);
+  font-size:13px; color:var(--muted);
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .step{opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s cubic-bezier(.16,1,.3,1);}
+  .step.vis{opacity:1; transform:none;}
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">Centerline Construction · Search &amp; AI visibility</p>
+  <h1>Getting to the top<span class="lo">of Google</span></h1>
+  <p class="standfirst">Nine things to set up, in the order that actually matters — not the order
+    that's easiest. Everything you need to paste is written out and ready to copy.</p>
+  <div class="mast-meta">
+    <span>Written for Alfred</span>
+    <span>August 2026</span>
+    <span>9 steps</span>
+  </div>
+</header>
+
+<div class="shell">
+
+  <nav class="rail" aria-label="Contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#s1"><span class="n">1</span><span>Google Business Profile</span></a></li>
+      <li><a href="#s2"><span class="n">2</span><span>Unblock AI crawlers</span></a></li>
+      <li><a href="#s3"><span class="n">3</span><span>Business information</span></a></li>
+      <li><a href="#s4"><span class="n">4</span><span>Page titles</span></a></li>
+      <li><a href="#s5"><span class="n">5</span><span>Search Console &amp; Bing</span></a></li>
+      <li><a href="#s6"><span class="n">6</span><span>Clean up URLs</span></a></li>
+      <li><a href="#s7"><span class="n">7</span><span>Photo names &amp; alt text</span></a></li>
+      <li><a href="#s8"><span class="n">8</span><span>Same business everywhere</span></a></li>
+      <li><a href="#s9"><span class="n">9</span><span>Keep reviews coming</span></a></li>
+      <li><a href="#skip"><span class="n">—</span><span>Not worth your time</span></a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <p class="lede" style="padding-top:52px; margin-bottom:0;">The website itself is already
+      doing its job — structured data on every page, plain-language FAQ answers, fast pages,
+      clean titles. What's left is mostly <strong>outside</strong> the website.</p>
+
+    <!-- 1 -->
+    <section class="step" id="s1">
+      <div class="step-head">
+        <div class="step-n">01</div>
+        <h2>Google Business Profile</h2>
+      </div>
+      <p class="lede">This one is bigger than everything else on the list put together.</p>
+      <p>When somebody in Woodstock searches "bathroom remodel near me," Google shows a map with
+        three businesses sitting above the normal results. That map comes from Google Business
+        Profile — <strong>not</strong> from your website. If you're not in it, you're invisible
+        for the searches that actually bring in work.</p>
+      <p>Go to <a href="https://www.google.com/business" target="_blank" rel="noopener">google.com/business</a>
+        and claim or open your listing.</p>
+
+      <h3>Business name</h3>
+      <p>Use exactly what's on your truck and your invoices — nothing more. Google penalises
+        keyword stuffing here, so <em>not</em> "Centerline Construction Bathroom Remodeling
+        Holly Springs."</p>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">Business name</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>Centerline Construction Company, LLC</p></div>
+      </div>
+      <p>If your signage just says "Centerline Construction," use that instead — match the real
+        world.</p>
+
+      <h3>Categories</h3>
+      <p>Your primary category carries more weight than any other single field on the listing.</p>
+      <p><strong>Primary:</strong> General contractor</p>
+      <p><strong>Secondary:</strong></p>
+      <div class="chips">
+        <span>Remodeler</span><span>Bathroom remodeler</span><span>Deck builder</span>
+        <span>Siding contractor</span><span>Kitchen remodeler</span><span>Carpenter</span>
+        <span>Construction company</span>
+      </div>
+      <div class="aside"><strong>A judgment call, so you know:</strong> "General contractor" is the
+        broadest umbrella and covers additions and commercial work. "Remodeler" is narrower but
+        less contested. Start with General contractor — if you're not showing up for remodel
+        searches in a few months, switch the primary to Remodeler and watch what happens. It's one
+        click and it's reversible.</div>
+
+      <h3>Address</h3>
+      <p>If you run out of your home and don't have a shop customers visit,
+        <strong>hide the address</strong> and set it up as a service-area business. Otherwise
+        Google puts your house on the map. You still enter the address — Google needs it to verify
+        you — you just tick the box that hides it.</p>
+
+      <h3>Service area</h3>
+      <div class="chips">
+        <span>Holly Springs</span><span>Canton</span><span>Woodstock</span><span>Ball Ground</span>
+        <span>Acworth</span><span>Kennesaw</span><span>Marietta</span><span>Roswell</span>
+        <span>Alpharetta</span><span>Cherokee County</span>
+      </div>
+      <p>Don't list twenty towns you'd never drive to — Google waters down your relevance for the
+        ones that matter. This is about as wide as it should go.</p>
+
+      <h3>Hours, phone and links</h3>
+      <div class="tablewrap"><table>
+        <tr><th>Field</th><th>Value</th></tr>
+        <tr><td>Hours</td><td>Monday–Saturday 7:00am–6:00pm · Sunday 2:00pm–6:00pm</td></tr>
+        <tr><td>Phone</td><td>(678) 372-1274</td></tr>
+        <tr><td>Website</td><td>https://www.centerlineworks.com/</td></tr>
+        <tr><td>Appointment link</td><td>https://www.centerlineworks.com/schedule</td></tr>
+      </table></div>
+      <p>That appointment link is a real field most contractors leave empty. Yours goes straight
+        to the estimate page you just built. Set holiday hours when they come up too — a listing
+        that says "open" when you're not gets complaints, and Google notices.</p>
+
+      <h3>Description</h3>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">Business description</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body">
+          <p>Family-owned, Christ-centered remodeling and construction in Holly Springs, Georgia.
+            Founded in 2020 by Alfred Tudela, who brings more than 18 years of residential and
+            commercial construction experience. We build bathrooms, finished basements, custom
+            cabanas and pavilions, home additions, decks and railing, siding and wood rot repair,
+            cabinetry, and commercial renovations.</p>
+          <p>We serve Holly Springs, Canton, Woodstock, Ball Ground, Acworth, Kennesaw, Marietta,
+            Roswell and all of Cherokee County. Estimates are free. We walk the project with you,
+            put the scope, price and timeline in writing before anything starts, show up when we
+            say we will, and leave the site clean every day. The price we quote is the price you
+            pay.</p>
+        </div>
+        <div class="count">722 characters — Google's limit is 750</div>
+      </div>
+      <p>No links or phone numbers in the description. Google strips them and it can flag the
+        listing.</p>
+
+      <h3>Services — add each one</h3>
+      <div class="grid">
+        <div class="svc"><h4>Bathroom Remodeling <button class="mini" type="button">Copy</button></h4>
+          <p>Full bathroom renovations from demo to final trim — tile and custom shower work,
+            vanities, cabinetry, lighting and plumbing coordination, plus accessible and
+            aging-in-place layouts. Free estimate with the scope and price in writing before we
+            start.</p></div>
+        <div class="svc"><h4>Basement Finishing <button class="mini" type="button">Copy</button></h4>
+          <p>Unfinished basements built out into real living space — framing, electrical and
+            plumbing coordination, bathrooms, wet bars, home theaters and code-compliant egress.
+            One crew from bare block through to final paint.</p></div>
+        <div class="svc"><h4>Custom Cabanas &amp; Pavilions <button class="mini" type="button">Copy</button></h4>
+          <p>Poolside cabanas, covered outdoor kitchens and freestanding pavilions designed and
+            built on site to match your house and your yard. Framing, roofing, finishes and
+            electrical handled start to finish.</p></div>
+        <div class="svc"><h4>Home Additions <button class="mini" type="button">Copy</button></h4>
+          <p>Room additions, bump-outs, second-story additions and garage conversions — tied into
+            your existing foundation, framing and roofline so the new space looks like it was
+            always there.</p></div>
+        <div class="svc"><h4>Decks &amp; Outdoor Living <button class="mini" type="button">Copy</button></h4>
+          <p>New decks, deck rebuilds and replacement railing, plus screened porches and pergolas.
+            Built to code, built to last through Georgia summers, and finished so the details
+            match the rest of the house.</p></div>
+        <div class="svc"><h4>Siding &amp; Exterior Repair <button class="mini" type="button">Copy</button></h4>
+          <p>Siding replacement, wood rot repair, trim, fascia and soffit work, and general
+            exterior repairs. We find the water before we cover it back up — no painting over a
+            problem.</p></div>
+        <div class="svc"><h4>Kitchen Remodeling <button class="mini" type="button">Copy</button></h4>
+          <p>Kitchen renovations including cabinetry, countertops, tile, lighting and layout
+            changes. Custom cabinetry and trim carpentry handled in house.</p></div>
+        <div class="svc"><h4>Commercial Renovations <button class="mini" type="button">Copy</button></h4>
+          <p>Tenant build-outs, office and retail remodels and commercial repair work, scheduled
+            around your business hours so you keep operating while we work.</p></div>
+        <div class="svc"><h4>Wood Rot &amp; Repair Work <button class="mini" type="button">Copy</button></h4>
+          <p>No job too small. Rotten trim, a soft spot in a deck, a door that never closed right —
+            the repairs other contractors won't return your call about.</p></div>
+      </div>
+
+      <h3>Photos</h3>
+      <p>Volume and freshness both count. Aim for <strong>30 or more</strong>, and add a few every
+        month — Google tracks listings that go stale.</p>
+      <ul>
+        <li>Cover photo: your best finished project, shot in daylight</li>
+        <li>Logo: the Centerline logo</li>
+        <li>At least ten finished projects, inside and out</li>
+        <li><strong>Before-and-afters as pairs</strong> — they get more engagement than anything else</li>
+        <li>You and the crew. People hire people.</li>
+      </ul>
+      <p>Shoot horizontal, in daylight, no filter. Google is perfectly happy with phone photos.</p>
+
+      <h3>Questions &amp; answers — seed it yourself</h3>
+      <p>Anyone can post a question on your listing, and anyone can answer it. Get there first:
+        post these from a second Google account, then answer them from the business account.</p>
+      <ul>
+        <li><strong>Do you charge for estimates?</strong> No. Estimates are free and there's no
+          obligation. We come out, walk the project with you, and give you the scope, price and
+          timeline in writing.</li>
+        <li><strong>What areas do you cover?</strong> Holly Springs, Canton, Woodstock, Ball
+          Ground, Acworth, Kennesaw, Marietta, Roswell and the rest of Cherokee County.</li>
+        <li><strong>Is any job too small?</strong> No. We take on single repairs right through to
+          full basement build-outs and additions.</li>
+        <li><strong>How far out are you booking?</strong> Call or text (678) 372-1274 and we'll
+          tell you honestly what our schedule looks like.</li>
+        <li><strong>Are you licensed and insured?</strong> Yes.</li>
+      </ul>
+
+      <h3>Posts</h3>
+      <p>Once a week, two minutes: a photo from the job you're on and two sentences. Google shows
+        recent posts right in your listing, and it's a live signal that the business is active.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="step" id="s2">
+      <div class="step-head">
+        <div class="step-n">02</div>
+        <h2>Make sure AI crawlers aren't blocked</h2>
+      </div>
+      <p class="lede">Thirty seconds, and it decides whether the llms.txt we just wrote does
+        anything at all.</p>
+      <p>In Squarespace, look for <strong>Settings → Crawlers</strong>. Depending on your version
+        it may be under <strong>Settings → Marketing → AI Tools</strong>, or
+        <strong>Developer Tools</strong>. There's a switch for blocking AI crawlers, and depending
+        on when your site was set up it may be <strong>on by default</strong>.</p>
+      <p>You want it <strong>off</strong> — crawlers allowed. That's what lets ChatGPT, Claude,
+        Perplexity and Google's AI answers read your site and recommend you. If it's blocked,
+        llms.txt does nothing.</p>
+      <div class="aside">Do this one straight after the Google profile. It costs nothing and it
+        quietly undoes a lot of work if it's wrong.</div>
+    </section>
+
+    <!-- 3 -->
+    <section class="step" id="s3">
+      <div class="step-head">
+        <div class="step-n">03</div>
+        <h2>Squarespace business information</h2>
+      </div>
+      <p><strong>Settings → Business Information.</strong> Squarespace uses these fields in its own
+        behind-the-scenes code and in any contact or hours block on the site, so they need to match
+        your Google listing exactly — character for character, including the "LLC" and the way the
+        phone number is punctuated.</p>
+      <div class="tablewrap"><table>
+        <tr><th>Field</th><th>Value</th></tr>
+        <tr><td>Business name</td><td>Centerline Construction Company, LLC</td></tr>
+        <tr><td>Address</td><td>Holly Springs, GA 30115, United States</td></tr>
+        <tr><td>Phone</td><td>(678) 372-1274</td></tr>
+        <tr><td>Email</td><td>Info@centerlineworks.com</td></tr>
+        <tr><td>Hours</td><td>Mon–Sat 7:00am–6:00pm · Sun 2:00pm–6:00pm</td></tr>
+      </table></div>
+      <div class="aside">Search engines cross-check your name, address and phone across the whole
+        internet. Where they disagree, they trust you less. This is the cheapest trust you will
+        ever buy.</div>
+    </section>
+
+    <!-- 4 -->
+    <section class="step" id="s4">
+      <div class="step-head">
+        <div class="step-n">04</div>
+        <h2>Page titles and descriptions</h2>
+      </div>
+      <p>Every page's description is already injected by the code we paste into the header. But the
+        <strong>SEO Title</strong> has to be set inside Squarespace — it's the blue clickable line
+        people see in Google results.</p>
+      <p>For each page: <strong>Pages → hover the page → gear icon → SEO tab.</strong> Paste the
+        title, and paste the same description into the SEO Description box so Squarespace's version
+        and ours say the same thing.</p>
+
+      <h3>Home</h3>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">SEO title</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>Centerline Construction | Remodeling Contractor in Holly Springs &amp; Canton, GA</p></div>
+      </div>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">SEO description</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>Centerline Construction Company, LLC builds bathrooms, basements,
+          cabanas, additions, decks, siding and commercial renovations across Holly Springs, Canton,
+          Woodstock &amp; North Georgia. Family-owned, 18+ years, 5.0 stars across 43 reviews. Free
+          estimates — call (678) 372-1274.</p></div>
+      </div>
+
+      <h3>Services</h3>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">SEO title</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>Our Services | Bathrooms, Basements, Cabanas &amp; More — Centerline Construction</p></div>
+      </div>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">SEO description</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>Centerline Construction builds bathrooms, basements, cabanas,
+          home additions, decks, siding, and commercial renovations across Holly Springs, Canton
+          &amp; North Georgia. See real project photos for every service. Free estimates:
+          (678) 372-1274.</p></div>
+      </div>
+
+      <h3>About</h3>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">SEO title</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>About Centerline Construction | Alfred Tudela | Holly Springs &amp; Canton, GA Remodeling Contractor</p></div>
+      </div>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">SEO description</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>Centerline Construction Company, LLC is a faith-driven,
+          family-owned remodeling contractor in Holly Springs &amp; Canton, GA. Founded by Alfred
+          Tudela, we serve North Georgia with bathroom, basement, kitchen, deck, and siding
+          renovations built on integrity and craftsmanship. Call (678) 372-1274 for a free
+          consultation.</p></div>
+      </div>
+
+      <h3>Schedule</h3>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">SEO title</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>Schedule a Free Estimate | Centerline Construction — Holly Springs &amp; Canton, GA</p></div>
+      </div>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">SEO description</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>Book a free, no-obligation estimate with Centerline Construction.
+          Tell us what you're building, where and when — we'll come look at it and put a written
+          quote in your hands before any work starts. Holly Springs, Canton, Woodstock &amp; North
+          Georgia. Call (678) 372-1274.</p></div>
+      </div>
+
+      <p>Also check <strong>Settings → SEO</strong> for the site-wide Site Title
+        (<code>Centerline Construction</code>) and Site Description, and set the title format to
+        put the page name first — <code>%p — %s</code> — rather than your site name leading on
+        every single page.</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="step" id="s5">
+      <div class="step-head">
+        <div class="step-n">05</div>
+        <h2>Search Console — and Bing</h2>
+      </div>
+      <p><strong>Google Search Console</strong> is free, and it tells you things nobody else will:
+        which searches you actually show up for, which pages Google refuses to index, and whether
+        anything's broken. Verify the site at
+        <a href="https://search.google.com/search-console" target="_blank" rel="noopener">search.google.com/search-console</a>,
+        then submit your sitemap.</p>
+      <div class="paste mono">
+        <div class="paste-top"><span class="paste-label">Sitemap URL</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body">https://www.centerlineworks.com/sitemap.xml</div>
+      </div>
+      <p><strong>Bing Webmaster Tools</strong> matters far more than its market share suggests,
+        because <strong>ChatGPT's web search runs on Bing's index.</strong> If Bing hasn't crawled
+        you properly, ChatGPT can't recommend you no matter what llms.txt says. Verify there too
+        and submit the same sitemap.</p>
+      <div class="aside">Fifteen minutes, and almost no local contractor bothers.</div>
+    </section>
+
+    <!-- 6 -->
+    <section class="step" id="s6">
+      <div class="step-head">
+        <div class="step-n">06</div>
+        <h2>Clean up the URLs</h2>
+      </div>
+      <p>Two things to check under <strong>Settings → Advanced → URL Mappings</strong>.</p>
+      <p>Your FAQ page sits at <code>/faqs-3</code>, which means there was once a <code>/faqs</code>
+        and a <code>/faqs-2</code>. Rename the slug to <code>/faqs</code> and add a redirect so
+        nothing breaks. And if <code>/newservices</code> was ever live publicly, redirect that
+        too.</p>
+      <div class="paste mono">
+        <div class="paste-top"><span class="paste-label">URL mappings</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body">/faqs-3 -&gt; /faqs 301
+/newservices -&gt; /services 301</div>
+      </div>
+      <p>The <code>301</code> tells Google the page permanently moved, so whatever credit the old
+        address built up transfers across instead of being thrown away.</p>
+      <div class="aside"><strong>Never delete a page without adding a redirect.</strong> That's how
+        sites lose their rankings overnight.</div>
+    </section>
+
+    <!-- 7 -->
+    <section class="step" id="s7">
+      <div class="step-head">
+        <div class="step-n">07</div>
+        <h2>Photo filenames and alt text</h2>
+      </div>
+      <p>Squarespace puts the filename straight into the image's web address, and Google reads it.
+        <code>IMG_2657.jpg</code> says nothing about anything. Rename before you upload:</p>
+      <div class="paste mono">
+        <div class="paste-top"><span class="paste-label">Filename pattern</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body">bathroom-remodel-holly-springs-ga.jpg
+finished-basement-canton-ga.jpg
+custom-cabana-woodstock-ga.jpg
+deck-railing-ball-ground-ga.jpg</div>
+      </div>
+      <p>Then add alt text describing the actual photo — that's what it's for, and it's also what a
+        blind visitor's screen reader reads out loud. Photos of you should name you in full:
+        <em>"Alfred Tudela, founder of Centerline Construction, on a bathroom renovation in Holly
+        Springs, GA."</em></p>
+    </section>
+
+    <!-- 8 -->
+    <section class="step" id="s8">
+      <div class="step-head">
+        <div class="step-n">08</div>
+        <h2>Be the same business everywhere</h2>
+      </div>
+      <p>Same name, same address format, same phone number, on every one of these. Claim any you
+        don't already have.</p>
+      <ul>
+        <li><strong>Google Business Profile</strong> — step 1 above</li>
+        <li><strong>Bing Places</strong> — free, feeds Bing Maps and ChatGPT</li>
+        <li><strong>Apple Business Connect</strong> — free, feeds Apple Maps and Siri. Roughly a
+          quarter of phone users never open Google Maps, and almost nobody claims this one.</li>
+        <li>Facebook — facebook.com/centerline.works</li>
+        <li>Yelp</li>
+        <li>Nextdoor — genuinely strong for contractors in suburban Cherokee County</li>
+        <li>Better Business Bureau</li>
+        <li>Angi and Houzz — worth a free listing even if you never pay them a cent</li>
+      </ul>
+    </section>
+
+    <!-- 9 -->
+    <section class="step" id="s9">
+      <div class="step-head">
+        <div class="step-n">09</div>
+        <h2>Keep the reviews coming</h2>
+      </div>
+      <p>43 five-star reviews is a real asset. Two things worth knowing about it.</p>
+      <p><strong>Google reviews are the ones that rank you.</strong> 29 of your 43 are on Google,
+        and that number feeds directly into the map pack. Facebook and Yelp reviews build trust
+        with people who already found you, but they do almost nothing for Google.</p>
+      <p><strong>Recency counts too.</strong> A listing with 29 reviews where the newest is two
+        years old looks worse than one with 15 where the newest is last week.</p>
+      <p>Get your Google review short link from the Business Profile dashboard — the "Ask for
+        reviews" button — then text it the day you finish, while they're still standing in the new
+        room and still happy.</p>
+      <div class="paste">
+        <div class="paste-top"><span class="paste-label">Review request text</span>
+          <button class="copy" type="button">Copy</button></div>
+        <div class="paste-body"><p>Hey [name] — really enjoyed working on your [bathroom]. If
+          you've got 30 seconds, a quick Google review helps us more than anything else. [link] —
+          thanks! Alfred</p></div>
+      </div>
+      <p>Asking on the day you finish roughly triples the response rate compared with asking a week
+        later. Never offer anything in exchange for a review — Google removes them and can suspend
+        the listing.</p>
+      <div class="aside">When you cross a milestone, tell me and I'll update the numbers everywhere
+        at once. The site's review counter is driven off a single config line, so it's one change
+        that updates the whole page — plus llms.txt.</div>
+    </section>
+
+    <!-- closer -->
+    <section class="closer" id="skip">
+      <p class="eyebrow">Straight talk</p>
+      <h2>What's not worth your time</h2>
+      <p>So you don't get sold any of it:</p>
+      <ul>
+        <li><strong>Meta keywords tags.</strong> Dead since 2009. Google ignores them completely.</li>
+        <li><strong>Buying backlinks or "SEO packages"</strong> from anyone who cold-calls or
+          emails you. At best it's wasted money; at worst it gets you penalised.</li>
+        <li><strong>Blogging three times a week.</strong> For a local contractor, one genuinely
+          useful page beats thirty thin ones. Your photos and your reviews are worth far more than
+          word count.</li>
+        <li><strong>Chasing llms.txt.</strong> We wrote it, it's free, it might help. But it isn't
+          why AI tools will recommend you — the structured data, the FAQ answers and your Google
+          profile are.</li>
+        <li><strong>Anything promising "#1 on Google, guaranteed."</strong> Nobody can guarantee
+          that. Anyone who says they can is lying to you.</li>
+      </ul>
+      <p class="kicker">The unglamorous truth: Google Business Profile plus a steady stream of
+        recent reviews is most of local SEO. Everything else here is finishing work around those
+        two.</p>
+    </section>
+
+    <p class="foot">Every value on this page is copied from what's already live on
+      centerlineworks.com, so it all matches. Work down the list in order, and tell me when each
+      one's done.</p>
+
+  </main>
+</div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* copy buttons ------------------------------------------------------- */
+  function textOf(el) {
+    var ps = el.querySelectorAll("p");
+    if (!ps.length) return (el.textContent || "").trim();
+    return [].map.call(ps, function (p) {
+      return (p.textContent || "").replace(/\s+/g, " ").trim();
+    }).join("\n\n");
+  }
+
+  function flash(btn) {
+    var was = btn.textContent;
+    btn.textContent = "Copied";
+    btn.classList.add("done");
+    setTimeout(function () {
+      btn.textContent = was;
+      btn.classList.remove("done");
+    }, 1600);
+  }
+
+  function put(str, btn) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(str).then(function () { flash(btn); }, function () {
+        legacy(str, btn);
+      });
+    } else {
+      legacy(str, btn);
+    }
+  }
+
+  function legacy(str, btn) {
+    var ta = document.createElement("textarea");
+    ta.value = str;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); flash(btn); } catch (e) { /* nothing to do */ }
+    document.body.removeChild(ta);
+  }
+
+  [].forEach.call(document.querySelectorAll(".paste .copy"), function (btn) {
+    btn.addEventListener("click", function () {
+      put(textOf(btn.closest(".paste").querySelector(".paste-body")), btn);
+    });
+  });
+
+  [].forEach.call(document.querySelectorAll(".svc .mini"), function (btn) {
+    btn.addEventListener("click", function () {
+      put(textOf(btn.closest(".svc").querySelector("p")), btn);
+    });
+  });
+
+  /* reveal ------------------------------------------------------------- */
+  var steps = [].slice.call(document.querySelectorAll(".step"));
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) {
+    steps.forEach(function (s) { s.classList.add("vis"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("vis"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -12% 0px" });
+    steps.forEach(function (s) { io.observe(s); });
+  }
+
+  /* contents rail scrollspy -------------------------------------------- */
+  var links = [].slice.call(document.querySelectorAll(".rail a"));
+  var targets = links.map(function (a) {
+    return document.getElementById(a.getAttribute("href").slice(1));
+  });
+
+  function spy() {
+    var best = 0, mark = window.innerHeight * 0.3;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i] && targets[i].getBoundingClientRect().top <= mark) best = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle("on", i === best); });
+  }
+
+  var tick = false;
+  window.addEventListener("scroll", function () {
+    if (tick) return;
+    tick = true;
+    requestAnimationFrame(function () { spy(); tick = false; });
+  }, { passive: true });
+  spy();
+})();
+</script>
