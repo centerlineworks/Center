@@ -400,6 +400,43 @@ plainly, do the technical work for him, and always give copy-paste-ready output.
 - Photos of Alfred get alt text naming him fully ("Alfred Tudela, founder and CEO of
   Centerline Construction…") to build his Google Images association.
 
+## WordPress port (`wordpress/`, added October 2026)
+
+Alfred is moving the live site from Squarespace to WordPress ("still keep squarespace up but
+within the next day or two i want to transfer everything"), keeping it parallel until tested.
+`wordpress/*-header.html` and `wordpress/*-block.html` (+ `about-phone-addon.html`) are
+generated from the already-verified `squarespace/*.html` files by `tools/gen_wordpress.py` —
+**never hand-edit the `wordpress/` files directly**, edit the squarespace/ source (which is
+itself generated from the page .html files — see the regular workflow above) and rerun the
+script, or a future squarespace/ fix silently stops matching the wordpress/ copy.
+The script does three things: (1) rewrites every `centerlineworks.com/s/<file>` address to
+`centerlineworks.com/wp-content/uploads/<file>` — a pure prefix swap, since Alfred is told to
+turn off WordPress's month/year upload folders so the filename alone is the address; (2)
+retargets the Schedule page's form bridge from Squarespace's Form Block
+(`.sqs-block-form`/`.form-item`/`.sqs-system-button`, functions named `findSquarespaceForm`/
+`fillSquarespaceForm`/`mountSquarespaceForm`/`sqForm`) to the free **WPForms** plugin
+(`.wpforms-container`/`.wpforms-field`/`.wpforms-submit`, renamed to `findWPForm`/`fillWPForm`/
+`mountWPForm`/`wpForm`) — verified end-to-end with a fake `.wpforms-container` in Playwright:
+the drum correctly drops to 5 faces, the ticket fills live from the form's own inputs, and the
+gold button relabels to "Submit My Request"; (3) replaces every Squarespace-specific
+instructional comment (how to get a photo's address, the `.sqs-block`/`.page-section` host-gap
+collapse CSS) with the WordPress equivalent (Media Library steps, `.wp-block-html` — the one
+class every WP block theme actually uses for a Custom HTML block, unlike Squarespace's
+per-theme `.sqs-block`). It also runs a same-line Squarespace-mention guard at the end of each
+file write as a drift check for future re-runs.
+LESSON: do this by **reusing the squarespace/ paste files**, not re-deriving from
+home.html/index.html/etc. — those are already the exact tested "paste this into a block"
+content; re-deriving from scratch risks reintroducing a bug that's already been fixed once
+(see the logo JPEG saga above).
+`images.squarespace-cdn.com` project-photo URLs are **left untouched by the script on
+purpose** — there is no way to know their new WordPress Media Library addresses ahead of
+time. `WORDPRESS-DEPLOY.md` has the full manifest (12 unique photos, deduped across the pages
+that reuse them) for Alfred to upload and hand back; integrate the new URLs exactly like the
+original Squarespace photo workflow once he sends them.
+Keep `wordpress/` and `WORDPRESS-DEPLOY.md` in sync with any change to `squarespace/`, same as
+the existing DEPLOY.md/README.md convention — rerun `tools/gen_wordpress.py` after any
+squarespace/ regeneration.
+
 ## Business facts (verified July 2026)
 
 - Centerline Construction Company, LLC — Holly Springs, GA; founded 2020; Alfred has 18+

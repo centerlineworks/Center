@@ -1,7 +1,9 @@
 # Centerline Construction — Website Pages
 
 Custom pages for [centerlineworks.com](https://www.centerlineworks.com), built to drop into
-Squarespace with zero build tools. Four pages so far:
+Squarespace with zero build tools — and, as of October 2026, into WordPress too (see
+**[WORDPRESS-DEPLOY.md](WORDPRESS-DEPLOY.md)**; the `wordpress/` folder holds the paste-ready
+files, generated from `squarespace/` by `tools/gen_wordpress.py`). Four pages so far:
 
 - **`home.html`** — the Home page: video hero with scroll-driven 3D, above-the-fold trust
   signals, services, before/after work, process, Alfred, a full review carousel, service area and
